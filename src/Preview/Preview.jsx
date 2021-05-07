@@ -9,12 +9,77 @@ class Preview extends React.Component {
         return (
     <div>
         <div className="row">
-            <div className="row">
-                <h1>People</h1>
+            <div className="full-width">
+                <section className="row admin-bar">
+                    <div className="brand">
+                        <a href="/">
+                        <h5>ProProject Studio</h5>
+                        </a>
+                    </div>
+                    <ul className="row admin-controls">
+                        <li className="admin-item">
+                            Item
+                        </li>
+                        <li className="admin-item">
+                            Item
+                        </li>
+                        <li className="admin-item">
+                            Item
+                        </li>
+                        <li className="admin-item">
+                            Item
+                        </li>
+                        <li className="admin-item">
+                            Item
+                        </li>
+                        <li className="admin-item">
+                            Item
+                        </li>
+                        <li className="admin-item">
+                            Item
+                        </li>
+                    </ul>
+                </section>
+
+                <section className="row grid-area">
+             <table>
+             <colgroup>
+    <col className="back-light"/>
+    <col className="back-dark"/>
+  </colgroup>
+                 <thead>
+                     <tr>
+                         <th>
+                             thing one
+                         </th>
+                         <th>
+                             thing two
+                         </th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                     <td>
+                         corn
+                     </td>
+                     <td>
+                         corn
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         corn
+                     </td>
+                     <td>
+                         corn
+                     </td>
+                 </tr>
+                 </tbody>
+                 
+             </table>
+                </section>
             </div>
-            <div className="row">
-                <h1>People</h1>
-            </div>
+
         </div>
     </div>
         );
