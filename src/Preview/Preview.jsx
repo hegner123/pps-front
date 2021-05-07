@@ -43,10 +43,7 @@ class Preview extends React.Component {
 
                 <section className="row grid-area">
              <table>
-             <colgroup>
-    <col className="back-light"/>
-    <col className="back-dark"/>
-  </colgroup>
+
                  <thead>
                      <tr>
                          <th>
@@ -60,22 +57,21 @@ class Preview extends React.Component {
                  <tbody>
                  <tr>
                      <td>
-                         corn
+                         corn1
                      </td>
                      <td>
-                         corn
+                         corn2
                      </td>
                  </tr>
                  <tr>
                      <td>
-                         corn
+                         corn3
                      </td>
                      <td>
-                         corn
+                         corn4
                      </td>
                  </tr>
                  </tbody>
-                 
              </table>
                 </section>
             </div>
