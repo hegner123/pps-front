@@ -39,28 +39,7 @@ h5 {
 
 
 
-table, th, td{
-  border: 1px solid black;
-  border-collapse: collapse;
-}
 
-tr{
-  display: flex;
-  flex-direction: row;
-}
-
-td, th {
-  height:85px;
-  width:160px;
-}
-
-td, th{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight:bold;
-  color:#000
-}
 
 
 
@@ -139,11 +118,33 @@ code {
 }
 
 .grid-area {
-  width:100%;
   
   background:rgb(168, 168, 168);
 }
+table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
 
+tr{
+  display: flex;
+  flex-direction: row;
+
+}
+
+td, th {
+  height:85px;
+  width:100%;
+  padding:0 15px;
+}
+
+td, th{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight:bold;
+  color:#000
+}
 [title~="N"] {
   background-color:rgb(182, 145, 145);
   text-align: center;
