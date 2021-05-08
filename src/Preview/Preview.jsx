@@ -1,7 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {TableArea} from '../_components/table'
+import { seedData } from '../../public/seedData.json'
 
+// console.log(seedData[0])
 
+function consoleLogWidth(){
+    console.log(window.innerWidth)
+}
+
+function consoleLogHeight(){
+    console.log(window.innerHeight)
+}
 class Preview extends React.Component {
 
 
@@ -18,61 +28,17 @@ class Preview extends React.Component {
                     </div>
                     <ul className="row admin-controls">
                         <li className="admin-item">
-                            Item
+                            Profile
                         </li>
                         <li className="admin-item">
-                            Item
-                        </li>
-                        <li className="admin-item">
-                            Item
-                        </li>
-                        <li className="admin-item">
-                            Item
-                        </li>
-                        <li className="admin-item">
-                            Item
-                        </li>
-                        <li className="admin-item">
-                            Item
-                        </li>
-                        <li className="admin-item">
-                            Item
+                            Projects
                         </li>
                     </ul>
                 </section>
 
                 <section className="row grid-area">
-             <table>
-
-                 <thead>
-                     <tr>
-                         <th>
-                             thing one
-                         </th>
-                         <th>
-                             thing two
-                         </th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                 <tr>
-                     <td>
-                         corn1
-                     </td>
-                     <td>
-                         corn2
-                     </td>
-                 </tr>
-                 <tr>
-                     <td>
-                         corn3
-                     </td>
-                     <td>
-                         corn4
-                     </td>
-                 </tr>
-                 </tbody>
-             </table>
+                   <TableArea
+                   data={seedData}/>
                 </section>
             </div>
 
@@ -84,5 +50,5 @@ class Preview extends React.Component {
 
 
 
-const connectedHomePage = connect()(Preview);
-export { connectedHomePage as Preview };
+const connectedPreview = connect()(Preview);
+export { connectedPreview as Preview };

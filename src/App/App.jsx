@@ -5,7 +5,6 @@ import { history } from '../_helpers';
 import { HomePage } from '../HomePage';
 import { Preview } from '../Preview';
 
-
 class App extends React.Component {
     constructor(props) {
         super(props);
