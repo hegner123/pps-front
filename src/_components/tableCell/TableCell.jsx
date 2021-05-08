@@ -7,6 +7,7 @@ class tableCell extends React.Component {
         super(props);
     }
     render() {
+        console.log(this.props.data)
         return (
     <td key={this.props.data}>
         <p>{this.props.data}</p>

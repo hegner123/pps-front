@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {TableHeaders} from '../tableHeaders';
 import {TableRow} from '../tableRow'
 
 
@@ -34,9 +35,13 @@ class tableArea extends React.Component {
         return (
         <table>
             <thead>
-                <TableRow data={tableHeaders(this.state.songs, this.state.songTotal)}/>
+                <TableHeaders data={tableHeaders(this.state.songs, this.state.songTotal)} id={'headers'}/>
             </thead>
             <tbody>
+                <TableRow
+                data={this.state.songs}
+                id={'table-body'}
+                />
             </tbody>
         </table>
         );

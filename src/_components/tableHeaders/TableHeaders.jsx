@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {TableCell} from '../tableCell';
 
 
-class tableRow extends React.Component {
+class tableHeaders extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -29,5 +29,5 @@ let display;
 
 
 
-const connectedTableRow = connect()(tableRow);
-export { connectedTableRow as TableRow };
+const connectedTableHeaders = connect()(tableHeaders);
+export { connectedTableHeaders as TableHeaders };

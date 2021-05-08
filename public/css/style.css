@@ -121,12 +121,12 @@ code {
   
   background:rgb(168, 168, 168);
 }
-table, th, td{
+table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-tr{
+tr {
   display: flex;
   flex-direction: row;
 
@@ -138,12 +138,16 @@ td, th {
   padding:0 15px;
 }
 
-td, th{
+td, th {
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight:bold;
   color:#000
+}
+
+.song-head {
+  font-size:18px;
 }
 [title~="N"] {
   background-color:rgb(182, 145, 145);
