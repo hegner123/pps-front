@@ -7,12 +7,15 @@ class tableCell extends React.Component {
         super(props);
     }
     render() {
+
+        
         let click;
         let clickable;
         let status;
         let fill;
         if (this.props.handleStatusChange){
-            click = (e=>this.props.handleStatusChange(this.props.id));
+            console.log(this.props)
+            click = (e=>this.props.handleStatusChange(this.props.id, this.props.instrument, this.props.data));
             clickable = "clickable";
             if (this.props.data == "Complete"){
                 status = "fill-green"
@@ -24,7 +27,7 @@ class tableCell extends React.Component {
             fill = this.props.data;
         }
         return (
-    <td className ={clickable + " " + status}key={this.props.data} onClick={click}>
+    <td className ={clickable + " " + status} key={this.props.data} onClick={click}>
         {fill}
     </td>
         );
