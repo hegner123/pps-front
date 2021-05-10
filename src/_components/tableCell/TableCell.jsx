@@ -7,10 +7,25 @@ class tableCell extends React.Component {
         super(props);
     }
     render() {
-        console.log(this.props.data)
+        let click;
+        let clickable;
+        let status;
+        let fill;
+        if (this.props.handleStatusChange){
+            click = (e=>this.props.handleStatusChange(this.props.id));
+            clickable = "clickable";
+            if (this.props.data == "Complete"){
+                status = "fill-green"
+            } else {
+                status = "fill-red"
+            }
+        } else {
+            click;
+            fill = this.props.data;
+        }
         return (
-    <td key={this.props.data}>
-        <p>{this.props.data}</p>
+    <td className ={clickable + " " + status}key={this.props.data} onClick={click}>
+        {fill}
     </td>
         );
     }

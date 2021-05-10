@@ -117,9 +117,9 @@ code {
   justify-content: space-evenly;
 }
 
-.grid-area {
-  
-  background:rgb(168, 168, 168);
+
+table{
+  width:100%;
 }
 table, th, td {
   border: 1px solid black;
@@ -144,6 +144,17 @@ td, th {
   justify-content: center;
   font-weight:bold;
   color:#000
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+.fill-green{
+  background:rgb(0, 255, 0);
+}
+.fill-red{
+  background: rgb(255,0,0);
 }
 
 .song-head {

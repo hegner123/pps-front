@@ -10,39 +10,37 @@ class tableArea extends React.Component {
 
         this.state={
             data:this.props,
-            songs:this.props.data[1].songs,
-            songTotal:this.props.data[1].songs.length
+            songs:this.props.data[4].songs,
+            songTotal:this.props.data[4].songs.length
         }
     }
     render() {
-
         function tableHeaders(songs,length){
             let i, j, k;
             let instruments = [];
             for (i=0;i<length;i++){
             let arrangements = songs[i].song_arrangements;
                for (j=0;j<arrangements.length;j++){
-                   for (k=0;k<arrangements.length; k++){
-                       if (instruments[j]!==arrangements[k]){
-                           instruments.push(arrangements[k]);
-                       }
+                   if(instruments[j] !== arrangements[j]){
+                    instruments.push(arrangements[j]);
                    }
-                //   user-defined sorting, or manipulating could be cool
-                   return instruments.sort()
+
                }
+
             }
+            //   user-defined sorting, or manipulating could be cool
+            return instruments.sort()
         };
         return (
         <table>
             <thead>
                 <TableHeaders data={tableHeaders(this.state.songs, this.state.songTotal)} id={'headers'}/>
             </thead>
-            <tbody>
                 <TableRow
                 data={this.state.songs}
+                headers={tableHeaders(this.state.songs, this.state.songTotal)}
                 id={'table-body'}
                 />
-            </tbody>
         </table>
         );
     }

@@ -135,20 +135,53 @@
             "members": ["thing 3-1", "thing 3-2"],
             "total_arrangements": 3,
             "companyName": "Netflix"
-        }, {
+        }, 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {
             "title": "Project5",
             "songs": [{
-                "song_title": "Song Title 5-1",
+                "song_title": "Magic Mountain",
                 "song_arrangements": ["bass1", "drum", "guitar1", "guitar2"],
                 "song_key": "G",
                 "song_bpm": 80,
                 "song_notes": [{
                     "notes": "there's no note"
-                }]
-            }],
+                }],
+                "song_status": {
+                    "bass1": "Complete",
+                    "drum": "Complete",
+                    "guitar1": "Complete",
+                    "guitar2": "Complete"
+                }
+            },
+            {
+                "song_title": "Rainbow",
+                "song_arrangements": ["bass1", "drum", "guitar1", "guitar2", "vocals", "bgv"],
+                "song_key": "G",
+                "song_bpm": 80,
+                "song_notes": [{
+                    "notes": "there's no note"
+                }],
+                "song_status": {
+                    "bass1": "Complete",
+                    "drum": "Complete",
+                    "guitar1": "Complete",
+                    "guitar2": "Incomplete",
+                    "vocals": "Incomplete",
+                    "bgv": "Incomplete"
+            }
+        }],
             "members": ["thing 5-1", "thing 5-2"],
-            "total_arrangements": 4,
+            "total_arrangements": 6,
             "companyName": "Netflix"
         }
     ]
-}
+    }
