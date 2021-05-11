@@ -3,19 +3,26 @@ import { connect } from 'react-redux';
 import {TableArea} from '../_components/table'
 import { seedData } from '../../public/seedData.json'
 
-// console.log(seedData[0])
 
-function consoleLogWidth(){
-    console.log(window.innerWidth)
-}
-
-function consoleLogHeight(){
-    console.log(window.innerHeight)
-}
 class Preview extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state ={
+            data:{}
+        }
+    }
+    setData(){
+        let dataCopy = Object.assign({}, seedData)
+        this.setState({data:dataCopy})
+        console.log(this.state)
+        }
 
+        componentDidMount(){
+            this.setData
+        }
 
     render() {
+
         return (
     <div>
         <div className="row">

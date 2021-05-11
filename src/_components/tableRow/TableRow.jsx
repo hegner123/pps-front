@@ -19,33 +19,41 @@ class TableRow extends React.Component {
 
 
     handleStatusChange(song, instrument, status){
-        this.statusSwap(song, instrument,this.state.data, status)
+
+        this.statusSwap(song, instrument, status, this.state.data )
     }
 
-    statusSwap(song,instrument,data){
-        
-    let sourceData = data[song].song_status[instrument]
-    if (sourceData == 'Complete'){
-        console.log('flip')
-    }
+    statusSwap(song,instrument,status, data){
+    data.forEach(element => {
+        if( element.song_title == song){
+            if (element.song_status[instrument] == 'Complete'){
+                let update = {[instrument]: 'incomplete'}
+            }else if (element.song_status[instrument] == 'Incomplete'){
+                console.log('fail')
+            }
+        }
+    });
 
             }
 
+            // this.setState({ userEmail: this.props.auth.user.email }, () => {
+            //     this.loadProjects();
+            //   })
+
     render() {
-        console.log(this.state)
+        
         let display;
         const songs = this.props.data;
-        function SongRow(title, songStatus, instrument) {
+        function SongRow(title, songStatus, ) {
             this.title = title;
-            this.instrument = instrument;
             this.songStatus = songStatus;
-            
           }
         if (this.props.id == 'table-body'){
             let i;
             let result = [];
             for (i=0;i<songs.length;i++){
-                let row = new SongRow(songs[i].song_title, songs[i].song_status, songs[i].song_arrangements)
+                let row = new SongRow(songs[i].song_title, songs[i].song_status)
+                
                 result.push(row)
             }
             display = result.map(projectSongs => (

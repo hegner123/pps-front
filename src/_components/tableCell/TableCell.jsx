@@ -7,21 +7,24 @@ class tableCell extends React.Component {
         super(props);
     }
     render() {
-
-        
         let click;
         let clickable;
         let status;
         let fill;
         if (this.props.handleStatusChange){
-            console.log(this.props)
-            click = (e=>this.props.handleStatusChange(this.props.id, this.props.instrument, this.props.data));
+            let songName = this.props.id;
+            let instrument = this.props.instrument;
+            let cellStatus = this.props.data
+            // console.log('cell ' + songName + ' ' + instrument + ' ' + cellStatus)
+            click = (e=>this.props.handleStatusChange(songName, instrument, cellStatus));
             clickable = "clickable";
-            if (this.props.data == "Complete"){
+            if (cellStatus == "Complete"){
                 status = "fill-green"
-            } else {
+            } else if (cellStatus == 'Incomplete'){
                 status = "fill-red"
-            }
+            } else (
+                status = 'fill-inactive'
+            )
         } else {
             click;
             fill = this.props.data;

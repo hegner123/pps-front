@@ -157,6 +157,13 @@ td, th {
   background: rgb(255,0,0);
 }
 
+.fill-inactive {
+  background-image: url(../x.svg);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .song-head {
   font-size:18px;
 }
