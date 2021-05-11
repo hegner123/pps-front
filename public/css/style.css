@@ -180,3 +180,12 @@ td, th {
 [title~="✗"] {
   text-align: center;
 }
+
+.link {
+  color:#000;
+}
+
+.active-link {
+  font-weight:bold;
+  text-shadow: 5px 5px 5px #f7f7f7;
+}

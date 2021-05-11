@@ -1,28 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {TableArea} from '../_components/table'
-import { seedData } from '../../public/seedData.json'
+import {TableArea} from '../_components/table';
+import { PDetails } from '../_components/p_details';
+import { seedData } from '../../public/seedData.json';
 
 
 class Preview extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
-            data:{}
+            data:seedData[4],
+            project: seedData[4].title
+
         }
     }
-    setData(){
-        let dataCopy = Object.assign({}, seedData)
-        this.setState({data:dataCopy})
-        console.log(this.state)
-        }
 
-        componentDidMount(){
-            this.setData
-        }
 
     render() {
-
         return (
     <div>
         <div className="row">
@@ -35,10 +29,10 @@ class Preview extends React.Component {
                     </div>
                     <ul className="row admin-controls">
                         <li className="admin-item">
-                            Profile
+                            <a href='/profile' className='link'>Profile</a>
                         </li>
                         <li className="admin-item">
-                            Projects
+                        <a href='/preview' className='link active-link'>Projects</a>
                         </li>
                     </ul>
                 </section>
@@ -47,6 +41,9 @@ class Preview extends React.Component {
                    <TableArea
                    data={seedData}/>
                 </section>
+                <div className='row'>
+                <PDetails data={this.state.project}/>
+                </div>
             </div>
 
         </div>

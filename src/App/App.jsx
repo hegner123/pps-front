@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { HomePage } from '../HomePage';
 import { Preview } from '../Preview';
+import { Profile }  from '../Profile';
 
 class App extends React.Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route exact path="/preview" component={Preview} />
+                        <Route exact path="/profile" component={Profile} />
                     </Switch>
                 </Router>
             </div>
