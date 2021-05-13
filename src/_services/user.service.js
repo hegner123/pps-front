@@ -18,7 +18,7 @@ function login(userName, hash) {
         body: JSON.stringify({ userName, hash })
     };
 
-    return fetch(`${config.apiUrl}/api/users/login`, requestOptions)
+    return fetch(`${config.apiUrl}/users/login`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -39,7 +39,7 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/api`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}`, requestOptions).then(handleResponse);
 }
 
 function getById(id) {
@@ -48,7 +48,7 @@ function getById(id) {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/api/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/${id}`, requestOptions).then(handleResponse);
 }
 
 function register(user) {
@@ -58,7 +58,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
     console.log(requestOptions)
-    return fetch(`${config.apiUrl}/api/users/register`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
@@ -68,7 +68,7 @@ function update(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/api/${user.id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/${user.id}`, requestOptions).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -78,7 +78,7 @@ function _delete(id) {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/api/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
