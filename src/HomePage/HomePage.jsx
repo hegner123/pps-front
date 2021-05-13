@@ -17,10 +17,10 @@ class HomePage extends React.Component {
                     <div className="">
                         <ul className="row">
                             <li className="actions">
-                                <a href="#">Login</a>
+                                <a href="/login">Login</a>
                             </li>
                             <li className="actions">
-                                <a href="#">Register</a>
+                                <a href="/register">Register</a>
                             </li>
                             <li className="actions">
                                 <a href="/preview">Preview</a>
