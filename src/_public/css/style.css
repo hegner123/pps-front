@@ -37,12 +37,6 @@ h5 {
   font-weight: bold;;
 }
 
-
-
-
-
-
-
 body {
   background: #e3fdff !important;
   margin: 0;
@@ -70,8 +64,13 @@ code {
   width:171px;
 }
 
-.row {
+.row-even {
   display:flex;
+  justify-content: space-evenly;
+}
+
+.row{
+  display: flex;
 }
 
 .logo {
@@ -82,7 +81,7 @@ code {
   width:50%;
 }
 
-.header-box {
+.even-space {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -94,12 +93,22 @@ code {
 }
 
 .actions-list {
+  display: flex;
   flex-direction: row;
+  justify-content: flex-start;
 }
 
 .actions {
+  margin-top:10px;
   padding:10px;
   text-decoration: none;
+  background-color:#b5fdc1;
+  border-radius:5px;
+}
+
+.actions a {
+  font-weight:bold;
+  color:#333;
 }
 
 .full-width {

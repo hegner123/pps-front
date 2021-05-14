@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {TableArea} from '../_components/table';
 import { PDetails } from '../_components/p_details';
-import { seedData } from '../../public/seedData.json';
+import { seedData } from '../_public/seedData.json';
 
 
 class Preview extends React.Component {

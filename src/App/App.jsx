@@ -9,6 +9,8 @@ import { Preview } from '../Preview';
 import { Profile }  from '../Profile';
 import { LoginPage } from '../Login';
 import { RegisterPage } from '../RegisterPage';
+import '../_public/css/reset.css';
+import '../_public/css/style.css'
 
 class App extends React.Component {
     constructor(props) {
