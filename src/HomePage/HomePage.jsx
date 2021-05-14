@@ -11,10 +11,11 @@ class HomePage extends React.Component {
     <div>
         <div className="row-even">
             <div className="even-space">
-                <img src={Image} alt="logo" className="img-fluid header-img" />
-                <div className="header-content">
-                    <h1>Pro-Project Studio</h1>
+                <img src={Image} alt="logo" className="img-fluid header-img w-50"/>
+                <div className="header-content w-50">
+                    <h1>ProProject Studio</h1>
                     <div className="sub-title">
+                        <p className="sub-title-text">Manage your Recording Projects with ProProject Studio.</p>
                         <ul className="actions-list">
                             <li className="actions">
                                 <a href="/register">Get Started</a>

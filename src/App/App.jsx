@@ -4,6 +4,7 @@ import { alertActions } from '../_actions';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
+import { Branding } from '../_components/brand'
 import { HomePage } from '../HomePage';
 import { Preview } from '../Preview';
 import { Profile }  from '../Profile';
@@ -25,6 +26,7 @@ class App extends React.Component {
         const { alert } = this.props;
         return (
             <div>
+                <Branding/>
                 {alert.message &&
                     <div className={`alert ${alert.type}`}>{alert.message}</div>
                 }

@@ -1,40 +1,42 @@
-h1, h2, h3, h4, h5, h6, a  p{
+h1, h2, h3, h4, h5, h6, a  p, div, li, button, input{
   font-family: 'Montserrat', sans-serif;
-  color:#000;
+  color:#333;
 }
 
 a {
   text-decoration: none;
+  color:#333;
+  font-size:16px;
 }
 
 h1 {
   font-size:60px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
 h2 {
   font-size:50px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
 h3 {
   font-size:40px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
 h4 {
   font-size:30px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
 h5 {
   font-size:25px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
-h5 {
+h6 {
   font-size:20px;
-  font-weight: bold;;
+  font-weight: bold;
 }
 
 body {
@@ -46,22 +48,64 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+section{
+  margin-top:100px;
 }
 
-.text-white {
-  color:#fff;
+input{
+  width:50%;
+  border:1px solid rgba(0,0,0,0.1);
+  border-radius:5px;
 }
 
-.header {
-  margin-left: 20%;
-  margin-top:30%;
+input:focus{
+  border:1px solid rgba(0,0,0,0.6);
 }
 
-.brand h5 {
-  width:171px;
+.brand {
+  width:25%;
+}
+
+.admin-bar {
+  background:#ffffff;
+  width:100%;
+  padding:10px 0;
+}
+
+.admin-controls {
+  display: flex;
+  width:75%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.admin-item{
+  margin-left:10px;
+  margin-right:10px;
+  transition:0.2s;
+}
+
+.admin-item:hover{
+  text-shadow:1px 1px 5px rgba(0,0,0,0.2);
+}
+
+.btn{
+  padding:10px;
+  border:1px solid rgba(0,0,0,0.1);
+  font-size:16px;
+  font-weight:500;
+  margin-top:10px;
+  border-radius:5px;
+  transition-duration: 0.2s;
+}
+
+.btn-action{
+  background-color:#b5fdc1;
+}
+
+.btn:hover{
+box-shadow:0 0 0 1px rgba(0,0,0,0.2);
+cursor: pointer;
 }
 
 .row-even {
@@ -71,6 +115,26 @@ code {
 
 .row{
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.w-50{
+  width:50%;
+}
+
+.text-white {
+  color:rgb(247, 247, 247);
+}
+
+.header {
+  margin-left: 20%;
+  margin-top:30%;
+}
+
+.header-content h1 {
+  align-items: center;
+  font-weight: 300;
 }
 
 .logo {
@@ -84,18 +148,27 @@ code {
 .even-space {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-.header-content {
-  align-items: center;
+.sub-title{
+  width: 100%;
+  margin-top: 5px;
+  line-height: normal;
+}
+
+.sub-title-text{
+  width: 100%;
+  font-size:20px
 }
 
 .actions-list {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .actions {
@@ -106,32 +179,26 @@ code {
   border-radius:5px;
 }
 
+.actions:nth-child(2){
+  margin-left:10%;
+}
+
 .actions a {
-  font-weight:bold;
+  font-weight:600;
   color:#333;
+  font-size:20px;
 }
 
 .full-width {
   width:100%;
 }
 
-.admin-bar {
-  background:#ffffff;
-  width:100%;
-  padding:10px 0;
-}
-
-.admin-controls {
-  width:100%;
-  justify-content: space-evenly;
-}
-
-
 table{
   width:100%;
 }
+
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid #333;
   border-collapse: collapse;
 }
 
@@ -152,7 +219,7 @@ td, th {
   align-items: center;
   justify-content: center;
   font-weight:bold;
-  color:#000
+  color:#333
 }
 
 .clickable{
@@ -176,6 +243,7 @@ td, th {
 .song-head {
   font-size:18px;
 }
+
 [title~="N"] {
   background-color:rgb(182, 145, 145);
   text-align: center;
@@ -191,10 +259,80 @@ td, th {
 }
 
 .link {
-  color:#000;
+  color:#333;
 }
 
 .active-link {
   font-weight:bold;
   text-shadow: 5px 5px 5px #f7f7f7;
+}
+
+.form-section{
+  width:20%;
+  padding:100px;
+  background-color:#fff;
+  box-shadow:0px 0px 25px rgba(0,0,0,0.6);
+}
+
+.form-section h2{
+  margin-bottom:10px;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height:100%;
+}
+
+.form-group{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom:10px;
+}
+
+.form-actions{
+  margin-top:10px;
+}
+
+.project-title{
+  line-height:75px;
+}
+
+@media only screen and (max-width: 400px) {
+  .header-img{
+    width:50%;
+  }
+  .w-50.header-content{
+    width:100%
+  }
+  .form-section{
+    width:75%;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .header-img{
+    width:50%;
+  }
+  .w-50.header-content{
+    width:100%
+  }
+  .form-section{
+    width:50%;
+  }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .header-img{
+    width:50%;
+  }
+  .w-50.header-content{
+    width:50%
+  }
+  .form-section{
+    width:20%;
+  }
 }
