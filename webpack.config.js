@@ -7,8 +7,8 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     devServer: {
-        // inline: false,
-        // contentBase: "./dist",
+        inline: true,
+        contentBase: "./dist",
         historyApiFallback: true
     },
     module: {

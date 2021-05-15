@@ -48,7 +48,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-section{
+section.row{
   margin-top:100px;
 }
 
@@ -100,7 +100,7 @@ input:focus{
 }
 
 .btn-action{
-  background-color:#b5fdc1;
+  background-color:#e3fdff;
 }
 
 .btn:hover{
@@ -128,7 +128,6 @@ cursor: pointer;
 }
 
 .header {
-  margin-left: 20%;
   margin-top:30%;
 }
 
@@ -151,6 +150,7 @@ cursor: pointer;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding:0 100px;
 }
 
 .sub-title{
@@ -160,32 +160,34 @@ cursor: pointer;
 }
 
 .sub-title-text{
-  width: 100%;
-  font-size:20px
+  margin:10px  0;
+  width: 90%;
+  font-size:20px;
+  color:rgb(100, 100, 100);
 }
 
-.actions-list {
+.action-list {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-.actions {
-  margin-top:10px;
-  padding:10px;
+.action {
+  margin-top:20px;
   text-decoration: none;
-  background-color:#b5fdc1;
+}
+
+.action:nth-child(2){
+  margin-left:20px;
+}
+
+.action-item {
+  padding:10px;
+  background-color:#333;
   border-radius:5px;
-}
-
-.actions:nth-child(2){
-  margin-left:10%;
-}
-
-.actions a {
   font-weight:600;
-  color:#333;
+  color:#f7f7f7;
   font-size:20px;
 }
 
@@ -274,7 +276,7 @@ td, th {
   box-shadow:0px 0px 25px rgba(0,0,0,0.6);
 }
 
-.form-section h2{
+.form-section h4{
   margin-bottom:10px;
 }
 

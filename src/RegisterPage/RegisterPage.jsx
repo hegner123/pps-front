@@ -51,7 +51,7 @@ class RegisterPage extends React.Component {
                 <section className="row">
                     <div className="center">
                         <div className="form-section">
-                            <h2>Register</h2>
+                            <h4>Register</h4>
                             <form name="form" onSubmit={this.handleSubmit}>
 
                                 <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
