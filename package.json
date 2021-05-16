@@ -1,6 +1,6 @@
 {
   "name": "proproject-studio",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Album Recording project management",
   "license": "MIT",
   "repository": {
@@ -9,8 +9,8 @@
   },
   "private": true,
   "scripts": {
-    "build:pro": "webpack --mode production",
-    "build": "webpack --mode development",
+
+    "build": "webpack --mode production",
     "start": "webpack-dev-server --open",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
