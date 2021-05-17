@@ -7,8 +7,6 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     devServer: {
-        inline: true,
-        contentBase: "./dist",
         historyApiFallback: true
     },
     module: {
@@ -48,7 +46,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://localhost:4000/api'
+            apiUrl: 'http://localhost:4000/'
         })
     },
     node: {

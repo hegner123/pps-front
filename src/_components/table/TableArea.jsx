@@ -15,10 +15,9 @@ class tableArea extends React.Component {
         }
     }
     render() {
-        function tableHeaders(songs,length){
-            let i, j, k;
+        function tableHeaders(songs){
             let instruments = [];
-            let arrangements = songs.forEach(song => {
+            songs.forEach(song => {
                 song.song_arrangements.forEach(instrument => {
                     if(instruments.includes(instrument)){
                         ;
@@ -27,7 +26,6 @@ class tableArea extends React.Component {
                     }
                 })
             });
-
             //   user-defined sorting, or manipulating could be cool
             return instruments.sort()
         };

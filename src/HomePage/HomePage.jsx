@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Image from "../_public/images/Image1.svg";
+import Image from "../_assets/images/Image1.svg";
 
 
 class HomePage extends React.Component {
