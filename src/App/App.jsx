@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
-import { HomePage } from '../HomePage';
+import { CoomingSoon, HomePage } from '../HomePage';
 import { Preview } from '../Preview';
 import { Profile }  from '../Profile';
 import { LoginPage } from '../Login';
@@ -32,7 +32,7 @@ class App extends React.Component {
                 }
                 <Router history={history}>
                     <Switch>
-                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/" component={CoomingSoon} />
                         <Route exact path="/preview" component={Preview} />
                         <PrivateRoute exact path="/profile" component={Profile} />
                         <Route exact path="/register" component={RegisterPage} />
