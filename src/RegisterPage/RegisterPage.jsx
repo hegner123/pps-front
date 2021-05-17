@@ -12,8 +12,8 @@ class RegisterPage extends React.Component {
             user: {
                 firstName: '',
                 lastName: '',
-                username: '',
-                password: ''
+                userName: '',
+                hash: ''
             },
             submitted: false
         };
@@ -35,10 +35,9 @@ class RegisterPage extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
         this.setState({ submitted: true });
         const { user } = this.state;
-        if (user.firstName && user.lastName && user.username && user.password) {
+        if (user.firstName && user.lastName && user.userName && user.hash) {
             this.props.register(user);
         }
     }
@@ -47,45 +46,54 @@ class RegisterPage extends React.Component {
         const { registering  } = this.props;
         const { user, submitted } = this.state;
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h2>Register</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
-                        {submitted && !user.firstName &&
-                            <div className="help-block">First Name is required</div>
-                        }
+            <div className="">
+
+                <section className="row">
+                    <div className="center">
+                        <div className="form-section">
+                            <h4>Register</h4>
+                            <form name="form" onSubmit={this.handleSubmit}>
+                            {submitted && !user.firstName &&
+                                        <div className="help-block">First Name is required</div>
+                                    }
+                                <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
+                                    <label htmlFor="firstName">First Name</label>
+                                    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
+
+                                </div>
+                                {submitted && !user.lastName &&
+                                        <div className="help-block">Last Name is required</div>
+                                    }
+                                <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
+                                    <label htmlFor="lastName">Last Name</label>
+                                    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
+
+                                </div>
+                                {submitted && !user.userName &&
+                                        <div className="help-block">Username is required</div>
+                                    }
+                                <div className={'form-group' + (submitted && !user.userName ? ' has-error' : '')}>
+                                    <label htmlFor="userName">Username</label>
+                                    <input type="text" className="form-control" name="userName" value={user.userName} onChange={this.handleChange} />
+
+                                </div>
+                                {submitted && !user.hash &&
+                                        <div className="help-block">Password is required</div>
+                                    }
+                                <div className={'form-group' + (submitted && !user.hash ? ' has-error' : '')}>
+                                    <label htmlFor="hash">Password</label>
+                                    <input type="password" className="form-control" name="hash" value={user.hash} onChange={this.handleChange} />
+
+                                </div>
+                                <div className="form-group form-actions">
+                                    <button className="btn btn-action">Register</button>
+
+                                    <Link to="/login" className="btn btn-link">Login</Link>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
-                        {submitted && !user.lastName &&
-                            <div className="help-block">Last Name is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
-                        {submitted && !user.username &&
-                            <div className="help-block">Username is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-                        {submitted && !user.password &&
-                            <div className="help-block">Password is required</div>
-                        }
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Register</button>
-                        {registering && 
-                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        }
-                        <Link to="/login" className="btn btn-link">Cancel</Link>
-                    </div>
-                </form>
+                </section>
             </div>
         );
     }
