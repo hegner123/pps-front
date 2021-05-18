@@ -24,7 +24,7 @@ class HomePage extends React.Component {
                                         <Link to="/register" className="action-item">Get Started</Link>
                                     </li>
                                     <li className="action">
-                                        <Link to="/preview" className="action-item">Learn More</Link>
+                                        <Link to="/dashboard" className="action-item">Dashboard</Link>
                                     </li>
                                 </ul>
                             </div>

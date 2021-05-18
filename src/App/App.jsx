@@ -10,8 +10,9 @@ import { Preview } from '../Preview';
 import { Profile }  from '../Profile';
 import { LoginPage } from '../Login';
 import { RegisterPage } from '../RegisterPage';
+import { Dashboard } from '../Dashboard';
 import '../_assets/css/reset.css';
-import '../_assets/css/style.css'
+import '../_assets/css/style.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -32,9 +33,10 @@ class App extends React.Component {
                 }
                 <Router history={history}>
                     <Switch>
-                        <Route exact path="/" component={CoomingSoon} />
+                        <Route exact path="/" component={HomePage} />
                         <Route exact path="/preview" component={Preview} />
                         <PrivateRoute exact path="/profile" component={Profile} />
+                        <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/login" component={LoginPage} />
                     </Switch>
