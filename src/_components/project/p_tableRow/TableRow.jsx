@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {TableCell} from '../tableCell';
+import {TableCell} from '../p_tableCell';
 
 
 class TableRow extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {TableArea} from '../_components/table';
-import { PDetails } from '../_components/p_details';
+import {TableArea} from '../_components/project/p_table';
+import { PDetails } from '../_components/project/p_details';
 import { seedData } from '../_assets/seedData.json';
 
 

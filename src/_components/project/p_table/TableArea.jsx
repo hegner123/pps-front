@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {TableHeaders} from '../tableHeaders';
-import {TableRow} from '../tableRow'
+import {TableHeaders} from '../p_tableHeaders';
+import {TableRow} from '../p_tableRow'
 
 
 class tableArea extends React.Component {

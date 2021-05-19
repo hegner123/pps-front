@@ -26,7 +26,7 @@ class App extends React.Component {
     render() {
         const { alert } = this.props;
         return (
-            <div>
+            <div className='container'>
                 <Branding/>
                 {alert.message &&
                     <div className={`alert ${alert.type}`}>{alert.message}</div>

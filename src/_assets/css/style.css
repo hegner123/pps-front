@@ -1,3 +1,6 @@
+#root{
+  height:100%;
+}
 h1, h2, h3, h4, h5, h6, a  p, div, li, button, input{
   font-family: 'Montserrat', sans-serif;
   color:#333;
@@ -46,6 +49,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 section.row{
@@ -60,6 +64,10 @@ input{
 
 input:focus{
   border:1px solid rgba(0,0,0,0.6);
+}
+
+.container{
+  height:100%;
 }
 
 .alert{
@@ -89,6 +97,7 @@ input:focus{
   background:#ffffff;
   width:100%;
   padding:10px 0;
+  box-shadow: 0 5px 5px  rgba(58, 58, 58, 0.171);
 }
 
 .admin-controls {
@@ -324,28 +333,62 @@ td, th {
   margin:10px 0 2px;
 }
 
+.dashboard{
+  display: flex;
+  width: 100%;
+  height:100%;
+}
+
+.dash-header{
+  margin:5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.dash-header h3{
+  font-weight:200;
+}
+
+.add-project{
+  font-size:30px;
+  font-weight:200;
+  margin-left:15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.recent-projects{
+  width:100%;
+}
+
+.projects{
+  flex-grow: 4;
+}
+
 .project-title{
   line-height:75px;
 }
 
 .sidebar{
-  width:172px;
   background:#656565;
   height: 100%;
+  flex-grow:1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  box-shadow:0 5px 5px #333;
 }
 
-.full-height{
-  height:100vh;
-}
+
 
 .card{
   width:150px;
   background:#e3fdff;
   border-radius:5px;
   margin-top: 10px;
-  padding:0 5px;
+  padding:5px;
   height: max-content;
 }
 
@@ -385,13 +428,34 @@ td, th {
   justify-content: flex-end;
 }
 
-.alert{
-  background: #a94442;
+.notification{
+  background: #FA383E;
   border-radius: 100%;
-  width:.5px;
-  height:.5px;
+  padding:10px;
   margin-top: -10px;
   margin-right:-10px;
+}
+
+.recent-projects{
+  display: flex;
+}
+
+.project-tile{
+  width:205px;
+  height:48px;
+  background:rgb(240, 240, 240);
+  box-shadow:0 0 5px #333;
+  border-radius: 20px;
+  margin:50px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tile-header{
+  font-weight:400;
+  font-size:16px;
 }
 
 @media only screen and (min-width: 500px) {
@@ -399,27 +463,27 @@ td, th {
     font-size:100px;
     font-weight: bold;
   }
-  
+
   h2 {
     font-size:90px;
     font-weight: bold;
   }
-  
+
   h3 {
     font-size:80px;
     font-weight: bold;
   }
-  
+
   h4 {
     font-size:70px;
     font-weight: bold;
   }
-  
+
   h5 {
     font-size:60px;
     font-weight: bold;
   }
-  
+
   h6 {
     font-size:50px;
     font-weight: bold;
@@ -451,36 +515,36 @@ td, th {
 
 @media only screen and (min-width: 1000px) {
   h1 {
-    font-size:90px;
-    font-weight: bold;
-  }
-  
-  h2 {
-    font-size:80px;
-    font-weight: bold;
-  }
-  
-  h3 {
-    font-size:70px;
-    font-weight: bold;
-  }
-  
-  h4 {
     font-size:60px;
     font-weight: bold;
   }
-  
-  h5 {
+
+  h2 {
     font-size:50px;
     font-weight: bold;
   }
-  
-  h6 {
+
+  h3 {
     font-size:40px;
     font-weight: bold;
   }
+
+  h4 {
+    font-size:30px;
+    font-weight: bold;
+  }
+
+  h5 {
+    font-size:25px;
+    font-weight: bold;
+  }
+
+  h6 {
+    font-size:20px;
+    font-weight: bold;
+  }
   p,div,span,a, input, .btn{
-    font-size:35px;
+    font-size:16px;
   }
   .header-img{
     width:50%;
@@ -496,36 +560,36 @@ td, th {
 
 @media only screen and (min-width: 1500px) {
   h1 {
-    font-size:70px;
-    font-weight: bold;
-  }
-  
-  h2 {
     font-size:60px;
     font-weight: bold;
   }
-  
-  h3 {
+
+  h2 {
     font-size:50px;
     font-weight: bold;
   }
-  
-  h4 {
+
+  h3 {
     font-size:40px;
     font-weight: bold;
   }
-  
-  h5 {
+
+  h4 {
     font-size:30px;
     font-weight: bold;
   }
-  
+
+  h5 {
+    font-size:20px;
+    font-weight: bold;
+  }
+
   h6 {
-    font-size:25px;
+    font-size:16px;
     font-weight: bold;
   }
   p,div,span,a, input, .btn{
-    font-size:22px;
+    font-size:16px;
   }
   .header-img{
     width:50%;

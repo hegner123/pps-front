@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Sidebar} from '../_components/d_sidebar';
+import { Sidebar} from '../_components/dashboard/d_sidebar';
+import { Recent } from '../_components/dashboard/d_recent';
+import { Projects } from '../_components/dashboard/d_projects';
+
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -9,8 +12,16 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-    <div className="full-height">
+    <div className="dashboard">
         <Sidebar/>
+        <div className="projects">
+            <div className="search">
+            <input type="text" name="search" id="search" placeholder='Search'/>
+            </div>
+            
+            <Recent/>
+            <Projects/>
+        </div>
     </div>
         );
     }

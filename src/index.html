@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>ProProject Studio</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
 </head>
-<body>
-    <div id="root"></div>
+<body id='body'onresize="changeSize()">
+    <div id='root'></div>
+    <script type="text/javascript">
+        changeSize()
+        function changeSize(){
+                let  wHeight = window.innerHeight;
+                document.getElementById('root').style.height = wHeight + 'px';
+            }
+        </script>
 </body>
 </html>
+
+
 
