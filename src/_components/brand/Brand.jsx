@@ -17,7 +17,7 @@ class Branding extends React.Component {
             </div>
             <ul className="admin-controls">
                 <li className="admin-item">
-                    <a href='/profile' className='link'>Profile</a>
+                    <a href='/dashboard' className='link'>Profile</a>
                 </li>
                 <li className="admin-item">
                 <a href='/preview' className='link'>Projects</a>
