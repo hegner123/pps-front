@@ -1,24 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 
 
 
-class Branding extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state ={
-            data:'Logged In'
-        }
-    }
-    render() {
+ const Branding = (props)=> {
+
+     const loggedIn = useSelector(state => state.authentication.loggedIn)
 
         let searchBar;
 
-        if (this.state.data === 'Logged In'){
+        if (loggedIn === true){
             searchBar =     <div className="search">
             <input type="text" name="search" id="search" placeholder='Search'/>
             </div>
         }
+
         return (
             <nav className="row admin-bar">
                 <div className="brand">
@@ -38,7 +35,7 @@ class Branding extends React.Component {
         </nav>
         );
     }
-}
+
 
 
 
