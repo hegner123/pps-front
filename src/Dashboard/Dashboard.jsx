@@ -15,9 +15,7 @@ class Dashboard extends React.Component {
     <div className="dashboard">
         <Sidebar/>
         <div className="projects">
-            <div className="search">
-            <input type="text" name="search" id="search" placeholder='Search'/>
-            </div>
+           
             
             <Recent/>
             <Projects/>

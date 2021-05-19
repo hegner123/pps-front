@@ -89,8 +89,19 @@ input:focus{
   border-color: #d6e9c6;
 }
 
+.search {
+  flex-grow: 5;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#search {
+  width: 100%;
+}
+
+
 .brand {
-  width:25%;
+  flex-grow: 1;
 }
 
 .admin-bar {
@@ -98,11 +109,13 @@ input:focus{
   width:100%;
   padding:10px 0;
   box-shadow: 0 5px 5px  rgba(58, 58, 58, 0.171);
+  display: flex;
+  justify-content: space-around;
 }
 
 .admin-controls {
   display: flex;
-  width:75%;
+  flex-grow:2;
   justify-content: flex-end;
   align-items: center;
 }
