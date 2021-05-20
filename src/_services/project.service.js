@@ -1,100 +1,78 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
+import { useSelector } from 'react-redux';
+import axios from 'axios'
+import { authentication } from '../_reducers/authentication.reducer';
 
-export const userService = {
-    login,
-    logout,
-    register,
-    getAll,
-    getById,
-    update,
-    delete: _delete
+
+export const projectService = {
+    getProjects,
 };
 
-function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
-
-    return fetch(`${config.apiUrl}/api/authenticate`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
-
-            return user;
-        });
-}
-
-function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
-}
-
-function getAll() {
+function getProjects(id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
-
-    return fetch(`${config.apiUrl}/api`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/projects/userprojects/${id}`, requestOptions).then(handleResponse);
 }
 
-function getById(id) {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+// function getProjects(id) {
+//     return axios.get("http://localhost:4000/projects/userprojects/" + id).then(
+//         projects => handleResponse(projects));
+//   }
+//   getProjects('michael')
 
-    return fetch(`${config.apiUrl}/api/${id}`, requestOptions).then(handleResponse);
-}
-
-function register(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`${config.apiUrl}/api/register`, requestOptions).then(handleResponse);
-}
-
-function update(user) {
-    const requestOptions = {
-        method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`${config.apiUrl}/api/${user.id}`, requestOptions).then(handleResponse);
-}
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/api/${id}`, requestOptions).then(handleResponse);
-}
 
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                // location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
         return data;
     });
 }
+
+
+
+
+
+// export default {
+//   // Gets all projects
+//   getProjects: function(id) {
+//     return axios.get("/api/projects/userprojects/" + id);
+//   },
+//     // Gets the project with the given id
+//   getProjectDetails: function(id) {
+//     return axios.get("/api/projects/" + id);
+//   },
+//   updateProject: function (id, projectData) {
+//     return axios.put("/api/projects/" + id, projectData);
+//   },
+//   addNote: function (id, noteData) {
+//     return axios.put("/api/projects/note/add/" + id, noteData);
+//   },
+//   removeNote: function (id, noteData) {
+//     return axios.put("/api/projects/note/remove/" + id, noteData);
+//   },
+
+//   saveProject: function(id,projectData) {
+//     return axios.post("/api/projects/userprojects/" + id, projectData);
+//   },
+//   saveSong: function(id, songData) {
+//     return axios.post("/api/projects/userprojects/" + id +"/songs", songData);
+//   },
+//   deleteProject: function(id){
+//     return axios.delete("/api/projects/" + id)
+//   },
+//   saveInstruments: function (id, instrumentData){
+//     return axios.post("/api/projects/song/arrangement/" + id , instrumentData)
+//   },
+
+//   spotifyPreview: function (song){
+//     return axios.get("/api/song-preview/" + song)
+//   }
+
+
+
+// };
+
+

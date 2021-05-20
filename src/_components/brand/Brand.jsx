@@ -7,9 +7,7 @@ import { connect } from 'react-redux';
  const Branding = (props)=> {
 
      const loggedIn = useSelector(state => state.authentication.loggedIn)
-
         let searchBar;
-
         if (loggedIn === true){
             searchBar =     <div className="search">
             <input type="text" name="search" id="search" placeholder='Search'/>

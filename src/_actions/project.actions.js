@@ -1,33 +1,32 @@
+import { alertActions } from './alert.actions';
 import { projectConstants } from '../_constants';
-import { projectService } from '../_services';
-import { alertActions } from '.';
-import { history } from '../_helpers';
+import { projectService } from '../_services/';
+import { useSelector } from 'react-redux';
+import { store } from '../_helpers';
+// import { alertActions } from '.';
+// import { history } from '../_helpers';
 
 export  const projectActions = {
-    update
+    getProjects
 };
 
-function update(project, song, instrument) {
+function getProjects() {
+    const state = store.getState()
     return dispatch => {
-        dispatch(request({  }));
-
-        projectService.updateStatus(project, song, instrument)
+        dispatch(request());
+        projectService.getProjects(state.authentication.user.userName)
             .then(
-                project => { 
-                    dispatch(success(user));
-                    // history.push('/');
+                projects => {
+                    dispatch(success(projects));
+                    dispatch(alertActions.success(projects.projectTitle + ' loaded!'));
                 },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
-                }
+                error => dispatch(failure(error.toString()))
             );
     };
 
-    function request(project) { return { type: projectConstants.UPDATE_REQUEST, project } }
-    function success(project) { return { type: projectConstants.UPDATE_SUCCESS, project } }
-    function failure(error) { return { type: projectConstants.UPDATE_FAILURE, error } }
+    function request() { return { type: projectConstants.GETALL_REQUEST } }
+    function success(projects) { return { type: projectConstants.GETALL_SUCCESS, projects } }
+    function failure(error) { return { type: projectConstants.GETALL_FAILURE, error } }
 }
 
-
-export default userActions;
+export default projectActions;

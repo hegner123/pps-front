@@ -7,14 +7,12 @@ import {TableRow} from '../p_tableRow'
 class tableArea extends React.Component {
     constructor(props) {
         super(props);
-
         this.state={
-            data:this.props,
-            songs:this.props.data[4].songs,
-            songTotal:this.props.data[4].songs.length
+            songs: this.props.data.songs,
         }
     }
     render() {
+        console.log(this.props.data.songs)
         function tableHeaders(songs){
             let instruments = [];
             songs.forEach(song => {
@@ -32,13 +30,19 @@ class tableArea extends React.Component {
         return (
         <table>
             <thead>
-                <TableHeaders data={tableHeaders(this.state.songs, this.state.songTotal)} id={'headers'}/>
+                {this.state.songs &&
+                <TableHeaders data={tableHeaders(this.state.songs)} id={'headers'}/>
+                }
+                
             </thead>
-                <TableRow
-                data={this.state.songs}
-                headers={tableHeaders(this.state.songs, this.state.songTotal)}
-                id={'table-body'}
-                />
+            {this.state.songs &&
+             <TableRow
+             data={this.state.songs}
+             headers={tableHeaders(this.state.songs)}
+             id={'table-body'}
+             />
+            }
+               
         </table>
         );
     }
