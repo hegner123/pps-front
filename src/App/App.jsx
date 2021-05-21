@@ -17,20 +17,44 @@ import '../_assets/css/style.css';
 class App extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state={
+            pop:0
+        }
         history.listen((location, action) => {
             // clear alert on location change
             this.props.clearAlerts();
         });
     }
+    componentDidMount(){
+        this.timerID = setInterval(
+            () => this.tick(this.state.pop),
+            10
+          );
+    }
+    tick(i) {
+        i++
+        this.setState({
+          pop: i
+        });
+        console.log(this.state.pop)
+      }
     render() {
+        let alertDisplay;
         const { alert } = this.props;
+
+        if (this.state.pop <= 100){
+            alertDisplay = <div className='alert-bar'>{alert.message &&
+                <div className={`alert ${alert.type}`}>{alert.message}</div>
+            }
+            </div>
+        } else if (this.state.pop > 100){
+            clearInterval(this.timerID);
+            // alertDisplay = <span></span>;
+            alertDisplay = <div className='alert-bar'></div>
+        }
         return (
             <div className='container'>
                 <Branding/>
-                {alert.message &&
-                    <div className={`alert ${alert.type}`}>{alert.message}</div>
-                }
                 <Router history={history}>
                     <Switch>
                         <Route exact path="/" component={HomePage} />
@@ -41,6 +65,7 @@ class App extends React.Component {
                         <Route exact path="/login" component={LoginPage} />
                     </Switch>
                 </Router>
+                {alertDisplay}
             </div>
         );
     }

@@ -30,7 +30,7 @@ class Preview extends React.Component {
         render(){
             const {project, projects} = this.props;
             let display;
-            if (this.state.loading > 1){
+            if (this.state.loading > 5){
             clearInterval(this.timerID);
             display = <div className="full-width">
             <div className='row project-title'>
