@@ -14,6 +14,19 @@ Mix revisions are something every engineer has to deal with, and their is no tec
 
 ## Looking Ahead
 The potential for **PPS** is huge. Their is currently nocompetitor in the recording project mangement space, and the pro audio market is huge. 
+
+## Technology
+**PPS** uses the following technology:
+* MongoDB
+* Express
+* React
+* Redux
+* Node JS
+* Webpack
+
+This repo is the front end of **PPS**. The backend can be found [here.](https://github.com/hegner123/pps-back)
+
+
 ### If you have any ideas about how I can improve this application please submit an issue.
 
 ### I'm open to collaborators so feel free to submit pull requests.
