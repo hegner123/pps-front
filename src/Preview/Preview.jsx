@@ -2,7 +2,7 @@ import React from 'react';
 import { store } from '../_helpers'
 import { connect } from 'react-redux';
 import { projectActions } from '../_actions/';
-import { PDetails } from '../_components/project/p_details/';
+import { PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
 
 
