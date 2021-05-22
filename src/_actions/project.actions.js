@@ -11,9 +11,10 @@ export  const projectActions = {
 };
 
 function getProjects() {
+    console.log('getProjects action')
     const state = store.getState()
     return dispatch => {
-        dispatch(request());
+        dispatch(request())
         projectService.getProjects(state.authentication.user.userName)
             .then(
                 projects => {

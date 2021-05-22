@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {TableHeaders} from '../p_tableHeaders';
-import {TableRow} from '../p_tableRow'
+import { TableHeaders } from '../p_tableHeaders';
+import { TableRow } from '../p_tableRow';
+import loadingGif from '../../../_assets/images/loading-buffering.gif';
 
 
 class tableArea extends React.Component {
@@ -12,9 +13,19 @@ class tableArea extends React.Component {
         }
     }
     render() {
-        console.log(this.props.data.songs)
+        let display;
+        if (this.props.data.songs){
+            display = <img src={loadingGif} alt="" />
+                } else {
+                    display = <h2></h2>
+                }
+        // {
+        //     display =       
+        // } else 
+
         function tableHeaders(songs){
             let instruments = [];
+            console.log('test')
             songs.forEach(song => {
                 song.song_arrangements.forEach(instrument => {
                     if(instruments.includes(instrument)){
@@ -28,22 +39,20 @@ class tableArea extends React.Component {
             return instruments.sort()
         };
         return (
-        <table>
-            <thead>
+            <table>
+                <thead>
+                    {this.state.songs &&
+                    <TableHeaders data={tableHeaders(this.state.songs)} id={'headers'}/>
+                    }
+                </thead>
                 {this.state.songs &&
-                <TableHeaders data={tableHeaders(this.state.songs)} id={'headers'}/>
+                <TableRow
+                data={this.state.songs}
+                headers={tableHeaders(this.state.songs)}
+                id={'table-body'}
+                />
                 }
-                
-            </thead>
-            {this.state.songs &&
-             <TableRow
-             data={this.state.songs}
-             headers={tableHeaders(this.state.songs)}
-             id={'table-body'}
-             />
-            }
-               
-        </table>
+            </table>
         );
     }
 }

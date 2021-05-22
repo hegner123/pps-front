@@ -14,6 +14,7 @@ function getProjects(id) {
         method: 'GET',
         headers: authHeader()
     };
+    console.log('getProjects service')
     return fetch(`${config.apiUrl}/projects/userprojects/${id}`, requestOptions).then(handleResponse);
 }
 

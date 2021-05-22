@@ -5,8 +5,6 @@ import Image from "../_assets/images/Image1.svg";
 
 
 class HomePage extends React.Component {
-
-
     render() {
         return (
     <div>

@@ -1,13 +1,10 @@
 import { projectConstants } from '../_constants';
 
-const initialState =  {projects: {projectTitle: 'this'}};
+const initialState =  {projects: 'unset'};
 
-export function projects(state = initialState, action) {
+export function data(state = initialState, action) {
   switch (action.type) {
-    // case projectConstants.GETALL_REQUEST:
-    //   // return {
-    //   //   projects: {projectTitle: 'this'}
-    //   // };
+
     case projectConstants.GETALL_SUCCESS:
       return {
         projects: action.projects

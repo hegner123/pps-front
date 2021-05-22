@@ -1,5 +1,6 @@
 import { userConstants } from '../_constants';
 import { userService } from '../_services';
+import { projectActions } from './project.actions';
 import { alertActions } from './';
 import { history } from '../_helpers';
 

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
+
 module.exports = {
     mode: 'development',
     resolve: {
@@ -39,8 +40,7 @@ module.exports = {
               },
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({template: './src/index.html'})
+    plugins: [new HtmlWebpackPlugin({template: './src/index.html'})
 ],
 
     externals: {
@@ -52,6 +52,6 @@ module.exports = {
     node: {
         fs: 'empty'
       }
-}
+    }
 
 

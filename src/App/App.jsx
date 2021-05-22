@@ -1,9 +1,11 @@
 import React from 'react';
+
 import {  Router, Route, Switch } from "react-router-dom";
 import { alertActions } from '../_actions';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
+// import { ApiRoute } from '../_components/apiRoute';
 import { Branding } from '../_components/brand'
 import { CoomingSoon, HomePage } from '../HomePage';
 import { Preview } from '../Preview';
@@ -25,18 +27,11 @@ class App extends React.Component {
             this.props.clearAlerts();
         });
     }
-    componentDidMount(){
-        this.timerID = setInterval(
-            () => this.tick(this.state.pop),
-            10
-          );
+     componentDidMount(){
+        this.timerID = setInterval(() => this.tick(this.state.pop),10);
     }
-    tick(i) {
-        i++
-        this.setState({
-          pop: i
-        });
-        console.log(this.state.pop)
+    tick(i) {i++ 
+        this.setState({pop: i});
       }
     render() {
         let alertDisplay;
@@ -49,7 +44,6 @@ class App extends React.Component {
             </div>
         } else if (this.state.pop > 100){
             clearInterval(this.timerID);
-            // alertDisplay = <span></span>;
             alertDisplay = <div className='alert-bar'></div>
         }
         return (

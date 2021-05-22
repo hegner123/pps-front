@@ -15,8 +15,7 @@ class Dashboard extends React.Component {
     <div className="dashboard">
         <Sidebar/>
         <div className="projects">
-           
-            
+
             <Recent/>
             <Projects/>
         </div>
