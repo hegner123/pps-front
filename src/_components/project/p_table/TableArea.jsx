@@ -19,13 +19,9 @@ class tableArea extends React.Component {
                 } else {
                     display = <h2></h2>
                 }
-        // {
-        //     display =       
-        // } else 
 
         function tableHeaders(songs){
             let instruments = [];
-            console.log('test')
             songs.forEach(song => {
                 song.song_arrangements.forEach(instrument => {
                     if(instruments.includes(instrument)){

@@ -1,10 +1,7 @@
 import { alertActions } from './alert.actions';
 import { projectConstants } from '../_constants';
 import { projectService } from '../_services/';
-import { useSelector } from 'react-redux';
 import { store } from '../_helpers';
-// import { alertActions } from '.';
-// import { history } from '../_helpers';
 
 export  const projectActions = {
     getProjects

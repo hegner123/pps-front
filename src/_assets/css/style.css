@@ -362,9 +362,9 @@ td, th {
 }
 
 .dash-header{
-  margin:5px 15px;
+  margin:5px 15px 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
 }
 
@@ -373,11 +373,12 @@ td, th {
 }
 
 .add-project{
-  font-size:30px;
+  font-size:16px;
   font-weight:200;
   margin-left:15px;
   text-align: center;
   cursor: pointer;
+  transition-duration: 1s;
 }
 
 .recent-projects{
@@ -622,4 +623,13 @@ td, th {
   .form-section{
     width:20%;
   }
+}
+
+
+.dropdown {
+  display: none;
+}
+
+.dropdown.active {
+  display: block;
 }

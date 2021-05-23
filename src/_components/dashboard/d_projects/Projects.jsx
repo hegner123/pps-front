@@ -17,11 +17,11 @@ class Projects extends React.Component {
     render() {
 let i =0;
 
+
         return (
             <div>
             <div className="dash-header">
-                <h3>Projects</h3>
-                <a className='add-project'>+</a>
+            <h3>Projects</h3>
             </div>
             <div className="recent-projects">
             {this.state.data.projects.map(data =>

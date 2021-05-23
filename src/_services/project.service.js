@@ -1,8 +1,7 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
-import { useSelector } from 'react-redux';
-import axios from 'axios'
-import { authentication } from '../_reducers/authentication.reducer';
+
+
 
 
 export const projectService = {
@@ -15,7 +14,13 @@ function getProjects(id) {
         headers: authHeader()
     };
     console.log('getProjects service')
-    return fetch(`${config.apiUrl}/projects/userprojects/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/projects/userprojects/${id}`, requestOptions)
+    .then(handleResponse)
+    .then(projects => {
+        
+        localStorage.setItem('hasProjects', JSON.stringify(projects))
+        return projects;
+    });
 }
 
 // function getProjects(id) {
@@ -27,8 +32,8 @@ function getProjects(id) {
 
 function handleResponse(response) {
     return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        return data;
+        const userData = text && JSON.parse(text);
+        return userData;
     });
 }
 

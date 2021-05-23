@@ -5,11 +5,6 @@ import { projectActions } from '../_actions/';
 import { PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
 
-
-
-
-
-
 class Preview extends React.Component {
     constructor(props) {
         super(props);
@@ -17,17 +12,19 @@ class Preview extends React.Component {
             loading:true,
         }
     }
-
-
       async componentDidMount(){
-          await this.props.getProjects()
-        await this.setState({
-            loading:false,
-        })
+          let storage = localStorage.getItem('hasProjects')
+          if (!storage){
+            await this.props.getProjects()
+            this.setState({
+                loading:false,
+            })
+          }
+        
     }
          render(){
              const dataStore = store.getState()
-             const projectData = dataStore.data.projects;
+             const projectData = dataStore.userData.projects;
              let display;
             if (projectData !== "unset"){
                 display =<div className="full-width">
