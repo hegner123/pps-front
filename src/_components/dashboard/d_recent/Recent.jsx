@@ -26,10 +26,6 @@ class Recent extends React.Component {
             <ProjectTile data={data} key={i++}/>
             )}
         </div>
-        
-
-        
-
     </div>
         );
     }

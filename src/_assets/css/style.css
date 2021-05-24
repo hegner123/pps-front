@@ -99,7 +99,6 @@ table, th, td {
 tr {
   display: flex;
   flex-direction: row;
-
 }
 
 td, th {
@@ -117,24 +116,6 @@ td, th {
   color:#333
 }
 
-.clickable{
-  cursor: pointer;
-}
-
-.fill-green{
-  background:rgb(0, 255, 0);
-}
-.fill-red{
-  background: rgb(255,0,0);
-}
-
-.fill-inactive {
-  background-image: url(../images/x.svg);
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .song-head {
   font-size:18px;
 }
@@ -148,14 +129,6 @@ td, th {
   text-shadow: 5px 5px 5px #f7f7f7;
 }
 
-
-
-.dashboard{
-  display: flex;
-  width: 100%;
-  height:100%;
-}
-
 .dash-header{
   margin:5px 15px 0;
   display: flex;
@@ -167,14 +140,8 @@ td, th {
   font-weight:200;
 }
 
-
-
 .recent-projects{
   width:100%;
-}
-
-.projects{
-  flex-grow: 4;
 }
 
 .project-title{
@@ -249,21 +216,5 @@ td, th {
   display: flex;
 }
 
-.project-tile{
-  width:205px;
-  height:48px;
-  background:rgb(240, 240, 240);
-  box-shadow:0 0 5px #333;
-  border-radius: 20px;
-  margin:50px 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
 
-.tile-header{
-  font-weight:400;
-  font-size:16px;
-}
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ProjectsTile, TileHeader} from './style';
 
 
 
@@ -9,12 +10,13 @@ class ProjectTile extends React.Component {
     }
 
     render() {
+        const projectTitle = this.props.data.trim().toLowerCase().replace(/\s/g, "-")
         return (
-            <a href="/project">
-    <div className="project-tile">
-        <h5 className="tile-header">{this.props.data}</h5>
-    </div>
-    </a>
+        <a href={"/project/" + projectTitle}>
+            <ProjectsTile>
+                <TileHeader>{this.props.data}</TileHeader>
+            </ProjectsTile>
+        </a>
         );
     }
 }

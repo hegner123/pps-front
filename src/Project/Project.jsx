@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { projectActions } from '../_actions';
 import { PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
+import { useParams } from 'react-router-dom';
 
 class Project extends React.Component {
     constructor(props) {
@@ -22,8 +23,9 @@ class Project extends React.Component {
           }
     }
          render(){
-             const dataStore = store.getState()
-             const projectData = dataStore.userData.projects;
+             console.log(useParams)
+             const projectStore = store.getState()
+             const projectData = projectStore.userData.projects;
              let display;
             if (projectData !== "unset"){
                 display =   <div className="full-width">

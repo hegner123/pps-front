@@ -21,7 +21,7 @@ let i =0;
         return (
         <div>
             <div className="dash-header">
-                <a href="/project">
+                <a href="/new-project">
                     <h3>Projects</h3>
                 </a>
             </div>

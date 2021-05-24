@@ -7,7 +7,6 @@ import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
 import { CoomingSoon, HomePage } from '../HomePage';
 import { Project } from '../Project';
-import { Profile }  from '../Profile';
 import { LoginPage } from '../Login';
 import { RegisterPage } from '../RegisterPage';
 import { Dashboard } from '../Dashboard';
@@ -53,10 +52,9 @@ class App extends React.Component {
                         <Route exact path="/" component={HomePage} />
                         <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/login" component={LoginPage} />
-                        <PrivateRoute exact path="/project" component={Project} />
-                        <PrivateRoute exact path="/profile" component={Profile} />
+                        <PrivateRoute exact path="/project/:id" component={Project} />
                         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                        <PrivateRoute exact path="/project" component={NewProject} />
+                        <PrivateRoute exact path="/new-project" component={NewProject} />
                     </Switch>
                 </Router>
                 {alertDisplay}

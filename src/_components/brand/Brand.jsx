@@ -27,9 +27,6 @@ import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink} fr
                     <AdminItem>
                         <a href='/dashboard' className='link'>Profile</a>
                     </AdminItem>
-                    <AdminItem>
-                        <a href='/project' className='link'>Projects</a>
-                    </AdminItem>
                 </AdminControls>
             </AdminBar>
         );
