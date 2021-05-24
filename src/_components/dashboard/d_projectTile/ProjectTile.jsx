@@ -10,7 +10,7 @@ class ProjectTile extends React.Component {
 
     render() {
         return (
-            <a href="/preview">
+            <a href="/project">
     <div className="project-tile">
         <h5 className="tile-header">{this.props.data}</h5>
     </div>

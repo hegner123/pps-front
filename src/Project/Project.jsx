@@ -1,11 +1,11 @@
 import React from 'react';
 import { store } from '../_helpers'
 import { connect } from 'react-redux';
-import { projectActions } from '../_actions/';
+import { projectActions } from '../_actions';
 import { PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
 
-class Preview extends React.Component {
+class Project extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
@@ -13,28 +13,27 @@ class Preview extends React.Component {
         }
     }
       async componentDidMount(){
-          let storage = localStorage.getItem('hasProjects')
+        let storage = localStorage.getItem('hasProjects')
           if (!storage){
             await this.props.getProjects()
-            this.setState({
-                loading:false,
-            })
+                this.setState({
+                    loading:false,
+                })
           }
-        
     }
          render(){
              const dataStore = store.getState()
              const projectData = dataStore.userData.projects;
              let display;
             if (projectData !== "unset"){
-                display =<div className="full-width">
-                 <div className='row project-title'>
-                         <PDetails data={projectData.projectTitle}/>
-                         </div>
-                         <div className="row grid-area">
-                             <TableArea data={projectData}/>
-                         </div>
-                     </div>
+                display =   <div className="full-width">
+                                <div className='row project-title'>
+                                    <PDetails data={projectData.projectTitle}/>
+                                </div>
+                                <div className="row grid-area">
+                                    <TableArea data={projectData}/>
+                                </div>
+                            </div>
             }
 
         return (
@@ -49,11 +48,9 @@ class Preview extends React.Component {
         return { projects };
     }
 
-
     const actionCreators = {
         getProjects: projectActions.getProjects
     }
 
-
-const connectedPreview = connect(mapState, actionCreators)(Preview);
-export { connectedPreview as Preview };
+const connectedProject = connect(mapState, actionCreators)(Project);
+export { connectedProject as Project };

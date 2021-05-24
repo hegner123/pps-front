@@ -1,0 +1,50 @@
+import styled, { css } from 'styled-components'
+
+
+
+export const CompletedCell = styled.td`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight:bold;
+    color:#333;
+    height:85px;
+    width:100%;
+    padding:0 15px;
+    font-size:16px;
+    cursor: pointer;
+    background: rgb(0,255,0);
+    /* here we use the dynamically computed prop */
+  `
+
+export const  IncompleteCell = styled.td`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight:bold;
+    color:#333;
+    height:85px;
+    width:100%;
+    padding:0 15px;
+    font-size:16px;
+    cursor: pointer;
+    background: rgb(255,0,0) ;
+`
+
+export const NaCell = styled.td`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight:bold;
+    color:#333;
+    height:85px;
+    width:100%;
+    padding:0 15px;
+    font-size:16px;
+    cursor: pointer;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+`
+
+

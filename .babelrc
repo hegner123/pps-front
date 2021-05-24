@@ -10,7 +10,8 @@
   "plugins": [
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties" ,
-    "transform-async-to-generator"
+    "transform-async-to-generator",
+    "babel-plugin-styled-components"
   ],
   "env": {
     "production": {

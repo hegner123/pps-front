@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { connect } from 'react-redux';
+import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink} from './style';
 
 
 
@@ -9,28 +10,28 @@ import { connect } from 'react-redux';
      const loggedIn = useSelector(state => state.authentication.loggedIn)
         let searchBar;
         if (loggedIn === true){
-            searchBar =     <div className="search">
-            <input type="text" name="search" id="search" placeholder='Search'/>
-            </div>
+            searchBar =     <Search>
+                                <Input type="text" name="search" id="search" placeholder='Search'/>
+                            </Search>
         }
 
         return (
-            <nav className="row admin-bar">
-                <div className="brand">
-                    <a href="/">
-                    <h5>ProProject Studio</h5>
-                    </a>
-                </div>
+            <AdminBar>
+                <Brand>
+                    <BrandLink href="/">
+                        ProProject Studio
+                    </BrandLink>
+                </Brand>
                 {searchBar}
-                <ul className="admin-controls">
-                    <li className="admin-item">
+                <AdminControls>
+                    <AdminItem>
                         <a href='/dashboard' className='link'>Profile</a>
-                    </li>
-                    <li className="admin-item">
-                    <a href='/preview' className='link'>Projects</a>
-                    </li>
-                </ul>
-        </nav>
+                    </AdminItem>
+                    <AdminItem>
+                        <a href='/project' className='link'>Projects</a>
+                    </AdminItem>
+                </AdminControls>
+            </AdminBar>
         );
     }
 

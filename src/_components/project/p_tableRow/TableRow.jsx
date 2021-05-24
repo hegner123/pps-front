@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {TableCell} from '../p_tableCell';
+import { TableCell } from '../p_tableCell';
 
 
 class TableRow extends React.Component {
@@ -35,13 +35,7 @@ class TableRow extends React.Component {
     });
 
             }
-
-            // this.setState({ userEmail: this.props.auth.user.email }, () => {
-            //     this.loadProjects();
-            //   })
-
     render() {
-        
         let display;
         const songs = this.props.data;
         function SongRow(title, songStatus, ) {
@@ -53,7 +47,6 @@ class TableRow extends React.Component {
             let result = [];
             for (i=0;i<songs.length;i++){
                 let row = new SongRow(songs[i].song_title, songs[i].song_status)
-                
                 result.push(row)
             }
             display = result.map(projectSongs => (

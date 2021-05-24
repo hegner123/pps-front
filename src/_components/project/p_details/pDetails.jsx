@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ProjectTitle } from './style';
 
 
 
@@ -10,7 +11,7 @@ class PDetails extends React.Component {
     render() {
         return (
         <div>
-            <h1>{this.props.data}</h1>
+            <ProjectTitle>{this.props.data}</ProjectTitle>
         </div>
         );
     }

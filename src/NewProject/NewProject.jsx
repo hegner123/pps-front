@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { projectActions } from '../_actions';
+import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
 class NewProject extends React.Component {
     constructor(props) {
@@ -44,48 +45,41 @@ class NewProject extends React.Component {
         const { NewProject  } = this.props;
         const { project, submitted } = this.state;
         return (
-            <div className="">
-
-                <section className="row">
-                    <div className="center">
-                        <div className="form-section">
-                            <h1>New Project</h1>
+                <Row>
+                    <Centered>
+                        <FormSection>
+                            <FormTitle>New Project</FormTitle>
                             <form name="form" onSubmit={this.handleSubmit}>
                             {submitted && !project.projectTitle &&
                                         <div className="help-block">Your Project needs a name.</div>
                                     }
-                                <div className={'form-group' + (submitted && !project.projectTitle ? ' has-error' : '')}>
-                                    <label htmlFor="projectTitle">Project Title</label>
-                                    <input type="text" className="form-control" name="projectTitle" value={project.projectTitle} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor="projectTitle">Project Title</Label>
+                                    <Input type="text" className="form-control" name="projectTitle" value={project.projectTitle} onChange={this.handleChange} />
 
-                                </div>
+                                </FormGroup>
                                 {submitted && !project.members &&
                                         <div className="help-block">Projects need Members</div>
                                     }
-                                <div className={'form-group' + (submitted && !project.members ? ' has-error' : '')}>
-                                    <label htmlFor="members">Members</label>
-                                    <input type="text" className="form-control" name="members" value={project.members} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor="members">Members</Label>
+                                    <Input type="text" className="form-control" name="members" value={project.members} onChange={this.handleChange} />
 
-                                </div>
-                                {submitted && !project.companyName &&
-                                        <div className="help-block">companyName is required</div>
-                                    }
-                                <div className={'form-group' + (submitted && !project.companyName ? ' has-error' : '')}>
-                                    <label htmlFor="companyName">Company</label>
-                                    <input type="text" className="form-control" name="companyName" value={project.companyName} onChange={this.handleChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="companyName">Company</Label>
+                                    <Input type="text" className="form-control" name="companyName" value={project.companyName} onChange={this.handleChange} />
 
-                                </div>
+                                </FormGroup>
 
-                                <div className="form-group form-actions">
-                                    <button className="btn btn-action">Create</button>
-
-                                    <Link to="/dashboard" className="btn btn-link">Cancel</Link>
-                                </div>
+                                <ActionGroup>
+                                    <Button>Create</Button>
+                                    <Btn to="/dashboard">Cancel</Btn>
+                                </ActionGroup>
                             </form>
-                        </div>
-                    </div>
-                </section>
-            </div>
+                        </FormSection>
+                    </Centered>
+                </Row>
         );
     }
 }

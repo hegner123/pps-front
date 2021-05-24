@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
+import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
 class RegisterPage extends React.Component {
     constructor(props) {
@@ -45,54 +46,51 @@ class RegisterPage extends React.Component {
         const { registering  } = this.props;
         const { user, submitted } = this.state;
         return (
-            <div className="">
-
-                <section className="row">
-                    <div className="center">
-                        <div className="form-section">
-                            <h4>Register</h4>
+            <div>
+                <Row>
+                    <Centered>
+                        <FormSection>
+                            <FormTitle>Register</FormTitle> 
                             <form name="form" onSubmit={this.handleSubmit}>
                             {submitted && !user.firstName &&
-                                        <div className="help-block">First Name is required</div>
+                                        <HelpBlock> First Name is required</HelpBlock>
                                     }
-                                <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
-                                    <label htmlFor="firstName">First Name</label>
-                                    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor="firstName">First Name</Label>
+                                    <Input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
 
-                                </div>
+                                </FormGroup>
                                 {submitted && !user.lastName &&
-                                        <div className="help-block">Last Name is required</div>
+                                        <HelpBlock> Last Name is required</HelpBlock>
                                     }
-                                <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
-                                    <label htmlFor="lastName">Last Name</label>
-                                    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor="lastName">Last Name</Label>
+                                    <Input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
 
-                                </div>
+                                </FormGroup>
                                 {submitted && !user.userName &&
-                                        <div className="help-block">Username is required</div>
+                                        <HelpBlock> Username is required</HelpBlock>
                                     }
-                                <div className={'form-group' + (submitted && !user.userName ? ' has-error' : '')}>
-                                    <label htmlFor="userName">Username</label>
-                                    <input type="text" className="form-control" name="userName" value={user.userName} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor="userName">Username</Label>
+                                    <Input type="text" className="form-control" name="userName" value={user.userName} onChange={this.handleChange} />
 
-                                </div>
+                                </FormGroup>
                                 {submitted && !user.hash &&
-                                        <div className="help-block">Password is required</div>
+                                        <HelpBlock> Password is required</HelpBlock>
                                     }
-                                <div className={'form-group' + (submitted && !user.hash ? ' has-error' : '')}>
-                                    <label htmlFor="hash">Password</label>
-                                    <input type="password" className="form-control" name="hash" value={user.hash} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor="hash">Password</Label>
+                                    <Input type="password" className="form-control" name="hash" value={user.hash} onChange={this.handleChange} />
+                                </FormGroup>
 
-                                </div>
-                                <div className="form-group form-actions">
-                                    <button className="btn btn-action">Register</button>
-
-                                    <Link to="/login" className="btn btn-link">Login</Link>
-                                </div>
+                                <FormGroup>
+                                   <Button>Register</Button>
+                                </FormGroup>
                             </form>
-                        </div>
-                    </div>
-                </section>
+                        </FormSection>
+                    </Centered>
+                </Row>
             </div>
         );
     }

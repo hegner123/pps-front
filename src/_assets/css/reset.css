@@ -47,6 +47,21 @@ table {
 	border-spacing: 0;
 }
 
+a {
+  text-decoration: none;
+  color:#333;
+  font-size:16px;
+}
+
+#root{
+	height:100%;
+  }
+  
+  h1, h2, h3, h4, h5, h6, a  p, div, li, button, input{
+	font-family: 'Montserrat', sans-serif;
+	color:#333;
+  }
+
 /* cyrillic-ext */
 @font-face {
 	font-family: 'Montserrat';

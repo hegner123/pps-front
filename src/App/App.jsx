@@ -6,7 +6,7 @@ import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
 import { CoomingSoon, HomePage } from '../HomePage';
-import { Preview } from '../Preview';
+import { Project } from '../Project';
 import { Profile }  from '../Profile';
 import { LoginPage } from '../Login';
 import { RegisterPage } from '../RegisterPage';
@@ -53,7 +53,7 @@ class App extends React.Component {
                         <Route exact path="/" component={HomePage} />
                         <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/login" component={LoginPage} />
-                        <PrivateRoute exact path="/preview" component={Preview} />
+                        <PrivateRoute exact path="/project" component={Project} />
                         <PrivateRoute exact path="/profile" component={Profile} />
                         <PrivateRoute exact path="/dashboard" component={Dashboard} />
                         <PrivateRoute exact path="/project" component={NewProject} />

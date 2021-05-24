@@ -1,36 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Image from "../_assets/images/Image1.svg";
-
+import { Header, SubTitle, SubText, ActionList, Action, ActionItem, RowEven, EvenSpace, HeaderContent, HeaderImage } from './style';
 
 class HomePage extends React.Component {
+    
     render() {
         return (
     <div>
-        <div className="row-even">
-            <div className="even-space">
-                <div className="header-content w-50">
-                    <div className="header-inner">
-                        <h1>ProProject Studio</h1>
-                            <div className="sub-title">
-                                <div className="sub-title-text">
+        <RowEven>
+            <EvenSpace>
+                <HeaderContent>
+                    <Header>ProProject Studio</Header>
+                        <SubTitle>
+                            <SubText>
                                 <p>Make managing your recording projects easier with ProProject Studio. The only project management app that is both online and in your DAW.</p>
-                                </div>
-                                <ul className="action-list">
-                                    <li className="action">
-                                        <Link to="/register" className="action-item">Get Started</Link>
-                                    </li>
-                                    <li className="action">
-                                        <Link to="/dashboard" className="action-item">Dashboard</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                <img src={Image} alt="logo" className="img-fluid header-img w-50"/>
-            </div>
-        </div>
+                            </SubText>
+                                <ActionList>
+                                    <Action>
+                                        <ActionItem href='/register'>Get Started</ActionItem>
+                                    </Action>
+                                    <Action spaced>
+                                        <ActionItem href='/login'>Login</ActionItem>
+                                    </Action>
+                                </ActionList>
+                        </SubTitle>
+                </HeaderContent>
+                    <HeaderImage src={Image} alt="logo"/>
+            </EvenSpace>
+        </RowEven>
     </div>
         );
     }
@@ -48,7 +46,6 @@ class CoomingSoon extends React.Component {
 
     render() {
         return (
-    <div>
         <div className="row-even">
             <div className="even-space">
                 <div className="header-content w-50">
@@ -64,7 +61,6 @@ class CoomingSoon extends React.Component {
                 <img src={Image} alt="logo" className="img-fluid header-img w-50"/>
             </div>
         </div>
-    </div>
         );
     }
 }

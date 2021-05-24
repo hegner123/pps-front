@@ -19,14 +19,16 @@ let i =0;
 
 
         return (
-            <div>
+        <div>
             <div className="dash-header">
-            <h3>Projects</h3>
+                <a href="/project">
+                    <h3>Projects</h3>
+                </a>
             </div>
             <div className="recent-projects">
-            {this.state.data.projects.map(data =>
-            <ProjectTile data={data} key={i++}/>
-            )}
+                {this.state.data.projects.map(data =>
+                <ProjectTile data={data} key={i++}/>
+                )}
             </div>
         </div>
         );

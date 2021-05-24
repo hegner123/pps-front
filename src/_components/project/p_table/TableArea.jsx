@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { TableHeaders } from '../p_tableHeaders';
 import { TableRow } from '../p_tableRow';
 import loadingGif from '../../../_assets/images/loading-buffering.gif';
+import { Table } from './style';
 
 
 class tableArea extends React.Component {
@@ -16,17 +17,13 @@ class tableArea extends React.Component {
         let display;
         if (this.props.data.songs){
             display = <img src={loadingGif} alt="" />
-                } else {
-                    display = <h2></h2>
                 }
 
         function tableHeaders(songs){
             let instruments = [];
             songs.forEach(song => {
                 song.song_arrangements.forEach(instrument => {
-                    if(instruments.includes(instrument)){
-                        ;
-                    } else {
+                    if(!instruments.includes(instrument)){
                         instruments.push(instrument)
                     }
                 })
@@ -35,7 +32,7 @@ class tableArea extends React.Component {
             return instruments.sort()
         };
         return (
-            <table>
+            <Table>
                 <thead>
                     {this.state.songs &&
                     <TableHeaders data={tableHeaders(this.state.songs)} id={'headers'}/>
@@ -48,7 +45,7 @@ class tableArea extends React.Component {
                 id={'table-body'}
                 />
                 }
-            </table>
+            </Table>
         );
     }
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
+import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
+
 
 
 
@@ -42,40 +44,37 @@ class LoginPage extends React.Component {
         const { username, password, submitted } = this.state;
         return (
             <div>
-                <section className="row">
-                    <div className="center">
-                        <div className="form-section">
-                            <h4>Login</h4>
+                <Row>
+                    <Centered>
+                        <FormSection>
+                           <FormTitle>Login</FormTitle>
                             <form name="form" onSubmit={this.handleSubmit}>
                             {submitted && !username &&
-                                        <div className="help-block">Username is required</div>
+                                       <HelpBlock>Username is required</HelpBlock>
                                     }
-                                <div className={'form-group form-group-m' + (submitted && !username ? ' has-error' : '')}>
-                                    <label htmlFor="username">Username</label>
-                                    <input type="text" className="form-control form-control-m" name="username" value={username} onChange={this.handleChange} />
+                                <FormGroup>
+                                    <Label htmlFor='username'>Username</Label>
+                                    <Input type="text"  name="username" value={username} onChange={this.handleChange} />
 
-                                </div>
+                                </FormGroup>
                                 {submitted && !password &&
-                                        <div className="help-block">Password is required</div>
+                                        <HelpBlock>Password is required</HelpBlock>
                                     }
-                                <div className={'form-group form-group-m' + (submitted && !password ? ' has-error' : '')}>
-                                    <label htmlFor="password">Password</label>
-                                    <input type="password" className="form-control form-control-m" name="password" value={password} onChange={this.handleChange} />
+                                <FormGroup>
+                                <Label htmlFor='password'>Password</Label>
+                                    <Input type="password"  name="password" value={password} onChange={this.handleChange} />
 
-                                </div>
+                                    </FormGroup>
                                 {loggingIn &&
                                         <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                                     }
-                                <div className="form-group form-group-m">
-                                    <button className="btn btn-action">Login</button>
-
-                                    <Link to="/register" className="btn">Register</Link>
-                                </div>
+                                <FormGroup>
+                                    <Button>Login</Button>
+                                </FormGroup>
                             </form>
-                        </div>
-                    </div>
-                </section>
-
+                        </FormSection>
+                    </Centered>
+                </Row>
             </div>
         );
     }
