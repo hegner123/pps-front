@@ -5,9 +5,6 @@ import {DashHeader, DashTitle, ProjectSection} from './style';
 import {store} from '../../../_helpers';
 import {projectActions} from '../../../_actions/project.actions';
 
-
-
-
 class Projects extends React.Component{
     constructor(props) {
         super(props);
@@ -44,11 +41,6 @@ render(){
 }
 }
 
-
-
-
-
-
   function mapState(state) {
     const { projects } = state;
     return { projects };
@@ -60,11 +52,11 @@ render(){
 }
 
 
-
 const connectedProjects = connect(mapState, actionCreators)(Projects);
 export { connectedProjects as Projects };
 
-export function RecentProjects(props) {
+
+export function RecentProjects() {
     const items = store.getState().userData.projects
     let i = 0;
     return (
@@ -82,7 +74,7 @@ export function RecentProjects(props) {
     );
   }
 
-export function UserProjects(props) {
+export function UserProjects() {
     const uPs = store.getState().userData.projects
     let i = 0
     return (

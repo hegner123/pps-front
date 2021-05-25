@@ -13,6 +13,7 @@ class ProjectTile extends React.Component {
 
     render() {
 
+
         const projectTitle = this.props.data.trim().toLowerCase().replace(/\s/g, "-")
         return (
         <Link to={"/project/" + projectTitle}>
