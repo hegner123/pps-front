@@ -6,7 +6,7 @@ import loadingGif from '../../../_assets/images/loading-buffering.gif';
 import { Table } from './style';
 
 
-class tableArea extends React.Component {
+class TableArea extends React.Component {
     constructor(props) {
         super(props);
         this.state={
@@ -52,5 +52,5 @@ class tableArea extends React.Component {
 
 
 
-const connectedTableArea = connect()(tableArea);
+const connectedTableArea = connect()(TableArea);
 export { connectedTableArea as TableArea };
