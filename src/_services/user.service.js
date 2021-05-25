@@ -1,4 +1,5 @@
 import config from 'config';
+import {history} from '../_helpers'
 import { authHeader } from '../_helpers';
 
 
@@ -29,8 +30,8 @@ function login(userName, hash) {
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user'  );
-    localStorage.removeItem('hasProjects');
+    localStorage.removeItem( 'userData' );
+    history.push('/');
 }
 
 

@@ -1,10 +1,36 @@
 import React from 'react';
-import {useParams} from 'react-router-dom'
+import {useParams, useLocation} from 'react-router-dom'
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { store } from '../_helpers'
 import { PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
+
+
+
+
+
+
+
+
+
+class SingleProject extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <Project/>
+        );
+    }
+}
+
+
+
+const connectedSingleProject = connect()(SingleProject);
+export { connectedSingleProject as SingleProject };
+
+
 
 export function Project(){
         let id = useParams().id
@@ -21,7 +47,8 @@ export function Project(){
             return display;
         }
 
-        console.log(iterate(projectData))
+        // console.log(iterate(projectData))
+        console.log(useLocation())
     return (
         <div className="full-width">
             <div className='row project-title'>

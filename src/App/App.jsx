@@ -1,12 +1,12 @@
 import React from 'react';
-import { Router,Switch,Route} from "react-router-dom";
+import { Router, Switch, Route, Redirect, useParams} from "react-router-dom";
 import { alertActions } from '../_actions';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
 import { CoomingSoon, HomePage } from '../HomePage';
-import { Project } from '../Project';
+import { SingleProject } from '../Project';
 import { LoginPage } from '../Login';
 import { RegisterPage } from '../RegisterPage';
 import { Dashboard } from '../Dashboard';
@@ -44,18 +44,19 @@ class App extends React.Component {
             clearInterval(this.timerID);
             alertDisplay = <div className='alert-bar'></div>
         }
-        console.log(Router)
+
         return (
             <div className='container'>
-                <Branding/>
+
                 <Router history={history} >
+                <Branding logout={() => logout(this.props)}/>
                     <Switch>
+                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                        <PrivateRoute path="/project/:id" component={SingleProject}/>
+                        <PrivateRoute exact path="/new-project" component={NewProject} />
                         <Route exact path="/" component={HomePage}/>
                         <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/login" component={LoginPage} />
-                        <Route exact path="/project/:id" component={Project}/>
-                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-                        <PrivateRoute exact path="/new-project" component={NewProject} />
                     </Switch>
                 </Router>
                 {alertDisplay}
@@ -77,5 +78,3 @@ const actionCreators = {
 
 const connectedApp = connect(mapState, actionCreators)(App);
 export { connectedApp as App };
-
-

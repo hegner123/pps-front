@@ -14,12 +14,7 @@ class TableRow extends React.Component {
         this.handleStatusChange = this.handleStatusChange.bind(this);
     }
 
-
-
-
-
     handleStatusChange(song, instrument, status){
-
         this.statusSwap(song, instrument, status, this.state.data )
     }
 

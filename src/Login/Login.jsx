@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
         super(props);
 
         // reset login status
-        this.props.logout();
+        
 
         this.state = {
             username: '',

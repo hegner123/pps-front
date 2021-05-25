@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CompletedCell, IncompleteCell, NaCell  } from './style'
+import { CompletedCell, IncompleteCell, NaCell, TextCell  } from './style'
 
 
 class tableCell extends React.Component {
@@ -24,7 +24,7 @@ class tableCell extends React.Component {
                 return display = <NaCell/>
             }
         } else {
-           return display = <td>{this.props.data}</td>
+           return display = <TextCell>{cellStatus}</TextCell>
         }
         return (
     {display}
