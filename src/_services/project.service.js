@@ -8,16 +8,15 @@ export const projectService = {
     getProjects,
 };
 
-function getProjects(id) {
+function getProjects(user) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
     console.log('getProjects service')
-    return fetch(`${config.apiUrl}/projects/userprojects/${id}`, requestOptions)
+    return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions)
     .then(handleResponse)
     .then(projects => {
-        
         localStorage.setItem('hasProjects', JSON.stringify(projects))
         return projects;
     });

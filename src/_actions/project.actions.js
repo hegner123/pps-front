@@ -10,13 +10,14 @@ export  const projectActions = {
 function getProjects() {
     console.log('getProjects action')
     const state = store.getState()
+    const user = state.authentication.user.userName
     return dispatch => {
         dispatch(request())
-        projectService.getProjects(state.authentication.user.userName)
+        projectService.getProjects(user)
             .then(
                 projects => {
                     dispatch(success(projects));
-                    dispatch(alertActions.success(projects.projectTitle + ' loaded!'));
+                    dispatch(alertActions.success(state + ' projects loaded!'));
                 },
                 error => dispatch(failure(error.toString()))
             );

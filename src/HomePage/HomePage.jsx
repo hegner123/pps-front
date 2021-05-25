@@ -4,10 +4,8 @@ import Image from "../_assets/images/Image1.svg";
 import { Header, SubTitle, SubText, ActionList, Action, ActionItem, RowEven, EvenSpace, HeaderContent, HeaderImage } from './style';
 
 class HomePage extends React.Component {
-    
     render() {
         return (
-    <div>
         <RowEven>
             <EvenSpace>
                 <HeaderContent>
@@ -29,7 +27,6 @@ class HomePage extends React.Component {
                     <HeaderImage src={Image} alt="logo"/>
             </EvenSpace>
         </RowEven>
-    </div>
         );
     }
 }

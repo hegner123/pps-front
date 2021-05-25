@@ -159,58 +159,20 @@ td, th {
   box-shadow:0 5px 5px #333;
 }
 
-.card{
-  width:150px;
-  background:#e3fdff;
-  border-radius:5px;
-  margin-top: 10px;
-  padding:5px;
-  height: max-content;
-}
 
-.card-title{
-  display: flex;
-  justify-content: space-between;
-}
 
-.card-title h6{
-  font-size:16px ;
-}
 
-.card-content{
-  font-size: 12px;
-}
 
-.card-body{
-  display: flex;
-}
 
-.card-time{
-  display: flex;
-  justify-content: flex-end;
-  align-items:flex-end;
-}
 
-.card-time div{
-  font-size: 12px;
-}
+
 
 .card-action{
   font-size:10px;
 }
 
-.alert-wrap{
-  display: flex;
-  justify-content: flex-end;
-}
 
-.notification{
-  background: #FA383E;
-  border-radius: 100%;
-  padding:10px;
-  margin-top: -10px;
-  margin-right:-10px;
-}
+
 
 .recent-projects{
   display: flex;

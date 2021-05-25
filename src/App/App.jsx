@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Router, Route, Switch } from "react-router-dom";
+import { Router,Switch,Route} from "react-router-dom";
 import { alertActions } from '../_actions';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
@@ -25,12 +25,12 @@ class App extends React.Component {
             this.props.clearAlerts();
         });
     }
-     componentDidMount(){
-        this.timerID = setInterval(() => this.tick(this.state.pop),10);
-    }
-    tick(i) {i++ 
-        this.setState({pop: i});
-      }
+    //  componentDidMount(){
+    //     this.timerID = setInterval(() => this.tick(this.state.pop),10);
+    // }
+    // tick(i) {i++
+    //     this.setState({pop: i});
+    //   }
     render() {
         let alertDisplay;
         const { alert } = this.props;
@@ -44,16 +44,17 @@ class App extends React.Component {
             clearInterval(this.timerID);
             alertDisplay = <div className='alert-bar'></div>
         }
+        console.log(Router)
         return (
             <div className='container'>
                 <Branding/>
-                <Router history={history}>
+                <Router history={history} >
                     <Switch>
-                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/" component={HomePage}/>
                         <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/login" component={LoginPage} />
-                        <PrivateRoute exact path="/project/:id" component={Project} />
-                        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/project/:id" component={Project}/>
+                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                         <PrivateRoute exact path="/new-project" component={NewProject} />
                     </Switch>
                 </Router>
@@ -76,3 +77,5 @@ const actionCreators = {
 
 const connectedApp = connect(mapState, actionCreators)(App);
 export { connectedApp as App };
+
+

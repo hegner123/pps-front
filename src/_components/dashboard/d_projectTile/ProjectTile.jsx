@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ProjectTitle } from '../../project/p_details/style';
 import { ProjectsTile, TileHeader} from './style';
+import {Link} from 'react-router-dom';
 
 
 
@@ -10,13 +12,14 @@ class ProjectTile extends React.Component {
     }
 
     render() {
+
         const projectTitle = this.props.data.trim().toLowerCase().replace(/\s/g, "-")
         return (
-        <a href={"/project/" + projectTitle}>
+        <Link to={"/project/" + projectTitle}>
             <ProjectsTile>
                 <TileHeader>{this.props.data}</TileHeader>
             </ProjectsTile>
-        </a>
+        </Link>
         );
     }
 }
