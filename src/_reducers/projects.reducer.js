@@ -1,7 +1,7 @@
 import { projectConstants } from '../_constants';
 
 
-let projects = JSON.parse(localStorage.getItem('hasProjects'));
+let projects = JSON.parse(localStorage.getItem('userProjects'));
 const initialState = projects ? {projects: projects } :  {projects:'unset'};
 
 export function userData(state = initialState, action) {

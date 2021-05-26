@@ -7,6 +7,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
+    
     devServer: {
         historyApiFallback: true
     },
@@ -42,7 +43,6 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({template: './src/index.html'})
 ],
-
     externals: {
         // global app config object
         config: JSON.stringify({
@@ -51,7 +51,10 @@ module.exports = {
     },
     node: {
         fs: 'empty'
-      }
+      },
+      output: {
+        filename: 'bundle.js',
+      },
     }
 
 

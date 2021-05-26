@@ -43,3 +43,12 @@ width:100%;
 border:1px solid rgba(0,0,0,0.1);
 border-radius:5px;
 `
+
+export const Logout = styled.a`
+  cursor: pointer;
+  color:#333;
+`
+
+export const Profile = styled.a`
+  color:#333;
+`

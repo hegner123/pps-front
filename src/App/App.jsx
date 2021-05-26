@@ -25,22 +25,22 @@ class App extends React.Component {
             this.props.clearAlerts();
         });
     }
-    //  componentDidMount(){
-    //     this.timerID = setInterval(() => this.tick(this.state.pop),10);
-    // }
-    // tick(i) {i++
-    //     this.setState({pop: i});
-    //   }
+     componentDidMount(){
+        this.timerID = setInterval(() => this.tick(this.state.pop),100);
+    }
+    tick(i) {i++
+        this.setState({pop: i});
+      }
     render() {
         let alertDisplay;
         const { alert } = this.props;
 
-        if (this.state.pop <= 100){
+        if (this.state.pop <= 10){
             alertDisplay = <div className='alert-bar'>{alert.message &&
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
             }
             </div>
-        } else if (this.state.pop > 100){
+        } else if (this.state.pop > 10){
             clearInterval(this.timerID);
             alertDisplay = <div className='alert-bar'></div>
         }
@@ -51,8 +51,8 @@ class App extends React.Component {
                 <Router history={history} >
                 <Branding logout={() => logout(this.props)}/>
                     <Switch>
-                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                         <PrivateRoute path="/project/:id" component={SingleProject}/>
+                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                         <PrivateRoute exact path="/new-project" component={NewProject} />
                         <Route exact path="/" component={HomePage}/>
                         <Route exact path="/register" component={RegisterPage} />

@@ -17,7 +17,7 @@ function getProjects(user) {
     return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions)
     .then(handleResponse)
     .then(projects => {
-        localStorage.setItem('hasProjects', JSON.stringify(projects))
+        localStorage.setItem('userProjects', JSON.stringify(projects))
         return projects;
     });
 }

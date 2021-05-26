@@ -14,10 +14,9 @@ export  const userActions = {
 function login(username, password) {
     return dispatch => {
         dispatch(request({ username }));
-
         userService.login(username, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
                     history.push('/dashboard');
                 },
@@ -41,10 +40,9 @@ function logout() {
 function register(user) {
     return dispatch => {
         dispatch(request(user));
-
         userService.register(user)
             .then(
-                user => { 
+                user => {
                     dispatch(success());
                     history.push('/login');
                     dispatch(alertActions.success('Registration successful ' + user));

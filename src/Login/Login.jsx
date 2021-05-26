@@ -10,10 +10,7 @@ import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-
         // reset login status
-        
-
         this.state = {
             username: '',
             password: '',
@@ -54,15 +51,15 @@ class LoginPage extends React.Component {
                                     }
                                 <FormGroup>
                                     <Label htmlFor='username'>Username</Label>
-                                    <Input type="text"  name="username" value={username} onChange={this.handleChange} />
+                                    <Input type="text"   name="username" value={username} onChange={this.handleChange} />
 
                                 </FormGroup>
                                 {submitted && !password &&
                                         <HelpBlock>Password is required</HelpBlock>
                                     }
                                 <FormGroup>
-                                <Label htmlFor='password'>Password</Label>
-                                    <Input type="password"  name="password" value={password} onChange={this.handleChange} />
+                                    <Label htmlFor='password'>Password</Label>
+                                    <Input type="password" autoComplete="current-password" name="password" value={password} onChange={this.handleChange} />
 
                                     </FormGroup>
                                 {loggingIn &&

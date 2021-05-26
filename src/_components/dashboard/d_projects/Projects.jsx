@@ -1,94 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ProjectTile } from '../d_projectTile'
-import {DashHeader, DashTitle, ProjectSection} from './style';
-import {store} from '../../../_helpers';
 import {projectActions} from '../../../_actions/project.actions';
+import {RecentProjects, UserProjects} from '../d_projectGrid';
 
 class Projects extends React.Component{
-    constructor(props) {
+      constructor(props) {
         super(props);
-        this.state ={
-            loading:true,
-        }
     }
-    async componentDidMount(){
-        let storage = localStorage.getItem('hasProjects')
-          if (!storage){
-            await this.props.getProjects()
-                this.setState({
-                    loading:false,
-                })
-          }
+     componentDidMount() {
+        const storage = localStorage.getItem('userProjects')
+        if (!storage){
+            this.props.getProjects()
+           }
     }
+
 render(){
-        const projectStore = store.getState()
-        const projectData = projectStore.userData.projects;
-        let display;
-            if (projectData !== "unset"){
-                display =   <div>
-                                <RecentProjects/>
-                                <UserProjects/>
-                            </div>
-            } else {
-                display = <span>Refresh</span>
-            }
+    const {projects} = this.props
     return(
         <div>
-       {display}
-       </div>
+            <RecentProjects data={projects}/>
+            <UserProjects data={projects}/>
+        </div>
     )
 }
 }
 
-  function mapState(state) {
-    const { projects } = state;
+
+function mapState(state) {
+    const { projects } = state.userData;
     return { projects };
 }
 
-
-  const actionCreators = {
+const actionCreators = {
     getProjects: projectActions.getProjects
-}
+};
+
+
 
 
 const connectedProjects = connect(mapState, actionCreators)(Projects);
 export { connectedProjects as Projects };
 
-
-export function RecentProjects() {
-    const items = store.getState().userData.projects
-    let i = 0;
-    return (
-        <div>
-            <DashHeader>
-                <DashTitle>Recent</DashTitle>
-            </DashHeader>
-            <ProjectSection>
-        {items.map(data =>
-           <ProjectTile data={data.projectTitle} key={i++}/>
-                 )}
-                </ProjectSection>
-        </div>
-
-    );
-  }
-
-export function UserProjects() {
-    const uPs = store.getState().userData.projects
-    let i = 0
-    return (
-      <div>
-        <DashHeader>
-            <a href="/new-project">
-                <DashTitle>Projects</DashTitle>
-            </a>
-        </DashHeader>
-        <ProjectSection>
-        {uPs.map(data =>
-           <ProjectTile data={data.projectTitle}  key={i++}/>
-                 )}
-    </ProjectSection>
-      </div>
-    );
-  }

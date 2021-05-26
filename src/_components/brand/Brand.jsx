@@ -3,7 +3,7 @@ import {useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {userActions} from '../../_actions/user.actions';
-import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink} from './style';
+import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink, Logout, Profile} from './style';
 
 
 
@@ -24,7 +24,6 @@ import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink} fr
             ProProject Studio
         </BrandLink>
         }
-        console.log(props)
 
         return (
             <AdminBar>
@@ -34,10 +33,10 @@ import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink} fr
                 {searchBar}
                 <AdminControls>
                     <AdminItem>
-                        <a href='/dashboard' className='link'>Profile</a>
+                        <Profile href='/dashboard' className='link'>Dashboard</Profile>
                     </AdminItem>
                     <AdminItem>
-                     <a onClick={() => props.logout()} className='link'>Logout</a>
+                     <Logout onClick={() => props.logout()} className='link'>Logout</Logout>
                     </AdminItem>
                 </AdminControls>
             </AdminBar>

@@ -6,14 +6,6 @@ import { store } from '../_helpers'
 import { PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
 
-
-
-
-
-
-
-
-
 class SingleProject extends React.Component {
     constructor(props) {
         super(props);
@@ -25,12 +17,8 @@ class SingleProject extends React.Component {
     }
 }
 
-
-
 const connectedSingleProject = connect()(SingleProject);
 export { connectedSingleProject as SingleProject };
-
-
 
 export function Project(){
         let id = useParams().id
@@ -46,19 +34,15 @@ export function Project(){
             })
             return display;
         }
-
-        // console.log(iterate(projectData))
-        console.log(useLocation())
     return (
         <div className="full-width">
-            <div className='row project-title'>
-            <TableArea data={iterate(projectData)}/>
-
-             </div>
             <div className="row grid-area">
-            <PDetails data={iterate(projectData).projectTitle}/>
+                <PDetails data={iterate(projectData).projectTitle}/>
+            </div>
+            <div className='row project-title'>
+                <TableArea data={iterate(projectData)}/>
+            </div>
         </div>
-    </div>
     );
   }
 

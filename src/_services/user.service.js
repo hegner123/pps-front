@@ -30,7 +30,8 @@ function login(userName, hash) {
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem( 'userData' );
+    localStorage.removeItem( 'userProjects' );
+    localStorage.removeItem( 'user' );
     history.push('/');
 }
 
