@@ -4,7 +4,8 @@ import { projectService } from '../_services/';
 import { store } from '../_helpers';
 
 export  const projectActions = {
-    getProjects
+    getProjects,
+    setCurrentProject
 };
 
 function getProjects() {
@@ -28,4 +29,10 @@ function getProjects() {
     function failure(error) { return { type: projectConstants.GETALL_FAILURE, error } }
 }
 
+
+
+
+function setCurrentProject() {
+    return { type: userConstants.LOGOUT };
+}
 export default projectActions;

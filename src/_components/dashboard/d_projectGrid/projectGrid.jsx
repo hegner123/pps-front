@@ -14,7 +14,7 @@ export function RecentProjects(props) {
             </DashHeader>
             <ProjectSection>
         {props.data.map(data =>
-           <ProjectTile data={data.projectTitle} key={i++}/>
+           <ProjectTile data={data.projectTitle} id={i} key={i++}/>
                  )}
                 </ProjectSection>
         </div>
@@ -36,7 +36,7 @@ export function UserProjects(props) {
         </DashHeader>
         <ProjectSection>
         {props.data.map(data =>
-           <ProjectTile data={data.projectTitle}  key={i++}/>
+           <ProjectTile data={data.projectTitle} id={i} key={i++}/>
                  )}
     </ProjectSection>
       </div>

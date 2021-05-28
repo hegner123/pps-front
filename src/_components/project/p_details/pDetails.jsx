@@ -1,23 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { ProjectTitle } from './style';
+import {store} from '../../../_helpers';
+import { ProjectDetails, ProjectTitle } from './style';
 
 
 
-class PDetails extends React.Component {
-    constructor(props) {
-        super(props);
+export function PDetails(props){
+    const data = store.getState();
+    console.log(data)
+
+
+function setCurrentProject(text) {
+    return {
+      type: 'CURRENT_PROJECT',
+      text
     }
-    render() {
+  }
+  
+  store.dispatch(setCurrentProject(props.data))
         return (
-        <div>
-            <ProjectTitle>{this.props.data}</ProjectTitle>
-        </div>
+            <ProjectDetails>
+                <ProjectTitle>{props.data}</ProjectTitle>
+            </ProjectDetails>
         );
     }
-}
 
 
 
-const connectedDetails = connect()(PDetails);
-export { connectedDetails as PDetails };
+

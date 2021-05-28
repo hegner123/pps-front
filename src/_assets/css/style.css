@@ -1,5 +1,6 @@
 body {
-  background: #e3fdff !important;
+  /* background: #e3fdff !important; */
+  background-image:linear-gradient(to right , #e3fdff, #3568bf);
   /* background-color: rgb(13, 17, 23); */
   margin: 0;
   padding: 0;
@@ -178,3 +179,16 @@ td, th {
 
 
 
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}

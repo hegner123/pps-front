@@ -1,28 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ProjectTitle } from '../../project/p_details/style';
 import { ProjectsTile, TileHeader} from './style';
 import {Link} from 'react-router-dom';
 
 
+// available props: project title as data, id as id
 
-class ProjectTile extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        const projectTitle = this.props.data.trim().toLowerCase().replace(/\s/g, "-")
+// todo dispatch project selection
+function ProjectTile(props) {
+
+        const projectTitle = props.data.trim().toLowerCase().replace(/\s/g, "-")
+        console.log(props)
         return (
             <div>
                 <Link to={"/project/" + projectTitle}>
                     <ProjectsTile>
-                        <TileHeader>{this.props.data}</TileHeader>
+                        <TileHeader>{props.data}</TileHeader>
                     </ProjectsTile>
                 </Link>
             </div>
         );
     }
-}
+
 
 const connectedProjectTile = connect()(ProjectTile);
 export { connectedProjectTile as ProjectTile };
