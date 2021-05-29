@@ -15,20 +15,17 @@ import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink, Lo
             searchBar =     <Search>
                                 <Input type="text" name="search" id="search" placeholder='Search'/>
                             </Search>
-            logo = <BrandLink href="/dashboard">
-            ProProject Studio
-        </BrandLink>
+            // logo = <BrandLink href="/dashboard">
+            // ProProject Studio
+        // </BrandLink>
 
-        } else {
-            logo = <BrandLink href="/">
-            ProProject Studio
-        </BrandLink>
         }
-
         return (
             <AdminBar>
                 <Brand>
-                   {logo}
+                    <BrandLink href="/dashboard">
+                        ProProject Studio
+                    </BrandLink>
                 </Brand>
                 {searchBar}
                 <AdminControls>

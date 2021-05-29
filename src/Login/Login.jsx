@@ -1,11 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
-import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
-
-
-
+import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input, FormRegister } from './style';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -28,7 +24,6 @@ class LoginPage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         this.setState({ submitted: true });
         const { username, password } = this.state;
         if (username && password) {
@@ -40,7 +35,6 @@ class LoginPage extends React.Component {
         const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
         return (
-            <div>
                 <Row>
                     <Centered>
                         <FormSection>
@@ -51,9 +45,7 @@ class LoginPage extends React.Component {
                                     }
                                 <FormGroup>
                                     <Label htmlFor='username'>Username</Label>
-                                    <div className="input-container">
                                     <Input type="text"   name="username" value={username} onChange={this.handleChange} />
-                                    </div>
                                 </FormGroup>
                                 {submitted && !password &&
                                         <HelpBlock>Password is required</HelpBlock>
@@ -73,7 +65,6 @@ class LoginPage extends React.Component {
                         </FormSection>
                     </Centered>
                 </Row>
-            </div>
         );
     }
 }

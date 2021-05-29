@@ -9,27 +9,9 @@ class TableRow extends React.Component {
         this.state ={
             data:this.props.data,
             headers: this.props.headers,
-            headersL: this.props.headers.length
+            headersLength: this.props.headers.length
         }
-        this.handleStatusChange = this.handleStatusChange.bind(this);
     }
-
-    handleStatusChange(song, instrument, status){
-        this.statusSwap(song, instrument, status, this.state.data )
-    }
-
-    statusSwap(song,instrument,status, data){
-    data.forEach(element => {
-        if( element.song_title == song){
-            if (element.song_status[instrument] == 'Complete'){
-                let update = {[instrument]: 'incomplete'}
-            }else if (element.song_status[instrument] == 'Incomplete'){
-                console.log('fail')
-            }
-        }
-    });
-
-            }
     render() {
         let display;
         const songs = this.props.data;
@@ -47,35 +29,41 @@ class TableRow extends React.Component {
             display = result.map(projectSongs => (
                 <tr key={projectSongs.title}>
                 <TableCell data={projectSongs.title} key={projectSongs.title}/>
-                {mapStatus(projectSongs, this.state.headers,this.state.headersL, this.handleStatusChange, projectSongs.title)}
+                {mapStatus({
+                    project: projectSongs,
+                    projectHeaders: this.state.headers,
+                    projectHeadersLength: this.state.headersLength,
+                    songTitle: projectSongs.title
+                    })}
                 </tr>
                 ))
         }
 
-        function mapStatus(obj,headers,ref,statusChange,songData){
+        function mapStatus({project, projectHeaders, projectHeadersLength, songTitle}){
             let i = 0;
             let k = 0;
             let j;
             let statusArray=[];
-            for (j=0;j<ref;j++){
-                let access = headers[j]
-                if (obj.songStatus[access] == 'Complete' || obj.songStatus[access] == 'Incomplete' ){
-                    statusArray.push(obj.songStatus[access])
-
+            for (j=0;j<projectHeadersLength;j++){
+                let access = projectHeaders[j]
+                if (project.songStatus[access] == 'Complete' || project.songStatus[access] == 'Incomplete' ){
+                    statusArray.push(project.songStatus[access])
                 } else {
                     statusArray.push('N/A')
                 }
             }
 
            return statusArray.map(data =>
-                <TableCell data={data} key={i++} handleStatusChange={statusChange} id={songData} instrument={headers[k++]}/>
+                        <TableCell data={data}
+                        key={i++}
+                        id={songTitle}
+                        instrument={projectHeaders[k++]}/>
                 )
         }
-
         return (
-        <tbody>
-            {display}
-        </tbody>
+            <tbody>
+                {display}
+            </tbody>
         );
     }
 }

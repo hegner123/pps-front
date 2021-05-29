@@ -5,7 +5,7 @@ import { store } from '../_helpers';
 
 export  const projectActions = {
     getProjects,
-    setCurrentProject
+    changeCellStatus
 };
 
 function getProjects() {
@@ -13,7 +13,7 @@ function getProjects() {
     const state = store.getState()
     const user = state.authentication.user.userName
     return dispatch => {
-        dispatch(request())
+        dispatch(request());
         projectService.getProjects(user)
             .then(
                 projects => {
@@ -32,7 +32,25 @@ function getProjects() {
 
 
 
-function setCurrentProject() {
-    return { type: userConstants.LOGOUT };
+
+
+
+function changeCellStatus(project, song, instrument){
+    const state = store.getState()
+    const user = state.authentication.user.userName
+    return dispatch => {
+        projectService.changeCellStatus(user, project, song, instrument)
+        .then(
+            status => {
+                dispatch(success(status));
+
+            },
+            error => dispatch(failure(error.toString))
+        );
+        
+    };
+    function request() { return { type: projectConstants.STATUS_REQUEST } }
+    function success(status) { return { type: projectConstants.STATUS_SUCCESS, status } }
+    function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
 }
 export default projectActions;

@@ -2,10 +2,9 @@ import config from 'config';
 import { authHeader } from '../_helpers';
 
 
-
-
 export const projectService = {
     getProjects,
+    changeCellStatus
 };
 
 function getProjects(user) {
@@ -20,6 +19,19 @@ function getProjects(user) {
         localStorage.setItem('userProjects', JSON.stringify(projects))
         return projects;
     });
+}
+
+function changeCellStatus(project, song, instrument, status) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' }
+    };
+    console.log(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}`)
+    return fetch(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}`, requestOptions)
+    .then(handleResponse)
+    .then(status => {
+        console.log(status)
+    })
 }
 
 // function getProjects(id) {
