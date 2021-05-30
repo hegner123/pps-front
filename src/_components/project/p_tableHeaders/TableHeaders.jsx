@@ -3,18 +3,12 @@ import { connect } from 'react-redux';
 import {TableCell} from '../p_tableCell';
 
 
-class tableHeaders extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-
-    render() {
+export function tableHeaders(props){
 let display;
 
-        if (this.props.id !== 'table-body'){
-            this.props.data.unshift("song");
-            display =this.props.data.map(dat => (
+        if (props.id !== 'table-body'){
+            props.data.unshift("song");
+            display =props.data.map(dat => (
                 <TableCell data={dat} key={dat}/>
                 ))
 
@@ -25,7 +19,7 @@ let display;
         </tr>
         );
     }
-}
+
 
 
 

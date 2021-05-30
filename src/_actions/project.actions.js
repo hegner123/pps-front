@@ -35,11 +35,11 @@ function getProjects() {
 
 
 
-function changeCellStatus(project, song, instrument){
+function changeCellStatus(project, song, instrument, status){
     const state = store.getState()
     const user = state.authentication.user.userName
     return dispatch => {
-        projectService.changeCellStatus(user, project, song, instrument)
+        projectService.changeCellStatus( project, song, instrument,status)
         .then(
             status => {
                 dispatch(success(status));
@@ -47,7 +47,6 @@ function changeCellStatus(project, song, instrument){
             },
             error => dispatch(failure(error.toString))
         );
-        
     };
     function request() { return { type: projectConstants.STATUS_REQUEST } }
     function success(status) { return { type: projectConstants.STATUS_SUCCESS, status } }
