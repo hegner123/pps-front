@@ -8,10 +8,7 @@ class Projects extends React.Component{
         super(props);
     }
      componentDidMount() {
-        const storage = localStorage.getItem('userProjects')
-        if (!storage){
             this.props.getProjects()
-           }
     }
 
 render(){

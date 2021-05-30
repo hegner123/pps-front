@@ -9,7 +9,7 @@ export  const projectActions = {
 };
 
 function getProjects() {
-    console.log('getProjects action')
+
     const state = store.getState()
     const user = state.authentication.user.userName
     return dispatch => {
@@ -35,14 +35,13 @@ function getProjects() {
 
 
 
-function changeCellStatus(project, song, instrument, status){
-    const state = store.getState()
-    const user = state.authentication.user.userName
+function changeCellStatus(project, song, instrument, status, id){
     return dispatch => {
-        projectService.changeCellStatus( project, song, instrument,status)
+        projectService.changeCellStatus( project, song, instrument,status, id)
         .then(
             status => {
                 dispatch(success(status));
+                dispatch(alertActions.success(state + ' projects loaded!'));
 
             },
             error => dispatch(failure(error.toString))

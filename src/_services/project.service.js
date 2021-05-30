@@ -12,7 +12,7 @@ function getProjects(user) {
         method: 'GET',
         headers: authHeader()
     };
-    console.log('getProjects service')
+    // console.log('getProjects service')
     return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions)
     .then(handleResponse)
     .then(projects => {
@@ -21,16 +21,16 @@ function getProjects(user) {
     });
 }
 
-function changeCellStatus(project, song, instrument, status) {
+function changeCellStatus(project, song, instrument, status,id) {
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }
     };
-    console.log(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}`)
-    return fetch(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}`, requestOptions)
+    // console.log(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`)
+    return fetch(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`, requestOptions)
     .then(handleResponse)
-    .then(status => {
-        console.log(status)
+    .then(projects => {
+        localStorage.setItem('userProjects', JSON.stringify(projects))
     })
 }
 

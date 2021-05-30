@@ -10,7 +10,6 @@ import {Link} from 'react-router-dom';
 function ProjectTile(props) {
 
         const projectTitle = props.data.trim().toLowerCase().replace(/\s/g, "-")
-        console.log(props)
         return (
             <div>
                 <Link to={"/project/" + projectTitle}>

@@ -4,6 +4,7 @@ import { TableHeaders } from '../p_tableHeaders';
 import { TableRow } from '../p_tableRow';
 import loadingGif from '../../../_assets/images/loading-buffering.gif';
 import { Table } from './style';
+import {projectActions} from '../../../_actions/project.actions'
 
 
 class TableArea extends React.Component {
@@ -11,7 +12,11 @@ class TableArea extends React.Component {
         super(props);
         this.state={
             songs: this.props.data.songs,
+            projectId: this.props.data._id
         }
+    }
+    componentDidMount() {
+            this.props.getProjects()
     }
     render() {
         let display;
@@ -41,6 +46,7 @@ class TableArea extends React.Component {
                 {this.state.songs &&
                 <TableRow
                 data={this.state.songs}
+                projectId={this.state.projectId}
                 headers={tableHeaders(this.state.songs)}
                 id={'table-body'}
                 />
@@ -50,7 +56,14 @@ class TableArea extends React.Component {
     }
 }
 
+function mapState(state) {
+    const { projects } = state.userData;
+    return { projects };
+}
 
+const actionCreators = {
+    getProjects: projectActions.getProjects
+};
 
-const connectedTableArea = connect()(TableArea);
+const connectedTableArea = connect(mapState, actionCreators)(TableArea);
 export { connectedTableArea as TableArea };
