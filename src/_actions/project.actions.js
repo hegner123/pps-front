@@ -18,7 +18,7 @@ function getProjects() {
             .then(
                 projects => {
                     dispatch(success(projects));
-                    dispatch(alertActions.success(state + ' projects loaded!'));
+                    dispatch(alertActions.success(user + ' projects loaded!'));
                 },
                 error => dispatch(failure(error.toString()))
             );
@@ -36,19 +36,25 @@ function getProjects() {
 
 
 function changeCellStatus(project, song, instrument, status, id){
+    const state = store.getState()
+    const user = state.authentication.user.userName
     return dispatch => {
-        projectService.changeCellStatus( project, song, instrument,status, id)
+        projectService.changeCellStatus( project, song, instrument,status, id, user)
         .then(
-            status => {
-                dispatch(success(status));
-                dispatch(alertActions.success(state + ' projects loaded!'));
-
-            },
-            error => dispatch(failure(error.toString))
-        );
-    };
+            projectService.getProjects(user)
+            .then(
+                projects => {
+                    dispatch(psuccess(projects));
+                    dispatch(alertActions.success(user + ' projects loaded!'));
+                },
+                error => dispatch(failure(error.toString()))
+            )
+        )
+            };
+    ;
     function request() { return { type: projectConstants.STATUS_REQUEST } }
-    function success(status) { return { type: projectConstants.STATUS_SUCCESS, status } }
+    function psuccess(projects) { return { type: projectConstants.GETALL_SUCCESS, projects } }
+    function success(status) { return { type: projectConstants.STATUS_SUCCESS } }
     function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
 }
 export default projectActions;

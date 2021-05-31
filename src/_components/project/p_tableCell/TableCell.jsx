@@ -1,10 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {  connect } from 'react-redux';
 import { projectActions } from '../../../_actions'
 import { CompletedCell, IncompleteCell, NaCell, TextCell  } from './style'
+import {store} from '../../../_helpers';
 
 
 function  TableCell (props) {
+let states = store.getState()
+
     let projectSlug  = props.projectId;
         const cellStatus =  props.data
         let display;
@@ -14,6 +17,8 @@ function  TableCell (props) {
             let instrument =  props.instrument;
             let cellStatus =  props.data;
             let cellId = props.cellId
+
+            console.log(states)
             if ( props.data == 'Complete'){
                  return display = <CompletedCell onClick={() => props.changeCellStatus(projectSlug, songId, instrument, cellStatus,cellId)} songName={songName} instrument={instrument}/>
             } else if ( props.data == 'Incomplete'){

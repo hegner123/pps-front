@@ -21,10 +21,11 @@ function getProjects(user) {
     });
 }
 
-function changeCellStatus(project, song, instrument, status,id) {
+function changeCellStatus(project, song, instrument, status,id, user) {
     const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' }
+        headers: authHeader(),
+        body: {user: user}
     };
     // console.log(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`)
     return fetch(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`, requestOptions)

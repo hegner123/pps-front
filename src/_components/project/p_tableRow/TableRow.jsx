@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TableCell } from '../p_tableCell';
+import { useSelector } from 'react-redux';
 
 
 
  function TableRow(props){
+
     let headers = props.headers
     let display;
     const songs = props.data;

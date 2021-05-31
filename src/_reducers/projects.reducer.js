@@ -16,6 +16,12 @@ export function userData(state = initialState, action) {
       };
     case projectConstants.STATUS_REQUEST:
       return {
+        ...state,
+        projects: action.projects
+      }
+    case projectConstants.STATUS_SUCCESS:
+      return {
+        projects: projects,
         action: action.status
       }
     default:
