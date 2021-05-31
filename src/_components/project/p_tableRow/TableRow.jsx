@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { connect } from 'react-redux';
 import { TableCell } from '../p_tableCell';
 import { useSelector } from 'react-redux';
@@ -6,10 +6,9 @@ import { useSelector } from 'react-redux';
 
 
  function TableRow(props){
-
-    let headers = props.headers
+const [headers, setHeaders] = useState(props.headers)
+const [songs, setSongs] = useState(props.data)
     let display;
-    const songs = props.data;
     class SongRow {
         constructor(title, arrangement, id) {
             this.songId = id;

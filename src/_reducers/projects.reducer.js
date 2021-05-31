@@ -17,13 +17,23 @@ export function userData(state = initialState, action) {
     case projectConstants.STATUS_REQUEST:
       return {
         ...state,
-        projects: action.projects
+        action: action.request
       }
     case projectConstants.STATUS_SUCCESS:
       return {
-        projects: projects,
+        ...state,
         action: action.status
       }
+      case projectConstants.ASSIGN_PROJECT:
+        return {
+          ...state,
+          current: action.project
+        }
+        case projectConstants.CLEAR_PROJECT:
+          return {
+            ...state,
+            current:{}
+          }
     default:
       return state
   }

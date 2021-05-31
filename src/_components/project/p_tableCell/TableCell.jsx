@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {  connect } from 'react-redux';
 import { projectActions } from '../../../_actions'
 import { CompletedCell, IncompleteCell, NaCell, TextCell  } from './style'
@@ -6,23 +6,25 @@ import {store} from '../../../_helpers';
 
 
 function  TableCell (props) {
-let states = store.getState()
+    const [songId,setSongId] = useState(props.songId)
+    const [songName,setSongName] = useState(props.title)
+    const [instrument,setInstrument] = useState(props.instrument)
+    const [cellStatus,setCellStatus] = useState(props.data)
+    const [cellId,setCellId] = useState(props.cellId)
+    const [projectSlug, setProjectSlug] = useState(props.projectId)
+    
 
-    let projectSlug  = props.projectId;
-        const cellStatus =  props.data
+
+
+
+   
         let display;
         if ( props.instrument){
-            let songId = props.songId
-            let songName =  props.title;
-            let instrument =  props.instrument;
-            let cellStatus =  props.data;
-            let cellId = props.cellId
 
-            console.log(states)
-            if ( props.data == 'Complete'){
-                 return display = <CompletedCell onClick={() => props.changeCellStatus(projectSlug, songId, instrument, cellStatus,cellId)} songName={songName} instrument={instrument}/>
-            } else if ( props.data == 'Incomplete'){
-                return display = <IncompleteCell onClick={() => props.changeCellStatus(projectSlug, songId, instrument, cellStatus, cellId)} songName={songName} instrument={instrument}/>
+            if ( cellStatus == 'Complete'){
+                 return display = <CompletedCell onClick={() => {props.changeCellStatus(projectSlug, songId, instrument, cellStatus,cellId); setCellStatus('Incomplete') }} songName={songName} instrument={instrument}/>
+            } else if ( cellStatus == 'Incomplete'){
+                return display = <IncompleteCell onClick={() => {props.changeCellStatus(projectSlug, songId, instrument, cellStatus, cellId); setCellStatus('Complete')}} songName={songName} instrument={instrument}/>
             } else {
                 return display = <NaCell/>
             }
@@ -30,7 +32,7 @@ let states = store.getState()
             display = <TextCell>{cellStatus}</TextCell>
         }
         return (
-    display
+                display
         );
     }
 
@@ -45,6 +47,3 @@ let states = store.getState()
 
 const connectedTableCell = connect(mapState, actionCreators)(TableCell);
 export { connectedTableCell as TableCell };
-
-
-// props.handleStatusChange(songName, instrument, cellStatus) 

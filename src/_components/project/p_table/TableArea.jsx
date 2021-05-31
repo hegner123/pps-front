@@ -11,10 +11,6 @@ export function TableArea (props) {
         const [songs, setSongs] = useState(props.data.songs);
         const [projectId, setProjectId] = useState(props.data._id);
 
-        let display;
-        if (props.data.songs){
-            display = <img src={loadingGif} alt="" />
-                }
 
         function tableHeaders(songs){
             let instruments = [];

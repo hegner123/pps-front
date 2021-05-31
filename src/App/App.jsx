@@ -51,7 +51,7 @@ class App extends React.Component {
                 <Router history={history} >
                 <Branding logout={() => logout(this.props)}/>
                     <Switch>
-                        <PrivateRoute path="/project/:id" component={SingleProject}/>
+                        <PrivateRoute exact path="/project/:id" component={SingleProject}/>
                         <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                         <PrivateRoute exact path="/new-project" component={NewProject} />
                         <Route exact path="/" component={HomePage}/>
