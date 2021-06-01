@@ -5,6 +5,7 @@ import { store } from '../_helpers';
 
 export  const projectActions = {
     getProjects,
+    createProject,
     changeCellStatus,
     assignProject
 };
@@ -67,16 +68,27 @@ function changeCellStatus(project, song, instrument, status, id){
     return dispatch => {
         dispatch(request())
         projectService.changeCellStatus( project, song, instrument,status, id, user)
-        .then(status =>
-            dispatch(success(status)),
-            error => 
-            dispatch(failure(error)
+        .then(status => dispatch(success(success)),
+                error => dispatch(failure(error)
         )
         )};
     ;
     function request() { return { type: projectConstants.STATUS_REQUEST } }
-    function psuccess(projects) { return { type: projectConstants.GETALL_SUCCESS } }
     function success(status) { return { type: projectConstants.STATUS_SUCCESS } }
     function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
+}
+
+
+
+function createProject(){
+    return dispatch => {
+
+        projectService.createProjects(newProject)
+        .then(res => dispatch(success(res)),
+        error => dispatch(failure(error)));
+    }
+
+    function success(){return {type: projectConstants.CREATE_SUCCESS}}
+    function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
 }
 export default projectActions;

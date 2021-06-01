@@ -15,7 +15,7 @@ background-color:#e3fdff;
 cursor:pointer;
 `
 
-export const Btn = styled.a`
+export const Btn = styled.div`
 padding:10px;
 text-align:center;
 border:1px solid rgba(0,0,0,0.1);
@@ -45,9 +45,7 @@ margin:10px 0;
 
 export const FormSection = styled.div`
 width:20%;
-  padding:100px;
-  background-color:#fff;
-  box-shadow:0px 0px 25px rgba(0,0,0,0.6);
+
 `
 
 export const FormTitle = styled.h1`
@@ -80,5 +78,6 @@ border-radius:5px;`
 export const ActionGroup = styled.div`
 display: flex;
 flex-direction:row;
+justify-content: center;
 margin:10px 0;
 `

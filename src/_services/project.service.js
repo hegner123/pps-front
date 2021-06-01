@@ -4,6 +4,7 @@ import { authHeader } from '../_helpers';
 
 export const projectService = {
     getProjects,
+    createProjects,
     changeCellStatus
 };
 
@@ -21,6 +22,16 @@ function getProjects(user) {
     });
 }
 
+function createProjects(newProject){
+    const requestOptions ={
+        method:'POST',
+        headers: authHeader(),
+        body: newProject
+    }
+    return fetch(`${config.url}/projects/`, requestOptions)
+}
+
+
 function changeCellStatus(project, song, instrument, status,id, user) {
     const requestOptions = {
         method: 'PUT',
@@ -35,11 +46,7 @@ function changeCellStatus(project, song, instrument, status,id, user) {
     })
 }
 
-// function getProjects(id) {
-//     return axios.get("http://localhost:4000/projects/userprojects/" + id).then(
-//         projects => handleResponse(projects));
-//   }
-//   getProjects('michael')
+
 
 
 function handleResponse(response) {

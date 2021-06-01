@@ -74,7 +74,9 @@ class NewProject extends React.Component {
 
                                 <ActionGroup>
                                     <Button>Create</Button>
-                                    <Btn to="/dashboard">Cancel</Btn>
+                                    <Btn>
+                                    <Link to="/dashboard">Cancel</Link>
+                                    </Btn>
                                 </ActionGroup>
                             </form>
                         </FormSection>
