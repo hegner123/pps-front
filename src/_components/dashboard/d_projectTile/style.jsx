@@ -11,6 +11,12 @@ export const ProjectsTile = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition-duration:10ms;
+
+&:hover {
+  background:#e3fdff;
+  color:#fff;
+}
 `
 
 export const TileHeader = styled.h5`

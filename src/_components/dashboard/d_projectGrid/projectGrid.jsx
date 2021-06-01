@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ProjectTile } from '../d_projectTile'
-import {DashHeader, DashTitle, ProjectSection} from './style';
+import {DashHeader, DashTitle, ProjectSection, AddProject} from './style';
 
 export function RecentProjects(props) {
     let i =0;
@@ -30,9 +31,10 @@ export function UserProjects(props) {
     return (
       <div>
         <DashHeader>
-            <a href="/new-project">
-                <DashTitle>Projects</DashTitle>
-            </a>
+        <DashTitle>Projects</DashTitle>
+        <Link to="/new-project">
+            <AddProject>+</AddProject>
+        </Link>
         </DashHeader>
         <ProjectSection>
         {props.data.map(data =>
