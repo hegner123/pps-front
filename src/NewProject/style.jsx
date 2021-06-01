@@ -13,6 +13,11 @@ transition-duration: 0.2s;
 width:100%;
 background-color:#e3fdff;
 cursor:pointer;
+transition:10ms;
+&:hover {
+    background:#3568bf;
+    color:#e3fdff;
+}
 `
 
 export const Btn = styled.div`
@@ -26,6 +31,11 @@ border-radius:5px;
 transition-duration: 0.2s;
 width:100%;
 cursor:pointer;
+transition:10ms;
+&:hover {
+    background:#3568bf;
+    color:#e3fdff;
+}
 `
 
 export const Centered = styled.div`

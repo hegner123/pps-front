@@ -53,6 +53,11 @@ transition-duration: 0.2s;
 width:100%;
 background-color:#e3fdff;
 cursor:pointer;
+transition:10ms;
+&:hover {
+    background:#3568bf;
+    color:#e3fdff;
+}
 `
 
 export const Label = styled.label`
