@@ -11,7 +11,7 @@ export const projectService = {
 function getProjects(user) {
     const requestOptions = {
         method: 'GET',
-        headers: authHeader()
+        headers: authHeader(), 
     };
     // console.log('getProjects service')
     return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions)
@@ -23,12 +23,15 @@ function getProjects(user) {
 }
 
 function createProjects(newProject){
+    console.log('createProject Service')
+    console.log(newProject)
     const requestOptions ={
         method:'POST',
-        headers: authHeader(),
-        body: newProject
+        headers: authHeader(1),
+        body: JSON.stringify({ newProject })
     }
-    return fetch(`${config.url}/projects/`, requestOptions)
+    console.log(requestOptions)
+    return fetch(`${config.apiUrl}/projects/`, requestOptions).then(handleResponse)
 }
 
 
@@ -41,9 +44,11 @@ function changeCellStatus(project, song, instrument, status,id, user) {
     // console.log(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`)
     return fetch(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`, requestOptions)
     .then(handleResponse)
-    .then(projects => {
-        localStorage.setItem('userProjects', JSON.stringify(projects))
-    })
+    // .then(projects => {
+    //     localStorage.setItem('userProjects', JSON.stringify(projects))
+    // }
+    
+    // )
 }
 
 

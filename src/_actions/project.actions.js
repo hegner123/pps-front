@@ -80,15 +80,15 @@ function changeCellStatus(project, song, instrument, status, id){
 
 
 
-function createProject(){
+function createProject(newProject){
+    console.log('createProject')
     return dispatch => {
-
         projectService.createProjects(newProject)
         .then(res => dispatch(success(res)),
         error => dispatch(failure(error)));
     }
 
-    function success(){return {type: projectConstants.CREATE_SUCCESS}}
+    function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
     function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
 }
 export default projectActions;

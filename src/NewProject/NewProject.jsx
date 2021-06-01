@@ -11,6 +11,7 @@ class NewProject extends React.Component {
         this.state = {
             project: {
                 projectTitle: '',
+                projectSlug:'',
                 members: [],
                 companyName: ''
             },
@@ -33,16 +34,25 @@ class NewProject extends React.Component {
     }
 
     handleSubmit(event) {
+        const pro = this.state.project
+        let project = {
+            projectTitle:'',
+            projectSlug:'',
+            members:[]
+        }
+        project.projectTitle = pro.projectTitle
+        project.projectSlug = pro.projectTitle.trim()
+        project.members.push(pro.members)
         event.preventDefault();
         this.setState({ submitted: true });
-        const { project } = this.state;
+        console.log(project)
         if (project.projectTitle && project.members) {
-            this.props.newProject(project);
+            this.props.createProject(project);
         }
     }
 
     render() {
-        const { NewProject  } = this.props;
+        const { createProject  } = this.props;
         const { project, submitted } = this.state;
         return (
                 <Row>
@@ -92,7 +102,7 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    newProject: projectActions.newProject
+    createProject: projectActions.createProject
 }
 
 const connectedNewProject = connect(mapState, actionCreators)(NewProject);

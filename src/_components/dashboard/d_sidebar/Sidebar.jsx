@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Notifications } from '../d_notifications'
+import { SidebarCol} from './style';
 
 
 class Sidebar extends React.Component {
@@ -10,7 +11,7 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-    <div className="sidebar">
+    <SidebarCol>
         <Notifications/>
         <Notifications/>
         <Notifications/>
@@ -19,7 +20,7 @@ class Sidebar extends React.Component {
         <Notifications/>
         <Notifications/>
         <Notifications/>
-    </div>
+    </SidebarCol>
         );
     }
 }

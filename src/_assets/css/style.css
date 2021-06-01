@@ -147,16 +147,7 @@ td, th {
   line-height:75px;
 }
 
-.sidebar{
-  background:#656565;
-  height: 100%;
-  flex-grow:1;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: center;
-  box-shadow:0 5px 5px #333;
-}
+
 
 
 

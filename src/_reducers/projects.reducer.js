@@ -42,7 +42,7 @@ export function userData(state = initialState, action) {
         case projectConstants.CREATE_SUCCESS:
           return {
           ...state,
-          create: action.create
+          create: action.error
           }
     default:
       return {...state}
