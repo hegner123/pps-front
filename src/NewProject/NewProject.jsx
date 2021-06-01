@@ -41,11 +41,10 @@ class NewProject extends React.Component {
             members:[]
         }
         project.projectTitle = pro.projectTitle
-        project.projectSlug = pro.projectTitle.trim()
+        project.projectSlug = pro.projectTitle.trim().toLowerCase().replace(/\s/g, "-")
         project.members.push(pro.members)
         event.preventDefault();
         this.setState({ submitted: true });
-        console.log(project)
         if (project.projectTitle && project.members) {
             this.props.createProject(project);
         }

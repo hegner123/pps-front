@@ -10,3 +10,7 @@ export const DashboardPage = styled.div`
 export const ProjectSection = styled.div`
 flex-grow: 4;
 `
+
+export const SidebarSection = styled.div`
+flex-grow:4;
+`

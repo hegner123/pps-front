@@ -5,6 +5,8 @@ width:150px;
 background:#e3fdff;
 border-radius:5px;
 margin-top: 10px;
+margin-left: 15px;
+margin-right: 15px;
 padding:5px;
 height: max-content;
 `

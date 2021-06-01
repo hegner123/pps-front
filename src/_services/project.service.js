@@ -1,5 +1,6 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
+import {history} from '../_helpers/history'
 
 
 export const projectService = {
@@ -31,7 +32,9 @@ function createProjects(newProject){
         body: JSON.stringify({ newProject })
     }
     console.log(requestOptions)
-    return fetch(`${config.apiUrl}/projects/`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/projects/`, requestOptions)
+    .then(handleResponse)
+    .then(history.push('/dashboard'))
 }
 
 

@@ -15,7 +15,7 @@ render(){
     const {projects} = this.props
     return(
         <div>
-            <RecentProjects data={projects}/>
+            {/* <RecentProjects data={projects}/> */}
             <UserProjects data={projects}/>
         </div>
     )

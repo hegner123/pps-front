@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ProjectTile } from '../d_projectTile'
-import {DashHeader, DashTitle, ProjectSection, AddProject} from './style';
+import {DashHeader, DashTitle, ProjectSection, AddProject, Section} from './style';
 
 export function RecentProjects(props) {
     let i =0;
@@ -29,7 +29,7 @@ export function UserProjects(props) {
         return <h1>Fuck</h1>
     }
     return (
-      <div>
+      <Section>
         <DashHeader>
         <DashTitle>Projects</DashTitle>
         <Link to="/new-project">
@@ -41,6 +41,6 @@ export function UserProjects(props) {
            <ProjectTile data={data.projectTitle} id={i} key={i++}/>
                  )}
     </ProjectSection>
-      </div>
+    </Section>
     );
   }

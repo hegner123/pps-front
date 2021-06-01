@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 
 export const DashHeader = styled.div`
-
+  width:100%;
   margin:5px 15px 0;
   display: flex;
   align-items: center;
@@ -17,6 +17,7 @@ export const ProjectSection = styled.div`
 width:100%;
 display:flex;
 flex-wrap:wrap;
+justify-content: space-between;
 `
 
 export const AddProject = styled.span`
@@ -32,4 +33,11 @@ box-shadow:0 0 5px #333;
 &:hover {
   background:#e3fdff;
 }
+`
+
+export const Section = styled.div`
+display:flex;
+flex-direction: row;
+flex-wrap:wrap;
+
 `
