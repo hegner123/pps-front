@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const SidebarCol = styled.div`
   background:#656565;
   height: 100%;
-  flex-grow: 4;
+  flex-grow: 1;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;

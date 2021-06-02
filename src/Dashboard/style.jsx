@@ -12,5 +12,5 @@ flex-grow: 4;
 `
 
 export const SidebarSection = styled.div`
-flex-grow:4;
+flex-grow:1;
 `

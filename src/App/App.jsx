@@ -10,6 +10,7 @@ import { SingleProject } from '../Project';
 import { LoginPage } from '../Login';
 import { RegisterPage } from '../RegisterPage';
 import { Dashboard } from '../Dashboard';
+import { NewSong } from '../NewSong'
 import '../_assets/css/reset.css';
 import '../_assets/css/style.css';
 import { NewProject } from '../NewProject';
@@ -54,6 +55,7 @@ class App extends React.Component {
                         <PrivateRoute exact path="/project/:id" component={SingleProject}/>
                         <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                         <PrivateRoute exact path="/new-project" component={NewProject} />
+                        <PrivateRoute exact path="/new-song" component={NewSong} />
                         <Route exact path="/" component={HomePage}/>
                         <Route exact path="/register" component={RegisterPage} />
                         <Route exact path="/login" component={LoginPage} />
