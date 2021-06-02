@@ -14,6 +14,12 @@ export const CompletedCell = styled.td`
     font-size:16px;
     cursor: pointer;
     background: rgb(0,255,0);
+    transition: filter 30ms;
+
+
+&:hover{
+  filter: brightness(1.5);
+}
     /* here we use the dynamically computed prop */
   `
 
@@ -29,6 +35,12 @@ export const  IncompleteCell = styled.td`
     font-size:16px;
     cursor: pointer;
     background: rgb(255,0,0) ;
+    transition: filter 30ms;
+
+
+    &:hover{
+      filter: brightness(1.5);
+    }
 `
 
 export const NaCell = styled.td`
