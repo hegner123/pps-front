@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ProjectTile } from '../d_projectTile'
+import { ProjectTile } from '../d_projectTile';
+import AddIcon from '../../../_assets/icons/add.svg';
 import {DashHeader, DashTitle, ProjectSection, AddProject, Section} from './style';
 
 export function RecentProjects(props) {
@@ -33,7 +34,7 @@ export function UserProjects(props) {
         <DashHeader>
         <DashTitle>Projects</DashTitle>
         <Link to="/new-project">
-            <AddProject>+</AddProject>
+            <AddProject><AddIcon/></AddProject>
         </Link>
         </DashHeader>
         <ProjectSection>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Image from "../_assets/images/Image1.svg";
+import  Image from "../_assets/images/Image1.svg";
 import { Header, SubTitle, SubText, ActionList, Action, ActionItem, RowEven, EvenSpace, HeaderContent, HeaderImage } from './style';
 
 class HomePage extends React.Component {
@@ -24,7 +24,7 @@ class HomePage extends React.Component {
                                 </ActionList>
                         </SubTitle>
                 </HeaderContent>
-                    <HeaderImage src={Image} alt="logo"/>
+                    <Image/>
             </EvenSpace>
         </RowEven>
         );

@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
+export const root = styled.div`
 
+`
 
 export const DashHeader = styled.div`
   width:100%;
@@ -20,17 +22,22 @@ flex-wrap:wrap;
 `
 
 export const AddProject = styled.span`
-align-items: center;
+--button-size: calc(var(--nav-size) * 0.3);
+width: var(--button-size);
+height: var(--button-size);
+background-color: #3568bf;
+color: var(--text-color);
 font-size:20px;
-padding:1px;
-background:#fff;
-border-radius:1000px;
-margin-left:10px;
-transition-duration:10ms;
-box-shadow:0 0 5px #333;
+border-radius:50%;
+padding:5px;
+margin:2px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition: filter 300ms;
 
-&:hover {
-  background:#e3fdff;
+&:hover{
+  filter: brightness(1.2)
 }
 `
 

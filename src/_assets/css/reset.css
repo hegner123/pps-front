@@ -62,6 +62,17 @@ a {
 	color:#333;
   }
 
+  :root {
+	--bg : #e3fdff;
+	--bg-accent: #e3fdff;
+	--text-color: #dadce1;
+	--link-color: #474a4d;
+	--nav-size: 60px;
+	--border: 1px solid #474a4d;
+	--border-radius:8px;
+	--speed: 500ms;
+  }
+
 /* cyrillic-ext */
 @font-face {
 	font-family: 'Montserrat';

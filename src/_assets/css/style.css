@@ -210,15 +210,7 @@ code {
     monospace;
 }
 
-:root {
-  --bg : #242526;
-  --bg-accent: #484a4d;
-  --text-color: #dadce1;
-  --nav-size: 60px;
-  --border: 1px solid #474a4d;
-  --border-radius:8px;
-  --speed: 500ms;
-}
+
 
 ul {
   list-style:none;
@@ -227,7 +219,7 @@ ul {
 }
 
 a {
-  color: var(--text-color);
+  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -258,7 +250,7 @@ a {
 --button-size: calc(var(--nav-size) * 0.5);
 width: var(--button-size);
 height: var(--button-size);
-background-color: #484a4d;
+background-color: #3568bf;
 border-radius:50%;
 padding:5px;
 margin:2px;
@@ -274,8 +266,8 @@ transition: filter 300ms;
 
 .icon-button svg {
   fill: var(--text-color);
-  width:20px;
-  height:20px;
+  width:24px;
+  height:24px;
 }
 
 .dropdown{
@@ -304,9 +296,9 @@ transition: filter 300ms;
   margin-right: 0.5rem;
 }
 
-.menu-item:hover {
+/* .menu-item:hover {
   background-color: #525357;
-}
+} */
 
 .icon-right {
   margin-left: auto;

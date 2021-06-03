@@ -1,12 +1,15 @@
 import styled, { css } from 'styled-components'
 
 export const Brand  = styled.div`
+  display:flex;
+  align-items:center;
   flex-grow: 1;
 `
 
 export const BrandLink = styled.a`
 margin-left:10px;
 font-size:30px;
+color:#333333;
 `
 
 export const Search  = styled.div`
