@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Header = styled.h1`
+color:var(--text-color);
 align-items: center;
 font-size: 40px;
 font-weight: 300;
@@ -16,7 +17,7 @@ export const SubText = styled.div`
 margin:10px  0;
 width: 90%;
 font-size:20px;
-color:rgb(100, 100, 100);
+color:var(--text-color);
 `
 
 export const ActionList  =  styled.ul`
@@ -33,10 +34,10 @@ margin-left: ${props => props.spaced ? "15px" : "0"};
 
 export const ActionItem = styled.a`
     padding:10px;
-    background-color:#333;
+    background-color:var(--bg-accent);
     border-radius:5px;
     font-weight:600;
-    color:#f7f7f7;
+    color:var(--text-color);
     font-size:20px;
   `
 

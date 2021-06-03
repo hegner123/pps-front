@@ -56,7 +56,6 @@ class NewSong extends React.Component {
         event.preventDefault();
         this.setState(state => {
             const list = state.project.arrangement.concat(state.value);
-       
             return {
               list,
               value: '',
@@ -81,42 +80,13 @@ class NewSong extends React.Component {
                                     <Input type="text" className="form-control" name="projectTitle" value={project.projectTitle} onChange={this.handleChange} />
 
                                 </FormGroup>
-                                {submitted && !project.members &&
-                                        <div className="help-block">Projects need Members</div>
-                                    }
                                 <FormGroup>
-                                    <Label htmlFor="members">Arrangement</Label> <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg>
+                                    <Label htmlFor="members">Arrangement</Label> 
                                     <Input type="text" className="form-control" name="members" value={project.arrangement} onChange={this.handleChange} />
 
                                 </FormGroup>
-                                {submitted && !project.members &&
-                                        <div className="help-block">Projects need Members</div>
-                                    }
-                                <FormGroup>
-                                    <Label htmlFor="members">Members</Label>
-                                    <Input type="text" className="form-control" name="members" value={project.members} onChange={this.handleChange} />
 
-                                </FormGroup>
-                                {submitted && !project.members &&
-                                        <div className="help-block">Projects need Members</div>
-                                    }
-                                <FormGroup>
-                                    <Label htmlFor="members">Members</Label>
-                                    <Input type="text" className="form-control" name="members" value={project.members} onChange={this.handleChange} />
 
-                                </FormGroup>
-                                {submitted && !project.members &&
-                                        <div className="help-block">Projects need Members</div>
-                                    }
-                                <FormGroup>
-                                    <Label htmlFor="members">Members</Label>
-                                    <Input type="text" className="form-control" name="members" value={project.members} onChange={this.handleChange} />
-
-                                </FormGroup>
-
-                                <FormGroup>
-
-                                </FormGroup>
                                 <FormGroup>
                                     <Label htmlFor="companyName">Company</Label>
                                     <Input type="text" className="form-control" name="companyName" value={project.companyName} onChange={this.handleChange} />

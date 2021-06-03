@@ -6,8 +6,9 @@ import {userActions} from '../../_actions/user.actions';
 import Home from "../../_assets/icons/home.svg";
 import LogoutIcon from "../../_assets/icons/logout.svg";
 import Settings from "../../_assets/icons/settings.svg"
-import { AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink, Logout, Profile} from './style';
+import { IconButton, NavItems, AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink, Logout, Profile} from './style';
 import {CSSTransition} from 'react-transition-group';
+import {css} from 'styled-components';
 
 
  function Branding(props){
@@ -32,12 +33,10 @@ import {CSSTransition} from 'react-transition-group';
                 {searchBar}
                 <AdminControls>
                     <NavItemLink link={'/dashboard'}>
-                      <Home/>
+                      <Home css="fill:var(--text-color)"/>
                     </NavItemLink>
-                     <NavItem icon={<Settings/>}>
-                       
+                     <NavItem icon={<Settings css="fill:var(--text-color)"/>}>
                          <DropdownMenu logout={()=>props.logout()}>
-                           
                          </DropdownMenu>
                      </NavItem>
                 </AdminControls>
@@ -59,34 +58,24 @@ export { connectedBranding as Branding };
 
 
 
-function Navbar(props) {
-    return (
-      <nav className="navbar">
-        <ul className="navbar-nav">
-          {props.children}
-        </ul>
-      </nav>
-
-    );
-  }
   function NavItemLink(props) {
     return (
-        <li className="nav-item">
-          <a href={props.link} className="icon-button">
+        <NavItems>
+          <IconButton href={props.link}>
              {props.children}
-          </a>
-        </li>
+          </IconButton>
+        </NavItems>
     );
   }
   function NavItem(props) {
     const [open,setOpen] = useState(false);
     return (
-        <li className="nav-item">
-          <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+      <NavItems>
+          <IconButton href="#" onClick={() => setOpen(!open)}>
              {props.icon}
-          </a>
+          </IconButton>
         {open && props.children}
-        </li>
+      </NavItems>
     );
   }
 
@@ -108,9 +97,7 @@ function Navbar(props) {
 
     function DropdownItem(props){
       return(
-        
-        <a href="#" className="menu-item" onClick={() => props.logout()}>
-          
+        <a href="#" className="menu-item" css="color:var(--text-color)"onClick={() => props.logout()}>
           {props.children}
           <span className="icon-right">{props.rightIcon}</span>
         </a>
@@ -122,8 +109,7 @@ function Navbar(props) {
             <div className="menu">
             {/* <DropdownItem
             leftIcon={<LogoutIcon/>} goToMenu='settings'>Settings</DropdownItem> */}
-            <DropdownItem rightIcon={<LogoutIcon/>} logout={()=> props.logout()}>Log Out</DropdownItem>
-            
+            <DropdownItem rightIcon={<LogoutIcon css="fill:var(--text-color);"/>}  logout={()=> props.logout()}>Log Out</DropdownItem>
             </div>
         </CSSTransition>
         {/* <CSSTransition in={activeMenu === 'settings'} unmountOnExit timeout={500} classNames='menu-secondary' onEnter={calcHeight} >

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Card = styled.div` 
 width:150px;
-background:#e3fdff;
+background: var(--bg-accent);
 border-radius:5px;
 margin-top: 10px;
 margin-left: 15px;
@@ -12,7 +12,7 @@ height: max-content;
 `
 
 export const Notification = styled.div`
-background: #FA383E;
+  background: var(--noti);
   border-radius: 100%;
   padding:10px;
   margin-top: -10px;
@@ -28,15 +28,18 @@ background: #FA383E;
   display: flex;
   justify-content: flex-end;
   align-items:flex-end;
+  
   `
 
   export const CardTitle = styled.div`
     display: flex;
     justify-content: space-between;
+    
   `
 
   export const Title = styled.h6`
   font-size:16px ;
+  color:var(--text-color);
   `
 
   export const CardBody = styled.div`
@@ -45,4 +48,5 @@ background: #FA383E;
 
   export const CardContent = styled.p`
   font-size:12px;
+  color:var(--text-color);
   `

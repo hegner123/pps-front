@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { projectActions } from '../_actions';
 import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
@@ -83,8 +83,8 @@ class NewProject extends React.Component {
 
                                 <ActionGroup>
                                     <Button>Create</Button>
-                                    <Btn>
-                                    <Link to="/dashboard">Cancel</Link>
+                                    <Btn to="/dashboard">
+                                        Cancel
                                     </Btn>
                                 </ActionGroup>
                             </form>

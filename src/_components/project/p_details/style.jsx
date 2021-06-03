@@ -11,16 +11,24 @@ align-items: center;
 `
 
 export const AddSong = styled.span`
-align-items: center;
+--button-size: calc(var(--nav-size) * 0.3);
+width: var(--button-size);
+height: var(--button-size);
+background-color: var(--bg-accent);
+color: var(--text-color);
 font-size:20px;
-padding:1px;
-background:#fff;
-border-radius:1000px;
-margin-left:10px;
-transition-duration:10ms;
-box-shadow:0 0 5px #333;
+border-radius:50%;
+padding:5px;
+margin-left: 20px;
+margin-top:2px;
+margin-right:2px;
+margin-bottom:2px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition: filter 300ms;
 
-&:hover {
-  background:#e3fdff;
+&:hover{
+  filter: brightness(1.2)
 }
 `

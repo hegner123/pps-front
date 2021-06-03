@@ -1,4 +1,5 @@
 import React from 'react';
+import {css} from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ProjectTile } from '../d_projectTile';
 import AddIcon from '../../../_assets/icons/add.svg';
@@ -34,7 +35,7 @@ export function UserProjects(props) {
         <DashHeader>
         <DashTitle>Projects</DashTitle>
         <Link to="/new-project">
-            <AddProject><AddIcon/></AddProject>
+            <AddProject><AddIcon css="fill:var(--text-color);"/></AddProject>
         </Link>
         </DashHeader>
         <ProjectSection>

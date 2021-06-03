@@ -22,6 +22,7 @@ width:20%;
 export const FormTitle = styled.h1`
 font-size:40px;
 margin-bottom:20px;
+color:var(--text-color);
 `
 
 export const FormRegister = styled.span`
@@ -51,7 +52,8 @@ margin-top:10px;
 border-radius:5px;
 transition-duration: 0.2s;
 width:100%;
-background-color:#e3fdff;
+background-color:var(--bg-accent);
+color:var(--text-color);
 cursor:pointer;
 transition:10ms;
 &:hover {
@@ -62,6 +64,7 @@ transition:10ms;
 
 export const Label = styled.label`
 margin-bottom:10px;
+color:var(--text-color);
 `
 
 export const Input = styled.input`

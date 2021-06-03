@@ -63,14 +63,14 @@ a {
   }
 
   :root {
-	--bg : #e3fdff;
-	--bg-accent: #e3fdff;
+	--bg : #242526;
+	--bg-accent: #484a4d;
 	--text-color: #dadce1;
-	--link-color: #474a4d;
 	--nav-size: 60px;
 	--border: 1px solid #474a4d;
 	--border-radius:8px;
 	--speed: 500ms;
+	--noti:#FA383E;
   }
 
 /* cyrillic-ext */

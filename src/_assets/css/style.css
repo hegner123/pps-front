@@ -1,6 +1,6 @@
 body {
-  /* background: #e3fdff !important; */
-  background-image:linear-gradient(to right , #e3fdff, #3568bf);
+  background:var(--bg);
+  /* background-image:linear-gradient(to right , #e3fdff, #3568bf); */
   /* background-color: rgb(13, 17, 23); */
   margin: 0;
   padding: 0;
@@ -149,7 +149,10 @@ td, th {
 
 
 
-
+.svg-graphic{
+  width:50%;
+  height:100%;
+}
 
 
 

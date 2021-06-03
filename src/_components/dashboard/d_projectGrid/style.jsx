@@ -13,6 +13,7 @@ export const DashHeader = styled.div`
 
 export const DashTitle = styled.h2`
 font-size:40px;
+color:var(--text-color);
 `
 
 export const ProjectSection = styled.div`
@@ -25,12 +26,15 @@ export const AddProject = styled.span`
 --button-size: calc(var(--nav-size) * 0.3);
 width: var(--button-size);
 height: var(--button-size);
-background-color: #3568bf;
+background-color: var(--bg-accent);
 color: var(--text-color);
 font-size:20px;
 border-radius:50%;
 padding:5px;
-margin:2px;
+margin-left: 20px;
+margin-top:2px;
+margin-right:2px;
+margin-bottom:2px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -42,6 +46,7 @@ transition: filter 300ms;
 `
 
 export const Section = styled.div`
+margin-top:50px;
 display:flex;
 flex-direction: row;
 flex-wrap:wrap;
