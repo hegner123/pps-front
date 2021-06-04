@@ -12,14 +12,15 @@ height:100%;
 
 export const FormGroup = styled.div`
 display: flex;
-flex-direction: ${props => props.flex ? "column" : "row"};
+flex-direction: ${props => props.flex ? "row" : "column"};
 justify-content: space-between;
 margin:10px 0;
 `
 
 export const FormSection = styled.div`
 width:20%;
-
+background:dodgerblue;
+padding:50px;
 `
 
 export const FormTitle = styled.h1`
@@ -50,13 +51,35 @@ export const Input = styled.input`
 width:100%;
 border:1px solid rgba(0,0,0,0);
 border-radius:5px;
-
-
 &:focus{
     outline: none;
     border: none;
 }
 `
+
+export const InputGroup = styled.input`
+width:100%;
+border:1px solid rgba(0,0,0,0);
+border-radius:5px 0 0 5px;
+&:focus{
+    outline: none;
+    border: none;
+}
+`
+
+export const InputGroupButton = styled.span`
+width: 20px;
+background: #f7f7f7;
+border-radius: 0px 5px 5px 0;
+border: none;
+cursor: pointer;
+padding: 5px;
+transition:300ms;
+&:hover{
+   filter:brightness(0.5);
+}
+`
+
 
 export const ActionGroup = styled.div`
 width:100%;
@@ -112,8 +135,8 @@ background-color: var(--bg-accent);
 color: var(--text-color);
 font-size:20px;
 border-radius:50%;
-padding:5px;
-margin-left: 20px;
+padding:${props => props.small ? "1px" : "5px"};
+margin-left: ${props => props.close ? "10px" : "20px"};
 margin-top:2px;
 margin-right:2px;
 margin-bottom:2px;
@@ -121,7 +144,6 @@ display:flex;
 align-items:center;
 justify-content:center;
 transition: filter 300ms;
-
 &:hover{
   filter: brightness(1.2)
 }

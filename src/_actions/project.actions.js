@@ -90,4 +90,15 @@ function createProject(newProject){
     function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
     function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
 }
+
+function createSong(newSong){
+    return dispatch => {
+        projectService.createProjects(newSong)
+        .then(create => dispatch(success(create)),
+        error => dispatch(failure(error)));
+    }
+
+    function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
+    function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
+}
 export default projectActions;

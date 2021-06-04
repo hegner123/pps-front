@@ -1,131 +1,58 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { projectActions } from '../_actions';
 import Add from '../_assets/icons/add.svg';
 import Delete from '../_assets/icons/delete.svg';
-import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input , IconButton} from './style';
+import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input,InputGroup, InputGroupButton, IconButton} from './style';
 
-class NewSong extends React.Component {
-    constructor(props) {
-        super(props);
+function NewSong(props) {
+    const [songTitle, setsongTitle] = useState('');
+    const [arrangement, setArrangement] = useState('');
 
-        this.state = {
-            project: {
-                projectTitle: '',
-                projectSlug:'',
-                arrangement:[],
-                companyName: ''
-            },
-            submitted: false
-        };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleAddInstrument = this.handleAddInstrument.bind(this);
-        this.handleAddSong = this.handleAddSong.bind(this);
-    }
-
-    handleChange(event) {
+    function handleChange(event) {
         const { name, value } = event.target;
-        const { project } = this.state;
-        this.setState({
-            project: {
-                ...project,
-                [name]: value
-            }
-        });
-    }
-
-    handleAddInstrument(event){
-        
-        event.preventDefault();
-        const { project } = this.state;
-        let placeholder = [''];
-        let instrument = this.state.project.arrangement.concat(placeholder);
-        
-        this.setState({
-            project:{
-                ...project,
-                arrangement:instrument
-            }
-        })
+        const { song } = state;
         
     }
 
 
-    // newInstrument(){
+    function handleSubmit(event) {
 
-    // }
-
-    handleSubmit(event) {
-
-        const pro = this.state.project
-        let project = {
-            projectTitle:'',
+        let song = {
+            songTitle:'',
             arrangement:[],
-            projectSlug:'',
             references:[]
         }
-        project.projectTitle = pro.projectTitle
-        project.projectSlug = pro.projectTitle.trim().toLowerCase().replace(/\s/g, "-")
-        project.members.push(pro.members)
-        event.preventDefault();
-        this.setState({ submitted: true });
-        if (project.projectTitle && project.members) {
-            this.props.createProject(project);
+        song.songTitle = songTitle;
+        song.arrangement = arrangement;
+        if (song.songTitle && song.members) {
+            props.createsong(song);
         }
     }
 
-    handleAddSong(event){
-        event.preventDefault();
-        this.setState(state => {
-            const list = state.project.arrangement.concat(state.value);
-            return {
-              list,
-              value: '',
-            };
-          });
-    }
+    
 
-    render() {
+
         let i=0;
-        const { createProject  } = this.props;
-        const { project, submitted } = this.state;
+        
+        
         return (
                 <Row>
                     <Centered>
                         <FormSection>
                             <FormTitle>New Song</FormTitle>
-                            <form name="form" onSubmit={this.handleSubmit}>
-                            {submitted && !project.projectTitle &&
-                                        <div className="help-block">Your Project needs a name.</div>
-                                    }
+                            <form name="newSong" onSubmit={handleSubmit}>
+                            {/* {submitted && !song.songTitle &&
+                                        <div className="help-block">Your song needs a name.</div>
+                                    } */}
                                 <FormGroup>
-                                    <Label htmlFor="projectTitle">Song Title</Label>
-                                    <Input type="text" className="form-control" name="projectTitle" value={project.projectTitle} onChange={this.handleChange} />
+                                    <Label htmlFor="songTitle" >Song Title</Label>
+                                    <Input type="text" className="form-control" name="songTitle"   />
 
                                 </FormGroup>
-                               <div css="display:flex; align-items:flex-start;">
-                                   <div css="display:flex; align-items:center;">
-                                        <span css="color:#fff;">arrangement</span><IconButton onClick={(e) => this.handleAddInstrument(e)}><Add/></IconButton>
-                                   </div>
-                                <div>
-                                        {this.state.project.arrangement.map(input => {
-                                           return( 
-                                               <div css="display:flex;">
-                                                   <input type='text'  name="arrangement"  onChange={this.handleChange} key={i++}/>
-                                                   <IconButton>
-                                                   <Delete/>
-                                                   </IconButton>
-                                               </div>
-                                           )
-                                        })}
-                                   </div>
-                               </div>
-
-
-
+                                <AddInstrument></AddInstrument>
 
                                 <ActionGroup>
                                     <Button>Create</Button>
@@ -139,16 +66,70 @@ class NewSong extends React.Component {
                 </Row>
         );
     }
-}
+
 
 function mapState(state) {
-    const { projects } = state;
-    return { projects };
+    const { songs } = state;
+    return { songs };
 }
 
 const actionCreators = {
-    createProject: projectActions.createProject
+    createSong: projectActions.createSong
 }
 
 const connectedNewSong = connect(mapState, actionCreators)(NewSong);
 export { connectedNewSong as NewSong };
+
+
+
+
+function AddInstrument(props){
+    const [arrangement, dispatch] = useReducer(instrumentReducer, []);
+  
+    function handleAddClick(text) {
+      dispatch({ type: 'add', text });
+    };
+    
+    function instrumentReducer(state, action) {
+        switch (action.type) {
+        case 'add':
+            return [...state, {
+            instrument: action.text
+            }];
+        // ... other actions ...
+        default:
+            return state;
+        }
+    }
+
+
+    function useReducer(reducer, initialState) {
+        const [state, setState] = useState(initialState);
+
+        function dispatch(action) {
+        const nextState = reducer(state, action);
+        setState(nextState);
+        }
+        return [state, dispatch];
+    }
+
+    return(
+        <section css="width:100%;">
+            <div css="display:flex; align-items:flex-start; flex-direction:column;">
+                <div css="display:flex; align-items:center;margin-bottom:10px;">
+                    <span css="color:#fff;">arrangement</span>
+                    <IconButton small close ><Add/></IconButton>
+                </div>
+                <div css="width:100%;">
+                    <div css="display:flex;flex-direction:row; ">
+                        <InputGroup type='text'  name="instrument" placeholder="Instrument" css="width:100%"/>
+                        <InputGroupButton>
+                            <Delete />
+                        </InputGroupButton>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
