@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { projectActions } from '../_actions';
-import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
+import Add from '../_assets/icons/add.svg';
+import Delete from '../_assets/icons/delete.svg';
+import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input , IconButton} from './style';
 
 class NewSong extends React.Component {
     constructor(props) {
@@ -20,6 +22,7 @@ class NewSong extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleAddInstrument = this.handleAddInstrument.bind(this);
         this.handleAddSong = this.handleAddSong.bind(this);
     }
 
@@ -34,7 +37,29 @@ class NewSong extends React.Component {
         });
     }
 
+    handleAddInstrument(event){
+        
+        event.preventDefault();
+        const { project } = this.state;
+        let placeholder = [''];
+        let instrument = this.state.project.arrangement.concat(placeholder);
+        
+        this.setState({
+            project:{
+                ...project,
+                arrangement:instrument
+            }
+        })
+        
+    }
+
+
+    // newInstrument(){
+
+    // }
+
     handleSubmit(event) {
+
         const pro = this.state.project
         let project = {
             projectTitle:'',
@@ -64,6 +89,7 @@ class NewSong extends React.Component {
     }
 
     render() {
+        let i=0;
         const { createProject  } = this.props;
         const { project, submitted } = this.state;
         return (
@@ -80,23 +106,31 @@ class NewSong extends React.Component {
                                     <Input type="text" className="form-control" name="projectTitle" value={project.projectTitle} onChange={this.handleChange} />
 
                                 </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="members">Arrangement</Label> 
-                                    <Input type="text" className="form-control" name="members" value={project.arrangement} onChange={this.handleChange} />
+                               <div css="display:flex; align-items:flex-start;">
+                                   <div css="display:flex; align-items:center;">
+                                        <span css="color:#fff;">arrangement</span><IconButton onClick={(e) => this.handleAddInstrument(e)}><Add/></IconButton>
+                                   </div>
+                                <div>
+                                        {this.state.project.arrangement.map(input => {
+                                           return( 
+                                               <div css="display:flex;">
+                                                   <input type='text'  name="arrangement"  onChange={this.handleChange} key={i++}/>
+                                                   <IconButton>
+                                                   <Delete/>
+                                                   </IconButton>
+                                               </div>
+                                           )
+                                        })}
+                                   </div>
+                               </div>
 
-                                </FormGroup>
 
 
-                                <FormGroup>
-                                    <Label htmlFor="companyName">Company</Label>
-                                    <Input type="text" className="form-control" name="companyName" value={project.companyName} onChange={this.handleChange} />
-
-                                </FormGroup>
 
                                 <ActionGroup>
                                     <Button>Create</Button>
-                                    <Btn>
-                                    <Link to="/dashboard">Cancel</Link>
+                                    <Btn to="/dashboard">
+                                        Cancel
                                     </Btn>
                                 </ActionGroup>
                             </form>
