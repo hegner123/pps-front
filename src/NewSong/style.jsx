@@ -19,7 +19,7 @@ margin:10px 0;
 
 export const FormSection = styled.div`
 width:20%;
-background:dodgerblue;
+/* background:dodgerblue; */
 padding:50px;
 `
 
@@ -128,14 +128,14 @@ transition:300ms;
 `
 
 export const IconButton = styled.span`
---button-size: calc(var(--nav-size) * 0.3);
+--button-size: ${props => props.small ? "calc(var(--nav-size) * 0.2)" : "calc(var(--nav-size) * 0.3)"};
 width: var(--button-size);
 height: var(--button-size);
 background-color: var(--bg-accent);
-color: var(--text-color);
+fill: var(--text-color);
 font-size:20px;
 border-radius:50%;
-padding:${props => props.small ? "1px" : "5px"};
+padding:${props => props.small ? "3px" : "5px"};
 margin-left: ${props => props.close ? "10px" : "20px"};
 margin-top:2px;
 margin-right:2px;
@@ -144,6 +144,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 transition: filter 300ms;
+cursor: pointer;
 &:hover{
   filter: brightness(1.2)
 }

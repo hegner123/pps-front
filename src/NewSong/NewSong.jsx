@@ -14,7 +14,7 @@ function NewSong(props) {
     function handleChange(event) {
         const { name, value } = event.target;
         const { song } = state;
-        
+
     }
 
 
@@ -32,12 +32,12 @@ function NewSong(props) {
         }
     }
 
-    
+
 
 
         let i=0;
-        
-        
+
+
         return (
                 <Row>
                     <Centered>
@@ -49,11 +49,10 @@ function NewSong(props) {
                                     } */}
                                 <FormGroup>
                                     <Label htmlFor="songTitle" >Song Title</Label>
-                                    <Input type="text" className="form-control" name="songTitle"   />
+                                    <Input type="text" className="form-control" name="songTitle"/>
 
                                 </FormGroup>
                                 <AddInstrument></AddInstrument>
-
                                 <ActionGroup>
                                     <Button>Create</Button>
                                     <Btn to="/dashboard">
@@ -81,21 +80,26 @@ const connectedNewSong = connect(mapState, actionCreators)(NewSong);
 export { connectedNewSong as NewSong };
 
 
-
+///////////
 
 function AddInstrument(props){
     const [arrangement, dispatch] = useReducer(instrumentReducer, []);
-  
-    function handleAddClick(text) {
-      dispatch({ type: 'add', text });
-    };
-    
+
+
+
     function instrumentReducer(state, action) {
         switch (action.type) {
         case 'add':
-            return [...state, {
-            instrument: action.text
-            }];
+            return [...state ,{ 
+                instrument:action.text}];
+        case 'delete':
+            console.log('delete ' + action.text);
+            const key = action.text;
+            
+            return ;
+        case 'edit':
+            console.log(action.value)
+            return [...state];
         // ... other actions ...
         default:
             return state;
@@ -113,22 +117,56 @@ function AddInstrument(props){
         return [state, dispatch];
     }
 
+    function handleClick(action,text) {
+        dispatch({ type: action, text });
+      };
+  
+      function handleChange(event){
+          const { name, value } = event.target;
+          dispatch({type: 'edit', value});
+      }
+
+
+
+const data = arrangement
+const display = Object.keys(data).map((d, key) => {
+    console.log(d)
+    console.log(key)
+    return(
+        <div css="width:100%;" key={d}>
+            <div css="display:flex;flex-direction:row; color:var(--text-color);">
+                    {key}
+                <InputGroup
+                    type='text'
+                    name="instrument"
+                    placeholder="Instrument"
+                    css="width:100%" value={d} onChange={handleChange}/>
+                <InputGroupButton onClick={()=> handleClick('delete', d)}>
+                    <Delete />
+                </InputGroupButton>
+
+            </div>
+        </div>
+        )
+})
+
+
+
+
+
+
+
+
     return(
         <section css="width:100%;">
             <div css="display:flex; align-items:flex-start; flex-direction:column;">
                 <div css="display:flex; align-items:center;margin-bottom:10px;">
-                    <span css="color:#fff;">arrangement</span>
-                    <IconButton small close ><Add/></IconButton>
+                    <span css="color:#fff;">Arrangement</span>
+                    <IconButton small close  onClick={(e)=>handleClick('add', '')}><Add/></IconButton>
                 </div>
-                <div css="width:100%;">
-                    <div css="display:flex;flex-direction:row; ">
-                        <InputGroup type='text'  name="instrument" placeholder="Instrument" css="width:100%"/>
-                        <InputGroupButton>
-                            <Delete />
-                        </InputGroupButton>
 
-                    </div>
-                </div>
+               {display}
+
             </div>
         </section>
     )
