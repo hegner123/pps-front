@@ -83,71 +83,106 @@ export { connectedNewSong as NewSong };
 ///////////
 
 function AddInstrument(props){
-    const [arrangement, dispatch] = useReducer(instrumentReducer, []);
+    const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'',id:0}]});
 
 
 
     function instrumentReducer(state, action) {
-        switch (action.type) {
+        const id = action.id;
+        const value = action.value;
+        const text = action.text;
+        const command = action.action
+        console.log(state)
+        switch (command) {
         case 'add':
-            return [...state ,{ 
-                instrument:action.text}];
+            return {...state ,
+                arrangement:[...state.arrangement,
+                    {
+                        instrument: text,
+                        id:state.arrangement.length
+                    }
+                ]
+            }
         case 'delete':
-            console.log('delete ' + action.text);
-            const key = action.text;
-            
-            return ;
+            return{ ...state,
+                        arrangement: state.arrangement.map(inst =>
+                        inst.id == id
+                            ? { ...inst, deleting: true }
+                            : inst
+                        )
+                    }
+
         case 'edit':
-            console.log(action.value)
-            return [...state];
-        // ... other actions ...
+            return {...state, 
+                arrangement: state.arrangement.map(inst => {
+                    if (inst.id != id){
+                        return{...inst}
+                    }
+                    return{...inst,
+                    instrument:value}
+
+            })
+            };
+
         default:
             return state;
         }
     }
 
 
+
+    // return {
+    //     ...state,
+    //     items: state.items.map(user =>
+    //       user.id === action.id
+    //         ? { ...user, deleting: true }
+    //         : user
+    //     )
+    //   };
+
+    function handleClick(action,text) {
+        dispatch({  action, text });
+      };
+
+      function handleChange(event){
+          console.log(event.target)
+          const { name, value , id} = event.target;
+          dispatch({action:name, value, id});
+      }
+
     function useReducer(reducer, initialState) {
         const [state, setState] = useState(initialState);
 
-        function dispatch(action) {
-        const nextState = reducer(state, action);
+        function dispatch(action, id) {
+        const nextState = reducer(state, action, id);
         setState(nextState);
         }
         return [state, dispatch];
     }
 
-    function handleClick(action,text) {
-        dispatch({ type: action, text });
-      };
-  
-      function handleChange(event){
-          const { name, value } = event.target;
-          dispatch({type: 'edit', value});
-      }
 
 
 
-const data = arrangement
-const display = Object.keys(data).map((d, key) => {
-    console.log(d)
-    console.log(key)
+form.arrangement.map(data => {console.log(data)})
+
+const display = form.arrangement.map((d, key) => {
     return(
-        <div css="width:100%;" key={d}>
+        <div css="width:100%;" key={key}>
             <div css="display:flex;flex-direction:row; color:var(--text-color);">
-                    {key}
                 <InputGroup
                     type='text'
-                    name="instrument"
+                    name="edit"
                     placeholder="Instrument"
-                    css="width:100%" value={d} onChange={handleChange}/>
-                <InputGroupButton onClick={()=> handleClick('delete', d)}>
+                    css="width:100%"
+                    value={form.arrangement[key].instrument}
+                    id={key} onChange={handleChange}/>
+                <InputGroupButton onClick={()=> handleClick('delete', key)}>
                     <Delete />
                 </InputGroupButton>
 
             </div>
         </div>
-        )
+    )
 })
 
 
@@ -162,7 +197,7 @@ const display = Object.keys(data).map((d, key) => {
             <div css="display:flex; align-items:flex-start; flex-direction:column;">
                 <div css="display:flex; align-items:center;margin-bottom:10px;">
                     <span css="color:#fff;">Arrangement</span>
-                    <IconButton small close  onClick={(e)=>handleClick('add', '')}><Add/></IconButton>
+                    <IconButton small close  onClick={()=>handleClick('add', '')}><Add/></IconButton>
                 </div>
 
                {display}
