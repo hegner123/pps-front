@@ -8,16 +8,23 @@ export const referenceService = {
 
 
 function spotifyPreview(song){
+    const search = song.trim().toLowerCase().replace(/\s/g, "-")
     const requestOptions ={
         method:'get',
-        headers: authHeader(),
-        body: {'search': song}
+        headers: authHeader(1)
     }
-    console.log(requestOptions)
-    return fetch(`${config.apiUrl}/song-preview/`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/song-preview/song/${search}`, requestOptions).then(handleResponse)
 }
 
 
 
+function handleResponse(response) {
+    
+    return response.text().then(text => {
+        const songData = text && JSON.parse(text);
+        console.log(songData)
+        return songData;
+    });
+}
 
 

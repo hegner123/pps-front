@@ -1,20 +1,117 @@
 import React, {useState,useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { projectActions } from '../_actions';
+import { Link} from 'react-router-dom';
+import { connect , useSelector} from 'react-redux';
+import { store } from '../_helpers'
+import { projectActions, refActions } from '../_actions';
 import Add from '../_assets/icons/add.svg';
 import Delete from '../_assets/icons/delete.svg';
-import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input,InputGroup, InputGroupButton, IconButton} from './style';
+import { ActionGroup,
+        Button,
+        Btn,
+        Centered ,
+        Form,
+        FormSection,
+        FormInnerSection,
+        FormTitle,
+        FormGroup,
+        HelpBlock,
+        Browser,
+        Label,
+        Row,
+        Input,
+        InputGroup,
+        InputGroupButton,
+        IconButton} from './style';
+import { v4 as uuidv4 } from 'uuid';
+
+import {results as query} from './_query'
+
+
 
 function NewSong(props) {
-    const [songTitle, setsongTitle] = useState('');
-    const [arrangement, setArrangement] = useState('');
+    const [songTitle, setSongTitle] = useState('');
+    const [getReference, setGetReference] = useState('');
+    const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'', id: uuidv4() }]});
+    const [references, setReferences] = useState('');
 
 
-    function handleChange(event) {
-        const { name, value } = event.target;
-        const { song } = state;
 
+
+    // const results = props.results
+    const results = query.results
+
+
+        function instrumentReducer(state, {action, value, id}) {
+            switch (action) {
+            case 'add':
+                return {...state ,
+                    arrangement:[...state.arrangement,
+                        {
+                            instrument: value,
+                            id: uuidv4()
+                        }
+                    ]
+                }
+            case 'delete':
+                return{ ...state,
+                    arrangement: state.arrangement.filter(inst => inst.id != id)
+                    }
+            case 'edit':
+                return {...state,
+                    arrangement: state.arrangement.map(inst => {
+                        if (inst.id != id){
+                            return{...inst}
+                        }
+                        return{...inst,
+                        instrument:value,
+                        id: id}
+
+                })
+                };
+
+            default:
+                return state;
+            }
+        }
+
+
+        function handleClick(action,value, id) {
+            dispatch({  action , value, id });
+          };
+
+          function handleChange(event){
+              const { name, value , id} = event.target;
+              dispatch({action:name, value, id});
+          }
+
+        function useReducer(reducer, initialState) {
+            const [state, setState] = useState(initialState);
+
+            function dispatch(action, id) {
+            const nextState = reducer(state, action, id);
+            setState(nextState);
+            }
+            return [state, dispatch];
+        }
+
+
+    function handleFormChange(event) {
+        const {name, value} = event.target;
+        switch(name){
+            case 'songTitle':{
+                return setSongTitle(value)
+            };
+            case  'referenceSeach':{
+                return setGetReference(value)
+            }
+            default:
+            return ''
+        }
+    }
+
+    function handleSearch(event){
+       event.preventDefault();
+       props.getReferences(getReference)
     }
 
 
@@ -26,8 +123,8 @@ function NewSong(props) {
             references:[]
         }
         song.songTitle = songTitle;
-        song.arrangement = arrangement;
-        if (song.songTitle && song.members) {
+        song.arrangement = form.arrangement;
+        if (song.songTitle) {
             props.createsong(song);
         }
     }
@@ -35,24 +132,76 @@ function NewSong(props) {
 
 
 
-        let i=0;
+    const displayArrangement = form.arrangement.map(key => {
+        return (
+            <div css="width:100%;margin-top:10px;" key={key.id}>
+                <div css="display:flex;flex-direction:row; color:var(--text-color);">
+                    <InputGroup
+                        type='text'
+                        name="edit"
+                        placeholder="Instrument"
+                        css="width:100%"
+                        value={key.instrument}
+                        id={key.id} onChange={handleChange}/>
+                    <InputGroupButton onClick={()=> handleClick('delete', 'delete', key.id)}>
+                        <Delete />
+                    </InputGroupButton>
 
+                </div>
+            </div>
+            )
+        })
+
+let referenceArray;
+    if (results !== 'unset' && results){
+        referenceArray =  results.map(item=>{
+            return(
+                <div css="color:var(--text-color); display:flex; align-items:center;justify-content:space-between;">
+                    <p css="width:50%;"> {item.title}</p>
+                    <audio controls src={item.preview} type="audio/mpeg"/>
+                </div>
+            )
+        })
+    }
 
         return (
                 <Row>
                     <Centered>
-                        <FormSection>
+                        <Form>
                             <FormTitle>New Song</FormTitle>
                             <form name="newSong" onSubmit={handleSubmit}>
-                            {/* {submitted && !song.songTitle &&
-                                        <div className="help-block">Your song needs a name.</div>
-                                    } */}
-                                <FormGroup>
-                                    <Label htmlFor="songTitle" >Song Title</Label>
-                                    <Input type="text" className="form-control" name="songTitle"/>
+                                <FormSection>
+                                <FormInnerSection>
+                                {/* {submitted && !song.songTitle &&
+                                            <div className="help-block">Your song needs a name.</div>
+                                        } */}
+                                    <FormGroup>
+                                        <Label htmlFor="songTitle" >Song Title</Label>
+                                    <Input type="text" placeholder="New Song" className="form-control" name="songTitle" value={songTitle} onChange={handleFormChange}/>
 
-                                </FormGroup>
-                                <AddInstrument></AddInstrument>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <div css="display:flex; align-items:flex-start; flex-direction:column;">
+                                            <div css="display:flex; align-items:center;margin-bottom:10px;">
+                                                <span css="color:#fff;">Arrangement</span>
+                                                <IconButton small close  onClick={()=>handleClick('add', '')}><Add/></IconButton>
+                                            </div>
+                                        {displayArrangement}
+                                        </div>
+                                    </FormGroup>
+                                </FormInnerSection>
+                                <FormInnerSection>
+                                    <FormGroup>
+                                        <Label>
+                                            References
+                                        </Label>
+                                        <Input placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
+                                        <Button onClick={(e)=> handleSearch(e)}>Search</Button>
+                                    </FormGroup>
+
+                                </FormInnerSection>
+
+                                </FormSection>
                                 <ActionGroup>
                                     <Button>Create</Button>
                                     <Btn to="/dashboard">
@@ -60,7 +209,10 @@ function NewSong(props) {
                                     </Btn>
                                 </ActionGroup>
                             </form>
-                        </FormSection>
+                        </Form>
+                        <Browser >
+                            {referenceArray}
+                            </Browser>
                     </Centered>
                 </Row>
         );
@@ -68,141 +220,14 @@ function NewSong(props) {
 
 
 function mapState(state) {
-    const { songs } = state;
-    return { songs };
+    return { results: state.referenceData.results };
 }
 
+
 const actionCreators = {
-    createSong: projectActions.createSong
+    createSong: projectActions.createSong,
+    getReferences: refActions.getReferences
 }
 
 const connectedNewSong = connect(mapState, actionCreators)(NewSong);
 export { connectedNewSong as NewSong };
-
-
-///////////
-
-function AddInstrument(props){
-    const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'',id:0}]});
-
-
-
-    function instrumentReducer(state, action) {
-        const id = action.id;
-        const value = action.value;
-        const text = action.text;
-        const command = action.action
-        console.log(state)
-        switch (command) {
-        case 'add':
-            return {...state ,
-                arrangement:[...state.arrangement,
-                    {
-                        instrument: text,
-                        id:state.arrangement.length
-                    }
-                ]
-            }
-        case 'delete':
-            return{ ...state,
-                        arrangement: state.arrangement.map(inst =>
-                        inst.id == id
-                            ? { ...inst, deleting: true }
-                            : inst
-                        )
-                    }
-
-        case 'edit':
-            return {...state, 
-                arrangement: state.arrangement.map(inst => {
-                    if (inst.id != id){
-                        return{...inst}
-                    }
-                    return{...inst,
-                    instrument:value}
-
-            })
-            };
-
-        default:
-            return state;
-        }
-    }
-
-
-
-    // return {
-    //     ...state,
-    //     items: state.items.map(user =>
-    //       user.id === action.id
-    //         ? { ...user, deleting: true }
-    //         : user
-    //     )
-    //   };
-
-    function handleClick(action,text) {
-        dispatch({  action, text });
-      };
-
-      function handleChange(event){
-          console.log(event.target)
-          const { name, value , id} = event.target;
-          dispatch({action:name, value, id});
-      }
-
-    function useReducer(reducer, initialState) {
-        const [state, setState] = useState(initialState);
-
-        function dispatch(action, id) {
-        const nextState = reducer(state, action, id);
-        setState(nextState);
-        }
-        return [state, dispatch];
-    }
-
-
-
-
-form.arrangement.map(data => {console.log(data)})
-
-const display = form.arrangement.map((d, key) => {
-    return(
-        <div css="width:100%;" key={key}>
-            <div css="display:flex;flex-direction:row; color:var(--text-color);">
-                <InputGroup
-                    type='text'
-                    name="edit"
-                    placeholder="Instrument"
-                    css="width:100%"
-                    value={form.arrangement[key].instrument}
-                    id={key} onChange={handleChange}/>
-                <InputGroupButton onClick={()=> handleClick('delete', key)}>
-                    <Delete />
-                </InputGroupButton>
-
-            </div>
-        </div>
-    )
-})
-
-
-
-
-
-
-
-
-    return(
-        <section css="width:100%;">
-            <div css="display:flex; align-items:flex-start; flex-direction:column;">
-                <div css="display:flex; align-items:center;margin-bottom:10px;">
-                    <span css="color:#fff;">Arrangement</span>
-                    <IconButton small close  onClick={()=>handleClick('add', '')}><Add/></IconButton>
-                </div>
-
-               {display}
-
-            </div>
-        </section>
-    )
-}

@@ -2,12 +2,43 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 import styled, { css } from 'styled-components'
 
+export const Row = styled.section`
+margin-top:10px;
+display: flex;
+width: 100%;
+`
+
 export const Centered = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+flex-direction: row;
 width: 100%;
 height:100%;
+`
+
+export const Browser = styled.aside`
+display:flex;
+flex-direction:column;
+justify-content:space-between; 
+width:15%;
+overflow: scroll;
+height: 50vh;
+`
+
+export const Form = styled.div`
+flex-direction: column;
+display: flex;
+`
+
+export const FormSection = styled.div`
+display: flex;
+`
+
+export const FormInnerSection= styled.section`
+display:flex;
+flex-direction: column;
+margin:10px;
 `
 
 export const FormGroup = styled.div`
@@ -15,12 +46,6 @@ display: flex;
 flex-direction: ${props => props.flex ? "row" : "column"};
 justify-content: space-between;
 margin:10px 0;
-`
-
-export const FormSection = styled.div`
-width:20%;
-/* background:dodgerblue; */
-padding:50px;
 `
 
 export const FormTitle = styled.h1`
@@ -36,21 +61,17 @@ padding:3px 0;
 color:rgb(138, 86, 86);
 margin:10px 0 2px;
 `
+
 export const Label = styled.label`
 color:var(--text-color);
 margin-bottom:10px;
-`
-export const Row = styled.section`
-margin-top:100px;
-display: flex;
-flex-wrap: wrap;
-width: 100%;
 `
 
 export const Input = styled.input`
 width:100%;
 border:1px solid rgba(0,0,0,0);
 border-radius:5px;
+padding: 5px;
 &:focus{
     outline: none;
     border: none;
@@ -61,6 +82,7 @@ export const InputGroup = styled.input`
 width:100%;
 border:1px solid rgba(0,0,0,0);
 border-radius:5px 0 0 5px;
+padding: 5px;
 &:focus{
     outline: none;
     border: none;
@@ -80,7 +102,6 @@ transition:300ms;
 }
 `
 
-
 export const ActionGroup = styled.div`
 width:100%;
 display: flex;
@@ -89,6 +110,7 @@ justify-content: center;
 align-items: center;
 margin:10px 0;
 `
+
 export const Btn = styled(Link)`
 padding:10px;
 text-align:center;

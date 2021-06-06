@@ -1,3 +1,24 @@
+:root {
+	--bg : #242526;
+	--bg-accent: #484a4d;
+	--text-color: #dadce1;
+  --input-font-size:20px;
+  --input-padding:5px;
+  --input-border-radius:5px;
+  --input-border:1px solid rgba(0,0,0,0.1);
+	--nav-size: 60px;
+	--border: 1px solid #474a4d;
+	--border-radius:8px;
+	--speed: 500ms;
+	--noti:#FA383E;
+  }
+
+audio {
+  padding:0px;
+
+}
+
+
 body {
   background:var(--bg);
   /* background-image:linear-gradient(to right , #e3fdff, #3568bf); */

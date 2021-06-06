@@ -47,9 +47,11 @@ width: 100%;
 `
 
 export const Input = styled.input`
-width:100%;
-border:1px solid rgba(0,0,0,0);
-border-radius:5px;`
+border:var(--input-border);
+border-radius:var(--input-border-radius);
+font-size:var(--input-font-size);
+padding:var(--input-padding);
+`
 
 export const ActionGroup = styled.div`
 width:100%;

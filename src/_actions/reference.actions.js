@@ -3,7 +3,7 @@ import { referenceConstants } from '../_constants';
 import { referenceService } from '../_services/';
 import { store } from '../_helpers';
 
-export  const projectActions = {
+export  const refActions = {
     getReferences
 };
 
@@ -14,7 +14,6 @@ function getReferences(song) {
             .then(
                 results => {
                     dispatch(success(results));
-                    dispatch(alertActions.success(user + ' projects loaded!'));
                 },
                 error => dispatch(failure(error.toString()))
             );
@@ -27,4 +26,4 @@ function getReferences(song) {
 
 
 
-export default projectActions;
+export default refActions;

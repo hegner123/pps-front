@@ -4,6 +4,7 @@ import { registration } from './registration.reducer';
 import { users } from './users.reducer';
 import { alert } from './alert.reducer';
 import { userData } from './projects.reducer';
+import { referenceData} from './reference.reducer';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   registration,
   users,
   alert,
-  userData
+  userData,
+  referenceData
 });
 
 export default rootReducer;

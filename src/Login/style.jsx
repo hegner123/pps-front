@@ -68,8 +68,8 @@ color:var(--text-color);
 `
 
 export const Input = styled.input`
-
-border:1px solid rgba(0,0,0,0.1);
-border-radius:5px;
-font-size:26px;
+border:var(--input-border);
+border-radius:var(--input-border-radius);
+font-size:var(--input-font-size);
+padding:var(--input-padding);
 `

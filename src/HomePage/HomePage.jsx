@@ -1,11 +1,9 @@
 import React from 'react';
-import {css} from 'styled-components';
-import { connect } from 'react-redux';
 import  Graphic from "../_assets/images/Image1.svg";
 import { Header, SubTitle, SubText, ActionList, Action, ActionItem, RowEven, EvenSpace, HeaderContent, HeaderImage } from './style';
 
-class HomePage extends React.Component {
-    render() {
+export function HomePage () {
+    
         return (
         <RowEven>
             <EvenSpace>
@@ -30,19 +28,15 @@ class HomePage extends React.Component {
         </RowEven>
         );
     }
-}
 
 
 
-const connectedHomePage = connect()(HomePage);
-export { connectedHomePage as HomePage };
 
 
 
-class CoomingSoon extends React.Component {
 
 
-    render() {
+export function CoomingSoon(){
         return (
         <div className="row-even">
             <div className="even-space">
@@ -61,9 +55,7 @@ class CoomingSoon extends React.Component {
         </div>
         );
     }
-}
 
 
 
-const connectedCoomingSoon = connect()(CoomingSoon);
-export { connectedCoomingSoon as CoomingSoon };
+
