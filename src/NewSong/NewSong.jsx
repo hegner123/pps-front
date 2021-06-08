@@ -165,10 +165,8 @@ function NewSong(props) {
             setReferences([...references, {name:name, id:id, preview:preview}])
         }}
         }
-    function filterRef(ref, id){
-        return ref.id !== id
-    }
 
+   
 let referenceArray;
     if (results !== 'unset' && results){
         referenceArray =  results.map(item=>{
@@ -197,12 +195,25 @@ let referenceArray;
         })
     }
 
+    function handleRefDelete(e, {reference}){
+        e.preventDefault();
+        console.log(reference)
+
+        console.log(references.filter(filterRef(id)))
+    }
+
+    function filterRef(ref, id){
+        console.log(ref)
+        console.log(id)
+    //    return ref !== id;
+    }
 
     let refList;
 
-    if (references[0] !==''){references.map(ref => {
-        refList =  <div css="color:var(--text-color);font-size:12px;" key={ref.id}>{ref.name}
-                    <button onClick={()=> setReferences(...references[references.filter(ref.id)])}>
+    if (references[0] !==''){
+        refList = references.map(ref => {
+        return  <div css="color:var(--text-color);font-size:12px;" key={ref.id}>{ref.name}
+                    <button reference={ref.id} onClick={(e)=> handleRefDelete(e)}>
                         <Delete />
                     </button>
                 </div>
@@ -258,7 +269,7 @@ let referenceArray;
                             </form>
                         </Form>
                         <Browser>
-                                        <h2 css="color:var(--text-color)">References</h2>
+                                <h2 css="color:var(--text-color)">References</h2>
                             {referenceArray}
                         </Browser>
                     </Centered>
