@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {TableCell} from '../p_tableCell';
+import { TableRow } from './style';
 
 
 export function tableHeaders(props){
@@ -14,9 +15,9 @@ let display;
 
         }
         return (
-        <tr>
+        <TableRow>
             {display}
-        </tr>
+        </TableRow>
         );
     }
 

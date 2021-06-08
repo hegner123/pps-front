@@ -39,6 +39,10 @@ export const ActionItem = styled.a`
     font-weight:600;
     color:var(--text-color);
     font-size:20px;
+    &:hover {
+    background:#3568bf;
+    color:#e3fdff;
+}
   `
 
 export const RowEven = styled.div`

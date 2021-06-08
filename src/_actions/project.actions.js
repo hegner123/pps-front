@@ -7,7 +7,8 @@ export  const projectActions = {
     getProjects,
     createProject,
     changeCellStatus,
-    assignProject
+    assignProject,
+    createSong
 };
 
 function getProjects() {
@@ -93,7 +94,7 @@ function createProject(newProject){
 
 function createSong(newSong){
     return dispatch => {
-        projectService.createProjects(newSong)
+        projectService.createSong(newSong)
         .then(create => dispatch(success(create)),
         error => dispatch(failure(error)));
     }

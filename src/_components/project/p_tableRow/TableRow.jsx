@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import { connect } from 'react-redux';
 import { TableCell } from '../p_tableCell';
-import { useSelector } from 'react-redux';
+import { TableRows } from './style';
+
 
 
 
@@ -65,15 +66,15 @@ const [songs, setSongs] = useState(props.data)
                 result.push(row)
             }
             display = result.map(projectSongs => (
-                    <tr key={projectSongs.title}>
-                    <TableCell data={projectSongs.title} key={projectSongs.title} projectId={props.projectId}/>
-                    {mapStatus({
-                        title: projectSongs.title,
-                        projectHeaders: props.headers,
-                        songs: projectSongs.projectArrangement.songArrangement,
-                        songId: projectSongs.songId
-                        })}
-                    </tr>
+                    <TableRows key={projectSongs.title}>
+                        <TableCell songTitle={projectSongs.title} key={projectSongs.title} projectId={props.projectId}/>
+                        {mapStatus({
+                            title: projectSongs.title,
+                            projectHeaders: props.headers,
+                            songs: projectSongs.projectArrangement.songArrangement,
+                            songId: projectSongs.songId
+                            })}
+                    </TableRows>
                     ))
             }
 

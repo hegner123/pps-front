@@ -1,10 +1,9 @@
-import React, {useState,useEffect} from 'react';
-import { Link} from 'react-router-dom';
-import { connect , useSelector} from 'react-redux';
-import { store } from '../_helpers'
+import React, {useState} from 'react';
+import { connect} from 'react-redux';
 import { projectActions, refActions } from '../_actions';
 import Add from '../_assets/icons/add.svg';
 import Delete from '../_assets/icons/delete.svg';
+import Search from '../_assets/icons/search.svg';
 import { ActionGroup,
         Button,
         Btn,
@@ -21,21 +20,20 @@ import { ActionGroup,
         Input,
         InputGroup,
         InputGroupButton,
-        IconButton} from './style';
+        IconButton,
+        Preview,
+        Title,
+         Artist} from './style';
 import { v4 as uuidv4 } from 'uuid';
-
 import {results as query} from './_query'
-
-
+import { useParams } from 'react-router';
 
 function NewSong(props) {
     const [songTitle, setSongTitle] = useState('');
     const [getReference, setGetReference] = useState('');
     const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'', id: uuidv4() }]});
-    const [references, setReferences] = useState('');
-
-
-
+    const [references, setReferences] = useState(['']);
+    const currentProject =useParams().id
 
     // const results = props.results
     const results = query.results
@@ -67,7 +65,7 @@ function NewSong(props) {
                         id: id}
 
                 })
-                };
+                }
 
             default:
                 return state;
@@ -114,22 +112,19 @@ function NewSong(props) {
        props.getReferences(getReference)
     }
 
-
     function handleSubmit(event) {
-
+        event.preventDefault()
         let song = {
-            songTitle:'',
-            arrangement:[],
-            references:[]
+            id: currentProject,
+            songTitle:songTitle,
+            arrangement:[...form.arrangement],
+            references:[...references]
         }
-        song.songTitle = songTitle;
-        song.arrangement = form.arrangement;
+        console.log(song)
         if (song.songTitle) {
-            props.createsong(song);
+            props.createSong(song);
         }
     }
-
-
 
 
     const displayArrangement = form.arrangement.map(key => {
@@ -152,14 +147,48 @@ function NewSong(props) {
             )
         })
 
+
+
+    function handleSearchClick(event, {name, id, preview}){
+        event.preventDefault();
+        let contains = false;
+        if (references[0] === ''){
+            setReferences([{name:name, id:id, preview:preview}])
+        } else{
+        references.forEach(x => {
+            if (x.id === id){
+                contains = true;
+            }
+        })
+        if (contains === false){
+            setReferences([...references, {name:name, id:id, preview:preview}])
+        }}
+        }
+
 let referenceArray;
     if (results !== 'unset' && results){
         referenceArray =  results.map(item=>{
             return(
-                <div css="color:var(--text-color); display:flex; align-items:center;justify-content:space-between;">
-                    <p css="width:50%;"> {item.title}</p>
-                    <audio controls src={item.preview} type="audio/mpeg"/>
-                </div>
+                <Preview key={item.id}>
+                    <div>
+                        <div css="display:flex;">
+                        <IconButton
+                        small close
+                        name={item.title}
+                        preview={item.preview}
+                        id={item.id}
+                        onClick={(event)=>handleSearchClick(event, {name:item.title, id:item.id, preview:item.preview, artist:item.artist[0]})}><Add/></IconButton>
+                            <Title> {item.title}</Title>
+                        </div>
+                        <div>
+                            {item.artist.map(artist => {
+                                return <Artist key={artist.id}>{artist.name}</Artist>
+                            })}
+                            {item.artist.name}
+                        </div>
+                    </div>
+                    <audio  css="height:20px;width:30%;" controls src={item.preview} type="audio/mpeg"/>
+                </Preview>
             )
         })
     }
@@ -195,8 +224,10 @@ let referenceArray;
                                         <Label>
                                             References
                                         </Label>
-                                        <Input placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
-                                        <Button onClick={(e)=> handleSearch(e)}>Search</Button>
+                                        <div css="display:flex;flex-direction:row; color:var(--text-color);">
+                                        <InputGroup placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
+                                        <InputGroupButton  onClick={(e)=> handleSearch(e)}><Search/></InputGroupButton >
+                                        </div>
                                     </FormGroup>
 
                                 </FormInnerSection>
@@ -210,9 +241,10 @@ let referenceArray;
                                 </ActionGroup>
                             </form>
                         </Form>
-                        <Browser >
+                        <Browser>
+                                        <h2 css="color:var(--text-color)">References</h2>
                             {referenceArray}
-                            </Browser>
+                        </Browser>
                     </Centered>
                 </Row>
         );
@@ -220,7 +252,8 @@ let referenceArray;
 
 
 function mapState(state) {
-    return { results: state.referenceData.results };
+    return { results: state.referenceData.results,
+            project: state.userData.current._id };
 }
 
 

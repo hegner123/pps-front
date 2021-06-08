@@ -1,15 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export const Table = styled.table`
-border: 1px solid #333;
-border-collapse: collapse;
-width:100%;
-background-color: rgba(255,255,255,0.6);
-`
-
-
-export const TableHead = styled.thead`
-
+export const TableRows = styled.tr`
+    display: flex;
+    flex-direction: row;
 `
 
   
@@ -19,8 +12,7 @@ export const TableHead = styled.thead`
   }
   
   tr {
-    display: flex;
-    flex-direction: row;
+    
   }
   
   td, th {

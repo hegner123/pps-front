@@ -10,8 +10,8 @@ width: 100%;
 
 export const Centered = styled.div`
 display: flex;
-justify-content: center;
-align-items: center;
+justify-content: space-evenly;
+align-items: flex-start;
 flex-direction: row;
 width: 100%;
 height:100%;
@@ -20,14 +20,33 @@ height:100%;
 export const Browser = styled.aside`
 display:flex;
 flex-direction:column;
-justify-content:space-between; 
-width:15%;
+justify-content:space-between;
+width:50%;
 overflow: scroll;
-height: 50vh;
+height: 90%;
+border:none;
 `
 
+export const Preview = styled.div`
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:10px;
+`
+
+export const Title = styled.p`
+color:var(--text-color);
+width:75%;
+`
+
+export const Artist = styled.p`
+color:var(--text-color);
+font-size: 12px;
+margin-left:10px;
+`
 export const Form = styled.div`
 flex-direction: column;
+
 display: flex;
 `
 

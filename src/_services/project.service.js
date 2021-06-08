@@ -6,6 +6,7 @@ import {history} from '../_helpers/history'
 export const projectService = {
     getProjects,
     createProjects,
+    createSong,
     changeCellStatus
 };
 
@@ -33,6 +34,20 @@ function createProjects(newProject){
     }
     console.log(requestOptions)
     return fetch(`${config.apiUrl}/projects/`, requestOptions)
+    .then(handleResponse)
+    .then(history.push('/dashboard'))
+}
+
+function createSong(newSong){
+    console.log('createSong Service')
+    console.log(newSong)
+    const requestOptions ={
+        method:'PUT',
+        headers: authHeader(1),
+        body: JSON.stringify({ newSong })
+    }
+    console.log(requestOptions)
+    return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
     .then(handleResponse)
     .then(history.push('/dashboard'))
 }

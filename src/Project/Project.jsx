@@ -15,7 +15,7 @@ export function SingleProject(props){
     return (
         <div className="full-width">
             <div className="row grid-area">
-                <PDetails data={songs.projectTitle}/>
+                <PDetails data={songs}/>
             </div>
             <div className='row project-title'>
                 <TableArea data={songs}/>

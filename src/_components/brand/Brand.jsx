@@ -26,7 +26,7 @@ import {css} from 'styled-components';
         return (
             <AdminBar>
                 <Brand>
-                    <BrandLink href="/dashboard">
+                    <BrandLink href="/">
                         ProProject Studio
                     </BrandLink>
                 </Brand>
@@ -98,8 +98,9 @@ export { connectedBranding as Branding };
     function DropdownItem(props){
       return(
         <a href="#" className="menu-item" css="color:var(--text-color)"onClick={() => props.logout()}>
+           <span ><LogoutIcon css="fill: var(--text-color);"/></span>
           {props.children}
-          <span className="icon-right">{props.rightIcon}</span>
+         
         </a>
       )
     }
@@ -109,7 +110,7 @@ export { connectedBranding as Branding };
             <div className="menu">
             {/* <DropdownItem
             leftIcon={<LogoutIcon/>} goToMenu='settings'>Settings</DropdownItem> */}
-            <DropdownItem rightIcon={<LogoutIcon css="fill:var(--text-color);"/>}  logout={()=> props.logout()}>Log Out</DropdownItem>
+            <DropdownItem logout={()=> props.logout()}>Log Out</DropdownItem>
             </div>
         </CSSTransition>
         {/* <CSSTransition in={activeMenu === 'settings'} unmountOnExit timeout={500} classNames='menu-secondary' onEnter={calcHeight} >

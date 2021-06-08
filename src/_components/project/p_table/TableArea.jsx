@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { TableHeaders } from '../p_tableHeaders';
 import { TableRow } from '../p_tableRow';
 import loadingGif from '../../../_assets/images/loading-buffering.gif';
-import { Table } from './style';
+import { Table, TableHead } from './style';
 
 
 
@@ -26,11 +26,11 @@ export function TableArea (props) {
         };
         return (
             <Table>
-                <thead>
+                <TableHead>
                     {songs &&
                     <TableHeaders data={tableHeaders(songs)} id={'headers'}/>
                     }
-                </thead>
+                </TableHead>
                 {songs &&
                 <TableRow
                 data={songs}
