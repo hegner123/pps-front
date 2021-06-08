@@ -120,6 +120,18 @@ transition:300ms;
    filter:brightness(0.5);
 }
 `
+export const ReferenceDelete = styled.span`
+width: 20px;
+background: #f7f7f7;
+border-radius: 0px 5px 5px 0;
+border: none;
+cursor: pointer;
+padding: 5px;
+transition:300ms;
+&:hover{
+   filter:brightness(0.5);
+}
+`
 
 export const ActionGroup = styled.div`
 width:100%;

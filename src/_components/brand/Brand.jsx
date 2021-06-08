@@ -26,7 +26,7 @@ import {css} from 'styled-components';
         return (
             <AdminBar>
                 <Brand>
-                    <BrandLink href="/">
+                    <BrandLink href="/dashboard">
                         ProProject Studio
                     </BrandLink>
                 </Brand>

@@ -23,7 +23,8 @@ import { ActionGroup,
         IconButton,
         Preview,
         Title,
-         Artist} from './style';
+         Artist,
+         ReferenceDelete} from './style';
 import { v4 as uuidv4 } from 'uuid';
 import {results as query} from './_query'
 import { useParams } from 'react-router';
@@ -164,6 +165,9 @@ function NewSong(props) {
             setReferences([...references, {name:name, id:id, preview:preview}])
         }}
         }
+    function filterRef(ref, id){
+        return ref.id !== id
+    }
 
 let referenceArray;
     if (results !== 'unset' && results){
@@ -193,6 +197,17 @@ let referenceArray;
         })
     }
 
+
+    let refList;
+
+    if (references[0] !==''){references.map(ref => {
+        refList =  <div css="color:var(--text-color);font-size:12px;" key={ref.id}>{ref.name}
+                    <button onClick={()=> setReferences(...references[references.filter(ref.id)])}>
+                        <Delete />
+                    </button>
+                </div>
+    })}
+
         return (
                 <Row>
                     <Centered>
@@ -200,37 +215,38 @@ let referenceArray;
                             <FormTitle>New Song</FormTitle>
                             <form name="newSong" onSubmit={handleSubmit}>
                                 <FormSection>
-                                <FormInnerSection>
-                                {/* {submitted && !song.songTitle &&
-                                            <div className="help-block">Your song needs a name.</div>
-                                        } */}
-                                    <FormGroup>
-                                        <Label htmlFor="songTitle" >Song Title</Label>
-                                    <Input type="text" placeholder="New Song" className="form-control" name="songTitle" value={songTitle} onChange={handleFormChange}/>
+                                    <FormInnerSection>
+                                    {/* {submitted && !song.songTitle &&
+                                                <div className="help-block">Your song needs a name.</div>
+                                            } */}
+                                        <FormGroup>
+                                            <Label htmlFor="songTitle" >Song Title</Label>
+                                        <Input type="text" placeholder="New Song" className="form-control" name="songTitle" value={songTitle} onChange={handleFormChange}/>
 
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <div css="display:flex; align-items:flex-start; flex-direction:column;">
-                                            <div css="display:flex; align-items:center;margin-bottom:10px;">
-                                                <span css="color:#fff;">Arrangement</span>
-                                                <IconButton small close  onClick={()=>handleClick('add', '')}><Add/></IconButton>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <div css="display:flex; align-items:flex-start; flex-direction:column;">
+                                                <div css="display:flex; align-items:center;margin-bottom:10px;">
+                                                    <span css="color:#fff;">Arrangement</span>
+                                                    <IconButton small close  onClick={()=>handleClick('add', '')}><Add/></IconButton>
+                                                </div>
+                                            {displayArrangement}
                                             </div>
-                                        {displayArrangement}
-                                        </div>
-                                    </FormGroup>
-                                </FormInnerSection>
-                                <FormInnerSection>
-                                    <FormGroup>
-                                        <Label>
-                                            References
-                                        </Label>
-                                        <div css="display:flex;flex-direction:row; color:var(--text-color);">
-                                        <InputGroup placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
-                                        <InputGroupButton  onClick={(e)=> handleSearch(e)}><Search/></InputGroupButton >
-                                        </div>
-                                    </FormGroup>
+                                        </FormGroup>
+                                    </FormInnerSection>
+                                    <FormInnerSection>
+                                        <FormGroup>
+                                            <Label>
+                                                References
+                                            </Label>
+                                            <div css="display:flex;flex-direction:row; color:var(--text-color); align-items:center;">
+                                            <InputGroup placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
+                                            <InputGroupButton  onClick={(e)=> handleSearch(e)}><Search/></InputGroupButton >
+                                            </div>
+                                            {refList}
+                                        </FormGroup>
 
-                                </FormInnerSection>
+                                    </FormInnerSection>
 
                                 </FormSection>
                                 <ActionGroup>

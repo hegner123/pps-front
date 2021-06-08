@@ -9,7 +9,7 @@ module.exports = {
     },
     
     devServer: {
-        historyApiFallback: true
+        historyApiFallback:true,
     },
     module: {
         rules: [
@@ -42,12 +42,7 @@ module.exports = {
             apiUrl: 'http://localhost:4000'
         })
     },
-    node: {
-        fs: 'empty'
-      },
-      output: {
-        filename: 'bundle.js',
-      },
+
     }
 
 

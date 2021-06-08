@@ -49,7 +49,7 @@ class App extends React.Component {
         return (
             <div className='container'>
 
-                <Router history={history} >
+                <Router history={ history } >
                 <Branding logout={() => logout(this.props)}/>
                     <Switch>
                         <PrivateRoute exact path="/project/:id" component={SingleProject}/>
