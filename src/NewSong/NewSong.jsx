@@ -24,6 +24,9 @@ import { ActionGroup,
         Preview,
         Title,
          Artist,
+         ArrangmentSection,
+         RefItem,
+         RefP,
          ReferenceDelete} from './style';
 import { v4 as uuidv4 } from 'uuid';
 import {results as query} from './_query'
@@ -34,10 +37,9 @@ function NewSong(props) {
     const [getReference, setGetReference] = useState('');
     const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'', id: uuidv4() }]});
     const [references, setReferences] = useState(['']);
-    const currentProject =useParams().id
-
-    // const results = props.results
-    const results = query.results
+    const currentProject = useParams().id
+    const results = props.results
+    // const results = query.results
 
 
         function instrumentReducer(state, {action, value, id}) {
@@ -130,7 +132,7 @@ function NewSong(props) {
 
     const displayArrangement = form.arrangement.map(key => {
         return (
-            <div css="width:100%;margin-top:10px;" key={key.id}>
+            <div css="width:100%;" key={key.id}>
                 <div css="display:flex;flex-direction:row; color:var(--text-color);">
                     <InputGroup
                         type='text'
@@ -195,29 +197,29 @@ let referenceArray;
         })
     }
 
-    function handleRefDelete(e, {reference}){
-        e.preventDefault();
-        console.log(reference)
-
-        console.log(references.filter(filterRef(id)))
-    }
-
-    function filterRef(ref, id){
-        console.log(ref)
-        console.log(id)
-    //    return ref !== id;
+    function handleRefDelete(e, refId){
+        e.preventDefault()
+        setReferences( references.filter(ref => ref.id != refId))
     }
 
     let refList;
 
     if (references[0] !==''){
-        refList = references.map(ref => {
-        return  <div css="color:var(--text-color);font-size:12px;" key={ref.id}>{ref.name}
-                    <button reference={ref.id} onClick={(e)=> handleRefDelete(e)}>
-                        <Delete />
-                    </button>
-                </div>
-    })}
+        refList = 
+        <div css="margin-top:20px">
+            <Label>Song References</Label>
+        <ul>
+            {references.map(ref => {
+            return  <RefItem key={ref.id}>
+                        <RefP>{ref.name}</RefP>
+                        <InputGroupButton onClick={(e)=> handleRefDelete(e, ref.id)}>
+                            <Delete css="height:24px;width:24px;"/>
+                        </InputGroupButton>
+                    </RefItem>
+            })}
+        </ul>
+        </div>
+    }
 
         return (
                 <Row>
@@ -232,33 +234,30 @@ let referenceArray;
                                             } */}
                                         <FormGroup>
                                             <Label htmlFor="songTitle" >Song Title</Label>
-                                        <Input type="text" placeholder="New Song" className="form-control" name="songTitle" value={songTitle} onChange={handleFormChange}/>
+                                        <Input type="text" placeholder="New Song" name="songTitle" value={songTitle} onChange={handleFormChange}/>
 
                                         </FormGroup>
                                         <FormGroup>
-                                            <div css="display:flex; align-items:flex-start; flex-direction:column;">
-                                                <div css="display:flex; align-items:center;margin-bottom:10px;">
-                                                    <span css="color:#fff;">Arrangement</span>
+                                            <ArrangmentSection>
+                                                <div css="display:flex; align-items:center;">
+                                                    <Label>Song Arrangement</Label>
                                                     <IconButton small close  onClick={()=>handleClick('add', '')}><Add/></IconButton>
                                                 </div>
                                             {displayArrangement}
-                                            </div>
+                                            </ArrangmentSection>
                                         </FormGroup>
                                     </FormInnerSection>
                                     <FormInnerSection>
                                         <FormGroup>
-                                            <Label>
-                                                References
-                                            </Label>
+                                            <Label>Search References</Label>
                                             <div css="display:flex;flex-direction:row; color:var(--text-color); align-items:center;">
-                                            <InputGroup placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
-                                            <InputGroupButton  onClick={(e)=> handleSearch(e)}><Search/></InputGroupButton >
+                                                <InputGroup placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
+                                                <InputGroupButton  onClick={(e)=> handleSearch(e)}><Search/></InputGroupButton >
                                             </div>
-                                            {refList}
+                                            
+                                                {refList}
                                         </FormGroup>
-
                                     </FormInnerSection>
-
                                 </FormSection>
                                 <ActionGroup>
                                     <Button>Create</Button>
@@ -269,7 +268,7 @@ let referenceArray;
                             </form>
                         </Form>
                         <Browser>
-                                <h2 css="color:var(--text-color)">References</h2>
+                                <h2 css="color:var(--text-color);margin-bottom:20px;font-size:26px;font-weight:600;">References</h2>
                             {referenceArray}
                         </Browser>
                     </Centered>

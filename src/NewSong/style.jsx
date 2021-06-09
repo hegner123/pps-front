@@ -1,6 +1,5 @@
-import React from 'react'
 import {Link} from 'react-router-dom';
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Row = styled.section`
 margin-top:10px;
@@ -17,37 +16,16 @@ width: 100%;
 height:100%;
 `
 
-export const Browser = styled.aside`
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-width:50%;
-overflow: scroll;
-height: 90%;
-border:none;
-`
-
-export const Preview = styled.div`
-display:flex;
-align-items:center;
-justify-content:space-between;
+export const Label = styled.label`
+color:var(--text-color);
 margin-bottom:10px;
 `
 
-export const Title = styled.p`
-color:var(--text-color);
-width:75%;
-`
-
-export const Artist = styled.p`
-color:var(--text-color);
-font-size: 12px;
-margin-left:10px;
-`
 export const Form = styled.div`
-flex-direction: column;
-
 display: flex;
+flex-direction: column;
+flex-grow:1;
+margin:0 100px;
 `
 
 export const FormSection = styled.div`
@@ -74,6 +52,38 @@ text-align:left;
 margin-bottom:10px;
 `
 
+export const Browser = styled.aside`
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+flex-grow:2;
+overflow: auto;
+height: 90%;
+border:none;
+margin:0 100px ;
+
+`
+
+export const Preview = styled.div`
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:10px;
+`
+
+export const Title = styled.p`
+color:var(--text-color);
+width:75%;
+`
+
+export const Artist = styled.p`
+color:var(--text-color);
+font-size: 12px;
+margin-left:10px;
+`
+
+
+
 export const HelpBlock = styled.div`
 font-size:12px;
 padding:3px 0;
@@ -81,10 +91,7 @@ color:rgb(138, 86, 86);
 margin:10px 0 2px;
 `
 
-export const Label = styled.label`
-color:var(--text-color);
-margin-bottom:10px;
-`
+
 
 export const Input = styled.input`
 width:100%;
@@ -93,7 +100,7 @@ border-radius:5px;
 padding: 5px;
 &:focus{
     outline: none;
-    border: none;
+    border: 1px solid rgba(0,0,0,0);;
 }
 `
 
@@ -104,7 +111,7 @@ border-radius:5px 0 0 5px;
 padding: 5px;
 &:focus{
     outline: none;
-    border: none;
+    border: 1px solid rgba(0,0,0,0);
 }
 `
 
@@ -114,19 +121,7 @@ background: #f7f7f7;
 border-radius: 0px 5px 5px 0;
 border: none;
 cursor: pointer;
-padding: 5px;
-transition:300ms;
-&:hover{
-   filter:brightness(0.5);
-}
-`
-export const ReferenceDelete = styled.span`
-width: 20px;
-background: #f7f7f7;
-border-radius: 0px 5px 5px 0;
-border: none;
-cursor: pointer;
-padding: 5px;
+padding: 4px;
 transition:300ms;
 &:hover{
    filter:brightness(0.5);
@@ -134,7 +129,6 @@ transition:300ms;
 `
 
 export const ActionGroup = styled.div`
-width:100%;
 display: flex;
 flex-direction:row;
 justify-content: center;
@@ -175,7 +169,6 @@ color:var(--text-color);
 cursor:pointer;
 transition:300ms;
 &:hover {
-    
     filter:brightness(1.5);
 }
 `
@@ -192,7 +185,7 @@ padding:${props => props.small ? "3px" : "5px"};
 margin-left: ${props => props.close ? "10px" : "20px"};
 margin-top:2px;
 margin-right:2px;
-margin-bottom:2px;
+margin-bottom:10px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -201,4 +194,41 @@ cursor: pointer;
 &:hover{
   filter: brightness(1.2)
 }
+`
+
+export const ArrangmentSection = styled.div`
+display:flex;
+align-items:flex-start;
+flex-direction:column;
+`
+
+export const ReferenceDelete = styled.span`
+width: 20px;
+background: #f7f7f7;
+border-radius: 0px 5px 5px 0;
+border: none;
+cursor: pointer;
+padding: 5px;
+transition:300ms;
+&:hover{
+   filter:brightness(0.5);
+}
+`
+
+export const RefItem = styled.li`
+display:flex;
+flex-wrap:wrap;
+align-items: center;
+width:100%;
+color:#000;
+font-size:14px;
+background:#fff;
+border-radius: 5px;
+margin-top:10px;
+margin-bottom:10px;
+`
+
+export const RefP = styled.p`
+font-size:12px;
+padding:5px;
 `
