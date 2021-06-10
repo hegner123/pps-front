@@ -8,8 +8,9 @@ import {DashHeader, DashTitle, ProjectSection, AddProject, Section} from './styl
 export function RecentProjects(props) {
     let i =0;
     if (props.data === 'unset'){
-        return <h1>Fuck</h1>
+        return <h1>Loading</h1>
     }
+    console.log(props.data)
     return (
         <div>
             <DashHeader>
@@ -17,7 +18,7 @@ export function RecentProjects(props) {
             </DashHeader>
             <ProjectSection>
         {props.data.map(data =>
-           <ProjectTile data={data.projectTitle} id={i} key={i++}/>
+           <ProjectTile data={data.projectTitle} id={data.id} key={i++}/>
                  )}
                 </ProjectSection>
         </div>
@@ -40,7 +41,7 @@ export function UserProjects(props) {
         </DashHeader>
         <ProjectSection>
         {props.data.map(data =>
-           <ProjectTile data={data.projectTitle} id={i} key={i++}/>
+           <ProjectTile data={data.projectTitle} id={data._id} key={i++}/>
                  )}
     </ProjectSection>
     </Section>

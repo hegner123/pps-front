@@ -6,6 +6,7 @@ import {history} from '../_helpers/history'
 export const projectService = {
     getProjects,
     createProjects,
+    deleteProjects,
     createSong,
     changeCellStatus
 };
@@ -37,6 +38,21 @@ function createProjects(newProject){
     .then(handleResponse)
     .then(history.push('/dashboard'))
 }
+
+function deleteProjects(project){
+    console.log('deleteProject Service')
+    console.log(project)
+    const requestOptions ={
+        method:'DELETE',
+        headers: authHeader(1),
+        body: JSON.stringify({project})
+    }
+    console.log(requestOptions)
+    return fetch(`${config.apiUrl}/projects/`, requestOptions)
+    .then(handleResponse)
+    .then(history.push('/dashboard'))
+}
+
 
 function createSong(newSong){
     console.log('createSong Service')

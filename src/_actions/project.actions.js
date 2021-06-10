@@ -6,6 +6,7 @@ import { store } from '../_helpers';
 export  const projectActions = {
     getProjects,
     createProject,
+    deleteProject,
     changeCellStatus,
     assignProject,
     createSong
@@ -31,9 +32,6 @@ function getProjects() {
     function success(projects) { return { type: projectConstants.GETALL_SUCCESS, projects } }
     function failure(error) { return { type: projectConstants.GETALL_FAILURE, error } }
 }
-
-
-
 
 function assignProject(action ,project){
     let currentProject;
@@ -79,8 +77,6 @@ function changeCellStatus(project, song, instrument, status, id){
     function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
 }
 
-
-
 function createProject(newProject){
     return dispatch => {
         projectService.createProjects(newProject)
@@ -90,6 +86,17 @@ function createProject(newProject){
 
     function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
     function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
+}
+
+function deleteProject(project){
+    return dispatch => {
+        projectService.deleteProjects(project)
+        .then(project => dispatch(success(project)),
+            error => dispatch(failure(error)));
+    }
+
+    function success(create){return {type: projectConstants.DELETE_SUCCESS}, create}
+    function failure(error) { return { type: projectConstants.DELETE_FAILURE, error } }
 }
 
 function createSong(newSong){

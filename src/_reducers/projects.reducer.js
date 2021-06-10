@@ -44,6 +44,17 @@ export function userData(state = initialState, action) {
           ...state,
           create: action.error
           }
+        case projectConstants.DELETE_SUCCESS:
+          return {
+            ...state,
+            delete:action.delete
+          }
+
+        case projectConstants.DELETE_FAILURE:
+          return {
+            ...state,
+            delete: action.error
+          }
     default:
       return {...state}
   }
