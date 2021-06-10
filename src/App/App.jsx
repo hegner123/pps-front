@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Switch, Route, Redirect, useParams} from "react-router-dom";
 import { alertActions } from '../_actions';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
@@ -14,6 +14,7 @@ import { NewSong } from '../NewSong'
 import '../_assets/css/reset.css';
 import '../_assets/css/style.css';
 import { NewProject } from '../NewProject';
+import { uiActions} from '../_actions/ui.actions'
 
 class App extends React.Component {
     constructor(props) {
@@ -21,10 +22,15 @@ class App extends React.Component {
         this.state={
             pop:0
         }
+        this.handleNavClose = this.handleNavClose.bind(this)
         history.listen((location, action) => {
             // clear alert on location change
             this.props.clearAlerts();
         });
+    }
+
+    handleNavClose(){
+        this.props.navClose()
     }
      componentDidMount(){
         this.timerID = setInterval(() => this.tick(this.state.pop),100);
@@ -35,6 +41,7 @@ class App extends React.Component {
     render() {
         let alertDisplay;
         const { alert } = this.props;
+        const { userInterface } = this.props;
 
         if (this.state.pop <= 10){
             alertDisplay = <div className='alert-bar'>{alert.message &&
@@ -47,8 +54,7 @@ class App extends React.Component {
         }
 
         return (
-            <div className='container'>
-
+            <div className='container' onClick={() => userInterface.navDropDown ? this.handleNavClose(): ""} >
                 <Router history={ history } >
                 <Branding logout={() => logout(this.props)}/>
                     <Switch>
@@ -68,13 +74,14 @@ class App extends React.Component {
 }
 
 function mapState(state) {
-    const { alert } = state;
-    return { alert };
+    const { alert, userInterface } = state;
+    return { alert, userInterface };
 }
 
 
 const actionCreators = {
-    clearAlerts: alertActions.clear
+    clearAlerts: alertActions.clear,
+    navClose: uiActions.navClose
 };
 
 

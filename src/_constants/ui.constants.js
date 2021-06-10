@@ -1,0 +1,4 @@
+export const uiConstants = {
+    NAV_DROPDOWN_OPEN: 'NAV_DROPDOWN_OPEN',
+    NAV_DROPDOWN_CLOSE: 'NAV_DROPDOWN_CLOSE'
+};

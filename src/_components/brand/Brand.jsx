@@ -1,28 +1,44 @@
 import React, {useState, useRef, useEffect} from 'react'
 import {useSelector } from 'react-redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {userActions} from '../../_actions/user.actions';
+import {projectActions} from '../../_actions/project.actions';
 import Home from "../../_assets/icons/home.svg";
 import LogoutIcon from "../../_assets/icons/logout.svg";
-import Settings from "../../_assets/icons/settings.svg"
+import DeleteIcon from "../../_assets/icons/delete.svg";
+import Settings from "../../_assets/icons/settings.svg";
 import { IconButton, NavItems, AdminBar, Brand, Search, AdminControls, AdminItem, Input, BrandLink, Logout, Profile} from './style';
 import {CSSTransition} from 'react-transition-group';
 import {css} from 'styled-components';
+import { uiActions } from '../../_actions';
 
 
  function Branding(props){
-     const loggedIn = useSelector(state => state.authentication.loggedIn)
+      const loggedIn = useSelector(state => state.authentication.loggedIn)
+      const current = useSelector(state => state.userData.current ? state.userData.current._id : '');
+      const navDropDown = useSelector(state => state.userInterface.navDropDown)
         let searchBar;
+        let settings;
         if (loggedIn === true){
-            searchBar =     <Search>
+            searchBar =   (  <Search>
                                 <Input type="text" name="search" id="search" placeholder='Search'/>
-                            </Search>
-            // logo = <BrandLink href="/dashboard">
-            // ProProject Studio
-        // </BrandLink>
+                            </Search>)
 
-        }
+            settings = (  <NavItem openState={navDropDown} navOpen={()=> props.navOpen()} icon={<Settings css="fill:var(--text-color)"/>}>
+            <DropdownMenu logout={()=>props.logout()} deleteProject={() => handleDelete(current)} currentP={current.projectTitle} >
+            </DropdownMenu>
+        </NavItem>
+
+            )
+        } 
+
+
+
+        function handleDelete( id){
+          props.deleteProject({id:id});
+      }
+
         return (
             <AdminBar>
                 <Brand>
@@ -35,10 +51,7 @@ import {css} from 'styled-components';
                     <NavItemLink link={'/dashboard'}>
                       <Home css="fill:var(--text-color)"/>
                     </NavItemLink>
-                     <NavItem icon={<Settings css="fill:var(--text-color)"/>}>
-                         <DropdownMenu logout={()=>props.logout()}>
-                         </DropdownMenu>
-                     </NavItem>
+                    {settings}
                 </AdminControls>
             </AdminBar>
         );
@@ -49,7 +62,9 @@ import {css} from 'styled-components';
     }
 
     const actionCreators = {
-        logout: userActions.logout
+        logout: userActions.logout,
+        deleteProject: projectActions.deleteProject,
+        navOpen: uiActions.navOpen
     };
 
 
@@ -68,13 +83,12 @@ export { connectedBranding as Branding };
     );
   }
   function NavItem(props) {
-    const [open,setOpen] = useState(false);
     return (
       <NavItems>
-          <IconButton href="#" onClick={() => setOpen(!open)}>
+          <IconButton href="#" onClick={() => props.navOpen()}>
              {props.icon}
           </IconButton>
-        {open && props.children}
+        {props.openState && props.children}
       </NavItems>
     );
   }
@@ -97,10 +111,9 @@ export { connectedBranding as Branding };
 
     function DropdownItem(props){
       return(
-        <a href="#" className="menu-item" css="color:var(--text-color)"onClick={() => props.logout()}>
-           <span ><LogoutIcon css="fill: var(--text-color);"/></span>
+        <a href="#" className="menu-item" css="color:var(--text-color)" onClick={() => props.action()}>
+           <span >{props.icon}</span>
           {props.children}
-         
         </a>
       )
     }
@@ -108,9 +121,9 @@ export { connectedBranding as Branding };
       <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
         <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} classNames='menu-primary' onEnter={calcHeight} >
             <div className="menu">
-            {/* <DropdownItem
-            leftIcon={<LogoutIcon/>} goToMenu='settings'>Settings</DropdownItem> */}
-            <DropdownItem logout={()=> props.logout()}>Log Out</DropdownItem>
+
+             <DropdownItem action={() => props.deleteProject()} icon={<DeleteIcon css="fill: var(--text-color);height:20px;width:20px;"/>}>Delete Project</DropdownItem>
+            <DropdownItem action={()=> props.logout()} icon={<LogoutIcon css="fill: var(--text-color);height:20px;width:20px;"/>}>Log Out</DropdownItem>
             </div>
         </CSSTransition>
         {/* <CSSTransition in={activeMenu === 'settings'} unmountOnExit timeout={500} classNames='menu-secondary' onEnter={calcHeight} >

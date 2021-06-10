@@ -44,18 +44,34 @@ export function userData(state = initialState, action) {
           ...state,
           create: action.error
           }
-        case projectConstants.DELETE_SUCCESS:
+        case projectConstants.DELETE_PROJECT_SUCCESS:
           return {
             ...state,
             delete:action.delete
           }
-
-        case projectConstants.DELETE_FAILURE:
+        case projectConstants.DELETE_PROJECT_FAILURE:
           return {
             ...state,
             delete: action.error
           }
+          case projectConstants.DELETE_SONG_SUCCESS:
+            return{
+              ...state,
+              songDelete: action.results
+            }
+          case projectConstants.DELETE_SONG_FAILURE:
+            return{
+              ...state,
+              songDelete: action.error
+            }
     default:
       return {...state}
   }
+}
+
+
+
+export async function fetchTodos(dispatch, getState) {
+  const response = await client.get('/fakeApi/todos')
+  dispatch({ type: 'todos/todosLoaded', payload: response.todos })
 }

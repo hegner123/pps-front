@@ -9,7 +9,8 @@ export  const projectActions = {
     deleteProject,
     changeCellStatus,
     assignProject,
-    createSong
+    createSong,
+    deleteSong
 };
 
 function getProjects() {
@@ -95,14 +96,25 @@ function deleteProject(project){
             error => dispatch(failure(error)));
     }
 
-    function success(create){return {type: projectConstants.DELETE_SUCCESS}, create}
-    function failure(error) { return { type: projectConstants.DELETE_FAILURE, error } }
+    function success(create){return {type: projectConstants.DELETE_PROJECT_SUCCESS}, create}
+    function failure(error) { return { type: projectConstants.DELETE_PROJECT_FAILURE}, error }
 }
 
 function createSong(newSong){
     return dispatch => {
         projectService.createSong(newSong)
         .then(create => dispatch(success(create)),
+        error => dispatch(failure(error)));
+    }
+
+    function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
+    function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
+}
+
+function deleteSong(song){
+    return dispatch => {
+        projectService.deleteSong(song)
+        .then(result => dispatch(success(result)),
         error => dispatch(failure(error)));
     }
 

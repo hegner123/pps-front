@@ -8,6 +8,7 @@ export const projectService = {
     createProjects,
     deleteProjects,
     createSong,
+    deleteSong,
     changeCellStatus
 };
 
@@ -68,6 +69,23 @@ function createSong(newSong){
     .then(history.push('/dashboard'))
 }
 
+function deleteSong(song){
+    console.log('DeleteSong Service')
+    console.log(song)
+    const requestOptions ={
+        method:'DELETE',
+        headers: authHeader(1),
+        body: JSON.stringify({ song })
+    }
+    console.log(requestOptions)
+    return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
+    .then(handleResponse)
+    .then(history.push('/dashboard'))
+}
+
+
+
+
 
 function changeCellStatus(project, song, instrument, status,id, user) {
     const requestOptions = {
@@ -75,14 +93,8 @@ function changeCellStatus(project, song, instrument, status,id, user) {
         headers: authHeader(),
         body: {user: user}
     };
-    // console.log(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`)
     return fetch(`${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`, requestOptions)
     .then(handleResponse)
-    // .then(projects => {
-    //     localStorage.setItem('userProjects', JSON.stringify(projects))
-    // }
-    
-    // )
 }
 
 
@@ -99,15 +111,7 @@ function handleResponse(response) {
 
 
 
-// export default {
-//   // Gets all projects
-//   getProjects: function(id) {
-//     return axios.get("/api/projects/userprojects/" + id);
-//   },
-//     // Gets the project with the given id
-//   getProjectDetails: function(id) {
-//     return axios.get("/api/projects/" + id);
-//   },
+
 //   updateProject: function (id, projectData) {
 //     return axios.put("/api/projects/" + id, projectData);
 //   },
@@ -117,7 +121,6 @@ function handleResponse(response) {
 //   removeNote: function (id, noteData) {
 //     return axios.put("/api/projects/note/remove/" + id, noteData);
 //   },
-
 //   saveProject: function(id,projectData) {
 //     return axios.post("/api/projects/userprojects/" + id, projectData);
 //   },
@@ -130,13 +133,6 @@ function handleResponse(response) {
 //   saveInstruments: function (id, instrumentData){
 //     return axios.post("/api/projects/song/arrangement/" + id , instrumentData)
 //   },
-
 //   spotifyPreview: function (song){
 //     return axios.get("/api/song-preview/" + song)
 //   }
-
-
-
-// };
-
-

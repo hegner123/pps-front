@@ -5,12 +5,14 @@ import { users } from './users.reducer';
 import { alert } from './alert.reducer';
 import { userData } from './projects.reducer';
 import { referenceData} from './reference.reducer';
+import { userInterface} from './ui.reducer';
 
 
 const rootReducer = combineReducers({
   authentication,
   registration,
   users,
+  userInterface,
   alert,
   userData,
   referenceData
