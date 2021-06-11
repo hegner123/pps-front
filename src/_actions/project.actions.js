@@ -2,15 +2,16 @@ import { alertActions } from './alert.actions';
 import { projectConstants } from '../_constants';
 import { projectService } from '../_services/';
 import { store } from '../_helpers';
+import { results } from '../NewSong/_query';
 
 export  const projectActions = {
     getProjects,
+    assignProject,
     createProject,
     deleteProject,
-    changeCellStatus,
-    assignProject,
     createSong,
-    deleteSong
+    deleteSong,
+    changeCellStatus
 };
 
 function getProjects() {
@@ -61,6 +62,50 @@ function assignProject(action ,project){
     function clear() {return {type:projectConstants.CLEAR_PROJECT}}
 }
 
+function createProject(newProject){
+    return dispatch => {
+        projectService.createProjects(newProject)
+        .then(create => dispatch(success(create)),
+            error => dispatch(failure(error)));
+    }
+
+    function success(create){return {type: projectConstants.CREATE_PROJECT_SUCCESS, create}}
+    function failure(error) { return { type: projectConstants.CREATE_PROJECT_FAILURE, error }}
+}
+
+function deleteProject(project){
+    return dispatch => {
+        projectService.deleteProjects(project)
+        .then(project => dispatch(success(project)),
+            error => dispatch(failure(error)));
+    }
+
+    function success(create){return {type: projectConstants.DELETE_PROJECT_SUCCESS, create}}
+    function failure(error) { return { type: projectConstants.DELETE_PROJECT_FAILURE, error }}
+}
+
+function createSong(newSong){
+    return dispatch => {
+        projectService.createSong(newSong)
+        .then(create => dispatch(success(create)),
+        error => dispatch(failure(error)));
+    }
+
+    function success(create){return {type: projectConstants.CREATE_SONG_SUCCESS, create}}
+    function failure(error) { return { type: projectConstants.CREATE_SONG_FAILURE, error }}
+}
+
+function deleteSong(song, id){
+
+    return dispatch => {
+        projectService.deleteSong( song, id)
+        .then(result => dispatch(success(result))),
+        error => dispatch(failure(error));
+    }
+
+    function success(result){return {type: projectConstants.DELETE_SONG_SUCCESS, result}}
+    function failure(error) { return { type: projectConstants.DELETE_SONG_FAILURE, error }}
+}
 
 function changeCellStatus(project, song, instrument, status, id){
     const state = store.getState()
@@ -78,47 +123,5 @@ function changeCellStatus(project, song, instrument, status, id){
     function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
 }
 
-function createProject(newProject){
-    return dispatch => {
-        projectService.createProjects(newProject)
-        .then(create => dispatch(success(create)),
-        error => dispatch(failure(error)));
-    }
 
-    function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
-    function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
-}
-
-function deleteProject(project){
-    return dispatch => {
-        projectService.deleteProjects(project)
-        .then(project => dispatch(success(project)),
-            error => dispatch(failure(error)));
-    }
-
-    function success(create){return {type: projectConstants.DELETE_PROJECT_SUCCESS}, create}
-    function failure(error) { return { type: projectConstants.DELETE_PROJECT_FAILURE}, error }
-}
-
-function createSong(newSong){
-    return dispatch => {
-        projectService.createSong(newSong)
-        .then(create => dispatch(success(create)),
-        error => dispatch(failure(error)));
-    }
-
-    function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
-    function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
-}
-
-function deleteSong(song){
-    return dispatch => {
-        projectService.deleteSong(song)
-        .then(result => dispatch(success(result)),
-        error => dispatch(failure(error)));
-    }
-
-    function success(create){return {type: projectConstants.CREATE_SUCCESS}, create}
-    function failure(error) { return { type: projectConstants.CREATE_FAILURE, error } }
-}
 export default projectActions;

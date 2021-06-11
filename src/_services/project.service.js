@@ -17,7 +17,6 @@ function getProjects(user) {
         method: 'GET',
         headers: authHeader(), 
     };
-    // console.log('getProjects service')
     return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions)
     .then(handleResponse)
     .then(projects => {
@@ -27,28 +26,22 @@ function getProjects(user) {
 }
 
 function createProjects(newProject){
-    console.log('createProject Service')
-    console.log(newProject)
     const requestOptions ={
         method:'POST',
         headers: authHeader(1),
         body: JSON.stringify({ newProject })
     }
-    console.log(requestOptions)
     return fetch(`${config.apiUrl}/projects/`, requestOptions)
     .then(handleResponse)
     .then(history.push('/dashboard'))
 }
 
 function deleteProjects(project){
-    console.log('deleteProject Service')
-    console.log(project)
     const requestOptions ={
         method:'DELETE',
         headers: authHeader(1),
         body: JSON.stringify({project})
     }
-    console.log(requestOptions)
     return fetch(`${config.apiUrl}/projects/`, requestOptions)
     .then(handleResponse)
     .then(history.push('/dashboard'))
@@ -56,31 +49,24 @@ function deleteProjects(project){
 
 
 function createSong(newSong){
-    console.log('createSong Service')
-    console.log(newSong)
     const requestOptions ={
         method:'PUT',
         headers: authHeader(1),
         body: JSON.stringify({ newSong })
     }
-    console.log(requestOptions)
     return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
     .then(handleResponse)
     .then(history.push('/dashboard'))
 }
 
-function deleteSong(song){
-    console.log('DeleteSong Service')
-    console.log(song)
+function deleteSong(song, id){
     const requestOptions ={
         method:'DELETE',
         headers: authHeader(1),
-        body: JSON.stringify({ song })
+        body: JSON.stringify({ id:id, songs:song})
     }
-    console.log(requestOptions)
     return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
     .then(handleResponse)
-    .then(history.push('/dashboard'))
 }
 
 
@@ -103,6 +89,7 @@ function changeCellStatus(project, song, instrument, status,id, user) {
 function handleResponse(response) {
     return response.text().then(text => {
         const userData = text && JSON.parse(text);
+
         return userData;
     });
 }

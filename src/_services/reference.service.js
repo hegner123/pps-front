@@ -19,10 +19,8 @@ function spotifyPreview(song){
 
 
 function handleResponse(response) {
-    
     return response.text().then(text => {
         const songData = text && JSON.parse(text);
-        console.log(JSON.parse(text))
         return songData;
     });
 }

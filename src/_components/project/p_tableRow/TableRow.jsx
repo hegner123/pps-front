@@ -1,14 +1,17 @@
 import React,{useState} from 'react';
 import { connect } from 'react-redux';
+import { useSelector } from 'react-redux'
 import { TableCell } from '../p_tableCell';
 import { TableRows } from './style';
+import { projectActions } from '../../../_actions/project.actions';
 
 
 
 
  function TableRow(props){
-const [headers, setHeaders] = useState(props.headers)
-const [songs, setSongs] = useState(props.data)
+    const [headers, setHeaders] = useState(props.headers)
+    const [songs, setSongs] = useState(props.data)
+    const userData = useSelector(state => state.userData.current._id)
     let display;
     class SongRow {
         constructor(title, arrangement, id) {
@@ -29,13 +32,9 @@ const [songs, setSongs] = useState(props.data)
             this.songArrangement =[]
         }
     }
-    if (props.id == 'table-body'){
-//song row needs to be [ songTitle , arrangement cells, ...]
-// table row
-// table cell - title
-//table cell - arrangement cell
 
-//construct new objects based on headers, compare to api data, fill in the blanks, or use default settings
+    if (props.id == 'table-body'){
+        //construct new objects based on headers, compare to api data, fill in the blanks, or use default settings
             let result = [];
 
             for (let i of songs){
@@ -48,35 +47,30 @@ const [songs, setSongs] = useState(props.data)
                     song.songArrangement.push(cell)
                 }
 
-// for every song, take each song status object, compare the instrument to the arrangement cell, and if they match transfer the status field to the arrangement cell
+        // for every song, take each song status object, compare the instrument to the arrangement cell, and if they match transfer the status field to the arrangement cell
                 i.song_status.forEach(song_status => {
-
-                song.songArrangement.forEach(arrangement =>{
-                    if(song_status.instrument === arrangement.instrument){
-                        arrangement.status = song_status.status
-                        arrangement.cellId = song_status._id
-                    } else {
-
-                    }
+                    song.songArrangement.forEach(arrangement =>{
+                        if(song_status.instrument === arrangement.instrument){
+                            arrangement.status = song_status.status
+                            arrangement.cellId = song_status._id
+                        }
+                    })
                 })
-
-                })
-
                 let row = new SongRow(i.song_title, song, i._id)
                 result.push(row)
             }
-            display = result.map(projectSongs => (
-                    <TableRows key={projectSongs.title}>
-                        <TableCell songTitle={projectSongs.title} key={projectSongs.title} projectId={props.projectId}/>
-                        {mapStatus({
-                            title: projectSongs.title,
-                            projectHeaders: props.headers,
-                            songs: projectSongs.projectArrangement.songArrangement,
-                            songId: projectSongs.songId
-                            })}
-                    </TableRows>
-                    ))
-            }
+        display = result.map(projectSongs => (
+                <TableRows key={projectSongs.title}>
+                    <TableCell songTitle={projectSongs.title} key={projectSongs.title} deleteSong={() => props.deleteSong(projectSongs.songId, userData)}/>
+                    {mapStatus({
+                        title: projectSongs.title,
+                        projectHeaders: props.headers,
+                        songs: projectSongs.projectArrangement.songArrangement,
+                        songId: projectSongs.songId
+                        })}
+                </TableRows>
+                ))
+        }
 
         function mapStatus({title,songs ,songId}){
             let i = 0;
@@ -99,8 +93,17 @@ const [songs, setSongs] = useState(props.data)
         );
     }
 
+    function mapState(state) {
+        const { userData } = state;
+        return { userData };
+    }
+
+    const actionCreators = {
+        deleteSong: projectActions.deleteSong
+    };
 
 
 
-const connectedTableRow = connect()(TableRow);
+
+const connectedTableRow = connect(mapState, actionCreators)(TableRow);
 export { connectedTableRow as TableRow };

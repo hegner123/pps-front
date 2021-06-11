@@ -34,12 +34,12 @@ export function userData(state = initialState, action) {
           ...state,
           current:{}
           }
-        case projectConstants.CREATE_SUCCESS:
+        case projectConstants.CREATE_PROJECT_SUCCESS:
           return {
           ...state,
           create: action.create
           }
-        case projectConstants.CREATE_SUCCESS:
+        case projectConstants.CREATE_PROJECT_FAILURE:
           return {
           ...state,
           create: action.error
@@ -54,6 +54,16 @@ export function userData(state = initialState, action) {
             ...state,
             delete: action.error
           }
+          case projectConstants.CREATE_SONG_SUCCESS:
+            return {
+            ...state,
+            create: action.create
+            }
+          case projectConstants.CREATE_SONG_FAILURE:
+            return {
+            ...state,
+            create: action.error
+            }
           case projectConstants.DELETE_SONG_SUCCESS:
             return{
               ...state,
@@ -71,7 +81,7 @@ export function userData(state = initialState, action) {
 
 
 
-export async function fetchTodos(dispatch, getState) {
-  const response = await client.get('/fakeApi/todos')
-  dispatch({ type: 'todos/todosLoaded', payload: response.todos })
-}
+// export async function fetchTodos(dispatch, getState) {
+//   const response = await client.get('/fakeApi/todos')
+//   dispatch({ type: 'todos/todosLoaded', payload: response.todos })
+// }

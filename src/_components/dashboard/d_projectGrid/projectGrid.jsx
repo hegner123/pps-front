@@ -10,7 +10,6 @@ export function RecentProjects(props) {
     if (props.data === 'unset'){
         return <h1>Loading</h1>
     }
-    console.log(props.data)
     return (
         <div>
             <DashHeader>

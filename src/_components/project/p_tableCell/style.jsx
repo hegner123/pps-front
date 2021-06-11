@@ -97,6 +97,5 @@ export const TitleCell = styled.td`
 
     &:hover{
       filter:brightness(0.5);
-      cursor:pointer;
     }
   `

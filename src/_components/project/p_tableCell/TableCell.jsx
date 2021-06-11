@@ -13,12 +13,7 @@ function  TableCell (props) {
     const [cellStatus,setCellStatus] = useState(props.data)
     const [cellId,setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    
 
-
-
-
-   
         let display;
         if ( props.instrument){
 
@@ -32,7 +27,7 @@ function  TableCell (props) {
         } else if (props.songTitle){
             display = <TitleCell>
                         {songTitle}
-                        <Edit css="width: 15px;height: 15px;padding: 10px;"/>
+                        <Edit css="width: 15px;height: 15px;padding: 10px;" onClick={()=>props.deleteSong()}/>
                     </TitleCell>
         } else {
          display =   <TextCell>

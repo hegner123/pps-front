@@ -123,7 +123,6 @@ function NewSong(props) {
             arrangement:[...form.arrangement],
             references:[...references]
         }
-        console.log(song)
         if (song.songTitle) {
             props.createSong(song);
         }
