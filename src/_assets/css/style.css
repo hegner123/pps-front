@@ -11,6 +11,7 @@
   --border-radius: 8px;
   --speed: 500ms;
   --noti: #FA383E;
+  --blue-gradient:linear-gradient(to bottom, #060607, #242526)
 }
 
 audio {
@@ -251,6 +252,21 @@ a {
 
 .dropdown {
   position: absolute;
+  top: 58px;
+  width: 300px;
+  transform: translateX(-45%);
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+  z-index: 10;
+}
+
+
+.dropdown-song {
+  position: relative;
   top: 58px;
   width: 300px;
   transform: translateX(-45%);

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SidebarCol = styled.div`
-  background:var(--bg);
+  background:var(--blue-gradient);
   height: 100%;
   flex-grow: 1;
   display: flex;

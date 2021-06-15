@@ -131,7 +131,7 @@ function NewSong(props) {
 
     const displayArrangement = form.arrangement.map(key => {
         return (
-            <div css="width:100%;" key={key.id}>
+            <div css="width:100%;margin-top:10px" key={key.id}>
                 <div css="display:flex;flex-direction:row; color:var(--text-color);">
                     <InputGroup
                         type='text'
@@ -253,7 +253,6 @@ let referenceArray;
                                                 <InputGroup placeholder=""type="text" name="referenceSeach" value={getReference} onChange={handleFormChange}/>
                                                 <InputGroupButton  onClick={(e)=> handleSearch(e)}><Search/></InputGroupButton >
                                             </div>
-                                            
                                                 {refList}
                                         </FormGroup>
                                     </FormInnerSection>

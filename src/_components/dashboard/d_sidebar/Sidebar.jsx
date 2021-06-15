@@ -12,14 +12,7 @@ class Sidebar extends React.Component {
     render() {
         return (
     <SidebarCol>
-        <Notifications/>
-        <Notifications/>
-        <Notifications/>
-        <Notifications/>
-        <Notifications/>
-        <Notifications/>
-        <Notifications/>
-        <Notifications/>
+       
     </SidebarCol>
         );
     }

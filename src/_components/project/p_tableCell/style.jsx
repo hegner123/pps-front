@@ -94,8 +94,30 @@ export const TitleCell = styled.td`
     border: 1px solid #333;
     border-collapse: collapse;
     transition-duration:300ms;
-
-    &:hover{
-      filter:brightness(0.5);
-    }
   `
+
+  export const CellButton = styled.div`
+    cursor: pointer;
+  `
+
+export const IconButton = styled.a`
+--button-size: calc(var(--nav-size) * 0.5);
+width: var(--button-size);
+height: var(--button-size);
+
+margin:2px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition: filter 300ms;
+
+`
+
+
+export const NavItems = styled.div`
+  width: calc(var(--nav-size) * 0.8);
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+`
