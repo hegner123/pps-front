@@ -266,17 +266,17 @@ a {
 
 
 .dropdown-song {
-  position: relative;
-  top: 58px;
-  width: 300px;
-  transform: translateX(-45%);
-  background-color: var(--bg);
-  border: var(--border);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  overflow: hidden;
-  transition: height var(--speed) ease;
+
+    position: absolute;
+    
+    transform: translateX(60%) translateY(45%);
+    background-color: var(--bg);
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    transition: height var(--speed) ease;
 }
+
 
 .menu-item {
   height: 50px;

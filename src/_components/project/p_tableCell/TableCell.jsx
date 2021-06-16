@@ -13,7 +13,8 @@ function  TableCell (props) {
     const [cellStatus,setCellStatus] = useState(props.data)
     const [cellId,setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    const [navDropDown,setNavDropDown] = useState(false)
+    const navDropDown = useSelector(state => state.userInterface.navDropDown);
+    let searchBar;
 
 
     function navOpen(){
@@ -33,7 +34,7 @@ function  TableCell (props) {
         } else if (props.songTitle){
             display =   <TitleCell>
                             {songTitle}
-                                <NavItem openState={navDropDown} navOpen={()=> navOpen()} icon={ <Edit  css="fill: var(--text-color);height:20px;width:20px;" />}>
+                                <NavItem openState={navDropDown} navOpen={()=> navOpen()} icon={ <Edit  css="height:20px;width:20px;" />}>
                                     <DropdownMenu deleteSong={() => handleDelete(songId)} currentS={songId} >
                                     </DropdownMenu>
                                 </NavItem>

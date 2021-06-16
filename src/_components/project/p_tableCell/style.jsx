@@ -115,6 +115,7 @@ transition: filter 300ms;
 
 
 export const NavItems = styled.div`
+  position: relative;
   width: calc(var(--nav-size) * 0.8);
   display:flex;
   justify-content: flex-end;
