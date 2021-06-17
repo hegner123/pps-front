@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {  connect, useSelector } from 'react-redux';
-import { projectActions } from '../../../_actions';
+import { projectActions, uiActions } from '../../../_actions';
 import { CompletedCell, IncompleteCell, NaCell, TextCell, TitleCell,CellButton , IconButton, NavItems } from './style';
 import  Edit  from '../../../_assets/icons/more.svg';
 import {store} from '../../../_helpers';
 import {CSSTransition} from 'react-transition-group';
+import { userInterface } from '../../../_reducers/ui.reducer';
 
 function  TableCell (props) {
     const [songId,setSongId] = useState(props.songId)
@@ -13,13 +14,10 @@ function  TableCell (props) {
     const [cellStatus,setCellStatus] = useState(props.data)
     const [cellId,setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    const navDropDown = useSelector(state => state.userInterface.navDropDown);
+    const { userInterface } = props;
     let searchBar;
+    console.log(userInterface.id)
 
-
-    function navOpen(){
-       return setNavDropDown(!navDropDown);
-    }
 
         let display;
         if ( props.instrument){
@@ -34,7 +32,7 @@ function  TableCell (props) {
         } else if (props.songTitle){
             display =   <TitleCell>
                             {songTitle}
-                                <NavItem openState={navDropDown} navOpen={()=> navOpen()} icon={ <Edit  css="height:20px;width:20px;" />}>
+                                <NavItem openState={userInterface.dropdownOpen} openId={userInterface.id} cellId={songId} dropdownOpen={()=> props.dropdownOpen(songId)} icon={ <Edit  css="height:20px;width:20px;" />}>
                                     <DropdownMenu deleteSong={() => handleDelete(songId)} currentS={songId} >
                                     </DropdownMenu>
                                 </NavItem>
@@ -50,12 +48,13 @@ function  TableCell (props) {
     }
 
     function mapState(state) {
-        const { cellStatus } = state;
-        return { cellStatus };
+        const { cellStatus, userInterface } = state;
+        return { cellStatus, userInterface };
     }
 
     const actionCreators = {
         changeCellStatus: projectActions.changeCellStatus,
+        dropdownOpen: uiActions.dropdownOpen,
     };
 
 const connectedTableCell = connect(mapState, actionCreators)(TableCell);
@@ -64,12 +63,16 @@ export { connectedTableCell as TableCell };
 
 
 function NavItem(props) {
+  let dropdownMatch = false;
+  if (props.openId === props.cellId){
+    dropdownMatch = true;
+}
     return (
       <NavItems>
-          <IconButton href="#" onClick={() => props.navOpen()}>
+          <IconButton href="#" onClick={() => props.dropdownOpen()}>
              {props.icon}
           </IconButton>
-        {props.openState && props.children}
+        {props.openState && dropdownMatch && props.children}
       </NavItems>
     );
   }

@@ -15,6 +15,7 @@ import '../_assets/css/reset.css';
 import '../_assets/css/style.css';
 import { NewProject } from '../NewProject';
 import { uiActions} from '../_actions/ui.actions'
+import { userInterface } from '../_reducers/ui.reducer';
 
 class App extends React.Component {
     constructor(props) {
@@ -22,15 +23,20 @@ class App extends React.Component {
         this.state={
             pop:0
         }
-        this.handleNavClose = this.handleNavClose.bind(this)
+        this.handleUiClose = this.handleUiClose.bind(this);
         history.listen((location, action) => {
             // clear alert on location change
             this.props.clearAlerts();
         });
     }
 
-    handleNavClose(){
-        this.props.navClose()
+    handleUiClose(nav){
+        if (nav){
+            this.props.navClose();
+        } else {
+            this.props.dropdownClose();
+        }
+
     }
      componentDidMount(){
         this.timerID = setInterval(() => this.tick(this.state.pop),100);
@@ -42,6 +48,7 @@ class App extends React.Component {
         let alertDisplay;
         const { alert } = this.props;
         const { userInterface } = this.props;
+        const openState =  (userInterface.navDropdown || userInterface.dropdownOpen)
 
         if (this.state.pop <= 10){
             alertDisplay = <div className='alert-bar'>{alert.message &&
@@ -54,7 +61,7 @@ class App extends React.Component {
         }
 
         return (
-            <div className='container' onClick={() => userInterface.navDropDown ? this.handleNavClose(): ""} >
+            <div className='container' onClick={() =>  openState ? this.handleUiClose(userInterface.navDropdown): ""} >
                 <Router history={ history } >
                 <Branding logout={() => logout(this.props)}/>
                     <Switch>
@@ -81,7 +88,8 @@ function mapState(state) {
 
 const actionCreators = {
     clearAlerts: alertActions.clear,
-    navClose: uiActions.navClose
+    navClose: uiActions.navClose,
+    dropdownClose: uiActions.dropdownClose
 };
 
 

@@ -17,7 +17,7 @@ import { uiActions } from '../../_actions';
  function Branding(props){
       const loggedIn = useSelector(state => state.authentication.loggedIn)
       const current = useSelector(state => state.userData.current ? state.userData.current._id : '');
-      const navDropDown = useSelector(state => state.userInterface.navDropDown)
+      const navDropdown = useSelector(state => state.userInterface.navDropdown)
         let searchBar;
         let settings;
         if (loggedIn === true){
@@ -25,7 +25,7 @@ import { uiActions } from '../../_actions';
                                 <Input type="text" name="search" id="search" placeholder='Search'/>
                             </Search>)
 
-            settings = (  <NavItem openState={navDropDown} navOpen={()=> props.navOpen()} icon={<Settings css="fill:var(--text-color)"/>}>
+            settings = (  <NavItem openState={navDropdown} navOpen={()=> props.navOpen()} icon={<Settings css="fill:var(--text-color)"/>}>
             <DropdownMenu logout={()=>props.logout()} deleteProject={() => handleDelete(current)} currentP={current.projectTitle} >
             </DropdownMenu>
         </NavItem>

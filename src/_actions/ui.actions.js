@@ -2,7 +2,9 @@ import { uiConstants } from '../_constants';
 
 export const uiActions = {
     navOpen,
-    navClose
+    navClose,
+    dropdownOpen,
+    dropdownClose
 };
 
 function navOpen() {
@@ -13,3 +15,12 @@ function navClose() {
     return { type: uiConstants.NAV_DROPDOWN_CLOSE };
 }
 
+
+
+function dropdownOpen(id) {
+    return { type: uiConstants.DROPDOWN_OPEN, id };
+}
+
+function dropdownClose() {
+    return { type: uiConstants.DROPDOWN_CLOSE };
+}
