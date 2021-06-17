@@ -32,18 +32,18 @@ function  TableCell (props) {
         } else if (props.songTitle){
             display =   <TitleCell>
                             {songTitle}
-                                <NavItem openState={userInterface.dropdownOpen} openId={userInterface.id} cellId={songId} dropdownOpen={()=> props.dropdownOpen(songId)} icon={ <Edit  css="height:20px;width:20px;" />}>
+                                <NavItem openState={userInterface.dropdownOpen} openId={userInterface.id} cellId={cellId} dropdownOpen={()=> props.dropdownOpen(cellId)} icon={ <Edit  css="height:20px;width:20px;" />}>
                                     <DropdownMenu deleteSong={() => handleDelete(songId)} currentS={songId} >
                                     </DropdownMenu>
                                 </NavItem>
                         </TitleCell>
         } else {
-         display =   <TextCell>
-                        {cellStatus}
-                    </TextCell>
+            display =   <TextCell>
+                            {cellStatus}
+                        </TextCell>
         }
         return (
-                display
+            display
         );
     }
 
