@@ -1,15 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
 
 
 
 module.exports = {
+
     mode: 'development',
+    context: path.resolve(__dirname),
     resolve: {
         extensions: ['.js', '.jsx']
     },
-    
     devServer: {
-        historyApiFallback:true,
+      port: 8080,
+      historyApiFallback: true,
+      hot: true,
+      contentBase: path.join(__dirname),
     },
     module: {
         rules: [

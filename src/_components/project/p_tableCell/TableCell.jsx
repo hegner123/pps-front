@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {  connect, useSelector } from 'react-redux';
 import { projectActions, uiActions } from '../../../_actions';
-import { CompletedCell, IncompleteCell, NaCell, TextCell, TitleCell,CellButton , IconButton, NavItems } from './style';
+import { CompletedCell, IncompleteCell, NaCell, TextCell, TitleCell,CellButton , DropdownSong,IconButton, NavItems } from './style';
 import  Edit  from '../../../_assets/icons/more.svg';
 import {store} from '../../../_helpers';
 import {CSSTransition} from 'react-transition-group';
@@ -14,9 +14,18 @@ function  TableCell (props) {
     const [cellStatus,setCellStatus] = useState(props.data)
     const [cellId,setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    const { userInterface } = props;
+    const  userInterface  = props.userInterface;
+
     let searchBar;
-    console.log(userInterface.id)
+
+
+    let dropdownStatus;
+
+    if (userInterface.id === songTitle){
+      dropdownStatus = true;
+    } else {
+      dropdownStatus = false;
+    }
 
 
         let display;
@@ -32,7 +41,7 @@ function  TableCell (props) {
         } else if (props.songTitle){
             display =   <TitleCell>
                             {songTitle}
-                                <NavItem openState={userInterface.dropdownOpen} openId={userInterface.id} cellId={cellId} dropdownOpen={()=> props.dropdownOpen(cellId)} icon={ <Edit  css="height:20px;width:20px;" />}>
+                                <NavItem openState={dropdownStatus} cellId={songTitle} dropdownOpen={(e)=> props.dropdownOpen(e)} icon={ <Edit  css="height:20px;width:20px;" />}>
                                     <DropdownMenu deleteSong={() => handleDelete(songId)} currentS={songId} >
                                     </DropdownMenu>
                                 </NavItem>
@@ -69,10 +78,10 @@ function NavItem(props) {
 }
     return (
       <NavItems>
-          <IconButton href="#" onClick={() => props.dropdownOpen()}>
+          <IconButton href="#" onClick={() => props.dropdownOpen(props.cellId)}>
              {props.icon}
           </IconButton>
-        {props.openState && dropdownMatch && props.children}
+        {props.openState && props.children}
       </NavItems>
     );
   }
@@ -95,10 +104,10 @@ function NavItem(props) {
 
     function DropdownItem(props){
       return(
-        <a href="#" className="menu-item" css="color:var(--text-color)" onClick={() => props.action()}>
+        <DropdownSong href="#"  onClick={() => props.action()}>
            <span >{props.icon}</span>
           {props.children}
-        </a>
+        </DropdownSong>
       )
     }
     return(

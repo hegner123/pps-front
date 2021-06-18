@@ -266,14 +266,11 @@ a {
 
 
 .dropdown-song {
-
     position: absolute;
-    
     transform: translateX(60%) translateY(45%);
     background-color: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);
-
     transition: height var(--speed) ease;
 }
 

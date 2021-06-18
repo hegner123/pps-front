@@ -122,3 +122,17 @@ export const NavItems = styled.div`
   align-items: center;
   cursor: pointer;
 `
+
+export const DropdownSong = styled.a`
+  color:var(--text-color);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding: 0.5rem;
+  z-index:10;
+    &:hover{
+      background-color:var(--bg-accent)
+    }
+`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Switch, Route, Redirect, useParams} from "react-router-dom";
+import {  Router, Switch, Route, Redirect, useParams} from "react-router-dom";
 import { alertActions } from '../_actions';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';

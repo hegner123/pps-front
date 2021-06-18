@@ -17,6 +17,7 @@ case uiConstants.DROPDOWN_OPEN:
           dropdownOpen: true}
 case uiConstants.DROPDOWN_CLOSE:
   return {...state,
+          id: '',
           dropdownOpen: false}
     default:
       return state
