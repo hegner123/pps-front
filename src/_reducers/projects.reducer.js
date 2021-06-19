@@ -7,7 +7,7 @@ let projects = JSON.parse(localStorage.getItem('userProjects'));
 
 
 console.log(' href => ' + window.location.href);
-const initialState = projects ? {projects: projects } :  {projects:'unset'};
+const initialState = projects ? {projects: projects} :  {projects:'unset'};
 
 export function userData(state = initialState, action) {
   switch (action.type) {
@@ -16,7 +16,7 @@ export function userData(state = initialState, action) {
           projects: action.projects
           };
         case projectConstants.GETALL_FAILURE:
-          return { 
+          return {
           error: action.error
           };
         case projectConstants.STATUS_REQUEST:

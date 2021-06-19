@@ -15,7 +15,6 @@ module.exports = {
       port: 8080,
       historyApiFallback: true,
       hot: true,
-      contentBase: path.join(__dirname),
     },
     module: {
         rules: [

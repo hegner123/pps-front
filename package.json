@@ -10,7 +10,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack serve --open",
+    "start": "webpack serve --open --hot",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
