@@ -20,6 +20,7 @@ width:20%;
 `
 
 export const FormTitle = styled.h1`
+color:var(--text-color);
 font-size:40px;
 margin-bottom:20px;
 `
@@ -62,6 +63,7 @@ transition:10ms;
 
 export const Label = styled.label`
 margin-bottom:10px;
+color:var(--text-color);
 `
 
 export const Input = styled.input`

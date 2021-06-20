@@ -8,7 +8,7 @@ import { Branding } from '../_components/brand'
 import { CoomingSoon, HomePage } from '../HomePage';
 import { SingleProject } from '../Project';
 import { LoginPage } from '../Login';
-import { RegisterPage } from '../RegisterPage';
+import { Register } from '../Register';
 import { Dashboard } from '../Dashboard';
 import { NewSong } from '../NewSong'
 import '../_assets/css/reset.css';
@@ -70,7 +70,7 @@ class App extends React.Component {
                         <PrivateRoute exact path="/new-project" component={NewProject} />
                         <PrivateRoute  path="/new-song/:id" component={NewSong} />
                         <Route exact path="/" component={HomePage}/>
-                        <Route exact path="/register" component={RegisterPage} />
+                        <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={LoginPage} />
                     </Switch>
                 </Router>

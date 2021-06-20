@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
-class RegisterPage extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
 
@@ -105,5 +105,5 @@ const actionCreators = {
     register: userActions.register
 }
 
-const connectedRegisterPage = connect(mapState, actionCreators)(RegisterPage);
-export { connectedRegisterPage as RegisterPage };
+const connectedRegister = connect(mapState, actionCreators)(Register);
+export { connectedRegister as Register };
