@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect, store } from 'react-redux';
-import { projectActions } from '../_actions';
+import { projectActions } from '../../_actions';
 import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
 class NewProject extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions } from '../_actions';
+import { userActions } from '../../_actions';
 import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
 class Register extends React.Component {

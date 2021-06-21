@@ -2,7 +2,7 @@ import { alertActions } from './alert.actions';
 import { projectConstants } from '../_constants';
 import { projectService } from '../_services/';
 import { store } from '../_helpers';
-import { results } from '../NewSong/_query';
+import { results } from '../_forms/NewSong/_query';
 
 export  const projectActions = {
     getProjects,

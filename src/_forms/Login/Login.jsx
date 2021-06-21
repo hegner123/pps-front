@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { userActions } from '../_actions';
+import { userActions } from '../../_actions';
 import { Button, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input, FormRegister } from './style';
 
 class LoginPage extends React.Component {

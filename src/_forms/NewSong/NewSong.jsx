@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { connect} from 'react-redux';
-import { projectActions, refActions } from '../_actions';
-import Add from '../_assets/icons/add.svg';
-import Delete from '../_assets/icons/delete.svg';
-import Search from '../_assets/icons/search.svg';
+import { projectActions, refActions } from '../../_actions';
+import Add from '../../_assets/icons/add.svg';
+import Delete from '../../_assets/icons/delete.svg';
+import Search from '../../_assets/icons/search.svg';
 import { ActionGroup,
         Button,
         Btn,
@@ -29,7 +29,7 @@ import { ActionGroup,
          RefP,
          ReferenceDelete} from './style';
 import { v4 as uuidv4 } from 'uuid';
-import {results as query} from './_query'
+
 import { useParams } from 'react-router';
 
 function NewSong(props) {

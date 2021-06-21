@@ -7,13 +7,13 @@ import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
 import { CoomingSoon, HomePage } from '../HomePage';
 import { SingleProject } from '../Project';
-import { LoginPage } from '../Login';
-import { Register } from '../Register';
+import { LoginPage } from '../_forms/Login';
+import { Register } from '../_forms/Register';
 import { Dashboard } from '../Dashboard';
-import { NewSong } from '../NewSong'
+import { NewSong } from '../_forms/NewSong'
 import '../_assets/css/reset.css';
 import '../_assets/css/style.css';
-import { NewProject } from '../NewProject';
+import { NewProject } from '../_forms/NewProject';
 import { uiActions} from '../_actions/ui.actions'
 import { userInterface } from '../_reducers/ui.reducer';
 
