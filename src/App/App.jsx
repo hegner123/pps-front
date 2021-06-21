@@ -5,17 +5,17 @@ import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { PrivateRoute } from '../_components/privateRoute';
 import { Branding } from '../_components/brand'
-import { CoomingSoon, HomePage } from '../HomePage';
+import { HomePage } from '../HomePage';
 import { SingleProject } from '../Project';
 import { LoginPage } from '../_forms/Login';
 import { Register } from '../_forms/Register';
 import { Dashboard } from '../Dashboard';
 import { NewSong } from '../_forms/NewSong'
-import '../_assets/css/reset.css';
-import '../_assets/css/style.css';
 import { NewProject } from '../_forms/NewProject';
 import { uiActions} from '../_actions/ui.actions'
 import { userInterface } from '../_reducers/ui.reducer';
+import '../_assets/css/reset.css';
+import '../_assets/css/style.css';
 
 class App extends React.Component {
     constructor(props) {

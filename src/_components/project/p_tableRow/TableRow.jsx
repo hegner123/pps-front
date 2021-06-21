@@ -5,14 +5,13 @@ import { TableCell } from '../p_tableCell';
 import { TableRows } from './style';
 import { projectActions } from '../../../_actions/project.actions';
 
-
-
-
  function TableRow(props){
-    const [headers, setHeaders] = useState(props.headers)
-    const [songs, setSongs] = useState(props.data)
-    const userData = useSelector(state => state.userData.current._id)
+    const [headers, setHeaders] = useState(props.headers);
+    const [songs, setSongs] = useState(props.data);
+    const userData = useSelector(state => state.userData.current._id);
+    //establish main jsx variable
     let display;
+    //Constructor for Song Rows
     class SongRow {
         constructor(title, arrangement, id) {
             this.songId = id;
@@ -20,6 +19,7 @@ import { projectActions } from '../../../_actions/project.actions';
             this.projectArrangement = arrangement
         }
     }
+    //Constructor for Table Cells
     class ArrangementCell {
         constructor( instrument, status, id) {
             this.cellId = id
@@ -27,6 +27,7 @@ import { projectActions } from '../../../_actions/project.actions';
             this.status = status;
         }
     }
+    //Constructor for defining song arrangements
     class SongArrangement{
         constructor(){
             this.songArrangement =[]
@@ -34,20 +35,22 @@ import { projectActions } from '../../../_actions/project.actions';
     }
 
     if (props.id == 'table-body'){
-        //construct new objects based on headers, compare to api data, fill in the blanks, or use default settings
+        // construct new objects based on headers, compares to project data from database,
+        // then fills in the blanks, or use default settings
+
             let result = [];
 
+            // for each song in song array build a new arrangement object
+            // for every instrument in song make a new cell object
+            //  for every instrument in song push that cell object into an arrangement object
+            // for every song, take each song status object, compare the instrument to the arrangement cell,
+            // and if they match transfer the status field to the arrangement cell
             for (let i of songs){
-                // for each song in song array build a new arrangement object
                 let song = new SongArrangement
                 for (let j of headers){
-                // for every instrument in song make a new cell object
                     let cell = new ArrangementCell(j, null, null)
-                //  for every instrument in song push that cell object into an arrangement object
                     song.songArrangement.push(cell)
                 }
-
-        // for every song, take each song status object, compare the instrument to the arrangement cell, and if they match transfer the status field to the arrangement cell
                 i.song_status.forEach(song_status => {
                     song.songArrangement.forEach(arrangement =>{
                         if(song_status.instrument === arrangement.instrument){
@@ -59,6 +62,7 @@ import { projectActions } from '../../../_actions/project.actions';
                 let row = new SongRow(i.song_title, song, i._id)
                 result.push(row)
             }
+
         display = result.map(projectSongs => (
                 <TableRows key={projectSongs.title}>
                     <TableCell songTitle={projectSongs.title} key={projectSongs.title} deleteSong={() => props.deleteSong(projectSongs.songId, userData)}/>

@@ -1,7 +1,11 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400');
+
 :root {
   --bg: #242526;
   --bg-accent: #484a4d;
   --text-color: #dadce1;
+  --table-text-color:#333;
   --input-font-size: 20px;
   --input-padding: 5px;
   --input-border-radius: 5px;
@@ -11,16 +15,17 @@
   --border-radius: 8px;
   --speed: 500ms;
   --noti: #FA383E;
-  --blue-gradient:linear-gradient(to bottom, #060607, #242526)
+  --blue-gradient:linear-gradient(to bottom, #060607, #242526);
+  --h1: 3.052rem;
+  --h2: 2.441rem;
+  --h3: 1.953rem;
+  --h4:1.563rem;
+  --h5:1.25rem;
+  --h6: 1rem;
+  --small: 0.8rem;
+  --main-font:'Montserrat', sans-serif;
+
 }
-
-audio {
-  padding: 0px;
-  color: blue;
-  fill: blue;
-
-}
-
 
 body {
   background: var(--bg);
@@ -28,18 +33,27 @@ body {
   /* background-color: rgb(13, 17, 23); */
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--main-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
 input:focus {
   border: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 .container {
-  height: 100%;
+  min-height: 100%;
 }
 
 .alert-bar {
@@ -85,15 +99,6 @@ input:focus {
   width: 100%;
 }
 
-.text-white {
-  color: rgb(247, 247, 247);
-}
-
-
-.logo {
-  width: 15%
-}
-
 .header-img {
   width: 50%;
 }
@@ -112,42 +117,9 @@ input:focus {
   width: 100%;
 }
 
-table {
-  width: 100%;
-}
 
-table,
-th,
-td {
-  border: 1px solid #333;
-  border-collapse: collapse;
-}
 
-tr {
-  display: flex;
-  flex-direction: row;
-}
 
-td,
-th {
-  height: 85px;
-  width: 100%;
-  padding: 0 15px;
-  font-size: 16px;
-}
-
-td,
-th {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #333
-}
-
-.song-head {
-  font-size: 18px;
-}
 
 
 
@@ -167,13 +139,7 @@ th {
   font-weight: 200;
 }
 
-.recent-projects {
-  width: 100%;
-}
 
-.project-title {
-  line-height: 75px;
-}
 
 .svg-graphic {
   width: 50%;
@@ -184,9 +150,7 @@ th {
   font-size: 10px;
 }
 
-.recent-projects {
-  display: flex;
-}
+
 
 .icon {
   padding: 10px;
@@ -213,16 +177,7 @@ th {
   user-select: none;
 }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
-a {
-  color: var(--link-color);
-  text-decoration: none;
-}
 
 
 .navbar {

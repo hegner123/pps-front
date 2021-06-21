@@ -28,34 +28,3 @@ export function HomePage () {
         </RowEven>
         );
     }
-
-
-
-
-
-
-
-
-export function CoomingSoon(){
-        return (
-        <div className="row-even">
-            <div className="even-space">
-                <div className="header-content w-50">
-                    <div className="header-inner">
-                        <h1>ProProject Studio</h1>
-                            <div className="sub-title">
-                                <div className="sub-title-text">
-                                <p>In Progress. Make managing your recording projects easier with ProProject Studio. The only project management app that is both online and in your DAW.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <img src={Image} alt="logo" className="img-fluid header-img w-50"/>
-            </div>
-        </div>
-        );
-    }
-
-
-
-

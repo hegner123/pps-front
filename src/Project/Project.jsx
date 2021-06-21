@@ -15,11 +15,11 @@ export function SingleProject(props){
     //    projectActions.assignProject('assign' ,id)
     // }
     return (
-        <div className="full-width">
-            <div className="row grid-area">
+        <div css={"width:100%"}>
+            <div css={"display:flex; flex-wrap: wrap; width: 100%;"} className=" grid-area">
                 <PDetails data={songs}/>
             </div>
-            <div className='row project-title'>
+            <div css={"display:flex; flex-wrap: wrap; width: 100%;line-height: 75px;"} >
                 <TableArea data={songs}/>
             </div>
         </div>

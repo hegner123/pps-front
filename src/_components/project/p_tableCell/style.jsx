@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 export const CompletedCell = styled.td`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-weight:bold;
     color:#333;
     height:85px;
@@ -28,7 +28,7 @@ export const CompletedCell = styled.td`
 export const  IncompleteCell = styled.td`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-weight:bold;
     color:#333;
     height:85px;
@@ -50,9 +50,8 @@ export const  IncompleteCell = styled.td`
 export const NaCell = styled.td`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-weight:bold;
-    color:#333;
     height:85px;
     width:100%;
     padding:0 15px;
@@ -69,23 +68,29 @@ export const NaCell = styled.td`
 
 export const TextCell = styled.td`
     display: flex;
-    font-weight:500;
-    color:#333;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color:var(--table-text-color);
     height:85px;
     width:100%;
     padding:0 15px;
-    font-size:16px;
+    font-size:var(--h5);
     line-height:1rem;
     border: 1px solid #333;
     border-collapse: collapse;
     transition-duration:300ms;
+    text-transform: capitalize;
+    &:first-child{
+      justify-content: flex-start;
+      font-weight:bolder;
+    }
   `
 
 
 export const TitleCell = styled.td`
     display: flex;
-    font-weight:500;
-    color:#333;
+    color:var(--table-text-color);
     height:85px;
     width:100%;
     padding:0 15px;
@@ -94,6 +99,9 @@ export const TitleCell = styled.td`
     border: 1px solid #333;
     border-collapse: collapse;
     transition-duration:300ms;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
   `
 
   export const CellButton = styled.div`
