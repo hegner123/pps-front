@@ -1,8 +1,9 @@
 import { projectConstants } from '../_constants';
-import { useParams } from 'react-router-dom';
 
 let href = window.location.pathname
-let id = href.replace("/project/","");
+let first = href.replace("/project/","");
+let id = first.replace("/new-song/","");
+
 
 
 

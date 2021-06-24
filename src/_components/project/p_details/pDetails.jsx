@@ -1,16 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {store} from '../../../_helpers';
-import {css} from 'styled-components';
+import { Link , useParams} from 'react-router-dom';
 import { ProjectDetails, ProjectTitle , AddSong} from './style';
 
 
 
-export function PDetails(props){
+export function pDetails(props){
+    let id = useParams().id
         return (
             <ProjectDetails>
                 <ProjectTitle  css="color:var(--text-color)" >{props.data.projectTitle}</ProjectTitle>
-                <Link to={`/new-song/${props.data._id}`}>
+                <Link to={`${id}/new-song/`}>
             <AddSong >+</AddSong>
         </Link>
             </ProjectDetails>

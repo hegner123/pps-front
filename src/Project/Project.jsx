@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom'
-import { PDetails } from '../_components/project/p_details';
+import { pDetails as PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';
 import {  useSelector, connect  } from 'react-redux';
 import { projectActions } from '../_actions/project.actions';
@@ -10,10 +10,6 @@ export function SingleProject(props){
     let id = useParams().id
     const [songs, setSongs] = useState(userData)
     const [userId, setUserId] = useState(id)
-    console.log(songs)
-    // if (!userData){
-    //    projectActions.assignProject('assign' ,id)
-    // }
     return (
         <div css={"width:100%"}>
             <div css={"display:flex; flex-wrap: wrap; width: 100%;"} className=" grid-area">

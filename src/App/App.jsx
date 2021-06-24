@@ -68,7 +68,7 @@ class App extends React.Component {
                         <PrivateRoute exact path="/project/:id" component={SingleProject}/>
                         <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                         <PrivateRoute exact path="/new-project" component={NewProject} />
-                        <PrivateRoute  path="/new-song/:id" component={NewSong} />
+                        <PrivateRoute  path="/project/:id/new-song/" component={NewSong} />
                         <Route exact path="/" component={HomePage}/>
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={LoginPage} />
