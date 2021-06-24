@@ -3,6 +3,7 @@ import { projectConstants } from '../_constants';
 import { projectService } from '../_services/';
 import { store } from '../_helpers';
 import { results } from '../_forms/NewSong/_query';
+import { history } from '../_helpers';
 
 export  const projectActions = {
     getProjects,
@@ -88,9 +89,12 @@ function deleteProject(project){
 }
 
 function createSong(newSong){
+    console.log(newSong)
     return dispatch => {
         projectService.createSong(newSong)
-        .then(create => dispatch(success(create)),
+        .then(create => {
+                    dispatch(success(create));
+                    history.push(newSong.path)},
         error => dispatch(failure(error)));
     }
 

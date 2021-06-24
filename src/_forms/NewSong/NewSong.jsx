@@ -37,7 +37,8 @@ function NewSong(props) {
     const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'', id: uuidv4() }]});
     const [references, setReferences] = useState(['']);
     const projectPage = useParams().id;
-    const results = props.results
+    const results = props.results;
+    const currentProject = props.project;
     // console.log(currentProject.replace("/new-song/",""))
     // const results = query.results
 
@@ -121,7 +122,8 @@ function NewSong(props) {
             id: currentProject,
             songTitle:songTitle,
             arrangement:[...form.arrangement],
-            references:[...references]
+            references:[...references],
+            path:`/project/${projectPage}`
         }
         if (song.songTitle) {
             props.createSong(song);
