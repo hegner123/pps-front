@@ -7,7 +7,6 @@ const path = require('path');
 module.exports = {
 
     mode: 'development',
-    context: path.resolve(__dirname),
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -15,6 +14,7 @@ module.exports = {
       port: 8080,
       historyApiFallback: true,
       hot: true,
+      compress: true,
     },
     module: {
         rules: [
@@ -39,14 +39,16 @@ module.exports = {
               },
         ]
     },
-    plugins: [new HtmlWebpackPlugin({template: './src/index.html'})
-],
+
     externals: {
         // global app config object
         config: JSON.stringify({
             apiUrl: 'http://localhost:4000'
         })
     },
+    optimization: {
+      minimize: true,
+    }
 
     }
 

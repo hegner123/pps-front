@@ -41,7 +41,7 @@ class App extends React.Component {
      componentDidMount(){
         this.timerID = setInterval(() => this.tick(this.state.pop),100);
     }
-    tick(i) {i++
+    tick(i) {i++;
         this.setState({pop: i});
       }
     render() {

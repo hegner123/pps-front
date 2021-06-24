@@ -36,11 +36,14 @@ function getProjects() {
 }
 
 function assignProject(action ,project){
+    console.log(action + "      " + project)
     let currentProject;
     const state = store.getState()
     const projects = state.userData.projects
 
     projects.forEach(data => {
+        console.log(data.projectSlug === project)
+        console.log(data)
         if (data.projectSlug === project){
             currentProject = data;
         }

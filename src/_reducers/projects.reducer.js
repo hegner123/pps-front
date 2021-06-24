@@ -1,13 +1,23 @@
 import { projectConstants } from '../_constants';
+import { useParams } from 'react-router-dom';
+
+let href = window.location.pathname
+let id = href.replace("/project/","");
+
 
 
 
 let projects = JSON.parse(localStorage.getItem('userProjects'));
+let current;
+projects.forEach(project => {
+  if (project.projectSlug === id){
+    current = project;
+  }
+});
 
 
 
-console.log(' href => ' + window.location.href);
-const initialState = projects ? {projects: projects} :  {projects:'unset'};
+const initialState = projects ? {projects: projects, current:current} :  {projects:'unset'};
 
 export function userData(state = initialState, action) {
   switch (action.type) {
