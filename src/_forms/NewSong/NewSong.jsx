@@ -28,17 +28,17 @@ import { ActionGroup,
          RefItem,
          RefP,
          ReferenceDelete} from './style';
+         import { useParams } from "react-router";
 import { v4 as uuidv4 } from 'uuid';
-
-import { useParams } from 'react-router';
 
 function NewSong(props) {
     const [songTitle, setSongTitle] = useState('');
     const [getReference, setGetReference] = useState('');
     const [form, dispatch] = useReducer(instrumentReducer, {arrangement:[{instrument:'', id: uuidv4() }]});
     const [references, setReferences] = useState(['']);
-    const currentProject = useParams().id
+    const projectPage = useParams().id;
     const results = props.results
+    // console.log(currentProject.replace("/new-song/",""))
     // const results = query.results
 
 
@@ -228,9 +228,6 @@ let referenceArray;
                             <form name="newSong" onSubmit={handleSubmit}>
                                 <FormSection>
                                     <FormInnerSection>
-                                    {/* {submitted && !song.songTitle &&
-                                                <div className="help-block">Your song needs a name.</div>
-                                            } */}
                                         <FormGroup>
                                             <Label htmlFor="songTitle" >Song Title</Label>
                                         <Input type="text" placeholder="New Song" name="songTitle" value={songTitle} onChange={handleFormChange}/>
@@ -259,7 +256,7 @@ let referenceArray;
                                 </FormSection>
                                 <ActionGroup>
                                     <Button>Create</Button>
-                                    <Btn to="/dashboard">
+                                    <Btn  to={`/project/${projectPage}`}>
                                         Cancel
                                     </Btn>
                                 </ActionGroup>
