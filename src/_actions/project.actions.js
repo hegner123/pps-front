@@ -37,14 +37,11 @@ function getProjects() {
 }
 
 function assignProject(action ,project){
-    console.log(action + "      " + project)
     let currentProject;
     const state = store.getState()
     const projects = state.userData.projects
 
     projects.forEach(data => {
-        console.log(data.projectSlug === project)
-        console.log(data)
         if (data.projectSlug === project){
             currentProject = data;
         }
@@ -89,7 +86,6 @@ function deleteProject(project){
 }
 
 function createSong(newSong){
-    console.log(newSong)
     return dispatch => {
         projectService.createSong(newSong)
         .then(create => {
@@ -103,14 +99,15 @@ function createSong(newSong){
 }
 
 function deleteSong(song, id){
-
+console.log(song)
+console.log(id)
     return dispatch => {
         projectService.deleteSong( song, id)
         .then(result => dispatch(success(result))),
         error => dispatch(failure(error));
     }
 
-    function success(result){return {type: projectConstants.DELETE_SONG_SUCCESS, result}}
+    function success(result) { return {type: projectConstants.DELETE_SONG_SUCCESS, result}}
     function failure(error) { return { type: projectConstants.DELETE_SONG_FAILURE, error }}
 }
 

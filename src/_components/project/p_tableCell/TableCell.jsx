@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {  connect, useSelector } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { projectActions, uiActions } from '../../../_actions';
 import { CompletedCell, IncompleteCell, NaCell, TextCell, TitleCell,CellButton , DropdownSong,IconButton, NavItems } from './style';
 import  Edit  from '../../../_assets/icons/more.svg';
-import {store} from '../../../_helpers';
-import {CSSTransition} from 'react-transition-group';
+import { store } from '../../../_helpers';
+import { CSSTransition } from 'react-transition-group';
 import { userInterface } from '../../../_reducers/ui.reducer';
 
 function  TableCell (props) {
@@ -14,11 +14,14 @@ function  TableCell (props) {
     const [cellStatus,setCellStatus] = useState(props.data)
     const [cellId,setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
+    const projectId = useSelector(state => state.userData.current._id);
     const  userInterface  = props.userInterface;
-
+console.log(songId)
     let searchBar;
 
-
+    function handleDelete(song, id){
+      props.deleteSong(song, id)
+    }
     let dropdownStatus;
 
     if (userInterface.id === songTitle){
@@ -42,7 +45,7 @@ function  TableCell (props) {
             display =   <TitleCell>
                             {songTitle}
                                 <NavItem openState={dropdownStatus} cellId={songTitle} dropdownOpen={(e)=> props.dropdownOpen(e)} icon={ <Edit  css="height:20px;width:20px;" />}>
-                                    <DropdownMenu deleteSong={() => handleDelete(songId)} currentS={songId} >
+                                    <DropdownMenu deleteSong={() => handleDelete(songId, projectId)} currentS={songId} >
                                     </DropdownMenu>
                                 </NavItem>
                         </TitleCell>
@@ -63,7 +66,8 @@ function  TableCell (props) {
 
     const actionCreators = {
         changeCellStatus: projectActions.changeCellStatus,
-        dropdownOpen: uiActions.dropdownOpen,
+        deleteSong: projectActions.deleteSong,
+        dropdownOpen: uiActions.dropdownOpen
     };
 
 const connectedTableCell = connect(mapState, actionCreators)(TableCell);
@@ -98,23 +102,22 @@ function NavItem(props) {
 
 
     function calcHeight(el) {
-      const height = el.offsetHeight;
+      const height = el.offsetHeight ;
       setMenuHeight(height);
     }
 
     function DropdownItem(props){
       return(
-        <DropdownSong href="#"  onClick={() => props.action()}>
-           <span >{props.icon}</span>
+        <DropdownSong href="#" onClick={() => props.deleteSong()} >
           {props.children}
         </DropdownSong>
       )
     }
     return(
-      <div className="dropdown-song" style={{ height: menuHeight }} ref={dropdownRef}>
+      <div className="dropdown-song" style={{ height: menuHeight }} css={"width:130px;z-index:200;"} ref={dropdownRef}>
         <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} classNames='menu-primary' onEnter={calcHeight} >
             <div className="menu">
-             <DropdownItem action={() => props.deleteSong()} >Delete Song</DropdownItem>
+             <DropdownItem deleteSong={() => props.deleteSong()} >Delete Song</DropdownItem>
             </div>
         </CSSTransition>
       </div>

@@ -1,7 +1,6 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
-import {history} from '../_helpers/history'
-
+import { history } from '../_helpers/history';
 
 export const projectService = {
     getProjects,
@@ -12,7 +11,7 @@ export const projectService = {
     changeCellStatus
 };
 
-function getProjects(user) {
+async function getProjects(user) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader(), 
@@ -25,7 +24,7 @@ function getProjects(user) {
     });
 }
 
-function createProjects(newProject){
+async function createProjects(newProject){
     const requestOptions ={
         method:'POST',
         headers: authHeader(1),
@@ -36,7 +35,7 @@ function createProjects(newProject){
     .then(history.push('/dashboard'))
 }
 
-function deleteProjects(project){
+async function deleteProjects(project){
     const requestOptions ={
         method:'DELETE',
         headers: authHeader(1),
@@ -48,7 +47,7 @@ function deleteProjects(project){
 }
 
 
-function createSong(newSong){
+async function createSong(newSong){
     const requestOptions ={
         method:'PUT',
         headers: authHeader(1),
@@ -59,7 +58,7 @@ function createSong(newSong){
     .then(history.push('/dashboard'))
 }
 
-function deleteSong(song, id){
+async function deleteSong(song, id){
     const requestOptions ={
         method:'DELETE',
         headers: authHeader(1),
@@ -69,11 +68,7 @@ function deleteSong(song, id){
     .then(handleResponse)
 }
 
-
-
-
-
-function changeCellStatus(project, song, instrument, status,id, user) {
+async function changeCellStatus(project, song, instrument, status,id, user) {
     const requestOptions = {
         method: 'PUT',
         headers: authHeader(),
@@ -83,43 +78,10 @@ function changeCellStatus(project, song, instrument, status,id, user) {
     .then(handleResponse)
 }
 
-
-
-
-function handleResponse(response) {
+async function handleResponse(response) {
     return response.text().then(text => {
         const userData = text && JSON.parse(text);
 
         return userData;
     });
 }
-
-
-
-
-
-
-//   updateProject: function (id, projectData) {
-//     return axios.put("/api/projects/" + id, projectData);
-//   },
-//   addNote: function (id, noteData) {
-//     return axios.put("/api/projects/note/add/" + id, noteData);
-//   },
-//   removeNote: function (id, noteData) {
-//     return axios.put("/api/projects/note/remove/" + id, noteData);
-//   },
-//   saveProject: function(id,projectData) {
-//     return axios.post("/api/projects/userprojects/" + id, projectData);
-//   },
-//   saveSong: function(id, songData) {
-//     return axios.post("/api/projects/userprojects/" + id +"/songs", songData);
-//   },
-//   deleteProject: function(id){
-//     return axios.delete("/api/projects/" + id)
-//   },
-//   saveInstruments: function (id, instrumentData){
-//     return axios.post("/api/projects/song/arrangement/" + id , instrumentData)
-//   },
-//   spotifyPreview: function (song){
-//     return axios.get("/api/song-preview/" + song)
-//   }

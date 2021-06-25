@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState } from 'react';
 import { connect } from 'react-redux';
 import { useSelector } from 'react-redux'
 import { TableCell } from '../p_tableCell';
@@ -46,7 +46,7 @@ import { projectActions } from '../../../_actions/project.actions';
             // for every song, take each song status object, compare the instrument to the arrangement cell,
             // and if they match transfer the status field to the arrangement cell
             for (let i of songs){
-                let song = new SongArrangement
+                let song = new SongArrangement;
                 for (let j of headers){
                     let cell = new ArrangementCell(j, null, null)
                     song.songArrangement.push(cell)
@@ -65,7 +65,7 @@ import { projectActions } from '../../../_actions/project.actions';
 
         display = result.map(projectSongs => (
                 <TableRows key={projectSongs.title}>
-                    <TableCell songTitle={projectSongs.title} key={projectSongs.title} deleteSong={() => props.deleteSong(projectSongs.songId, userData)}/>
+                    <TableCell songTitle={projectSongs.title} key={projectSongs.title} songId={projectSongs.songId}/>
                     {mapStatus({
                         title: projectSongs.title,
                         projectHeaders: props.headers,
@@ -76,7 +76,7 @@ import { projectActions } from '../../../_actions/project.actions';
                 ))
         }
 
-        function mapStatus({title,songs ,songId}){
+        function mapStatus({title, songs, songId}){
             let i = 0;
            return songs.map(data =>
                         <TableCell
