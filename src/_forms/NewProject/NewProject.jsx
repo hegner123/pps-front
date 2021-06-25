@@ -1,83 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import { connect, store } from 'react-redux';
 import { projectActions } from '../../_actions';
 import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
-class NewProject extends React.Component {
-    constructor(props) {
-        super(props);
+function NewProject (props) {
+    const [projectTitle, setProjectTitle] = useState('');
+    const [projectSlug, setProjectSlug] = useState('');
+    const [members, setMembers] = useState([]);
+    const [companyName, setCompanyName] = useState('');
 
-        this.state = {
-            project: {
-                projectTitle: '',
-                projectSlug:'',
-                members: [],
-                companyName: ''
-            },
-            submitted: false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-        const { name, value } = event.target;
-        const { project } = this.state;
-        this.setState({
-            project: {
-                ...project,
-                [name]: value
+    function handleChange(event) {
+        const {name, value} = event.target;
+        switch(name){
+            case 'projectTitle':{
+                return setProjectTitle(value)
+            };
+            case  'companyName':{
+                return setCompanyName(value)
             }
-        });
+            default:
+            return ''
+        }
     }
 
-    handleSubmit(event) {
-        const pro = this.state.project
+    function handleSubmit(event) {
+        const pro = state.project
         let project = {
             projectTitle:'',
             projectSlug:'',
             members:[]
         }
-        project.projectTitle = pro.projectTitle
-        project.projectSlug = pro.projectTitle.trim().toLowerCase().replace(/\s/g, "-")
-        project.members.push(pro.members)
+        projectTitle = pro.projectTitle
+        projectSlug = pro.projectTitle.trim().toLowerCase().replace(/\s/g, "-")
+        members.push(pro.members)
         event.preventDefault();
-        this.setState({ submitted: true });
-        if (project.projectTitle && project.members) {
-            this.props.createProject(project);
+        if (projectTitle && members) {
+            props.createProject(project);
         }
     }
 
-    render() {
-        const { createProject  } = this.props;
-        const { project, submitted } = this.state;
+
         return (
                 <Row>
                     <Centered>
                         <FormSection>
                             <FormTitle>New Project</FormTitle>
-                            <form name="form" onSubmit={this.handleSubmit}>
-                            {submitted && !project.projectTitle &&
+                            <form name="form" onSubmit={handleSubmit}>
+                            {/* {!projectTitle &&
                                         <div className="help-block">Your Project needs a name.</div>
-                                    }
+                                    } */}
                                 <FormGroup>
                                     <Label htmlFor="projectTitle">Project Title</Label>
-                                    <Input type="text" className="form-control" name="projectTitle" value={project.projectTitle} onChange={this.handleChange} />
+                                    <Input type="text" className="form-control" name="projectTitle" value={projectTitle} onChange={handleChange} />
 
                                 </FormGroup>
-                                {submitted && !project.members &&
+                                {/* {!members &&
                                         <div className="help-block">Projects need Members</div>
-                                    }
+                                    } */}
                                 <FormGroup>
                                     <Label htmlFor="members">Members</Label>
-                                    <Input type="text" className="form-control" name="members" value={project.members} onChange={this.handleChange} />
+                                    <Input type="text" className="form-control" name="members" value={members} onChange={handleChange} />
 
                                 </FormGroup>
                                 <FormGroup>
                                     <Label htmlFor="companyName">Company</Label>
-                                    <Input type="text" className="form-control" name="companyName" value={project.companyName} onChange={this.handleChange} />
+                                    <Input type="text" className="form-control" name="companyName" value={companyName} onChange={handleChange} />
 
                                 </FormGroup>
 
@@ -93,7 +81,7 @@ class NewProject extends React.Component {
                 </Row>
         );
     }
-}
+
 
 function mapState(state) {
     const { projects } = state;
