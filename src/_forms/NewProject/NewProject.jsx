@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import { connect, store } from 'react-redux';
+import { connect, store, useSelector } from 'react-redux';
 import { projectActions } from '../../_actions';
 import { ActionGroup, Button, Btn, Centered ,FormSection, FormTitle, FormGroup, HelpBlock, Label, Row, Input } from './style';
 
 function NewProject (props) {
     const [projectTitle, setProjectTitle] = useState('');
     const [projectSlug, setProjectSlug] = useState('');
-    const [members, setMembers] = useState([]);
     const [companyName, setCompanyName] = useState('');
-
+    const userName = useSelector(state => state.authentication.user.userName);
+    console.log(userName)
     function handleChange(event) {
         const {name, value} = event.target;
         switch(name){
@@ -25,21 +25,16 @@ function NewProject (props) {
     }
 
     function handleSubmit(event) {
-        const pro = state.project
         let project = {
-            projectTitle:'',
-            projectSlug:'',
-            members:[]
+            projectTitle: projectTitle,
+            projectSlug: projectTitle.trim().toLowerCase().replace(/\s/g, "-"),
+            members: userName
         }
-        projectTitle = pro.projectTitle
-        projectSlug = pro.projectTitle.trim().toLowerCase().replace(/\s/g, "-")
-        members.push(pro.members)
         event.preventDefault();
-        if (projectTitle && members) {
+        if (projectTitle) {
             props.createProject(project);
         }
     }
-
 
         return (
                 <Row>
@@ -47,9 +42,9 @@ function NewProject (props) {
                         <FormSection>
                             <FormTitle>New Project</FormTitle>
                             <form name="form" onSubmit={handleSubmit}>
-                            {/* {!projectTitle &&
-                                        <div className="help-block">Your Project needs a name.</div>
-                                    } */}
+                                {/* {!projectTitle &&
+                                            <div className="help-block">Your Project needs a name.</div>
+                                        } */}
                                 <FormGroup>
                                     <Label htmlFor="projectTitle">Project Title</Label>
                                     <Input type="text" className="form-control" name="projectTitle" value={projectTitle} onChange={handleChange} />
@@ -59,16 +54,9 @@ function NewProject (props) {
                                         <div className="help-block">Projects need Members</div>
                                     } */}
                                 <FormGroup>
-                                    <Label htmlFor="members">Members</Label>
-                                    <Input type="text" className="form-control" name="members" value={members} onChange={handleChange} />
-
-                                </FormGroup>
-                                <FormGroup>
                                     <Label htmlFor="companyName">Company</Label>
                                     <Input type="text" className="form-control" name="companyName" value={companyName} onChange={handleChange} />
-
                                 </FormGroup>
-
                                 <ActionGroup>
                                     <Button>Create</Button>
                                     <Btn to="/dashboard">

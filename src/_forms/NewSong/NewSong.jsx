@@ -151,7 +151,8 @@ function NewSong(props) {
             )
         })
 
-
+        let referenceArray;
+        let refList;
 
     function handleSearchClick(event, {name, id, preview}){
         event.preventDefault();
@@ -169,8 +170,7 @@ function NewSong(props) {
         }}
         }
 
-   
-let referenceArray;
+
     if (results !== 'unset' && results){
         referenceArray =  results.map(item=>{
             return(
@@ -203,7 +203,6 @@ let referenceArray;
         setReferences( references.filter(ref => ref.id != refId))
     }
 
-    let refList;
 
     if (references[0] !==''){
         refList = 
