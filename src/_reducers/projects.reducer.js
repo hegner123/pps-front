@@ -1,7 +1,7 @@
 import { projectConstants } from '../_constants';
 
-let href = window.location.pathname
-let first = href.replace("/project/","");
+let url = window.location.pathname
+let first = url.replace("/project/","");
 let id = first.replace("/new-song/","");
 
 
@@ -10,11 +10,15 @@ let id = first.replace("/new-song/","");
 
 let projects = JSON.parse(localStorage.getItem('userProjects'));
 let current;
-projects.forEach(project => {
-  if (project.projectSlug === id){
-    current = project;
-  }
-});
+if (url.includes("/project/")){
+  projects.forEach(project => {
+    if (project.projectSlug === id){
+      current = project;
+    }
+  });
+
+}
+
 
 
 
