@@ -16,7 +16,6 @@ function  TableCell (props) {
     const [projectSlug, setProjectSlug] = useState(props.projectId)
     const projectId =  useSelector(state => state.userData.current._id);
     const  userInterface  = props.userInterface;
-
     function handleDelete(song, id){
       props.deleteSong(song, id)
     }
@@ -65,7 +64,8 @@ function  TableCell (props) {
     const actionCreators = {
         changeCellStatus: projectActions.changeCellStatus,
         deleteSong: projectActions.deleteSong,
-        dropdownOpen: uiActions.dropdownOpen
+        dropdownOpen: uiActions.dropdownOpen,
+        getProjects: projectActions.getProjects
     };
 
 const connectedTableCell = connect(mapState, actionCreators)(TableCell);

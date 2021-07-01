@@ -1,19 +1,24 @@
 import { projectConstants } from '../_constants';
 
+
 let url = window.location.pathname
-let first = url.replace("/project/","");
-let id = first.replace("/new-song/","");
+const first = url.replace("/project/","");
+const id = first.replace("/new-song/","");
 
-let projects = JSON.parse(localStorage.getItem('userProjects'));
+const projects = JSON.parse(localStorage.getItem('userProjects'));
 let current;
-if (url.includes("/project/")){
-  projects.forEach(project => {
-    if (project.projectSlug === id){
-      current = project;
-    }
-  });
 
-}
+  if (url.includes("/project/")){
+    projects.forEach(project => {
+      if (project.projectSlug === id){
+        current = project;
+        // localStorage.setItem('current', JSON.stringify(current))
+      }
+    });
+  }
+
+
+
 
 const initialState = projects ? {projects: projects, current:current} :  {projects:'unset'};
 
@@ -35,7 +40,7 @@ export function userData(state = initialState, action) {
         case projectConstants.STATUS_SUCCESS:
           return {
           ...state,
-          current: {...current}
+          current: updateCurrent ( action.status[0], action.status[1], current )
           }
         case projectConstants.ASSIGN_PROJECT:
           return {
@@ -92,9 +97,17 @@ export function userData(state = initialState, action) {
   }
 }
 
-
-
-// export async function fetchTodos(dispatch, getState) {
-//   const response = await client.get('/fakeApi/todos')
-//   dispatch({ type: 'todos/todosLoaded', payload: response.todos })
-// }
+function updateCurrent( value, desc, projects ) {
+  console.log(projects)
+let res;
+  for (var i in projects.songs) {
+    for (var j in projects.songs[i].song_status){
+      if (projects.songs[i].song_status[j]._id == value) {
+        projects.songs[i].song_status[j].status = desc;
+        res = projects
+        // localStorage.setItem('current', JSON.stringify(res))
+       return res;
+      }
+    }
+    }
+}

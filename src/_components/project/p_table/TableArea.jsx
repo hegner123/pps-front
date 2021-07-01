@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { TableHeaders } from '../p_tableHeaders';
 import { TableRow } from '../p_tableRow';
 import loadingGif from '../../../_assets/images/loading-buffering.gif';
 import { Table, TableHead } from './style';
+import { projectActions } from '../../../_actions/project.actions';
 
 
 
-export function TableArea (props) {
+function TableArea (props) {
         const [songs, setSongs] = useState(props.data.songs);
         const [projectId, setProjectId] = useState(props.data._id);
 
+        
 
         function tableHeaders(songs){
             let instruments = [];
@@ -44,3 +46,14 @@ export function TableArea (props) {
     }
 
 
+    function mapState(state) {
+        const { userData  } = state;
+        return { userData };
+    }
+
+    const actionCreators = {
+        getProjects: projectActions.getProjects
+    };
+
+    const connectedTableArea = connect(mapState, actionCreators)(TableArea);
+    export { connectedTableArea as TableArea };

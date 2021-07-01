@@ -28,7 +28,8 @@ export function SingleProject(props){
 }
 
 const actionCreators = {
-    assignProject: projectActions.assignProject
+    assignProject: projectActions.assignProject,
+    getProjects: projectActions.getProjects
 };
 
 const connectedProject = connect(mapState, actionCreators)(SingleProject);
