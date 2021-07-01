@@ -8,7 +8,7 @@ import { projectActions } from '../../../_actions/project.actions';
  function TableRow(props){
     const [headers, setHeaders] = useState(props.headers);
     const [songs, setSongs] = useState(props.data);
-    const userData = useSelector(state => state.userData.current._id);
+    
     //establish main jsx variable
     let display;
     //Constructor for Song Rows

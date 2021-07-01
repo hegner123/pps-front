@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom'
 import { pDetails as PDetails } from '../_components/project/p_details';
 import { TableArea } from '../_components/project/p_table';

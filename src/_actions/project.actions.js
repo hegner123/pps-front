@@ -117,13 +117,13 @@ function changeCellStatus(project, song, instrument, status, id){
     return dispatch => {
         dispatch(request())
         projectService.changeCellStatus( project, song, instrument,status, id, user)
-        .then(status => dispatch(success(success)),
+        .then(status => dispatch(success(status)),
                 error => dispatch(failure(error)
         )
         )};
     ;
     function request() { return { type: projectConstants.STATUS_REQUEST } }
-    function success(status) { return { type: projectConstants.STATUS_SUCCESS } }
+    function success(status) { return { type: projectConstants.STATUS_SUCCESS, status } }
     function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
 }
 

@@ -4,10 +4,6 @@ let url = window.location.pathname
 let first = url.replace("/project/","");
 let id = first.replace("/new-song/","");
 
-
-
-
-
 let projects = JSON.parse(localStorage.getItem('userProjects'));
 let current;
 if (url.includes("/project/")){
@@ -18,9 +14,6 @@ if (url.includes("/project/")){
   });
 
 }
-
-
-
 
 const initialState = projects ? {projects: projects, current:current} :  {projects:'unset'};
 
@@ -42,7 +35,7 @@ export function userData(state = initialState, action) {
         case projectConstants.STATUS_SUCCESS:
           return {
           ...state,
-          action: action.status
+          current: {...current}
           }
         case projectConstants.ASSIGN_PROJECT:
           return {

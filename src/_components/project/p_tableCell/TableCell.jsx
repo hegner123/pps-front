@@ -14,10 +14,8 @@ function  TableCell (props) {
     const [cellStatus,setCellStatus] = useState(props.data)
     const [cellId,setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    const projectId = useSelector(state => state.userData.current._id);
+    const projectId =  useSelector(state => state.userData.current._id);
     const  userInterface  = props.userInterface;
-console.log(songId)
-    let searchBar;
 
     function handleDelete(song, id){
       props.deleteSong(song, id)

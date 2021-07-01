@@ -46,7 +46,7 @@ import { uiActions } from '../../_actions';
                         ProProject Studio
                     </BrandLink>
                 </Brand>
-                {searchBar}
+
                 <AdminControls>
                     <NavItemLink link={'/dashboard'}>
                       <Home css="fill:var(--text-color)"/>
