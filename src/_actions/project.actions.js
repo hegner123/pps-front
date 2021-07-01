@@ -25,6 +25,7 @@ function getProjects() {
                 projects => {
                     dispatch(success(projects));
                     dispatch(alertActions.success(user + ' projects loaded!'));
+                    localStorage.setItem('userProjects', JSON.stringify(projects));
                 },
                 error => dispatch(failure(error.toString()))
             );
@@ -119,8 +120,15 @@ function changeCellStatus(project, song, instrument, status, id){
         .then(status => dispatch(success(status)),
                 error => dispatch(failure(error)
         )
-        )};
-    ;
+        );
+        projectService.getProjects(user)
+        .then(
+            projects => {
+                localStorage.setItem('userProjects', JSON.stringify(projects));
+            },
+            error => dispatch(failure(error.toString()))
+        )
+    };
     function request() { return { type: projectConstants.STATUS_REQUEST } }
     function success(status) { return { type: projectConstants.STATUS_SUCCESS, status } }
     function failure(error) { return { type: projectConstants.STATUS_FAILURE, error } }
