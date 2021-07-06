@@ -1,22 +1,31 @@
 import { projectConstants } from '../_constants';
 
 
-let url = window.location.pathname
+const url = window.location.pathname
 const first = url.replace("/project/","");
 const id = first.replace("/new-song/","");
 
 const projects = JSON.parse(localStorage.getItem('userProjects'));
 let current;
 
+
   if (url.includes("/project/")){
-    projects.forEach(project => {
+     projects.forEach(project => {
       if (project.projectSlug === id){
         current = project;
-        // localStorage.setItem('current', JSON.stringify(current))
       }
     });
   }
 
+function getCurrent(){
+projects.map(project => {
+     if (project.projectSlug === id){
+      current = project;
+    }
+  })
+  console.log(current);
+  return current;
+}
 
 
 
@@ -40,7 +49,7 @@ export function userData(state = initialState, action) {
         case projectConstants.STATUS_SUCCESS:
           return {
           ...state,
-          current: updateCurrent ( action.status[0], action.status[1], current )
+          current: updateCurrent ( action.status[0], action.status[1],  getCurrent() )
           }
         case projectConstants.ASSIGN_PROJECT:
           return {
