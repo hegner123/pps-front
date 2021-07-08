@@ -13,7 +13,8 @@ class Register extends React.Component {
                 firstName: '',
                 lastName: '',
                 userName: '',
-                hash: ''
+                hash: '',
+                recentProjects:[]
             },
             submitted: false
         };

@@ -8,6 +8,7 @@ export const userService = {
     logout,
     register,
     update,
+    addToRecent,
     delete: _delete
 };
 
@@ -64,6 +65,16 @@ function _delete(id) {
     };
 
     return fetch(`${config.apiUrl}/${id}`, requestOptions).then(handleResponse);
+}
+
+function addToRecent(project, user) {
+    console.log(JSON.stringify(project))
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(1),
+        body: JSON.stringify(project)
+    };
+    return fetch(`${config.apiUrl}/users/addtorecent/${user}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

@@ -1,6 +1,7 @@
 import { alertActions } from './alert.actions';
 import { projectConstants } from '../_constants';
 import { projectService } from '../_services/';
+import { userService } from '../_services/user.service';
 import { store } from '../_helpers';
 import { history } from '../_helpers';
 
@@ -17,7 +18,7 @@ export  const projectActions = {
 function getProjects() {
 
     const state = store.getState()
-    const user = state.authentication.user.userName
+    const user = state.authentication.user.id
     return dispatch => {
         dispatch(request());
         projectService.getProjects(user)
@@ -40,6 +41,7 @@ function assignProject(action ,project){
     let currentProject;
     const state = store.getState()
     const projects = state.userData.projects
+    const user = state.authentication.user.id
 
     projects.forEach(data => {
         if (data.projectSlug === project){
@@ -49,6 +51,7 @@ function assignProject(action ,project){
     switch(action){
         case 'assign':
             return dispatch => {
+                userService.addToRecent(currentProject, user);
                 dispatch(assign(currentProject))
     };
         case 'clear':
