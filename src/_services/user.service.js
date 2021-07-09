@@ -70,7 +70,7 @@ function _delete(id) {
 function addToRecent(project, user) {
     console.log(JSON.stringify(project))
     const requestOptions = {
-        method: 'POST',
+        method: 'PUT',
         headers: authHeader(1),
         body: JSON.stringify(project)
     };
