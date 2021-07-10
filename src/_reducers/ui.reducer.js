@@ -1,25 +1,20 @@
-import { uiConstants } from '../_constants';
+import { uiConstants } from "../_constants";
 
-export function userInterface(state = {navDropdown: false, dropdownOpen:false, id:''}, action) {
+export function userInterface(
+  state = { navDropdown: false, dropdownOpen: false, id: "" },
+  action
+) {
   switch (action.type) {
     case uiConstants.NAV_DROPDOWN_OPEN:
-      return {...state,
-        navDropdown: true,
-      };
+      return { ...state, navDropdown: true };
     case uiConstants.NAV_DROPDOWN_CLOSE:
-      return {...state,
-        navDropdown: false,
-      };
+      return { ...state, navDropdown: false };
 
-case uiConstants.DROPDOWN_OPEN:
-  return {...state,
-          id: action.id,
-          dropdownOpen: true}
-case uiConstants.DROPDOWN_CLOSE:
-  return {...state,
-          id: '',
-          dropdownOpen: false}
+    case uiConstants.DROPDOWN_OPEN:
+      return { ...state, id: action.id, dropdownOpen: true };
+    case uiConstants.DROPDOWN_CLOSE:
+      return { ...state, id: "", dropdownOpen: false };
     default:
-      return state
+      return state;
   }
 }

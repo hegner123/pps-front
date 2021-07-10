@@ -17,6 +17,4 @@ const store = createStore(
   )
 );
 
-
-
-export {store};
+export { store };

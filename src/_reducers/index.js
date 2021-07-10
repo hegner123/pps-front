@@ -1,12 +1,11 @@
-import { combineReducers } from 'redux';
-import { authentication } from './authentication.reducer';
-import { registration } from './registration.reducer';
-import { users } from './users.reducer';
-import { alert } from './alert.reducer';
-import { userData } from './projects.reducer';
-import { referenceData} from './reference.reducer';
-import { userInterface} from './ui.reducer';
-
+import { combineReducers } from "redux";
+import { authentication } from "./authentication.reducer";
+import { registration } from "./registration.reducer";
+import { users } from "./users.reducer";
+import { alert } from "./alert.reducer";
+import { userData } from "./projects.reducer";
+import { referenceData } from "./reference.reducer";
+import { userInterface } from "./ui.reducer";
 
 const rootReducer = combineReducers({
   authentication,
@@ -15,7 +14,7 @@ const rootReducer = combineReducers({
   userInterface,
   alert,
   userData,
-  referenceData
+  referenceData,
 });
 
 export default rootReducer;

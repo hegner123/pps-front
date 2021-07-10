@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 
 export const TableRow = styled.tr`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-`
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;

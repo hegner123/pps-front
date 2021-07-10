@@ -1,12 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const TableRows = styled.tr`
-    display: flex;
-    flex-direction: row;
-`
+  display: flex;
+  flex-direction: row;
+`;
 
-  
-  /* table, th, td {
+/* table, th, td {
     border: 1px solid #333;
     border-collapse: collapse;
   }

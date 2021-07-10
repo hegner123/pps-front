@@ -1,1 +1,1 @@
-export * from './TableArea'
+export * from "./TableArea";

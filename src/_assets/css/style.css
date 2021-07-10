@@ -1,11 +1,10 @@
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400");
 
 :root {
   --bg: #242526;
   --bg-accent: #484a4d;
   --text-color: #dadce1;
-  --table-text-color:#333;
+  --table-text-color: #333;
   --input-font-size: 20px;
   --input-padding: 5px;
   --input-border-radius: 5px;
@@ -14,17 +13,16 @@
   --border: 1px solid #474a4d;
   --border-radius: 8px;
   --speed: 500ms;
-  --noti: #FA383E;
-  --blue-gradient:linear-gradient(to bottom, #060607, #242526);
+  --noti: #fa383e;
+  --blue-gradient: linear-gradient(to bottom, #060607, #242526);
   --h1: 3.052rem;
   --h2: 2.441rem;
   --h3: 1.953rem;
-  --h4:1.563rem;
-  --h5:1.25rem;
+  --h4: 1.563rem;
+  --h5: 1.25rem;
   --h6: 1rem;
   --small: 0.8rem;
-  --main-font:'Montserrat', sans-serif;
-
+  --main-font: "Montserrat", sans-serif;
 }
 
 body {
@@ -68,8 +66,6 @@ input:focus {
   border-radius: 4px;
 }
 
-
-
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
@@ -91,7 +87,6 @@ input:focus {
   cursor: pointer;
 }
 
-
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -111,16 +106,9 @@ input:focus {
   padding: 0 100px;
 }
 
-
 .full-width {
   width: 100%;
 }
-
-
-
-
-
-
 
 .active-link {
   font-weight: bold;
@@ -138,8 +126,6 @@ input:focus {
   font-weight: 200;
 }
 
-
-
 .svg-graphic {
   width: 50%;
   height: 100%;
@@ -148,8 +134,6 @@ input:focus {
 .card-action {
   font-size: 10px;
 }
-
-
 
 .icon {
   padding: 10px;
@@ -176,9 +160,6 @@ input:focus {
   user-select: none;
 }
 
-
-
-
 .navbar {
   height: var(--nav-size);
   background-color: var(--bg);
@@ -201,9 +182,6 @@ input:focus {
   cursor: pointer;
 }
 
-
-
-
 .dropdown {
   position: absolute;
   top: 58px;
@@ -218,16 +196,14 @@ input:focus {
   z-index: 10;
 }
 
-
 .dropdown-song {
-    position: absolute;
-    transform: translateX(60%) translateY(45%);
-    background-color: var(--bg);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    transition: height var(--speed) ease;
+  position: absolute;
+  transform: translateX(60%) translateY(45%);
+  background-color: var(--bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  transition: height var(--speed) ease;
 }
-
 
 .menu-item {
   height: 50px;
@@ -273,9 +249,7 @@ menu-item:hover {
   transition: all var(--speed) ease;
 }
 
-
 .menu-secondary-enter {
-
   transform: translateX(110%);
 }
 
@@ -283,8 +257,6 @@ menu-item:hover {
   transform: translateX(0%);
   transition: all var(--speed) ease;
 }
-
-
 
 .menu-secondary-exit-active {
   transform: translateX(110%);
