@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { projectActions } from "../../../_actions/project.actions";
 import { RecentProjects, UserProjects } from "../d_projectGrid";
 
-class Projects extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    this.props.getProjects();
+function Projects(props) {
+  const projects = props.userData.projects;
+  const recent = props.authentication.user.recentProjects;
+  let display;
+  if (recent) {
+    display = <RecentProjects data={recent} projects={projects} />;
+  } else {
+    display = <></>;
   }
 
-  render() {
-    const { projects } = this.props;
-    return (
-      <div>
-        {/* <RecentProjects data={projects}/> */}
-        <UserProjects data={projects} />
-      </div>
-    );
-  }
+  useEffect(() => {
+    props.getProjects();
+  }, []);
+
+  // console.log(props);
+
+  return (
+    <div>
+      {display}
+      <UserProjects data={projects} />
+    </div>
+  );
 }
 
 function mapState(state) {
-  const { projects } = state.userData;
-  return { projects };
+  const { userData, authentication } = state;
+  return { userData, authentication };
 }
 
 const actionCreators = {

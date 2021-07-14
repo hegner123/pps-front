@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400");
+/* @import url("../fonts/Space_Mono/SpaceMono-Regular.ttf"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Space+Mono&display=swap");
+
+
+
 
 :root {
   --bg: #242526;
@@ -22,7 +27,7 @@
   --h5: 1.25rem;
   --h6: 1rem;
   --small: 0.8rem;
-  --main-font: "Montserrat", sans-serif;
+  --main-font: "Poppins", sans-serif;
 }
 
 body {
@@ -35,6 +40,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#root {
+  height: 100%;
+}
+
 ul {
   list-style: none;
   margin: 0;

@@ -12,21 +12,23 @@ import {
 } from "./style";
 
 export function RecentProjects(props) {
-  let i = 0;
-  if (props.data === "unset") {
-    return <h1>Loading</h1>;
+  const id = props.data[0].recentID;
+  const project = props.projects.filter(filterProjects);
+  function filterProjects(project) {
+    return project._id === id;
   }
+  let i = 0;
   return (
-    <div>
+    <Section>
       <DashHeader>
         <DashTitle>Recent</DashTitle>
       </DashHeader>
       <ProjectSection>
-        {props.data.map((data) => (
-          <ProjectTile data={data.projectTitle} id={data.id} key={i++} />
+        {project.map((entry) => (
+          <ProjectTile data={entry.projectTitle} id={entry.id} key={i++} />
         ))}
       </ProjectSection>
-    </div>
+    </Section>
   );
 }
 

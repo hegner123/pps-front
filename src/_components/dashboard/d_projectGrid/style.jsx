@@ -44,7 +44,6 @@ export const AddProject = styled.span`
 `;
 
 export const Section = styled.div`
-  margin-top: 50px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

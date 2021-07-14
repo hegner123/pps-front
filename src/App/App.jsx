@@ -14,7 +14,8 @@ import { NewSong } from "../_forms/NewSong";
 import { NewProject } from "../_forms/NewProject";
 import { uiActions } from "../_actions/ui.actions";
 import { userInterface } from "../_reducers/ui.reducer";
-import "../_assets/css/reset.css";
+import "../_assets/css/normalize.css";
+import "../_assets/css/main.css";
 import "../_assets/css/style.css";
 
 class App extends React.Component {
