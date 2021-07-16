@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { ProjectTile } from "../d_projectTile";
+import { ProjectTile, RecentProjectTile } from "../d_projectTile";
 import AddIcon from "../../../_assets/icons/add.svg";
 import {
   DashHeader,
@@ -12,11 +12,16 @@ import {
 } from "./style";
 
 export function RecentProjects(props) {
-  const id = props.data[0].recentID;
-  const project = props.projects.filter(filterProjects);
-  function filterProjects(project) {
-    return project._id === id;
-  }
+  // props.data.map((projects) => {
+  //   console.log(projects);
+  //   if (filterProjects(projects.recentID)) {
+  //   }
+  // });
+
+  // const project = props.projects.filter(filterProjects);
+  // function filterProjects(project) {
+  //   return project._id === id;
+  // }
   let i = 0;
   return (
     <Section>
@@ -24,9 +29,16 @@ export function RecentProjects(props) {
         <DashTitle>Recent</DashTitle>
       </DashHeader>
       <ProjectSection>
-        {project.map((entry) => (
-          <ProjectTile data={entry.projectTitle} id={entry.id} key={i++} />
-        ))}
+
+          {props.data.map(
+            (entry) => (
+            <RecentProjectTile
+              data={entry.projectTitle}
+              id={entry.recentID}
+              key={i++}
+            />
+          ))}
+
       </ProjectSection>
     </Section>
   );
@@ -35,7 +47,7 @@ export function RecentProjects(props) {
 export function UserProjects(props) {
   let i = 0;
   if (props.data === "unset") {
-    return <h1>Fuck</h1>;
+    return <h1>Loading</h1>;
   }
   return (
     <Section>

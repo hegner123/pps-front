@@ -21,13 +21,40 @@ function ProjectTile(props) {
   );
 }
 
+function RecentProjectTile(props) {
+  const projects = props.userData.projects.filter(filterProjects);
+  console.log(projects);
+  function filterProjects(id) {
+    return id._id === props.id;
+  }
+  return (
+    <div>
+      <Link
+        to={"/project/" + projects[0].projectSlug}
+        onClick={() => props.assignProject("assign", projects[0].projectSlug)}
+      >
+        <ProjectsTile>
+          <TileHeader>{projects[0].projectTitle}</TileHeader>
+        </ProjectsTile>
+      </Link>
+    </div>
+  );
+}
+
 function mapState(state) {
-  const { tileState } = state;
-  return { tileState };
+  const { userData } = state;
+  return { userData };
 }
 
 const actionCreators = {
   assignProject: projectActions.assignProject,
 };
+
 const connectedProjectTile = connect(mapState, actionCreators)(ProjectTile);
 export { connectedProjectTile as ProjectTile };
+
+const connectedRecentProjectTile = connect(
+  mapState,
+  actionCreators
+)(RecentProjectTile);
+export { connectedRecentProjectTile as RecentProjectTile };

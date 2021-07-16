@@ -8,6 +8,7 @@ export const userActions = {
   logout,
   register,
   getAll,
+  getById,
   delete: _delete,
 };
 
@@ -36,6 +37,21 @@ function login(username, password) {
     return { type: userConstants.LOGIN_FAILURE, error };
   }
 }
+
+function getById(id) {
+  return (dispatch) => {
+   
+    userService.getById(id).then(
+      (user) => {
+        dispatch(console.log(user));
+
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  }};
 
 function logout() {
   userService.logout();

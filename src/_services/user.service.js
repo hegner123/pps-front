@@ -8,6 +8,7 @@ export const userService = {
   register,
   update,
   addToRecent,
+  getById,
   delete: _delete,
 };
 
@@ -19,6 +20,23 @@ function login(userName, hash) {
   };
 
   return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+    .then(handleResponse)
+    .then((user) => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem("user", JSON.stringify(user));
+
+      return user;
+    });
+}
+
+function getById(id) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(1),
+    body: JSON.stringify({}),
+  };
+
+  return fetch(`${config.apiUrl}/users/${id}`, requestOptions)
     .then(handleResponse)
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes

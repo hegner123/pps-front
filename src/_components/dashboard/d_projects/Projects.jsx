@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { userActions } from "../../../_actions";
 import { projectActions } from "../../../_actions/project.actions";
 import { RecentProjects, UserProjects } from "../d_projectGrid";
 
@@ -10,14 +11,13 @@ function Projects(props) {
   if (recent) {
     display = <RecentProjects data={recent} projects={projects} />;
   } else {
-    display = <></>;
+    display = <div>Test</div>;
   }
 
   useEffect(() => {
     props.getProjects();
+    props.getUser(props.authentication.user._id)
   }, []);
-
-  // console.log(props);
 
   return (
     <div>
@@ -34,6 +34,7 @@ function mapState(state) {
 
 const actionCreators = {
   getProjects: projectActions.getProjects,
+  getUser:userActions.getById
 };
 
 const connectedProjects = connect(mapState, actionCreators)(Projects);
