@@ -33,14 +33,14 @@ function getById(id) {
   const requestOptions = {
     method: "GET",
     headers: authHeader(1),
-    body: JSON.stringify({}),
   };
 
   return fetch(`${config.apiUrl}/users/${id}`, requestOptions)
     .then(handleResponse)
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("user", JSON.stringify(user));
+      // console.log(user);
 
       return user;
     });

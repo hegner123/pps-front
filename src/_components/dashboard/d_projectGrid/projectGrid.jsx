@@ -1,5 +1,4 @@
-import React from "react";
-import { css } from "styled-components";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProjectTile, RecentProjectTile } from "../d_projectTile";
 import AddIcon from "../../../_assets/icons/add.svg";
@@ -12,16 +11,13 @@ import {
 } from "./style";
 
 export function RecentProjects(props) {
-  // props.data.map((projects) => {
-  //   console.log(projects);
-  //   if (filterProjects(projects.recentID)) {
-  //   }
-  // });
-
-  // const project = props.projects.filter(filterProjects);
-  // function filterProjects(project) {
-  //   return project._id === id;
-  // }
+  const [data, setData] = useState([]);
+  function mapData() {
+    setData(props.data);
+  }
+  useEffect(() => {
+    mapData();
+  }, []);
   let i = 0;
   return (
     <Section>
@@ -29,26 +25,28 @@ export function RecentProjects(props) {
         <DashTitle>Recent</DashTitle>
       </DashHeader>
       <ProjectSection>
-
-          {props.data.map(
-            (entry) => (
+        {data &&
+          data.map((entry) => (
             <RecentProjectTile
               data={entry.projectTitle}
               id={entry.recentID}
               key={i++}
             />
           ))}
-
       </ProjectSection>
     </Section>
   );
 }
 
 export function UserProjects(props) {
-  let i = 0;
-  if (props.data === "unset") {
-    return <h1>Loading</h1>;
+  const [data, setData] = useState([]);
+  function mapData() {
+    setData(props.data);
   }
+  useEffect(() => {
+    mapData();
+  }, []);
+  let i = 0;
   return (
     <Section>
       <DashHeader>
@@ -60,9 +58,15 @@ export function UserProjects(props) {
         </Link>
       </DashHeader>
       <ProjectSection>
-        {props.data.map((data) => (
-          <ProjectTile data={data.projectTitle} id={data._id} key={i++} />
-        ))}
+        {data &&
+          data.map((data) => (
+            <ProjectTile
+              data={data.projectTitle}
+              slug={data.projectSlug}
+              id={data._id}
+              key={i++}
+            />
+          ))}
       </ProjectSection>
     </Section>
   );

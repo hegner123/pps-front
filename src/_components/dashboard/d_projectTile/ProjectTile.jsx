@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ProjectsTile, TileHeader } from "./style";
 import { Link } from "react-router-dom";
@@ -6,12 +6,11 @@ import { projectActions } from "../../../_actions/";
 // available props: project title as data, id as id
 
 function ProjectTile(props) {
-  const projectTitle = props.data.trim().toLowerCase().replace(/\s/g, "-");
   return (
     <div>
       <Link
-        to={"/project/" + projectTitle}
-        onClick={() => props.assignProject("assign", projectTitle)}
+        to={"/project/" + props.slug}
+        onClick={() => props.assignProject("assign", props.slug)}
       >
         <ProjectsTile>
           <TileHeader>{props.data}</TileHeader>
@@ -22,23 +21,36 @@ function ProjectTile(props) {
 }
 
 function RecentProjectTile(props) {
-  const projects = props.userData.projects.filter(filterProjects);
-  console.log(projects);
+  const [projects, setProjects] = useState();
+
+  function filterProj() {
+    const res = props.userData.projects.filter(filterProjects);
+    setProjects(res[0]);
+  }
+  useEffect(() => {
+    filterProj();
+  }, []);
+
   function filterProjects(id) {
     return id._id === props.id;
   }
-  return (
-    <div>
-      <Link
-        to={"/project/" + projects[0].projectSlug}
-        onClick={() => props.assignProject("assign", projects[0].projectSlug)}
-      >
-        <ProjectsTile>
-          <TileHeader>{projects[0].projectTitle}</TileHeader>
-        </ProjectsTile>
-      </Link>
-    </div>
-  );
+
+  if (!projects) {
+    return <h2>loading</h2>;
+  } else {
+    return (
+      <div>
+        <Link
+          to={"/project/" + projects.projectSlug}
+          onClick={() => props.assignProject("assign", projects.projectSlug)}
+        >
+          <ProjectsTile>
+            <TileHeader>{projects.projectTitle}</TileHeader>
+          </ProjectsTile>
+        </Link>
+      </div>
+    );
+  }
 }
 
 function mapState(state) {

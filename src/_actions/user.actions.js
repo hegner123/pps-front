@@ -40,18 +40,26 @@ function login(username, password) {
 
 function getById(id) {
   return (dispatch) => {
-   
     userService.getById(id).then(
       (user) => {
-        dispatch(console.log(user));
-
+        dispatch(success(user));
       },
       (error) => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));
       }
     );
-  }};
+    function request(user) {
+      return { type: userConstants.GET_REQUEST, user };
+    }
+    function success(user) {
+      return { type: userConstants.GET_SUCCESS, user };
+    }
+    function failure(error) {
+      return { type: userConstants.GET_FAILURE, error };
+    }
+  };
+}
 
 function logout() {
   userService.logout();

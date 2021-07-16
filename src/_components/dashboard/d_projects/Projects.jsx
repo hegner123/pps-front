@@ -1,30 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useEffect, useState, useMemo } from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../../_actions";
-import { projectActions } from "../../../_actions/project.actions";
+import { projectActions } from "../../../_actions/";
+
 import { RecentProjects, UserProjects } from "../d_projectGrid";
 
 function Projects(props) {
-  const projects = props.userData.projects;
-  const recent = props.authentication.user.recentProjects;
-  let display;
-  if (recent) {
-    display = <RecentProjects data={recent} projects={projects} />;
-  } else {
-    display = <div>Test</div>;
+  const [waiting, setWaiting] = useState(true);
+  const [projects, setProjects] = useState([]);
+  const [recent, setRecent] = useState([]);
+
+  function fetchData() {
+    function handleStatusChange(status) {
+      setWaiting(status);
+      setProjects(props.userData.projects);
+      setRecent(props.authentication.user.recentProjects);
+    }
+    props.getProjects();
+    props.getUser(props.authentication.user._id);
+    handleStatusChange(false);
   }
 
   useEffect(() => {
-    props.getProjects();
-    props.getUser(props.authentication.user._id)
+    fetchData();
   }, []);
 
-  return (
-    <div>
-      {display}
-      <UserProjects data={projects} />
-    </div>
-  );
+  if (waiting) {
+    return (
+      <div>
+        <p css={"color:var(--white);"}>Waiting</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <RecentProjects data={recent} projects={projects} />
+        <UserProjects data={projects} />
+      </div>
+    );
+  }
 }
 
 function mapState(state) {
@@ -34,7 +48,7 @@ function mapState(state) {
 
 const actionCreators = {
   getProjects: projectActions.getProjects,
-  getUser:userActions.getById
+  getUser: userActions.getById,
 };
 
 const connectedProjects = connect(mapState, actionCreators)(Projects);

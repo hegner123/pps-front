@@ -2,10 +2,8 @@
 /* @import url("../fonts/Space_Mono/SpaceMono-Regular.ttf"); */
 @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Space+Mono&display=swap");
 
-
-
-
 :root {
+  --white: #dadce1;
   --bg: #242526;
   --bg-accent: #484a4d;
   --text-color: #dadce1;
