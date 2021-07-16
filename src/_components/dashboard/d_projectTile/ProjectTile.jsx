@@ -28,8 +28,10 @@ function RecentProjectTile(props) {
     setProjects(res[0]);
   }
   useEffect(() => {
-    filterProj();
-  }, []);
+    if (props.userData.projects !== "unset") {
+      filterProj();
+    }
+  }, [props.userData.projects]);
 
   function filterProjects(id) {
     return id._id === props.id;

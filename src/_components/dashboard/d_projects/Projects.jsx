@@ -16,8 +16,8 @@ function Projects(props) {
       setProjects(props.userData.projects);
       setRecent(props.authentication.user.recentProjects);
     }
-    props.getProjects();
-    props.getUser(props.authentication.user._id);
+    // props.getProjects();
+    // props.getUser(props.authentication.user._id);
     handleStatusChange(false);
   }
 
@@ -35,7 +35,7 @@ function Projects(props) {
     return (
       <div>
         <RecentProjects data={recent} projects={projects} />
-        <UserProjects data={projects} />
+        <UserProjects projects={projects} />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { ProjectTile, RecentProjectTile } from "../d_projectTile";
 import AddIcon from "../../../_assets/icons/add.svg";
 import {
@@ -10,8 +11,8 @@ import {
   Section,
 } from "./style";
 
-export function RecentProjects(props) {
-  const [data, setData] = useState([]);
+function RecentProjects(props) {
+  const [data, setData] = useState(false);
   function mapData() {
     setData(props.data);
   }
@@ -38,14 +39,19 @@ export function RecentProjects(props) {
   );
 }
 
-export function UserProjects(props) {
-  const [data, setData] = useState([]);
-  function mapData() {
-    setData(props.data);
+function UserProjects(props) {
+  const [isReady, setIsReady] = useState(false);
+
+  function handleIsReady() {
+    setIsReady(true);
   }
+
   useEffect(() => {
-    mapData();
-  }, []);
+    if (props.userData.projects !== "unset") {
+      handleIsReady();
+    }
+  }, [props.userData.projects]);
+
   let i = 0;
   return (
     <Section>
@@ -58,12 +64,12 @@ export function UserProjects(props) {
         </Link>
       </DashHeader>
       <ProjectSection>
-        {data &&
-          data.map((data) => (
+        {isReady &&
+          props.userData.projects.map((entry) => (
             <ProjectTile
-              data={data.projectTitle}
-              slug={data.projectSlug}
-              id={data._id}
+              data={entry.projectTitle}
+              slug={entry.projectSlug}
+              id={entry._id}
               key={i++}
             />
           ))}
@@ -71,3 +77,14 @@ export function UserProjects(props) {
     </Section>
   );
 }
+
+function mapState(state) {
+  const { userData, authentication } = state;
+  return { userData, authentication };
+}
+
+const connectedRecentProjects = connect(mapState)(RecentProjects);
+export { connectedRecentProjects as RecentProjects };
+
+const connectedUserProjects = connect(mapState)(UserProjects);
+export { connectedUserProjects as UserProjects };

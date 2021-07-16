@@ -1,6 +1,7 @@
 import { userConstants } from "../_constants";
 import { userService } from "../_services";
 import { alertActions } from "./";
+import { projectActions } from "./";
 import { history } from "../_helpers";
 
 export const userActions = {
@@ -18,6 +19,7 @@ function login(username, password) {
     userService.login(username, password).then(
       (user) => {
         dispatch(success(user));
+        dispatch(projectActions.getProjects());
         history.push("/dashboard");
       },
       (error) => {

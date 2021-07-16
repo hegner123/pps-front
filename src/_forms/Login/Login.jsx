@@ -59,6 +59,7 @@ class LoginPage extends React.Component {
                 <Input
                   type="text"
                   name="username"
+                  autoComplete="username"
                   value={username}
                   onChange={this.handleChange}
                 />
