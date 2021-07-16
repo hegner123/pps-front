@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { userActions } from "../../_actions/user.actions";
 import { projectActions } from "../../_actions/project.actions";
 import Home from "../../_assets/icons/home.svg";
@@ -15,14 +15,10 @@ import {
   Brand,
   Search,
   AdminControls,
-  AdminItem,
   Input,
   BrandLink,
-  Logout,
-  Profile,
 } from "./style";
 import { CSSTransition } from "react-transition-group";
-import { css } from "styled-components";
 import { uiActions } from "../../_actions";
 
 function Branding(props) {
@@ -111,6 +107,8 @@ function DropdownMenu(props) {
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
 
+  const location = useLocation().pathname;
+
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
   }, []);
@@ -143,14 +141,17 @@ function DropdownMenu(props) {
         onEnter={calcHeight}
       >
         <div className="menu">
-          <DropdownItem
-            action={() => props.deleteProject()}
-            icon={
-              <DeleteIcon css="fill: var(--text-color);height:20px;width:20px;" />
-            }
-          >
-            Delete Project
-          </DropdownItem>
+          {location.includes("project") && (
+            <DropdownItem
+              action={() => props.deleteProject()}
+              icon={
+                <DeleteIcon css="fill: var(--text-color);height:20px;width:20px;" />
+              }
+            >
+              Delete Project
+            </DropdownItem>
+          )}
+
           <DropdownItem
             action={() => props.logout()}
             icon={
@@ -161,15 +162,6 @@ function DropdownMenu(props) {
           </DropdownItem>
         </div>
       </CSSTransition>
-      {/* <CSSTransition in={activeMenu === 'settings'} unmountOnExit timeout={500} classNames='menu-secondary' onEnter={calcHeight} >
-            <div className="menu">
-            <DropdownItem>Corn</DropdownItem>
-            <DropdownItem>Corn</DropdownItem>
-            <DropdownItem>Corn</DropdownItem>
-            <DropdownItem
-            leftIcon={<BoltIcon/>} goToMenu='main'>My Profile</DropdownItem>
-            </div>
-        </CSSTransition> */}
     </div>
   );
 }
