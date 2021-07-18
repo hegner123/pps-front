@@ -13,9 +13,9 @@ import {
   NavItems,
 } from "./style";
 import Edit from "../../../_assets/icons/more.svg";
-import { store } from "../../../_helpers";
+
 import { CSSTransition } from "react-transition-group";
-import { userInterface } from "../../../_reducers/ui.reducer";
+import { useOnClickOutside } from "../../../_hooks/onClickOutside";
 
 function TableCell(props) {
   const [songId, setSongId] = useState(props.songId);
@@ -86,10 +86,10 @@ function TableCell(props) {
           dropdownOpen={(e) => props.dropdownOpen(e)}
           icon={<Edit css="height:20px;width:20px;" />}
         >
-          <DropdownMenu
+          <ConDropdownMenu
             deleteSong={() => handleDelete(songId, projectId)}
             currentS={songId}
-          ></DropdownMenu>
+          ></ConDropdownMenu>
         </NavItem>
       </TitleCell>
     );
@@ -98,21 +98,6 @@ function TableCell(props) {
   }
   return display;
 }
-
-function mapState(state) {
-  const { cellStatus, userInterface } = state;
-  return { cellStatus, userInterface };
-}
-
-const actionCreators = {
-  changeCellStatus: projectActions.changeCellStatus,
-  deleteSong: projectActions.deleteSong,
-  dropdownOpen: uiActions.dropdownOpen,
-  getProjects: projectActions.getProjects,
-};
-
-const connectedTableCell = connect(mapState, actionCreators)(TableCell);
-export { connectedTableCell as TableCell };
 
 function NavItem(props) {
   let dropdownMatch = false;
@@ -133,6 +118,7 @@ function DropdownMenu(props) {
   const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
+  useOnClickOutside(dropdownRef, () => props.dropdownClose());
 
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
@@ -173,3 +159,21 @@ function DropdownMenu(props) {
     </div>
   );
 }
+
+function mapState(state) {
+  const { cellStatus, userInterface } = state;
+  return { cellStatus, userInterface };
+}
+
+const actionCreators = {
+  changeCellStatus: projectActions.changeCellStatus,
+  deleteSong: projectActions.deleteSong,
+  dropdownOpen: uiActions.dropdownOpen,
+  dropdownClose: uiActions.dropdownClose,
+  getProjects: projectActions.getProjects,
+};
+
+const ConDropdownMenu = connect(mapState, actionCreators)(DropdownMenu);
+
+const connectedTableCell = connect(mapState, actionCreators)(TableCell);
+export { connectedTableCell as TableCell };

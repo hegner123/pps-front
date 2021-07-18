@@ -23,7 +23,7 @@ function Projects(props) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [props.userData.projects]);
 
   if (waiting) {
     return (

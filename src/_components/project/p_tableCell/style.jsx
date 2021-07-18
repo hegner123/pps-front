@@ -88,7 +88,7 @@ export const TitleCell = styled.td`
   height: 85px;
   width: 100%;
   padding: 0 15px;
-  font-size: 16px;
+  font-size: 10px;
   line-height: 1rem;
   border: 1px solid #333;
   border-collapse: collapse;

@@ -1,18 +1,18 @@
 import { uiConstants } from "../_constants";
 
 export const uiActions = {
-  navOpen,
-  navClose,
+  setSettingsOpen,
+  setSettingsClose,
   dropdownOpen,
   dropdownClose,
 };
 
-function navOpen() {
-  return { type: uiConstants.NAV_DROPDOWN_OPEN };
+function setSettingsOpen() {
+  return { type: uiConstants.SETTINGS_OPEN };
 }
 
-function navClose() {
-  return { type: uiConstants.NAV_DROPDOWN_CLOSE };
+function setSettingsClose() {
+  return { type: uiConstants.SETTINGS_CLOSE };
 }
 
 function dropdownOpen(id) {

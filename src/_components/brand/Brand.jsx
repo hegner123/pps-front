@@ -20,34 +20,26 @@ import {
 } from "./style";
 import { CSSTransition } from "react-transition-group";
 import { uiActions } from "../../_actions";
+import { useOnClickOutside } from "../../_hooks/onClickOutside";
 
 function Branding(props) {
-  const loggedIn = useSelector((state) => state.authentication.loggedIn);
+  const loggedIn = props.authentication.loggedIn;
   const current = useSelector((state) =>
     state.userData.current ? state.userData.current._id : ""
   );
-  const navDropdown = useSelector((state) => state.userInterface.navDropdown);
+  const ui = props.userInterface;
   let searchBar;
-  let settings;
-  if (loggedIn === true) {
+  if (loggedIn) {
     searchBar = (
       <Search>
-        <Input type="text" name="search" id="search" placeholder="Search" />
+        <Input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search"
+          disabled
+        />
       </Search>
-    );
-
-    settings = (
-      <NavItem
-        openState={navDropdown}
-        navOpen={() => props.navOpen()}
-        icon={<Settings css="fill:var(--text-color)" />}
-      >
-        <DropdownMenu
-          logout={() => props.logout()}
-          deleteProject={() => handleDelete(current)}
-          currentP={current.projectTitle}
-        ></DropdownMenu>
-      </NavItem>
     );
   }
 
@@ -65,24 +57,21 @@ function Branding(props) {
         <NavItemLink link={"/dashboard"}>
           <Home css="fill:var(--text-color)" />
         </NavItemLink>
-        {settings}
+        <NavItem
+          icon={<Settings css="fill:var(--text-color)" />}
+          navOpen={() => props.setSettingsOpen()}
+          openState={ui.isSettingsOpen}
+        >
+          <ConDropdownMenu
+            logout={() => props.logout()}
+            deleteProject={() => handleDelete(current)}
+            currentP={current.projectTitle}
+          ></ConDropdownMenu>
+        </NavItem>
       </AdminControls>
     </AdminBar>
   );
 }
-function mapState(state) {
-  const { loggingIn } = state;
-  return { loggingIn };
-}
-
-const actionCreators = {
-  logout: userActions.logout,
-  deleteProject: projectActions.deleteProject,
-  navOpen: uiActions.navOpen,
-};
-
-const connectedBranding = connect(mapState, actionCreators)(Branding);
-export { connectedBranding as Branding };
 
 function NavItemLink(props) {
   return (
@@ -105,12 +94,14 @@ function NavItem(props) {
 function DropdownMenu(props) {
   const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
-  const dropdownRef = useRef(null);
+  const ref = useRef();
+  useOnClickOutside(ref, () => props.setSettingsClose());
+  // State for our modal
 
   const location = useLocation().pathname;
 
   useEffect(() => {
-    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
+    setMenuHeight(ref.current?.firstChild.offsetHeight);
   }, []);
 
   function calcHeight(el) {
@@ -131,8 +122,9 @@ function DropdownMenu(props) {
       </a>
     );
   }
+
   return (
-    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
+    <div className="dropdown" style={{ height: menuHeight }} ref={ref}>
       <CSSTransition
         in={activeMenu === "main"}
         unmountOnExit
@@ -165,3 +157,20 @@ function DropdownMenu(props) {
     </div>
   );
 }
+
+function mapState(state) {
+  const { authentication, userInterface } = state;
+  return { authentication, userInterface };
+}
+
+const actionCreators = {
+  logout: userActions.logout,
+  deleteProject: projectActions.deleteProject,
+  setSettingsOpen: uiActions.setSettingsOpen,
+  setSettingsClose: uiActions.setSettingsClose,
+};
+
+const connectedBranding = connect(mapState, actionCreators)(Branding);
+export { connectedBranding as Branding };
+
+const ConDropdownMenu = connect(mapState, actionCreators)(DropdownMenu);

@@ -15,16 +15,6 @@ if (url.includes("/project/")) {
   });
 }
 
-function getCurrent() {
-  projects.map((project) => {
-    if (project.projectSlug === id) {
-      current = project;
-    }
-  });
-  console.log(current);
-  return current;
-}
-
 const initialState = projects
   ? { projects: projects, current: current }
   : { projects: "unset" };
@@ -47,11 +37,7 @@ export function userData(state = initialState, action) {
     case projectConstants.STATUS_SUCCESS:
       return {
         ...state,
-        current: updateCurrent(
-          action.status[0],
-          action.status[1],
-          getCurrent()
-        ),
+        current: updateCurrent(action.status[0], action.status[1], current),
       };
     case projectConstants.ASSIGN_PROJECT:
       return {
@@ -109,7 +95,6 @@ export function userData(state = initialState, action) {
 }
 
 function updateCurrent(value, desc, projects) {
-  console.log(projects);
   let res;
   for (var i in projects.songs) {
     for (var j in projects.songs[i].song_status) {

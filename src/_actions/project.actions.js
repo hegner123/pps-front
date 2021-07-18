@@ -110,7 +110,7 @@ function createSong(newSong) {
     projectService.createSong(newSong).then(
       (create) => {
         dispatch(success(create));
-        history.push(newSong.path);
+        getProjects();
       },
       (error) => dispatch(failure(error))
     );
@@ -144,7 +144,7 @@ function deleteSong(song, id) {
 
 function changeCellStatus(project, song, instrument, status, id) {
   const state = store.getState();
-  const user = state.authentication.user.userName;
+  const user = state.authentication.user.id;
   return (dispatch) => {
     dispatch(request());
     projectService

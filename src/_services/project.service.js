@@ -54,7 +54,7 @@ async function createSong(newSong) {
   };
   return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
     .then(handleResponse)
-    .then(history.push("/dashboard"));
+    .then(history.push(newSong.path));
 }
 
 async function deleteSong(song, id) {
@@ -71,8 +71,8 @@ async function deleteSong(song, id) {
 async function changeCellStatus(project, song, instrument, status, id, user) {
   const requestOptions = {
     method: "PUT",
-    headers: authHeader(),
-    body: { user: user },
+    headers: authHeader(1),
+    body: JSON.stringify({ user: user }),
   };
   return fetch(
     `${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`,

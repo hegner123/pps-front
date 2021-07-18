@@ -5,7 +5,7 @@ export const ProjectsTile = styled.div`
   height: 48px;
   background: var(--bg-accent);
   margin: 0 25px;
-  border-radius: 20px;
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
