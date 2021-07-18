@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   Notification,
@@ -11,36 +11,43 @@ import {
   Title,
 } from "./style";
 
-class Notifications extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      new: true,
-    };
+const Notifications = (props) => {
+  const [isNew, setIsNew] = useState(true);
+  let alert;
+  let body;
+  if (isNew) {
+    alert = <Notification />;
   }
+  console.log(props.activity);
 
-  render() {
-    let alert;
-    if (this.state.new === true) {
-      alert = <Notification />;
-    }
+  switch (props.type) {
+    case "update":
+      body = `${props.user.slice(
+        0,
+        5
+      )} marked ${props.activity.activity.song.slice(0, 5)} ${
+        props.activity.activity.instrument
+      } as ${props.activity.activity.action}`;
 
-    return (
-      <Card>
-        <AlertWrap>{alert}</AlertWrap>
-        <CardTitle>
-          <Title>radXDAD</Title>
-        </CardTitle>
-        <CardBody>
-          <CardContent>radxDAD added lyrics to 4 songs.</CardContent>
-          <CardTime>
-            <CardContent> 2m</CardContent>
-          </CardTime>
-        </CardBody>
-      </Card>
-    );
+      break;
+    default:
+      body = "";
   }
-}
+  return (
+    <Card onClick={() => setIsNew(false)}>
+      <AlertWrap>{alert}</AlertWrap>
+      <CardTitle>
+        <Title>{props.user.slice(0, 5)}</Title>
+      </CardTitle>
+      <CardBody>
+        <CardContent>{body}</CardContent>
+        <CardTime>
+          <CardContent>{props.activity.updatedAt.slice(0, 3)}</CardContent>
+        </CardTime>
+      </CardBody>
+    </Card>
+  );
+};
 
 const connectedNotifications = connect()(Notifications);
 export { connectedNotifications as Notifications };

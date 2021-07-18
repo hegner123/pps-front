@@ -1,17 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Notifications } from "../d_notifications";
 import { SidebarCol } from "./style";
 
-class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
+const Sidebar = (props) => {
+  const projects = props.userData.projects;
+  const [recentActivity, setRecentActivty] = useState(null);
+  const [isReady, setIsReady] = useState(false);
+
+  function handleIsReady() {
+    projects.map((project) => {
+      let recent = [];
+      // console.log(project);
+      if (project.recent_activity) {
+        project.recent_activity.map((noti) => {
+          recent.push(noti);
+        });
+      }
+      setRecentActivty(recent);
+      setIsReady(true);
+    });
   }
 
-  render() {
-    return <SidebarCol></SidebarCol>;
-  }
+  useEffect(() => {
+    if (props.userData.projects !== "unset") {
+      handleIsReady();
+    }
+  }, [props.userData.projects]);
+
+  let i = 0;
+
+  return (
+    <SidebarCol>
+      {isReady &&
+        recentActivity.map((activity) => (
+          <Notifications
+            user={activity.user}
+            activity={activity}
+            type={activity.type}
+            key={i++}
+          />
+        ))}
+    </SidebarCol>
+  );
+};
+
+function mapState(state) {
+  const { userData } = state;
+  return { userData };
 }
 
-const connectedSidebar = connect()(Sidebar);
+const connectedSidebar = connect(mapState)(Sidebar);
 export { connectedSidebar as Sidebar };

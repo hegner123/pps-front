@@ -7,7 +7,7 @@ import { projectActions } from "../../../_actions/";
 
 function ProjectTile(props) {
   return (
-    <div>
+    <div css={"margin-bottom:10px;"}>
       <Link
         to={"/project/" + props.slug}
         onClick={() => props.assignProject("assign", props.slug)}
@@ -41,7 +41,7 @@ function RecentProjectTile(props) {
     return <h2>loading</h2>;
   } else {
     return (
-      <div>
+      <div css={"margin-bottom:10px;"}>
         <Link
           to={"/project/" + projects.projectSlug}
           onClick={() => props.assignProject("assign", projects.projectSlug)}

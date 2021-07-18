@@ -8,7 +8,6 @@ export const Card = styled.div`
   margin-left: 15px;
   margin-right: 15px;
   padding: 5px;
-  height: max-content;
 `;
 
 export const Notification = styled.div`
@@ -30,14 +29,12 @@ export const CardTime = styled.div`
   align-items: flex-end;
 `;
 
-export const CardTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+export const CardTitle = styled.div``;
 
 export const Title = styled.h6`
   font-size: 16px;
   color: var(--text-color);
+  margin: 0;
 `;
 
 export const CardBody = styled.div`
