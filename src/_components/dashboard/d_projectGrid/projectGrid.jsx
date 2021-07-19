@@ -12,13 +12,8 @@ import {
 } from "./style";
 
 function RecentProjects(props) {
-  const [data, setData] = useState(false);
-  function mapData() {
-    setData(props.data);
-  }
-  useEffect(() => {
-    mapData();
-  }, []);
+  const data = props.data;
+  console.log(data);
   let i = 0;
   return (
     <Section>
@@ -28,11 +23,7 @@ function RecentProjects(props) {
       <ProjectSection>
         {data &&
           data.map((entry) => (
-            <RecentProjectTile
-              data={entry.projectTitle}
-              id={entry.recentID}
-              key={i++}
-            />
+            <RecentProjectTile id={entry.recentID} key={i++} />
           ))}
       </ProjectSection>
     </Section>
@@ -79,8 +70,8 @@ function UserProjects(props) {
 }
 
 function mapState(state) {
-  const { userData, authentication } = state;
-  return { userData, authentication };
+  const { userData, authentication, recent } = state;
+  return { userData, authentication, recent };
 }
 
 const connectedRecentProjects = connect(mapState)(RecentProjects);

@@ -20,8 +20,8 @@ function NewProject(props) {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectSlug, setProjectSlug] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const userName = useSelector((state) => state.authentication.user.userName);
-  console.log(userName);
+  const userName = useSelector((state) => state.authentication.user._id);
+ 
   function handleChange(event) {
     const { name, value } = event.target;
     switch (name) {

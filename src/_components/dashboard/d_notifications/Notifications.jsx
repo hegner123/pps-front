@@ -13,6 +13,7 @@ import {
 
 const Notifications = (props) => {
   const [isNew, setIsNew] = useState(true);
+  const activity = props.activity.activity;
   let alert;
   let body;
   if (isNew) {
@@ -22,14 +23,14 @@ const Notifications = (props) => {
 
   switch (props.type) {
     case "update":
-      body = `${props.user.slice(
-        0,
-        5
-      )} marked ${props.activity.activity.song.slice(0, 5)} ${
-        props.activity.activity.instrument
-      } as ${props.activity.activity.action}`;
+      body = `${props.user.slice(0, 5)} marked ${activity.song.slice(0, 5)} ${
+        activity.instrument
+      } as ${activity.action}`;
 
       break;
+
+    case "New Project":
+      body = `${props.user.slice(0, 5)} created ${activity.project}`;
     default:
       body = "";
   }

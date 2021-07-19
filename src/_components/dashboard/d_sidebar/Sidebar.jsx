@@ -11,7 +11,7 @@ const Sidebar = (props) => {
   function handleIsReady() {
     projects.map((project) => {
       let recent = [];
-      // console.log(project);
+
       if (project.recent_activity) {
         project.recent_activity.map((noti) => {
           recent.push(noti);

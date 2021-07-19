@@ -95,6 +95,7 @@ export function userData(state = initialState, action) {
 }
 
 function updateCurrent(value, desc, projects) {
+  console.log(projects);
   let res;
   for (var i in projects.songs) {
     for (var j in projects.songs[i].song_status) {

@@ -29,6 +29,7 @@ function Branding(props) {
   );
   const ui = props.userInterface;
   let searchBar;
+  let settings;
   if (loggedIn) {
     searchBar = (
       <Search>
@@ -41,10 +42,29 @@ function Branding(props) {
         />
       </Search>
     );
+
+    settings = (
+      <NavItem
+        icon={<Settings css="fill:var(--text-color)" />}
+        navOpen={() => props.setSettingsOpen()}
+        openState={ui.isSettingsOpen}
+      >
+        <ConDropdownMenu
+          logOut={() => userLogout()}
+          deleteProject={() => handleDelete(current)}
+          currentP={current.projectTitle}
+        ></ConDropdownMenu>
+      </NavItem>
+    );
   }
 
   function handleDelete(id) {
     props.deleteProject({ id: id });
+  }
+
+  function userLogout() {
+    props.setSettingsClose();
+    props.logout();
   }
 
   return (
@@ -57,17 +77,7 @@ function Branding(props) {
         <NavItemLink link={"/dashboard"}>
           <Home css="fill:var(--text-color)" />
         </NavItemLink>
-        <NavItem
-          icon={<Settings css="fill:var(--text-color)" />}
-          navOpen={() => props.setSettingsOpen()}
-          openState={ui.isSettingsOpen}
-        >
-          <ConDropdownMenu
-            logout={() => props.logout()}
-            deleteProject={() => handleDelete(current)}
-            currentP={current.projectTitle}
-          ></ConDropdownMenu>
-        </NavItem>
+        {settings}
       </AdminControls>
     </AdminBar>
   );
@@ -145,7 +155,7 @@ function DropdownMenu(props) {
           )}
 
           <DropdownItem
-            action={() => props.logout()}
+            action={() => props.logOut()}
             icon={
               <LogoutIcon css="fill: var(--text-color);height:20px;width:20px;" />
             }

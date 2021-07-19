@@ -39,8 +39,8 @@ function getById(id) {
     .then(handleResponse)
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      // localStorage.setItem("user", JSON.stringify(user));
-      // console.log(user);
+      localStorage.setItem("recent", JSON.stringify(user[0].recentProjects));
+      console.log(user[0].recentProjects);
 
       return user;
     });

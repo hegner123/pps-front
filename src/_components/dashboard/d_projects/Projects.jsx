@@ -2,28 +2,28 @@ import React, { useLayoutEffect, useEffect, useState, useMemo } from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../../_actions";
 import { projectActions } from "../../../_actions/";
-
 import { RecentProjects, UserProjects } from "../d_projectGrid";
 
 function Projects(props) {
   const [waiting, setWaiting] = useState(true);
   const [projects, setProjects] = useState([]);
-  const [recent, setRecent] = useState([]);
 
   function fetchData() {
-    function handleStatusChange(status) {
-      setWaiting(status);
-      setProjects(props.userData.projects);
-      setRecent(props.authentication.user.recentProjects);
-    }
-    // props.getProjects();
-    // props.getUser(props.authentication.user._id);
-    handleStatusChange(false);
+    props.getProjects();
+  }
+
+  function handleStatusChange() {
+    setWaiting(false);
+    setProjects(props.userData.projects);
   }
 
   useEffect(() => {
-    fetchData();
+    handleStatusChange();
   }, [props.userData.projects]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   if (waiting) {
     return (
@@ -34,7 +34,7 @@ function Projects(props) {
   } else {
     return (
       <div>
-        <RecentProjects data={recent} projects={projects} />
+        <RecentProjects data={props.recent.projects} />
         <UserProjects projects={projects} />
       </div>
     );
@@ -42,8 +42,8 @@ function Projects(props) {
 }
 
 function mapState(state) {
-  const { userData, authentication } = state;
-  return { userData, authentication };
+  const { userData, authentication, recent } = state;
+  return { userData, authentication, recent };
 }
 
 const actionCreators = {

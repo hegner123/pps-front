@@ -56,8 +56,8 @@ function RecentProjectTile(props) {
 }
 
 function mapState(state) {
-  const { userData } = state;
-  return { userData };
+  const { userData, recent } = state;
+  return { userData, recent };
 }
 
 const actionCreators = {
