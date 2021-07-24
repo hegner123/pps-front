@@ -1,6 +1,6 @@
 import React from "react";
 import { Sidebar } from "../_components/dashboard/d_sidebar";
-import { Projects } from "../_components/dashboard/d_projects";
+import { Dash } from "../_components/dashboard/d_dash";
 import { DashboardPage, ProjectSection, SidebarSection } from "./style";
 
 export function Dashboard() {
@@ -10,7 +10,7 @@ export function Dashboard() {
         <Sidebar />
       </SidebarSection>
       <ProjectSection>
-        <Projects />
+        <Dash />
       </ProjectSection>
     </DashboardPage>
   );

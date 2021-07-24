@@ -40,7 +40,6 @@ function getById(id) {
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem("recent", JSON.stringify(user[0].recentProjects));
-      console.log(user[0].recentProjects);
 
       return user;
     });
@@ -50,6 +49,7 @@ function logout() {
   // remove user from local storage to log user out
   localStorage.removeItem("userProjects");
   localStorage.removeItem("user");
+  localStorage.removeItem("recent");
   history.push("/");
 }
 
@@ -87,7 +87,6 @@ function _delete(id) {
 }
 
 function addToRecent(project, user) {
-  console.log(JSON.stringify(project));
   const requestOptions = {
     method: "PUT",
     headers: authHeader(1),

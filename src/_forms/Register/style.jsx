@@ -42,14 +42,15 @@ export const FormGroup = styled.div`
 
 export const Button = styled.button`
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
   font-size: 16px;
   font-weight: 500;
   margin-top: 10px;
   border-radius: 5px;
   transition-duration: 0.2s;
   width: 100%;
-  background-color: #e3fdff;
+  background-color: #484a4d;
+  color: #e3fdff;
   cursor: pointer;
   transition: 10ms;
   &:hover {
@@ -59,6 +60,7 @@ export const Button = styled.button`
 `;
 
 export const Label = styled.label`
+font-size: 0.75rem;
   margin-bottom: 10px;
   color: var(--text-color);
 `;

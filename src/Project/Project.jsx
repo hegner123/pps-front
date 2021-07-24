@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { pDetails as PDetails } from "../_components/project/p_details";
-import { TableArea } from "../_components/project/p_table";
+import { pDetails as PDetails } from "../_components/project/Grid/p_details";
+import { TableArea } from "../_components/project/Grid/p_table";
 import { useSelector, connect } from "react-redux";
 import { projectActions } from "../_actions/project.actions";
+import { Info } from "../_components/project/Info";
 
 export function SingleProject(props) {
   const userData = useSelector((state) => state.userData.current);
@@ -23,6 +24,7 @@ export function SingleProject(props) {
       >
         <TableArea data={songs} />
       </div>
+      <Info />
     </div>
   );
 }

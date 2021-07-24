@@ -11,6 +11,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --open --hot",
+    "start:": "webpack serve --open --hot; cd ../pps-back && npm run start:dev ",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

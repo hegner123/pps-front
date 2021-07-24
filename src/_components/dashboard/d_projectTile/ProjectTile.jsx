@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { ProjectsTile, TileHeader } from "./style";
 import { Link } from "react-router-dom";
 import { projectActions } from "../../../_actions/";
-// available props: project title as data, id as id
 
 function ProjectTile(props) {
   return (
@@ -21,39 +20,39 @@ function ProjectTile(props) {
 }
 
 function RecentProjectTile(props) {
-  const [projects, setProjects] = useState();
+  // const [projects, setProjects] = useState();
 
-  function filterProj() {
-    const res = props.userData.projects.filter(filterProjects);
-    setProjects(res[0]);
-  }
-  useEffect(() => {
-    if (props.userData.projects !== "unset") {
-      filterProj();
-    }
-  }, [props.userData.projects]);
+  // function filterProj() {
+  //   const res = props.userData.projects.filter(filterProjects);
+  //   setProjects(res[0]);
+  // }
+  // useEffect(() => {
+  //   if (props.userData.projects !== "unset") {
+  //     filterProj();
+  //   }
+  // }, [props.userData.projects]);
 
-  function filterProjects(id) {
-    return id._id === props.id;
-  }
+  // function filterProjects(id) {
+  //   return id._id === props.id;
+  // }
 
-  if (!projects) {
-    return <h2>loading</h2>;
-  } else {
+  // if (!projects) {
+  //   return <h2>loading</h2>;
+  // } else {
     return (
       <div css={"margin-bottom:10px;"}>
-        <Link
+        {/* <Link
           to={"/project/" + projects.projectSlug}
           onClick={() => props.assignProject("assign", projects.projectSlug)}
-        >
-          <ProjectsTile>
-            <TileHeader>{projects.projectTitle}</TileHeader>
-          </ProjectsTile>
-        </Link>
+        > */}
+        <ProjectsTile>
+          <TileHeader>{props.id}</TileHeader>
+        </ProjectsTile>
+        {/* </Link> */}
       </div>
     );
   }
-}
+// }
 
 function mapState(state) {
   const { userData, recent } = state;

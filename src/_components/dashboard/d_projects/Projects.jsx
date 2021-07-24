@@ -1,44 +1,72 @@
-import React, { useLayoutEffect, useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { userActions } from "../../../_actions";
-import { projectActions } from "../../../_actions/";
-import { RecentProjects, UserProjects } from "../d_projectGrid";
+import { ProjectTile, RecentProjectTile } from "../d_projectTile";
+import AddIcon from "../../../_assets/icons/add.svg";
+import {
+  DashHeader,
+  DashTitle,
+  ProjectSection,
+  AddProject,
+  Section,
+} from "./style";
 
-function Projects(props) {
-  const [waiting, setWaiting] = useState(true);
-  const [projects, setProjects] = useState([]);
+function RecentProjects(props) {
+  const data = props.data;
 
-  function fetchData() {
-    props.getProjects();
-  }
+  let i = 0;
+  return (
+    <Section>
+      <DashHeader>
+        <DashTitle>Recent</DashTitle>
+      </DashHeader>
+      <ProjectSection>
+        {data &&
+          data.map((entry) => (
+            <RecentProjectTile id={entry.recentID} key={i++} />
+          ))}
+      </ProjectSection>
+    </Section>
+  );
+}
 
-  function handleStatusChange() {
-    setWaiting(false);
-    setProjects(props.userData.projects);
+function UserProjects(props) {
+  const [isReady, setIsReady] = useState(false);
+
+  function handleIsReady() {
+    setIsReady(true);
   }
 
   useEffect(() => {
-    handleStatusChange();
+    if (props.userData.projects !== "unset") {
+      handleIsReady();
+    }
   }, [props.userData.projects]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  if (waiting) {
-    return (
-      <div>
-        <p css={"color:var(--white);"}>Waiting</p>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <RecentProjects data={props.recent.projects} />
-        <UserProjects projects={projects} />
-      </div>
-    );
-  }
+  let i = 0;
+  return (
+    <Section>
+      <DashHeader>
+        <DashTitle>Projects</DashTitle>
+        <Link to="/new-project">
+          <AddProject>
+            <AddIcon css="fill:var(--text-color);" />
+          </AddProject>
+        </Link>
+      </DashHeader>
+      <ProjectSection>
+        {isReady &&
+          props.userData.projects.map((entry) => (
+            <ProjectTile
+              data={entry.projectTitle}
+              slug={entry.projectSlug}
+              id={entry._id}
+              key={i++}
+            />
+          ))}
+      </ProjectSection>
+    </Section>
+  );
 }
 
 function mapState(state) {
@@ -46,10 +74,8 @@ function mapState(state) {
   return { userData, authentication, recent };
 }
 
-const actionCreators = {
-  getProjects: projectActions.getProjects,
-  getUser: userActions.getById,
-};
+const connectedRecentProjects = connect(mapState)(RecentProjects);
+export { connectedRecentProjects as RecentProjects };
 
-const connectedProjects = connect(mapState, actionCreators)(Projects);
-export { connectedProjects as Projects };
+const connectedUserProjects = connect(mapState)(UserProjects);
+export { connectedUserProjects as UserProjects };

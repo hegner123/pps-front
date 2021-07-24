@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect, useSelector } from "react-redux";
-import { projectActions, uiActions } from "../../../_actions";
+import { projectActions, uiActions } from "../../../../_actions";
 import {
   CompletedCell,
   IncompleteCell,
@@ -12,10 +12,10 @@ import {
   IconButton,
   NavItems,
 } from "./style";
-import Edit from "../../../_assets/icons/more.svg";
+import Edit from "../../../../_assets/icons/more.svg";
 
 import { CSSTransition } from "react-transition-group";
-import { useOnClickOutside } from "../../../_hooks/onClickOutside";
+import { useOnClickOutside } from "../../../../_hooks/onClickOutside";
 
 function TableCell(props) {
   const [songId, setSongId] = useState(props.songId);

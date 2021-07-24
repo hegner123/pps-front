@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import { TableCell } from "../p_tableCell";
 import { TableRows } from "./style";
-import { projectActions } from "../../../_actions/project.actions";
+import { projectActions } from "../../../../_actions/project.actions";
 
 function TableRow(props) {
   const [headers, setHeaders] = useState(props.headers);
