@@ -5,8 +5,9 @@ import { projectActions } from "../../../_actions";
 import { RecentProjects, UserProjects } from "../d_projects/";
 
 function Dash(props) {
-  const [waiting, setWaiting] = useState(true);
+  const [isWaiting, setWaiting] = useState(true);
   const [projects, setProjects] = useState([]);
+  const recent = props.authentication.user.recentProjects;
 
   function fetchData() {
     props.getProjects();
@@ -23,9 +24,9 @@ function Dash(props) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [recent]);
 
-  if (waiting) {
+  if (isWaiting) {
     return (
       <div>
         <p css={"color:var(--white);"}>Waiting</p>
@@ -34,7 +35,7 @@ function Dash(props) {
   } else {
     return (
       <div>
-        <RecentProjects data={props.recent.projects} />
+        <RecentProjects data={recent} />
         <UserProjects projects={projects} />
       </div>
     );

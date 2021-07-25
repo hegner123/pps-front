@@ -4,6 +4,7 @@ import { projectService } from "../_services/";
 import { userService } from "../_services/user.service";
 import { store } from "../_helpers";
 import { history } from "../_helpers";
+import { userActions } from "./user.actions";
 
 export const projectActions = {
   getProjects,
@@ -18,12 +19,16 @@ export const projectActions = {
 function getProjects() {
   const state = store.getState();
   const user = state.authentication.user.id;
+  const userName = state.authentication.user.userName;
   return (dispatch) => {
     dispatch(request());
     projectService.getProjects(user).then(
       (projects) => {
         dispatch(success(projects));
-        dispatch(alertActions.success(user + " projects loaded!"));
+        dispatch(
+          alertActions.success(userName.toUpperCase() + "'s projects loaded!")
+        );
+        dispatch(userActions.getById(user));
         localStorage.setItem("userProjects", JSON.stringify(projects));
       },
       (error) => dispatch(failure(error.toString()))
@@ -57,6 +62,7 @@ function assignProject(action, project) {
       return (dispatch) => {
         userService.addToRecent(currentProject, user);
         dispatch(assign(currentProject));
+        userService.getById(user);
       };
     case "clear":
       return (dispatch) => {

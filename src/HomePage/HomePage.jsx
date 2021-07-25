@@ -7,7 +7,6 @@ import {
   ActionList,
   Action,
   ActionItem,
-  RowEven,
   EvenSpace,
   HeaderContent,
   HeaderImage,
@@ -15,30 +14,34 @@ import {
 
 export function HomePage() {
   return (
-    <RowEven>
+    <div>
       <EvenSpace>
         <HeaderContent>
-          <Header>ProProject Studio</Header>
-          <SubTitle>
-            <SubText>
-              <p>
-                Make managing your recording projects easier with ProProject
-                Studio. The only project management app that is both online and
-                in your DAW.
-              </p>
-            </SubText>
-            <ActionList>
-              <Action>
-                <ActionItem href="/register">Get Started</ActionItem>
-              </Action>
-              <Action spaced>
-                <ActionItem href="/login">Login</ActionItem>
-              </Action>
-            </ActionList>
-          </SubTitle>
+          <div>
+            <Header>ProProject Studio</Header>
+            <SubTitle>
+              <SubText>
+                <p>
+                  Make managing your recording projects easier with ProProject
+                  Studio. The only project management app that is both online
+                  and in your DAW.
+                </p>
+              </SubText>
+              <ActionList>
+                <Action>
+                  <ActionItem href="/register">Get Started</ActionItem>
+                </Action>
+                <Action spaced>
+                  <ActionItem href="/login">Login</ActionItem>
+                </Action>
+              </ActionList>
+            </SubTitle>
+          </div>
         </HeaderContent>
-        <Graphic css="height: 100%;width:50%" />
+        <div css={"display:flex; justify-content:center;"}>
+          <Graphic css="height: 100%;width:50%" />
+        </div>
       </EvenSpace>
-    </RowEven>
+    </div>
   );
 }

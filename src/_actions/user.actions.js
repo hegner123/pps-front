@@ -8,7 +8,6 @@ export const userActions = {
   login,
   logout,
   register,
-
   getById,
   delete: _delete,
 };

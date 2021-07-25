@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const AlertBar = styled.div`
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  bottom: 10px;
+  right: 10px;
+  width: 25%;
 `;
 
 export const Alert = styled.div`

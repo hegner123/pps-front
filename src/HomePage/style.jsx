@@ -1,10 +1,23 @@
 import styled, { css } from "styled-components";
 
+export const EvenSpace = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: calc(100vh - 64px);
+  padding: 0 100px;
+`;
+
 export const Header = styled.h1`
   color: var(--text-color);
   align-items: center;
   font-size: 40px;
   font-weight: 300;
+`;
+
+export const HeaderContent = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 export const SubTitle = styled.div`
@@ -43,24 +56,6 @@ export const ActionItem = styled.a`
     background: #3568bf;
     color: #e3fdff;
   }
-`;
-
-export const RowEven = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-export const EvenSpace = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 0 100px;
-`;
-
-export const HeaderContent = styled.div`
-  width: 50%;
 `;
 
 export const HeaderImage = styled.img`
