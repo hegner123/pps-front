@@ -129,3 +129,7 @@ export const DropdownSong = styled.a`
     background-color: var(--bg-accent);
   }
 `;
+
+export const Celltitle = styled.span`
+  cursor: pointer;
+`;

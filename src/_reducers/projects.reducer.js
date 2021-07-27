@@ -16,17 +16,19 @@ if (url.includes("/project/")) {
 }
 
 const initialState = projects
-  ? { projects: projects, current: current }
-  : { projects: "unset" };
+  ? { projects: projects, current: current, selected: 0 }
+  : { projects: "unset", selected: 0 };
 
 export function userData(state = initialState, action) {
   switch (action.type) {
     case projectConstants.GETALL_SUCCESS:
       return {
+        ...state,
         projects: action.projects,
       };
     case projectConstants.GETALL_FAILURE:
       return {
+        ...state,
         error: action.error,
       };
     case projectConstants.STATUS_REQUEST:
@@ -88,6 +90,11 @@ export function userData(state = initialState, action) {
       return {
         ...state,
         songDelete: action.error,
+      };
+    case projectConstants.SET_SELECTED:
+      return {
+        ...state,
+        selected: action.selection,
       };
     default:
       return { ...state };

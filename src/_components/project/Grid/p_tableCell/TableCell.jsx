@@ -10,6 +10,7 @@ import {
   DropdownSong,
   IconButton,
   NavItems,
+  Celltitle,
 } from "./style";
 import Edit from "../../../../_assets/icons/more.svg";
 
@@ -78,7 +79,9 @@ function TableCell(props) {
   } else if (props.songTitle) {
     display = (
       <TitleCell>
-        {songTitle}
+        <Celltitle onClick={(e) => props.setSelected(props.id)}>
+          {songTitle}
+        </Celltitle>
         <NavItem
           openState={dropdownStatus}
           cellId={songTitle}
@@ -170,6 +173,7 @@ const actionCreators = {
   dropdownOpen: uiActions.dropdownOpen,
   dropdownClose: uiActions.dropdownClose,
   getProjects: projectActions.getProjects,
+  setSelected: projectActions.setSelected,
 };
 
 const ConDropdownMenu = connect(mapState, actionCreators)(DropdownMenu);

@@ -14,6 +14,7 @@ export const projectActions = {
   createSong,
   deleteSong,
   changeCellStatus,
+  setSelected,
 };
 
 function getProjects() {
@@ -174,6 +175,16 @@ function changeCellStatus(project, song, instrument, status, id) {
   }
   function failure(error) {
     return { type: projectConstants.STATUS_FAILURE, error };
+  }
+}
+
+function setSelected(selected) {
+  console.log(selected);
+  return (dispatch) => {
+    dispatch(setSelectedSong(selected));
+  };
+  function setSelectedSong(selection) {
+    return { type: projectConstants.SET_SELECTED, selection };
   }
 }
 
