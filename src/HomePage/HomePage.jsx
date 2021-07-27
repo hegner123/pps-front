@@ -37,6 +37,7 @@ export function HomePage() {
               </ActionList>
             </SubTitle>
           </div>
+          
         </HeaderContent>
         <div css={"display:flex; justify-content:center;"}>
           <Graphic css="height: 100%;width:50%" />

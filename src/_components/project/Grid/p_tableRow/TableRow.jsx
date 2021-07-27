@@ -64,7 +64,10 @@ function TableRow(props) {
     }
 
     display = result.map((projectSongs) => (
-      <TableRows key={projectSongs.title}>
+      <TableRows
+        grid={projectSongs.projectArrangement.songArrangement.length + 1}
+        key={projectSongs.title}
+      >
         <TableCell
           songTitle={projectSongs.title}
           key={projectSongs.title}

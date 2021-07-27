@@ -19,9 +19,7 @@ export function SingleProject(props) {
       >
         <PDetails data={songs} />
       </div>
-      <div
-        css={"display:flex; flex-wrap: wrap; width: 100%;line-height: 75px;"}
-      >
+      <div>
         <TableArea data={songs} />
       </div>
       <Info />

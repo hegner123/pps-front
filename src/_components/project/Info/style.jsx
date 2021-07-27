@@ -3,22 +3,23 @@ import styled from "styled-components";
 export const InfoGrid = styled.div`
   width: 100%;
   display: grid;
-  grid: 100px auto;
-  gap: 10px;
+  grid: 100px auto / 90%;
+  justify-content: center;
 `;
 
 export const TitleGrid = styled.div`
   width: 100%;
   display: grid;
   grid: auto / repeat(3, 1fr);
-  gap: 10px;
+  align-items: center;
 `;
 
 export const ProjectInfoGrid = styled.div`
   width: 100%;
   display: grid;
   grid: auto / repeat(3, 1fr);
-  gap: 10px;
+  grid-gap: 10px;
+  margin: 5px;
 `;
 
 export const Title = styled.div`

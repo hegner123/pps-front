@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const TableRow = styled.tr`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid: 100px / repeat(${(props) => props.grid}, 1fr);
 `;

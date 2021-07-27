@@ -10,7 +10,7 @@ export function tableHeaders(props) {
     props.data.unshift("song");
     display = props.data.map((dat) => <TableCell data={dat} key={dat} />);
   }
-  return <TableRow>{display}</TableRow>;
+  return <TableRow grid={props.data.length}>{display}</TableRow>;
 }
 
 const connectedTableHeaders = connect()(tableHeaders);

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { TableHeaders } from "../p_tableHeaders";
 import { TableRow } from "../p_tableRow";
-import loadingGif from "../../../../_assets/images/loading-buffering.gif";
 import { Table, TableHead } from "./style";
 import { projectActions } from "../../../../_actions/project.actions";
 

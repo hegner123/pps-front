@@ -6,8 +6,6 @@ export const CompletedCell = styled.td`
   justify-content: flex-start;
   font-weight: bold;
   color: #333;
-  height: 85px;
-  width: 100%;
   padding: 0 15px;
   font-size: 16px;
   cursor: pointer;
@@ -28,8 +26,7 @@ export const IncompleteCell = styled.td`
   justify-content: flex-start;
   font-weight: bold;
   color: #333;
-  height: 85px;
-  width: 100%;
+
   padding: 0 15px;
   font-size: 16px;
   cursor: pointer;
@@ -48,8 +45,7 @@ export const NaCell = styled.td`
   align-items: center;
   justify-content: flex-start;
   font-weight: bold;
-  height: 85px;
-  width: 100%;
+
   padding: 0 15px;
   font-size: 16px;
   cursor: pointer;
@@ -67,8 +63,7 @@ export const TextCell = styled.td`
   align-items: center;
   font-weight: bold;
   color: var(--table-text-color);
-  height: 85px;
-  width: 100%;
+
   padding: 0 15px;
   font-size: var(--h5);
   line-height: 1rem;
@@ -85,8 +80,6 @@ export const TextCell = styled.td`
 export const TitleCell = styled.td`
   display: flex;
   color: var(--table-text-color);
-  height: 85px;
-  width: 100%;
   padding: 0 15px;
   font-size: 10px;
   line-height: 1rem;

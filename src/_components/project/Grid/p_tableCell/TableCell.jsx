@@ -7,7 +7,6 @@ import {
   NaCell,
   TextCell,
   TitleCell,
-  CellButton,
   DropdownSong,
   IconButton,
   NavItems,
