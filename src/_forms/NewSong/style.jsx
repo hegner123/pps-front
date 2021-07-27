@@ -1,21 +1,35 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Row = styled.section`
+export const Main = styled.main`
+  display: grid;
+  grid: 100% / 2fr 1fr;
   background: #fff;
-  margin-top: 10px;
-  /* display: grid; */
+  grid-gap: 20px;
+  padding: 30px;
+`;
+
+export const Section = styled.section`
+  display: block;
+`;
+
+export const Group = styled.div`
+  display: grid;
+  grid: 50vh / repeat(3, 1fr);
+  grid-gap: 20px;
 `;
 
 export const Centered = styled.div``;
 
 export const Label = styled.label`
+  display: block;
   /* color: var(--text-color);
   margin-bottom: 10px; */
 `;
 
 export const Form = styled.div`
-  /* margin: 0 100px; */
+  display: grid;
+  grid: auto / auto;
 `;
 
 export const FormSection = styled.div``;
@@ -29,6 +43,9 @@ export const FormGroup = styled.div`
 `;
 
 export const FormTitle = styled.h2`
+  display: block;
+  grid-column: 1 / -1;
+
   /* color: var(--text-color);
   font-size: 30px;
   text-align: left;
@@ -152,7 +169,7 @@ export const Button = styled.button`
 `;
 
 export const IconButton = styled.span`
-  /* --button-size: ${(props) =>
+  --button-size: ${(props) =>
     props.small
       ? "calc(var(--nav-size) * 0.2)"
       : "calc(var(--nav-size) * 0.3)"};
@@ -164,9 +181,7 @@ export const IconButton = styled.span`
   border-radius: 50%;
   padding: ${(props) => (props.small ? "3px" : "5px")};
   margin-left: ${(props) => (props.close ? "10px" : "20px")};
-  margin-top: 2px;
-  margin-right: 2px;
-  margin-bottom: 10px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,42 +189,13 @@ export const IconButton = styled.span`
   cursor: pointer;
   &:hover {
     filter: brightness(1.2);
-  } */
+  }
 `;
 
 export const ArrangmentSection = styled.div`
-  /* display: flex;
-  align-items: flex-start;
-  flex-direction: column; */
-`;
-
-export const ReferenceDelete = styled.span`
-  /* width: 20px;
-  background: #f7f7f7;
-  border-radius: 0px 5px 5px 0;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  transition: 300ms;
-  &:hover {
-    filter: brightness(0.5);
-  } */
-`;
-
-export const RefItem = styled.li`
-  /* display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-  color: #000;
-  font-size: 14px;
-  background: #fff;
-  border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px; */
-`;
-
-export const RefP = styled.p`
-  /* font-size: 12px;
-  padding: 5px; */
+  display: block;
+  height: 100%;
+  input {
+    height: 100%;
+  }
 `;

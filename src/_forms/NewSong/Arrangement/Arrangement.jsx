@@ -65,16 +65,16 @@ export const Arrangement = (props) => {
 
   const displayArrangement = form.arrangement.map((key) => {
     return (
-      <div css="width:100%;margin-top:10px" key={key.id}>
+      <div key={key.id}>
         <div css="display:flex;flex-direction:row; color:var(--text-color);">
           <input
             type="text"
             name="edit"
             placeholder="Instrument"
-            css="width:100%"
             value={key.instrument}
             id={key.id}
             onChange={handleChange}
+            css={"height:100%;"}
           />
           <IconButton onClick={() => handleClick("delete", "delete", key.id)}>
             <Delete />
@@ -84,15 +84,5 @@ export const Arrangement = (props) => {
     );
   });
 
-  return (
-    <div>
-      <div css="display:flex; align-items:center;">
-        <label>Song Arrangement</label>
-        <IconButton small close onClick={() => handleClick("add", "")}>
-          <Add />
-        </IconButton>
-      </div>
-      {displayArrangement}
-    </div>
-  );
+  return <div>{displayArrangement}</div>;
 };

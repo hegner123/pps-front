@@ -14,14 +14,15 @@ import {
   FormInnerSection,
   FormTitle,
   FormGroup,
-  Browser,
   Label,
-  Row,
+  Main,
   Input,
   InputGroup,
   InputGroupButton,
   IconButton,
   ArrangmentSection,
+  Section,
+  Group,
 } from "./style";
 import { useParams } from "react-router";
 
@@ -48,77 +49,85 @@ function NewSong(props) {
   }
 
   return (
-    <Row>
-      <Arrangement />
-    </Row>
+    <Main>
+      <Section>
+        <Form>
+          <FormTitle>New Song</FormTitle>
+          <form name="newSong" onSubmit={handleSubmit}>
+            <Group>
+              <FormInnerSection>
+                <FormGroup>
+                  <Label htmlFor="songTitle">Song Title</Label>
+                  <Input
+                    type="text"
+                    placeholder="New Song"
+                    name="songTitle"
+                    value={songTitle}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="key">Key</Label>
+                  <Input type="text" placeholder="key" name="key" value="" />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="BPM">BPM</Label>
+                  <Input type="text" placeholder="120bpm" name="bpm" value="" />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="lyrics">Lyrics</Label>
+                  <Input type="file" name="lyris" />
+                </FormGroup>
+              </FormInnerSection>
+              <FormInnerSection>
+                <FormGroup>
+                  <ArrangmentSection>
+                    <div css={"display:flex;"}>
+                      <Label>Song Arrangement</Label>
+                      <IconButton
+                        small
+                        close
+                        onClick={() => handleClick("add", "")}
+                      >
+                        <Add />
+                      </IconButton>
+                    </div>
+                    <Arrangement />
+                  </ArrangmentSection>
+                </FormGroup>
+              </FormInnerSection>
+              <FormInnerSection>
+                <FormGroup>
+                  <Label>Search References</Label>
+                  <div css="display:flex;flex-direction:Main; color:var(--text-color); align-items:center;">
+                    <InputGroup
+                      placeholder=""
+                      type="text"
+                      name="referenceSeach"
+                      value={getReference}
+                    />
+                    <InputGroupButton onClick={(e) => handleSearch(e)}>
+                      <Search />
+                    </InputGroupButton>
+                  </div>
+                </FormGroup>
+              </FormInnerSection>
+            </Group>
+            <ActionGroup>
+              <Button>Create</Button>
+              <Btn to={`/project/${projectPage}`}>Cancel</Btn>
+            </ActionGroup>
+          </form>
+        </Form>
+      </Section>
+      <Section></Section>
+      <Section></Section>
+      {/* <BMainser>
+          <h2 css="color:var(--text-color);margin-bottom:20px;font-size:26px;font-weight:600;">
+            References
+          </h2>
+        </BMainser> */}
+    </Main>
   );
-  //   <Row>
-  //     <div>
-  //       <Form>
-  //         <FormTitle>New Song</FormTitle>
-  //         <form name="newSong" onSubmit={handleSubmit}>
-  //           <div>
-  //             <FormInnerSection>
-  //               <FormGroup>
-  //                 <Label htmlFor="songTitle">Song Title</Label>
-  //                 <Input
-  //                   type="text"
-  //                   placeholder="New Song"
-  //                   name="songTitle"
-  //                   value={songTitle}
-  //                   onChange={handleFormChange}
-  //                 />
-  //               </FormGroup>
-  //               <FormGroup>
-  //                 <ArrangmentSection>
-  //                   <div css="display:flex; align-items:center;">
-  //                     <Label>Song Arrangement</Label>
-  //                     <IconButton
-  //                       small
-  //                       close
-  //                       onClick={() => handleClick("add", "")}
-  //                     >
-  //                       <Add />
-  //                     </IconButton>
-  //                   </div>
-  //                   {displayArrangement}
-  //                 </ArrangmentSection>
-  //               </FormGroup>
-  //             </FormInnerSection>
-  //             <FormInnerSection>
-  //               <FormGroup>
-  //                 <Label>Search References</Label>
-  //                 <div css="display:flex;flex-direction:row; color:var(--text-color); align-items:center;">
-  //                   <InputGroup
-  //                     placeholder=""
-  //                     type="text"
-  //                     name="referenceSeach"
-  //                     value={getReference}
-  //                     onChange={handleFormChange}
-  //                   />
-  //                   <InputGroupButton onClick={(e) => handleSearch(e)}>
-  //                     <Search />
-  //                   </InputGroupButton>
-  //                 </div>
-  //                 {refList}
-  //               </FormGroup>
-  //             </FormInnerSection>
-  //           </div>
-  //           <ActionGroup>
-  //             <Button>Create</Button>
-  //             <Btn to={`/project/${projectPage}`}>Cancel</Btn>
-  //           </ActionGroup>
-  //         </form>
-  //       </Form>
-  //       <Browser>
-  //         <h2 css="color:var(--text-color);margin-bottom:20px;font-size:26px;font-weight:600;">
-  //           References
-  //         </h2>
-  //         {referenceArray}
-  //       </Browser>
-  //     </div>
-  //   </Row>
-  // );
 }
 
 function mapState(state) {
