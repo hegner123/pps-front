@@ -8,6 +8,7 @@ import Home from "../../_assets/icons/home.svg";
 import LogoutIcon from "../../_assets/icons/logout.svg";
 import DeleteIcon from "../../_assets/icons/delete.svg";
 import Settings from "../../_assets/icons/settings.svg";
+import Account from "../../_assets/icons/account.svg";
 import {
   IconButton,
   NavItems,
@@ -17,6 +18,7 @@ import {
   AdminControls,
   Input,
   BrandLink,
+  DropdownLink,
 } from "./style";
 import { CSSTransition } from "react-transition-group";
 import { uiActions } from "../../_actions";
@@ -28,8 +30,7 @@ const Menu = (props) => {
     state.userData.current ? state.userData.current._id : ""
   );
   const ui = props.userInterface;
-  let searchBar;
-  let settings;
+  let searchBar, settings;
   if (loggedIn) {
     searchBar = (
       <Search>
@@ -121,7 +122,7 @@ function DropdownMenu(props) {
 
   function DropdownItem(props) {
     return (
-      <a
+      <DropdownLink
         href="#"
         className="menu-item"
         css="color:var(--text-color)"
@@ -129,7 +130,7 @@ function DropdownMenu(props) {
       >
         <span>{props.icon}</span>
         {props.children}
-      </a>
+      </DropdownLink>
     );
   }
 
@@ -153,6 +154,13 @@ function DropdownMenu(props) {
               Delete Project
             </DropdownItem>
           )}
+          <DropdownItem
+            icon={
+              <Account css="fill: var(--text-color);height:20px;width:20px;" />
+            }
+          >
+            Account
+          </DropdownItem>
 
           <DropdownItem
             action={() => props.logOut()}

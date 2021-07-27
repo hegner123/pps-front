@@ -168,7 +168,7 @@ input:focus {
 .dropdown {
   position: absolute;
   top: 58px;
-  width: 300px;
+  width: 150px;
   transform: translateX(-45%);
   background-color: var(--bg);
   border: var(--border);
@@ -194,7 +194,6 @@ input:focus {
   align-items: center;
   border-radius: var(--border-radius);
   transition: background var(--speed);
-  padding: 0.5rem;
 }
 
 .menu-item .icon-button {

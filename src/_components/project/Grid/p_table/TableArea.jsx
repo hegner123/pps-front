@@ -19,7 +19,7 @@ function TableArea(props) {
       });
     });
     //   user-defined sorting, or manipulating could be cool
-    return instruments.sort();
+    return instruments;
   }
   return (
     <Table>

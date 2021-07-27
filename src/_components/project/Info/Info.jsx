@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { InfoGrid, TitleGrid, ProjectInfoGrid, Title, Field } from "./style";
 
 const Info = (props) => {
-  let song = props.userData.current.songs[2];
+  let selected = props.userData.selected;
+  let song = props.userData.current.songs[selected];
   let project = props.userData.current;
 
   return (
@@ -42,7 +43,7 @@ const Info = (props) => {
           {song.song_references.map((ref) => (
             <div>
               <span>{ref.name}</span>
-              <audio src={ref.preview} controls css={"margin-left:10px;"}/>
+              <audio src={ref.preview} controls css={"margin-left:10px;"} />
             </div>
           ))}
         </Field>

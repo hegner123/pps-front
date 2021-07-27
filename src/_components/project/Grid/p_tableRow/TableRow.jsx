@@ -70,6 +70,7 @@ function TableRow(props) {
         <TableCell
           songTitle={projectSongs.title}
           key={i}
+          id={i}
           songId={projectSongs.songId}
         />
         {mapStatus({
