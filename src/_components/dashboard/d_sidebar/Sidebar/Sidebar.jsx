@@ -29,17 +29,15 @@ const Sidebar = (props) => {
     }
   }, [props.userData.projects]);
 
-  let i = 0;
-
   return (
     <SidebarCol>
       {isReady &&
-        recentActivity.map((activity) => (
+        recentActivity.map((activity, i) => (
           <Notifications
             user={activity.user}
             activity={activity}
             type={activity.type}
-            key={i++}
+            key={i}
           />
         ))}
     </SidebarCol>

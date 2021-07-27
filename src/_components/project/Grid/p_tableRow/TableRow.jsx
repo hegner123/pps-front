@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useSelector } from "react-redux";
 import { TableCell } from "../p_tableCell";
 import { TableRows } from "./style";
 import { projectActions } from "../../../../_actions/project.actions";
@@ -63,14 +62,14 @@ function TableRow(props) {
       result.push(row);
     }
 
-    display = result.map((projectSongs) => (
+    display = result.map((projectSongs, i) => (
       <TableRows
         grid={projectSongs.projectArrangement.songArrangement.length + 1}
         key={projectSongs.title}
       >
         <TableCell
           songTitle={projectSongs.title}
-          key={projectSongs.title}
+          key={i}
           songId={projectSongs.songId}
         />
         {mapStatus({
@@ -84,8 +83,7 @@ function TableRow(props) {
   }
 
   function mapStatus({ title, songs, songId }) {
-    let i = 0;
-    return songs.map((data) => (
+    return songs.map((data, i) => (
       <TableCell
         projectId={props.projectId}
         songId={songId}
@@ -93,7 +91,7 @@ function TableRow(props) {
         instrument={data.instrument}
         data={data.status}
         title={title}
-        key={i++}
+        key={i}
       />
     ));
   }

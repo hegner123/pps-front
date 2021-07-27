@@ -4,7 +4,7 @@ import { alertActions, uiActions } from "../_actions";
 import { connect } from "react-redux";
 import { history } from "../_helpers";
 import { PrivateRoute } from "../_components/privateRoute";
-import { Branding } from "../_components/brand";
+import { Menu } from "../_components/menu";
 import { HomePage } from "../HomePage";
 import { SingleProject } from "../Project";
 import { LoginPage } from "../_forms/Login";
@@ -50,7 +50,7 @@ const App = (props) => {
   return (
     <div className="container">
       <Router history={history}>
-        <Branding logout={() => logout(props)} />
+        <Menu logout={() => logout(props)} />
         <Switch>
           <PrivateRoute exact path="/project/:id" component={SingleProject} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />

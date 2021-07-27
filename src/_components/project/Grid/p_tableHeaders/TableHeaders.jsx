@@ -8,7 +8,7 @@ export function tableHeaders(props) {
 
   if (props.id !== "table-body") {
     props.data.unshift("song");
-    display = props.data.map((dat) => <TableCell data={dat} key={dat} />);
+    display = props.data.map((dat, i) => <TableCell data={dat} key={i} />);
   }
   return <TableRow grid={props.data.length}>{display}</TableRow>;
 }

@@ -14,7 +14,6 @@ import {
 function RecentProjects(props) {
   const data = props.data;
 
-  let i = 0;
   return (
     <Section>
       <DashHeader>
@@ -22,8 +21,8 @@ function RecentProjects(props) {
       </DashHeader>
       <ProjectSection>
         {data &&
-          data.map((entry) => (
-            <RecentProjectTile id={entry.recentID} key={i++} />
+          data.map((entry, i) => (
+            <RecentProjectTile id={entry.recentID} key={i} />
           ))}
       </ProjectSection>
     </Section>
@@ -42,8 +41,6 @@ function UserProjects(props) {
       handleIsReady();
     }
   }, [props.userData.projects]);
-
-  let i = 0;
   return (
     <Section>
       <DashHeader>
@@ -56,12 +53,12 @@ function UserProjects(props) {
       </DashHeader>
       <ProjectSection>
         {isReady &&
-          props.userData.projects.map((entry) => (
+          props.userData.projects.map((entry, i) => (
             <ProjectTile
               data={entry.projectTitle}
               slug={entry.projectSlug}
               id={entry._id}
-              key={i++}
+              key={i}
             />
           ))}
       </ProjectSection>

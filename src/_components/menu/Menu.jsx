@@ -22,7 +22,7 @@ import { CSSTransition } from "react-transition-group";
 import { uiActions } from "../../_actions";
 import { useOnClickOutside } from "../../_hooks/onClickOutside";
 
-function Branding(props) {
+const Menu = (props) => {
   const loggedIn = props.authentication.loggedIn;
   const current = useSelector((state) =>
     state.userData.current ? state.userData.current._id : ""
@@ -81,7 +81,7 @@ function Branding(props) {
       </AdminControls>
     </AdminBar>
   );
-}
+};
 
 function NavItemLink(props) {
   return (
@@ -180,7 +180,7 @@ const actionCreators = {
   setSettingsClose: uiActions.setSettingsClose,
 };
 
-const connectedBranding = connect(mapState, actionCreators)(Branding);
-export { connectedBranding as Branding };
+const connectedMenu = connect(mapState, actionCreators)(Menu);
+export { connectedMenu as Menu };
 
 const ConDropdownMenu = connect(mapState, actionCreators)(DropdownMenu);
