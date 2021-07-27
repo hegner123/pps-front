@@ -132,4 +132,7 @@ export const DropdownSong = styled.a`
 
 export const Celltitle = styled.span`
   cursor: pointer;
+  &:hover {
+    filter: brightness(1.5);
+  }
 `;

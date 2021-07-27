@@ -80,3 +80,12 @@ export const IconButton = styled.a`
     filter: brightness(1.2);
   }
 `;
+
+export const DropdownLink = styled.a`
+  background: transparent;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover {
+    background: var(--bg-accent);
+    filter: brightness(1.5);
+  }
+`;
