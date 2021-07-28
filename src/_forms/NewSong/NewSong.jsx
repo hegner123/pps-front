@@ -27,9 +27,11 @@ import {
 import { useParams } from "react-router";
 
 function NewSong(props) {
-  const [songTitle, setSongTitle] = useState("");
   const [getReference, setGetReference] = useState("");
-
+  const [valSongTitle, setSongTitle] = useState("");
+  const [valSongKey, setSongKey] = useState("");
+  const [valSongBpm, setSongBpm] = useState("");
+  const [valSongLyrics, setSongLyrics] = useState("");
   const [references, setReferences] = useState([""]);
   const projectPage = useParams().id;
   const currentProject = props.project;
@@ -62,20 +64,46 @@ function NewSong(props) {
                     type="text"
                     placeholder="New Song"
                     name="songTitle"
-                    value={songTitle}
+                    value={valSongTitle}
+                    onChange={(e) => setSongTitle(e.target.value)}
                   />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="key">Key</Label>
-                  <Input type="text" placeholder="key" name="key" value="" />
+                  <Input
+                    type="text"
+                    placeholder="key"
+                    name="key"
+                    value={valSongKey}
+                    onChange={(e) => setSongKey(e.target.value)}
+                  />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="BPM">BPM</Label>
-                  <Input type="text" placeholder="120bpm" name="bpm" value="" />
+                  <Input
+                    type="text"
+                    placeholder="120bpm"
+                    name="bpm"
+                    value={valSongBpm}
+                    onChange={(e) => setSongBpm(e.target.value)}
+                  />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="lyrics">Lyrics</Label>
-                  <Input type="file" name="lyris" />
+                  <textarea
+                    name="typedLyrics"
+                    id="typedLyrics"
+                    cols="30"
+                    rows="10"
+                    value={valSongLyrics}
+                    onChange={(e) => setSongLyrics(e.target.value)}
+                    placeholder="Never gunna give you up..."
+                  ></textarea>
+                  <Input
+                    type="file"
+                    name="lyris"
+                    onChange={(e) => console.log(e.target.value)}
+                  />
                 </FormGroup>
               </FormInnerSection>
               <FormInnerSection>
@@ -90,6 +118,13 @@ function NewSong(props) {
                       >
                         <Add />
                       </IconButton>
+                    </div>
+                    <div>
+                      <label>Template</label>
+                      <select id="arrangement-template">
+                        <option value="">-----</option>
+                        <option value="test">Test</option>
+                      </select>
                     </div>
                     <Arrangement />
                   </ArrangmentSection>
