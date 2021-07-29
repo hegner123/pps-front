@@ -10,24 +10,7 @@ import Delete from '../../_assets/icons/delete.svg'
 import Search from '../../_assets/icons/search.svg'
 import { References } from './References'
 import { Arrangement } from './Arrangement'
-import {
-    ActionGroup,
-    Button,
-    Btn,
-    Form,
-    FormInnerSection,
-    FormTitle,
-    FormGroup,
-    Label,
-    Main,
-    Input,
-    InputGroup,
-    InputGroupButton,
-    IconButton,
-    ArrangmentSection,
-    Section,
-    Group,
-} from './style'
+import { Main, Btn, Grid, ArrangmentSection } from './style'
 import { useParams } from 'react-router'
 
 function NewSong(props) {
@@ -157,17 +140,17 @@ function NewSong(props) {
 
     return (
         <Main>
-            <Section>
-                <Form>
-                    <FormTitle>New Song</FormTitle>
+            <div className="section">
+                <div className="form">
+                    <h2>New Song</h2>
                     <form name="newSong" onSubmit={handleSubmit}>
-                        <Group>
-                            <FormInnerSection>
-                                <FormGroup>
-                                    <Label htmlFor="songTitle">
+                        <Grid>
+                            <section>
+                                <div>
+                                    <label htmlFor="songTitle">
                                         Song Title
-                                    </Label>
-                                    <Input
+                                    </label>
+                                    <input
                                         type="text"
                                         placeholder="New Song"
                                         name="songTitle"
@@ -176,10 +159,10 @@ function NewSong(props) {
                                             setSongTitle(e.target.value)
                                         }
                                     />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="key">Key</Label>
-                                    <Input
+                                </div>
+                                <div>
+                                    <label htmlFor="key">Key</label>
+                                    <input
                                         type="text"
                                         placeholder="key"
                                         name="key"
@@ -188,10 +171,10 @@ function NewSong(props) {
                                             setSongKey(e.target.value)
                                         }
                                     />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="BPM">BPM</Label>
-                                    <Input
+                                </div>
+                                <div>
+                                    <label htmlFor="BPM">BPM</label>
+                                    <input
                                         type="text"
                                         placeholder="120bpm"
                                         name="bpm"
@@ -200,9 +183,9 @@ function NewSong(props) {
                                             setSongBpm(e.target.value)
                                         }
                                     />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="lyrics">Lyrics</Label>
+                                </div>
+                                <div>
+                                    <label htmlFor="lyrics">Lyrics</label>
                                     <textarea
                                         name="typedLyrics"
                                         id="typedLyrics"
@@ -214,20 +197,20 @@ function NewSong(props) {
                                         }
                                         placeholder="Never gunna give you up..."
                                     ></textarea>
-                                    <Input
+                                    <input
                                         type="file"
                                         name="lyris"
                                         onChange={(e) =>
                                             console.log(e.target.value)
                                         }
                                     />
-                                </FormGroup>
-                            </FormInnerSection>
-                            <FormInnerSection>
-                                <FormGroup>
+                                </div>
+                            </section>
+                            <section>
+                                <div>
                                     <ArrangmentSection>
                                         <div css={'display:flex;'}>
-                                            <Label>Song Arrangement</Label>
+                                            <label>Song Arrangement</label>
                                         </div>
                                         <div
                                             css={
@@ -273,22 +256,23 @@ function NewSong(props) {
                                             }
                                         />
                                     </ArrangmentSection>
-                                </FormGroup>
-                            </FormInnerSection>
-                        </Group>
-                        <ActionGroup>
-                            <Button>Create</Button>
+                                </div>
+                            </section>
+                        </Grid>
+                        <div>
+                            <button>Create</button>
                             <Btn to={`/project/${projectPage}`}>Cancel</Btn>
-                        </ActionGroup>
+                        </div>
                     </form>
                     <form
                         onSubmit={(e) => hanldeSpotifySearch(e, getReference)}
                     >
-                        <FormInnerSection>
-                            <FormGroup>
-                                <Label>Search References</Label>
+                        <section>
+                            <div>
+                                <label>Search References</label>
                                 <div css="display:flex; color:var(--text-color); align-items:center;">
-                                    <InputGroup
+                                    <input
+                                        className="input-group"
                                         id="spotify-search"
                                         placeholder="Search Spotify"
                                         type="text"
@@ -298,18 +282,19 @@ function NewSong(props) {
                                             setReference(e.target.value)
                                         }
                                     />
-                                    <InputGroupButton
+                                    <span
+                                        className="input-group-btn"
                                         onClick={(e) => handleSearch(e)}
                                     >
                                         <Search />
-                                    </InputGroupButton>
+                                    </span>
                                 </div>
-                            </FormGroup>
-                        </FormInnerSection>
+                            </div>
+                        </section>
                     </form>
                     <References />
-                </Form>
-            </Section>
+                </div>
+            </div>
         </Main>
     )
 }
