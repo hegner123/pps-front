@@ -31,7 +31,7 @@ import {
 import { useParams } from 'react-router'
 
 function NewSong(props) {
-    const [getReference, setGetReference] = useState('')
+    const [getReference, setReference] = useState('')
     const [valSongTitle, setSongTitle] = useState('')
     const [valSongKey, setSongKey] = useState('')
     const [valSongBpm, setSongBpm] = useState('')
@@ -100,8 +100,14 @@ function NewSong(props) {
         }
     }
 
+    function handleRefDelete(e, refId) {
+        e.preventDefault()
+        setSongRefs(songRefs.filter((ref) => ref.id != refId))
+    }
+
     function handleClick(action, value, id) {
         dispatch({ action, value, id })
+        console.log('{ action, value, id }', { action, value, id })
     }
 
     function handleDispatch(action, value, id) {
@@ -111,6 +117,15 @@ function NewSong(props) {
     function handleChange(event) {
         const { name, value, id } = event.target
         dispatch({ action: name, value, id })
+    }
+
+    function hanldeSpotifySearch(e, ref) {
+        e.preventDefault()
+        props.getReferences(ref)
+    }
+
+    function handleEdit(action, value, id) {
+        dispatch({ action, value, id })
     }
 
     function useReducer(reducer, initialState) {
@@ -213,23 +228,14 @@ function NewSong(props) {
                                     <ArrangmentSection>
                                         <div css={'display:flex;'}>
                                             <Label>Song Arrangement</Label>
-                                            <IconButton
-                                                small
-                                                close
-                                                onClick={() =>
-                                                    handleClick('add', '')
-                                                }
-                                            >
-                                                <Add />
-                                            </IconButton>
                                         </div>
                                         <div
                                             css={
-                                                'display:flex;justify-content:space-between;'
+                                                'display:flex;justify-content:space-between;margin-bottom:27px; height:100%;'
                                             }
                                         >
-                                            <label>Template</label>
                                             <select
+                                                css={'height:31px;'}
                                                 id="arrangement-template"
                                                 onChange={(e) =>
                                                     setTemplate(e.target.value)
@@ -252,32 +258,21 @@ function NewSong(props) {
                                         </div>
                                         <Arrangement
                                             template={form.arrangement}
-                                            handleChange={(e) =>
-                                                handleChange(e)
+                                            handleChange={(e, f) =>
+                                                handleEdit('edit', e, f)
+                                            }
+                                            handleAdd={() =>
+                                                handleClick('add', '')
+                                            }
+                                            handleDelete={(e) =>
+                                                handleClick(
+                                                    'delete',
+                                                    'delete',
+                                                    e
+                                                )
                                             }
                                         />
                                     </ArrangmentSection>
-                                </FormGroup>
-                            </FormInnerSection>
-                            <FormInnerSection>
-                                <FormGroup>
-                                    <Label>Search References</Label>
-                                    <div css="display:flex;flex-direction:Main; color:var(--text-color); align-items:center;">
-                                        <InputGroup
-                                            placeholder=""
-                                            type="text"
-                                            name="referenceSeach"
-                                            value={getReference}
-                                            onChange={(e) =>
-                                                console.log(e.target.value)
-                                            }
-                                        />
-                                        <InputGroupButton
-                                            onClick={(e) => handleSearch(e)}
-                                        >
-                                            <Search />
-                                        </InputGroupButton>
-                                    </div>
                                 </FormGroup>
                             </FormInnerSection>
                         </Group>
@@ -286,15 +281,35 @@ function NewSong(props) {
                             <Btn to={`/project/${projectPage}`}>Cancel</Btn>
                         </ActionGroup>
                     </form>
+                    <form
+                        onSubmit={(e) => hanldeSpotifySearch(e, getReference)}
+                    >
+                        <FormInnerSection>
+                            <FormGroup>
+                                <Label>Search References</Label>
+                                <div css="display:flex; color:var(--text-color); align-items:center;">
+                                    <InputGroup
+                                        id="spotify-search"
+                                        placeholder="Search Spotify"
+                                        type="text"
+                                        name="referenceSeach"
+                                        value={getReference}
+                                        onChange={(e) =>
+                                            setReference(e.target.value)
+                                        }
+                                    />
+                                    <InputGroupButton
+                                        onClick={(e) => handleSearch(e)}
+                                    >
+                                        <Search />
+                                    </InputGroupButton>
+                                </div>
+                            </FormGroup>
+                        </FormInnerSection>
+                    </form>
+                    <References />
                 </Form>
             </Section>
-            <Section></Section>
-            <Section></Section>
-            {/* <Browser>
-          <h2 css="color:var(--text-color);margin-bottom:20px;font-size:26px;font-weight:600;">
-            References
-          </h2>
-        </Browser> */}
         </Main>
     )
 }
@@ -306,6 +321,7 @@ function mapState(state) {
 
 const actionCreators = {
     createSong: projectActions.createSong,
+    getReferences: refActions.getReferences,
 }
 
 const connectedNewSong = connect(mapState, actionCreators)(NewSong)

@@ -1,201 +1,179 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const Main = styled.main`
-  display: grid;
-  grid: 100% / 2fr 1fr;
-  background: #fff;
-  grid-gap: 20px;
-  padding: 30px;
-`;
+    padding: 30px;
+    input,
+    textarea,
+    select,
+    option {
+        border-radius: 4px;
+        border: 1px solid var(--input-border);
+    }
+    textarea {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 5px;
+        padding: 5px;
+        &:focus {
+            outline: none;
+            border: 1px solid rgba(0, 0, 0, 0);
+        }
+    }
+    input[type='file'] {
+        color: var(--text-color);
+    }
+`
 
 export const Section = styled.section`
-  display: block;
-`;
+    display: block;
+`
 
 export const Group = styled.div`
-  display: grid;
-  grid: 50vh / repeat(3, 1fr);
-  grid-gap: 20px;
-`;
+    display: grid;
+    grid: 50vh / repeat(2, 1fr);
+    grid-gap: 3rem;
+`
 
-export const Centered = styled.div``;
+export const Centered = styled.div``
 
 export const Label = styled.label`
-  display: block;
-  /* color: var(--text-color);
-  margin-bottom: 10px; */
-`;
+    display: block;
+    font-size: var(--small);
+    color: var(--text-color);
+    padding-top: 10px;
+`
 
 export const Form = styled.div`
-  display: grid;
-  grid: auto / auto;
-`;
+    width: 100%;
+    display: grid;
+    grid: auto / 1fr 0.5fr 1fr;
+`
 
-export const FormSection = styled.div``;
+export const FormSection = styled.div``
 
 export const FormInnerSection = styled.section`
-  /* margin: 10px; */
-`;
+    /* margin: 10px; */
+`
 
 export const FormGroup = styled.div`
-  /* margin: 10px 0; */
-`;
+    #spotify-search {
+        border-radius: 4px 0 0 4px;
+    }
+`
 
 export const FormTitle = styled.h2`
-  display: block;
-  grid-column: 1 / -1;
+    display: block;
+    grid-column: 1 / -1;
 
-  /* color: var(--text-color);
-  font-size: 30px;
-  text-align: left;
-  margin-bottom: 10px; */
-`;
+    color: var(--text-color);
 
-export const Browser = styled.aside`
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 2;
-  overflow: auto;
-  height: 90%;
-  border: none;
-  margin: 0 100px; */
-`;
+    text-align: left;
+`
 
-export const Preview = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px; */
-`;
+export const Input = styled.input`
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    padding: 5px;
+`
 
-export const Title = styled.p`
-  /* color: var(--text-color);
-  width: 75%; */
-`;
+export const IconButton = styled.span`
+    --button-size: ${(props) =>
+        props.small
+            ? 'calc(var(--nav-size) * 0.2)'
+            : 'calc(var(--nav-size) * 0.3)'};
+    width: var(--button-size);
+    height: var(--button-size);
+    background-color: var(--bg-accent);
+    fill: var(--text-color);
+    font-size: 20px;
+    border-radius: 50%;
+    padding: ${(props) => (props.small ? '3px' : '5px')};
+    margin-left: ${(props) => (props.close ? '10px' : '20px')};
 
-export const Artist = styled.p`
-  /* color: var(--text-color);
-  font-size: 12px;
-  margin-left: 10px; */
-`;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 300ms;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(1.2);
+    }
+`
+
+export const ArrangmentSection = styled.div`
+    display: block;
+    height: 100%;
+    input {
+        height: 100%;
+    }
+`
 
 export const HelpBlock = styled.div`
-  /* font-size: 12px;
+    /* font-size: 12px;
   padding: 3px 0;
   color: rgb(138, 86, 86);
   margin: 10px 0 2px; */
-`;
-
-export const Input = styled.input`
-  /* width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 5px;
-  padding: 5px;
-  &:focus {
-    outline: none;
-    border: 1px solid rgba(0, 0, 0, 0);
-  } */
-`;
+`
 
 export const InputGroup = styled.input`
-  /* width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 5px 0 0 5px;
-  padding: 5px;
-  &:focus {
-    outline: none;
+    height: 31px;
+    width: 100%;
     border: 1px solid rgba(0, 0, 0, 0);
-  } */
-`;
+    padding: 5px;
+
+`
 
 export const InputGroupButton = styled.span`
-  /* width: 20px;
-  background: #f7f7f7;
-  border-radius: 0px 5px 5px 0;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  transition: 300ms;
-  &:hover {
-    filter: brightness(0.5);
-  } */
-`;
+    height: 31px;
+    width: 20px;
+    background: #f7f7f7;
+    border-radius: 0px 4px 4px 0;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: 300ms;
+    &:hover {
+        filter: brightness(0.5);
+    }
+`
 
-export const ActionGroup = styled.div`
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0; */
-`;
+export const ActionGroup = styled.div``
 
 export const Btn = styled(Link)`
-  /* padding: 10px;
-  text-align: center;
-  border: var(--border);
-  color: var(--text-color);
-  font-size: 16px;
-  font-weight: 500;
-  margin: 10px;
-  border-radius: 5px;
-  transition-duration: 0.2s;
-  width: 100%;
-  cursor: pointer;
-  transition: 300ms;
-  &:hover {
-    background: var(--bg-accent);
-    filter: brightness(1.5);
-  } */
-`;
+    padding: 10px;
+    text-align: center;
+    border: var(--border);
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+    width: 100%;
+    cursor: pointer;
+    transition: 300ms;
+    &:hover {
+        background: var(--bg-accent);
+        filter: brightness(1.5);
+    }
+`
 
 export const Button = styled.button`
-  /* padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  font-weight: 500;
-  margin: 10px;
-  margin-left: 0px;
-  border-radius: 5px;
-  width: 100%;
-  background-color: var(--bg-accent);
-  color: var(--text-color);
-  cursor: pointer;
-  transition: 300ms;
-  &:hover {
-    filter: brightness(1.5);
-  } */
-`;
-
-export const IconButton = styled.span`
-  --button-size: ${(props) =>
-    props.small
-      ? "calc(var(--nav-size) * 0.2)"
-      : "calc(var(--nav-size) * 0.3)"};
-  width: var(--button-size);
-  height: var(--button-size);
-  background-color: var(--bg-accent);
-  fill: var(--text-color);
-  font-size: 20px;
-  border-radius: 50%;
-  padding: ${(props) => (props.small ? "3px" : "5px")};
-  margin-left: ${(props) => (props.close ? "10px" : "20px")};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: filter 300ms;
-  cursor: pointer;
-  &:hover {
-    filter: brightness(1.2);
-  }
-`;
-
-export const ArrangmentSection = styled.div`
-  display: block;
-  height: 100%;
-  input {
-    height: 100%;
-  }
-`;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px;
+    margin-left: 0px;
+    border-radius: 5px;
+    background-color: var(--bg-accent);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 300ms;
+    &:hover {
+        filter: brightness(1.5);
+    }
+`

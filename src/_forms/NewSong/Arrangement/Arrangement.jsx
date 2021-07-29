@@ -1,8 +1,8 @@
-import React, { useState, useReducer, useEffect } from 'react'
-import Add from '../../../_assets/icons/add.svg'
+import React, { useState, useEffect } from 'react'
 import Delete from '../../../_assets/icons/delete.svg'
-import { v4 as uuidv4 } from 'uuid'
-import { IconButton } from '../../../_components/project/Grid/p_tableCell/style'
+import Add from '../../../_assets/icons/add.svg'
+
+import { ArrangeEditor, IconButton, InputGroup } from './style'
 
 export const Arrangement = (props) => {
     const [isLoading, setLoading] = useState(true)
@@ -19,30 +19,37 @@ export const Arrangement = (props) => {
         ? ''
         : props.template.map((key) => {
               return (
-                  <div key={key.id} css={"margin-top:10px;"}>
+                  <div key={key.id}>
                       <div css="display:flex;flex-direction:row; color:var(--text-color);">
-                          <input
+                          <InputGroup
                               type="text"
                               name="edit"
                               placeholder="Instrument"
                               value={key.instrument}
                               id={key.id}
                               onChange={(e) =>
-                                  props.handleChange(e.target.value)
+                                  props.handleChange(e.target.value, key.id)
                               }
                               css={'height:100%;'}
                           />
-                          <IconButton
-                              onClick={() =>
-                                  handleClick('delete', 'delete', key.id)
-                              }
-                          >
-                              <Delete />
-                          </IconButton>
+                          <div css={'display:flex;'}>
+                              <IconButton
+                                  small
+                                  open
+                                  onClick={() => props.handleAdd()}
+                              >
+                                  <Add />
+                              </IconButton>
+                              <IconButton
+                                  onClick={() => props.handleDelete(key.id)}
+                              >
+                                  <Delete />
+                              </IconButton>
+                          </div>
                       </div>
                   </div>
               )
           })
 
-    return <div>{displayArrangement}</div>
+    return <ArrangeEditor>{displayArrangement}</ArrangeEditor>
 }
