@@ -1,16 +1,15 @@
 import React, { useState, useReducer, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { projectActions, refActions } from '../../_actions'
+import { projectActions, refActions, formActions } from '../../_actions'
 import Add from '../../_assets/icons/add.svg'
 //! development query
 import { query } from './_query'
 import { v4 as uuidv4 } from 'uuid'
-
 import Delete from '../../_assets/icons/delete.svg'
 import Search from '../../_assets/icons/search.svg'
 import { References } from './References'
 import { Arrangement } from './Arrangement'
-import { Main, Btn, Grid, ArrangmentSection } from './style'
+import { Main, Btn, Grid, ArrangmentSection, IconButton } from './style'
 import { useParams } from 'react-router'
 
 function NewSong(props) {
@@ -240,13 +239,11 @@ function NewSong(props) {
                                             </select>
                                         </div>
                                         <Arrangement
-                                            template={form.arrangement}
+                                            template={props.form.arrangement}
                                             handleChange={(e, f) =>
                                                 handleEdit('edit', e, f)
                                             }
-                                            handleAdd={() =>
-                                                handleClick('add', '')
-                                            }
+                                            handleAdd={() => props.instAdd()}
                                             handleDelete={(e) =>
                                                 handleClick(
                                                     'delete',
@@ -289,6 +286,37 @@ function NewSong(props) {
                                         <Search />
                                     </span>
                                 </div>
+                                <div>
+                                    {references}
+                                    <div css="display:flex;flex-direction:row;">
+                                        <div
+                                            className="input-group"
+                                            css={'height:100%;width:100%;'}
+                                        >
+                                            Result
+                                        </div>
+
+                                        <IconButton
+                                            onClick={() => props.handleDelete()}
+                                        >
+                                            <Delete />
+                                        </IconButton>
+                                    </div>
+                                    <div css="display:flex;flex-direction:row;">
+                                        <div
+                                            className="input-group"
+                                            css={'height:100%;width:100%;'}
+                                        >
+                                            Result
+                                        </div>
+
+                                        <IconButton
+                                            onClick={() => props.handleDelete()}
+                                        >
+                                            <Delete />
+                                        </IconButton>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </form>
@@ -300,13 +328,14 @@ function NewSong(props) {
 }
 
 function mapState(state) {
-    const { userData } = state
-    return { userData, project: state.userData.current._id }
+    const { userData, form } = state
+    return { userData, form, project: state.userData.current._id }
 }
 
 const actionCreators = {
     createSong: projectActions.createSong,
     getReferences: refActions.getReferences,
+    instAdd: formActions.instAdd,
 }
 
 const connectedNewSong = connect(mapState, actionCreators)(NewSong)

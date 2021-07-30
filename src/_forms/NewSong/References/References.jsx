@@ -111,6 +111,9 @@ const References = (props) => {
     return <div>{referenceArray}</div>
 }
 
+
+
+
 function mapState(state) {
     return {
         results: state.referenceData.results,

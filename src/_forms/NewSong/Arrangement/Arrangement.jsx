@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Delete from '../../../_assets/icons/delete.svg'
 import Add from '../../../_assets/icons/add.svg'
 
-import { ArrangeEditor, IconButton, InputGroup } from './style'
+import { Main, IconButton } from './style'
 
 export const Arrangement = (props) => {
     const [isLoading, setLoading] = useState(true)
@@ -21,7 +21,8 @@ export const Arrangement = (props) => {
               return (
                   <div key={key.id}>
                       <div css="display:flex;flex-direction:row; color:var(--text-color);">
-                          <InputGroup
+                          <input
+                              className="input-group"
                               type="text"
                               name="edit"
                               placeholder="Instrument"
@@ -51,5 +52,9 @@ export const Arrangement = (props) => {
               )
           })
 
-    return <ArrangeEditor>{displayArrangement}</ArrangeEditor>
+    return (
+        <Main>
+            <div className="arrange-editor">{displayArrangement}</div>
+        </Main>
+    )
 }

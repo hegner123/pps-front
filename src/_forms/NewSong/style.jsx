@@ -31,10 +31,12 @@ export const Main = styled.main`
     input[type='file'] {
         color: var(--text-color);
     }
-    input.input-group {
+    .input-group {
+        background: #fff;
         border: 1px solid rgba(0, 0, 0, 0);
-        border-radius: 5px;
+        border-radius: 4px 0 0 4px;
         padding: 5px;
+        color: var(--bg-accent);
     }
     span.input-group-btn {
         height: 100%;
@@ -93,8 +95,11 @@ export const Main = styled.main`
 `
 export const Grid = styled.div`
     display: grid;
-    grid: 50vh / repeat(2, 1fr);
+    grid: 1fr 1fr/ 1fr;
     grid-gap: 3rem;
+    @media (min-width: 768px) {
+        grid: 50vh / repeat(2, 1fr);
+    }
 `
 export const ArrangmentSection = styled.div`
     display: block;
@@ -118,6 +123,19 @@ export const Btn = styled(Link)`
     transition: 300ms;
     &:hover {
         background-color: var(--blue);
+    }
+`
+
+export const IconButton = styled.span`
+    width: 20px;
+    background: #f7f7f7;
+    border-radius: ${(props) => (props.open ? '0' : '0px 4px 4px 0')};
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: 300ms;
+    &:hover {
+        filter: brightness(0.5);
     }
 `
 export const HelpBlock = styled.div`
