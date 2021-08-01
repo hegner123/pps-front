@@ -2,11 +2,12 @@ import styled from 'styled-components'
 
 export const Main = styled.main`
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    grid-template-rows: 1fr 1fr;
     justify-content: center;
-    background: #fff;
-    color: #333;
-    height: 500px;
+    margin-top: 2rem;
+    color: var(--text-color);
+    min-height: 500px;
 
     section.user-info {
         grid-column: 2 /3;
@@ -22,21 +23,24 @@ export const Main = styled.main`
     }
     section.user-info div {
         display: grid;
-
         width: max-content;
         margin-top: auto;
         margin-bottom: auto;
     }
 
     aside.account-menu {
-        grid-column: 2/3;
+        margin-top: auto;
+        margin-bottom: auto;
+        grid-column: 2;
+        grid-template-columns: 0.25fr 1fr;
         display: grid;
-        justify-content: center;
+        grid-auto-flow: column;
     }
-    section.account-section {
-        grid-column: 3/4;
-        display: grid;
-        justify-content: flex-start;
+    aside.account-menu ul.account-menu-items {
+        width: 200px;
+    }
+    aside.account-menu div {
+        width: max-content;
     }
 `
 

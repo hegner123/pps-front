@@ -33,7 +33,7 @@ const Account = (props) => {
                 </div>
             </section>
             <aside className="account-menu">
-                <ul>
+                <ul className="account-menu-items">
                     <AccountMenuItem
                         active={fullUrl === '/account'}
                         id="account"
@@ -53,8 +53,6 @@ const Account = (props) => {
                         <Link to={`${url}/spotify`}>Spotify</Link>
                     </AccountMenuItem>
                 </ul>
-            </aside>
-            <section className="account-options">
                 <Switch>
                     <Route exact path={path}>
                         <UserAccount />
@@ -66,7 +64,7 @@ const Account = (props) => {
                         <Spotify />
                     </Route>
                 </Switch>
-            </section>
+            </aside>
         </Main>
     )
 }
