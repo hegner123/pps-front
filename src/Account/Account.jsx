@@ -32,39 +32,41 @@ const Account = (props) => {
                     </p>
                 </div>
             </section>
-            <aside className="account-menu">
-                <ul className="account-menu-items">
-                    <AccountMenuItem
-                        active={fullUrl === '/account'}
-                        id="account"
-                    >
-                        <Link to={url}>Account</Link>
-                    </AccountMenuItem>
-                    <AccountMenuItem
-                        active={fullUrl === '/account/friends'}
-                        id="friends"
-                    >
-                        <Link to={`${url}/friends`}>Friends</Link>
-                    </AccountMenuItem>
-                    <AccountMenuItem
-                        active={fullUrl === '/account/spotify'}
-                        id="spotify"
-                    >
-                        <Link to={`${url}/spotify`}>Spotify</Link>
-                    </AccountMenuItem>
-                </ul>
-                <Switch>
-                    <Route exact path={path}>
-                        <UserAccount />
-                    </Route>
-                    <Route exact path={`${path}/friends`}>
-                        <Friends />
-                    </Route>
-                    <Route exact path={`${path}/spotify`}>
-                        <Spotify />
-                    </Route>
-                </Switch>
-            </aside>
+            <section className="account">
+                
+                    <ul className="account-menu-items">
+                        <AccountMenuItem
+                            active={fullUrl === '/account'}
+                            id="account"
+                        >
+                            <Link to={url}>Account</Link>
+                        </AccountMenuItem>
+                        <AccountMenuItem
+                            active={fullUrl === '/account/friends'}
+                            id="friends"
+                        >
+                            <Link to={`${url}/friends`}>Friends</Link>
+                        </AccountMenuItem>
+                        <AccountMenuItem
+                            active={fullUrl === '/account/spotify'}
+                            id="spotify"
+                        >
+                            <Link to={`${url}/spotify`}>Spotify</Link>
+                        </AccountMenuItem>
+                    </ul>
+                    <Switch>
+                        <Route exact path={path}>
+                            <UserAccount />
+                        </Route>
+                        <Route exact path={`${path}/friends`}>
+                            <Friends />
+                        </Route>
+                        <Route exact path={`${path}/spotify`}>
+                            <Spotify />
+                        </Route>
+                    </Switch>
+                
+            </section>
         </Main>
     )
 }

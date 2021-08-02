@@ -61,7 +61,7 @@ const UserAccount = (props) => {
         </ul>
     )
     return (
-        <div>
+        <div className="user-account">
             <div css={'display:flex'}>
                 <h2>Account Options</h2>
                 <button

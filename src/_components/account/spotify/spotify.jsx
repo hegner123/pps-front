@@ -61,7 +61,7 @@ const Spotify = (props) => {
         </ul>
     )
     return (
-        <div>
+        <div className="spotify">
             <div css={'display:flex'}>
                 <h2>Spotify Options</h2>
                 <button

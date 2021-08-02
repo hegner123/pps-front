@@ -61,7 +61,7 @@ const Friends = (props) => {
         </ul>
     )
     return (
-        <div>
+        <div className="friends">
             <div css={'display:flex'}>
                 <h2>Friends Options</h2>
                 <button
