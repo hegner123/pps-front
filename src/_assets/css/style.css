@@ -1,3 +1,8 @@
+p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 @font-face {
     font-family: Roboto Mono;
     src: url(../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
@@ -6,6 +11,8 @@
     --white: #dadce1;
     --bg: #242526;
     --bg-accent: #484a4d;
+    --accent: #7a7c7e;
+    --dark-text-color: #000;
     --text-color: #dadce1;
     --table-text-color: #333;
     --blue: #3568bf;

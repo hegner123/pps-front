@@ -7,117 +7,56 @@ import {
     RefItem,
     RefP,
     ReferenceDelete,
+    Label,
     Preview,
     IconButton,
-    Title,
-    Artist,
+    RefPreviewList,
 } from './style'
+import { RefPreview } from '../../../_components/forms/previewRef/previewRef'
 
 const References = (props) => {
     const [getReference, setGetReference] = useState('')
-    const [songRefs, setSongRefs] = useState([''])
+
     const results = props.results
     let referenceArray
     let refList
 
-    function handleSearchClick(event, { name, id, preview }) {
-        event.preventDefault()
-        let contains = false
-        if (songRefs[0] === '') {
-            setSongRefs([{ name: name, id: id, preview: preview }])
-        } else {
-            songRefs.forEach((x) => {
-                if (x.id === id) {
-                    contains = true
-                }
-            })
-            if (contains === false) {
-                setSongRefs([
-                    ...songRefs,
-                    { name: name, id: id, preview: preview },
-                ])
-            }
-        }
-    }
+    // function handleSearchClick(event, { name, id, preview }) {
+    //     event.preventDefault()
+    //     let contains = false
+    //     if (songRefs[0] === '') {
+    //         setSongRefs([{ name: name, id: id, preview: preview }])
+    //     } else {
+    //         songRefs.forEach((x) => {
+    //             if (x.id === id) {
+    //                 contains = true
+    //             }
+    //         })
+    //         if (contains === false) {
+    //             setSongRefs([
+    //                 ...songRefs,
+    //                 { name: name, id: id, preview: preview },
+    //             ])
+    //         }
+    //     }
+    // }
 
     if (results !== 'unset' && results) {
         referenceArray = results.map((item) => {
-            return (
-                <Preview key={item.id}>
-                    <div>
-                        <div css="display:flex;">
-                            <IconButton
-                                small
-                                close
-                                name={item.title}
-                                preview={item.preview}
-                                id={item.id}
-                                onClick={(event) =>
-                                    handleSearchClick(event, {
-                                        name: item.title,
-                                        id: item.id,
-                                        preview: item.preview,
-                                        artist: item.artist[0],
-                                    })
-                                }
-                            >
-                                <Add />
-                            </IconButton>
-                            <Title> {item.title}</Title>
-                        </div>
-                        <div>
-                            {item.artist.map((artist) => {
-                                return (
-                                    <Artist key={artist.id}>
-                                        {artist.name}
-                                    </Artist>
-                                )
-                            })}
-                            {item.artist.name}
-                        </div>
-                    </div>
-                    <audio
-                        css="height:20px;width:30%;"
-                        controls
-                        src={item.preview}
-                        type="audio/mpeg"
-                    />
-                </Preview>
-            )
+            return <RefPreview key={item.id} item={item} />
         })
     }
 
-    if (songRefs[0] !== '') {
-        refList = (
-            <div css="margin-top:20px">
-                <Label>Song References</Label>
-                <ul>
-                    {songRefs.map((ref) => {
-                        return (
-                            <RefItem key={ref.id}>
-                                <RefP>{ref.name}</RefP>
-                                <InputGroupButton
-                                    onClick={(e) => handleRefDelete(e, ref.id)}
-                                >
-                                    <Delete css="height:24px;width:24px;" />
-                                </InputGroupButton>
-                            </RefItem>
-                        )
-                    })}
-                </ul>
-            </div>
-        )
-    }
-    return <div>{referenceArray}</div>
+    
+    return <RefPreviewList>{referenceArray}</RefPreviewList>
 }
 
-
-
-
 function mapState(state) {
+    const { form } = state
     return {
         results: state.referenceData.results,
         project: state.userData.current._id,
+        form,
     }
 }
 
