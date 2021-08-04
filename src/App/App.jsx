@@ -6,6 +6,7 @@ import { history } from '../_helpers'
 import { PrivateRoute } from '../_components/privateRoute'
 import { Menu } from '../_components/menu'
 import { HomePage } from '../HomePage'
+import { Audio } from '../_components/audio/audio'
 import { SingleProject } from '../Project'
 import { LoginPage } from '../_forms/Login'
 import { Register } from '../_forms/Register'
@@ -73,6 +74,7 @@ const App = (props) => {
                         path="/project/:id/new-song/"
                         component={NewSong}
                     />
+                    <Route exact path="/test" component={Audio} />
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={LoginPage} />
