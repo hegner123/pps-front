@@ -126,21 +126,43 @@ export const Btn = styled(Link)`
     }
 `
 
+
+
+export const RefItem = styled.li`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    color: #000;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+`
 export const IconButton = styled.span`
-    width: 20px;
+    width: 10%;
     background: #f7f7f7;
     border-radius: ${(props) => (props.open ? '0' : '0px 4px 4px 0')};
     border: none;
     cursor: pointer;
     padding: 4px;
     transition: 300ms;
+    height: 100%;
     &:hover {
         filter: brightness(0.5);
     }
 `
-export const HelpBlock = styled.div`
-    /* font-size: 12px;
-  padding: 3px 0;
-  color: rgb(138, 86, 86);
-  margin: 10px 0 2px; */
+
+export const RefP = styled.p`
+    font-size: 12px;
+    padding: 5px;
+    width: 80%;
+`
+
+export const Label = styled.label`
+    display: block;
+    font-size: var(--small);
+    color: var(--dark-text-color);
+    padding-top: 10px;
 `

@@ -20,19 +20,19 @@ function instAdd() {
 
 function instInsertMany(value) {
     return (dispatch) => {
-        dispatch({ type: formConstants.INST_INSERT_MANY, value })
+        dispatch({ type: formConstants.INST_INSERT_MANY, value: value })
     }
 }
 
 function instDelete(id) {
     return (dispatch) => {
-        dispatch({ type: formConstants.INST_DELETE, id })
+        dispatch({ type: formConstants.INST_DELETE, id: id })
     }
 }
 
 function instEdit(value, id) {
     return (dispatch) => {
-        dispatch({ type: formConstants.INST_EDIT, value, id })
+        dispatch({ type: formConstants.INST_EDIT, value: value, id: id })
     }
 }
 
@@ -44,13 +44,13 @@ function instReset() {
 
 function referenceAdd(value) {
     return (dispatch) => {
-        dispatch({ type: formConstants.REFERENCE_ADD, value })
+        dispatch({ type: formConstants.REFERENCE_ADD, value: value })
     }
 }
 
 function referenceDelete(id) {
     return (dispatch) => {
-        dispatch({ type: formConstants.REFERENCE_DELETE, id })
+        dispatch({ type: formConstants.REFERENCE_DELETE, id: id })
     }
 }
 

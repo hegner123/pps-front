@@ -1,15 +1,23 @@
 import React, { useState, useReducer, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { projectActions, refActions, formActions } from '../../_actions'
-import Add from '../../_assets/icons/add.svg'
+
 //! development query
 import { query } from './_query'
-import { v4 as uuidv4 } from 'uuid'
 import Delete from '../../_assets/icons/delete.svg'
 import Search from '../../_assets/icons/search.svg'
 import { References } from './References'
 import { Arrangement } from './Arrangement'
-import { Main, Btn, Grid, ArrangmentSection, IconButton } from './style'
+import {
+    Main,
+    Btn,
+    Grid,
+    ArrangmentSection,
+    IconButton,
+    RefP,
+    RefItem,
+    Label,
+} from './style'
 import { useParams } from 'react-router'
 
 function NewSong(props) {
@@ -20,104 +28,17 @@ function NewSong(props) {
     const [valSongLyrics, setSongLyrics] = useState('')
     const [references, setReferences] = useState([''])
     const [valTemplate, setTemplate] = useState('')
-    const [form, dispatch] = useReducer(instrumentReducer, {
-        arrangement: [{ instrument: '', id: uuidv4() }],
-    })
-
+    let refList
     useEffect(() => {
-        handleDispatch('reset')
+        props.instReset()
         if (valTemplate !== '') {
-            handleDispatch('insertMany', valTemplate)
+            props.instInsertMany(valTemplate)
         }
     }, [valTemplate])
 
-    function instrumentReducer(state, { action, value, id }) {
-        switch (action) {
-            case 'add':
-                return {
-                    ...state,
-                    arrangement: [
-                        ...state.arrangement,
-                        {
-                            instrument: value,
-                            id: uuidv4(),
-                        },
-                    ],
-                }
-            case 'insertMany':
-                return {
-                    ...state,
-                    arrangement: value.split(',').map((inst) => {
-                        return {
-                            instrument: inst,
-                            id: uuidv4(),
-                        }
-                    }),
-                }
-            case 'delete':
-                return {
-                    ...state,
-                    arrangement: state.arrangement.filter(
-                        (inst) => inst.id != id
-                    ),
-                }
-            case 'edit':
-                return {
-                    ...state,
-                    arrangement: state.arrangement.map((inst) => {
-                        if (inst.id != id) {
-                            return { ...inst }
-                        }
-                        return { ...inst, instrument: value, id: id }
-                    }),
-                }
-            case 'reset':
-                return {
-                    ...state,
-                    arrangement: [{ instrument: '', id: uuidv4() }],
-                }
-
-            default:
-                return state
-        }
-    }
-
-    function handleRefDelete(e, refId) {
-        e.preventDefault()
-        setSongRefs(songRefs.filter((ref) => ref.id != refId))
-    }
-
-    function handleClick(action, value, id) {
-        dispatch({ action, value, id })
-        console.log('{ action, value, id }', { action, value, id })
-    }
-
-    function handleDispatch(action, value, id) {
-        dispatch({ action, value, id })
-    }
-
-    function handleChange(event) {
-        const { name, value, id } = event.target
-        dispatch({ action: name, value, id })
-    }
-
-    function hanldeSpotifySearch(e, ref) {
+    function handleSpotifySearch(e, ref) {
         e.preventDefault()
         props.getReferences(ref)
-    }
-
-    function handleEdit(action, value, id) {
-        dispatch({ action, value, id })
-    }
-
-    function useReducer(reducer, initialState) {
-        const [state, setState] = useState(initialState)
-
-        function dispatch(action, id) {
-            const nextState = reducer(state, action, id)
-            setState(nextState)
-        }
-        return [state, dispatch]
     }
 
     const projectPage = useParams().id
@@ -128,13 +49,33 @@ function NewSong(props) {
         let song = {
             id: currentProject,
             songTitle: songTitle,
-            arrangement: [...form.arrangement],
+            arrangement: [...props.form.arrangement],
             references: [...references],
             path: `/project/${projectPage}`,
         }
         if (song.songTitle) {
             props.createSong(song)
         }
+    }
+
+    if (props.form.references) {
+        refList = (
+            <ul>
+                {props.form.references.map((refs) => {
+                    const ref = refs.reference
+                    return (
+                        <RefItem key={ref.id}>
+                            <RefP>{ref.name.substring(0, 21)}</RefP>
+                            <IconButton
+                                onClick={() => props.referenceDelete(refs.id)}
+                            >
+                                <Delete css="height:24px;width:24px;" />
+                            </IconButton>
+                        </RefItem>
+                    )
+                })}
+            </ul>
+        )
     }
 
     return (
@@ -241,15 +182,11 @@ function NewSong(props) {
                                         <Arrangement
                                             template={props.form.arrangement}
                                             handleChange={(e, f) =>
-                                                handleEdit('edit', e, f)
+                                                props.instEdit(e, f)
                                             }
                                             handleAdd={() => props.instAdd()}
                                             handleDelete={(e) =>
-                                                handleClick(
-                                                    'delete',
-                                                    'delete',
-                                                    e
-                                                )
+                                                props.instDelete(e)
                                             }
                                         />
                                     </ArrangmentSection>
@@ -262,7 +199,7 @@ function NewSong(props) {
                         </div>
                     </form>
                     <form
-                        onSubmit={(e) => hanldeSpotifySearch(e, getReference)}
+                        onSubmit={(e) => handleSpotifySearch(e, getReference)}
                     >
                         <section>
                             <div>
@@ -281,46 +218,23 @@ function NewSong(props) {
                                     />
                                     <span
                                         className="input-group-btn"
-                                        onClick={(e) => handleSearch(e)}
+                                        onClick={(e) =>
+                                            handleSpotifySearch(e, getReference)
+                                        }
                                     >
                                         <Search />
                                     </span>
                                 </div>
-                                <div>
-                                    {references}
-                                    <div css="display:flex;flex-direction:row;">
-                                        <div
-                                            className="input-group"
-                                            css={'height:100%;width:100%;'}
-                                        >
-                                            Result
-                                        </div>
-
-                                        <IconButton
-                                            onClick={() => props.handleDelete()}
-                                        >
-                                            <Delete />
-                                        </IconButton>
-                                    </div>
-                                    <div css="display:flex;flex-direction:row;">
-                                        <div
-                                            className="input-group"
-                                            css={'height:100%;width:100%;'}
-                                        >
-                                            Result
-                                        </div>
-
-                                        <IconButton
-                                            onClick={() => props.handleDelete()}
-                                        >
-                                            <Delete />
-                                        </IconButton>
-                                    </div>
-                                </div>
+                                <div>{refList}</div>
+                                <div>{references}</div>
                             </div>
                         </section>
                     </form>
-                    <References />
+                    <References
+                        userReferences={props.form.references}
+                        handleRefDelete={(e) => props.referenceDelete(e)}
+                        addRefernce={(e) => props.referenceAdd(e)}
+                    />
                 </div>
             </div>
         </Main>
@@ -336,6 +250,12 @@ const actionCreators = {
     createSong: projectActions.createSong,
     getReferences: refActions.getReferences,
     instAdd: formActions.instAdd,
+    instInsertMany: formActions.instInsertMany,
+    instDelete: formActions.instDelete,
+    instEdit: formActions.instEdit,
+    instReset: formActions.instReset,
+    referenceAdd: formActions.referenceAdd,
+    referenceDelete: formActions.referenceDelete,
 }
 
 const connectedNewSong = connect(mapState, actionCreators)(NewSong)
