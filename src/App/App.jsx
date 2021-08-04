@@ -59,7 +59,7 @@ const App = (props) => {
                         path="/project/:id"
                         component={SingleProject}
                     />
-                    <PrivateRoute exact path="/account" component={Account} />
+                    <PrivateRoute path="/account" component={Account} />
                     <PrivateRoute
                         exact
                         path="/dashboard"
