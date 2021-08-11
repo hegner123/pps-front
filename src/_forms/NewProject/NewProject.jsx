@@ -20,7 +20,7 @@ function NewProject(props) {
     const [projectTitle, setProjectTitle] = useState('')
     const [projectSlug, setProjectSlug] = useState('')
     const [companyName, setCompanyName] = useState('')
-    const userName = useSelector((state) => state.authentication.user._id)
+    const user = useSelector((state) => state.authentication.user)
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -37,10 +37,14 @@ function NewProject(props) {
     }
 
     function handleSubmit(event) {
+        const members = {
+            id: user._id,
+            username: user.userName,
+        }
         let project = {
             projectTitle: projectTitle,
             projectSlug: projectTitle.trim().toLowerCase().replace(/\s/g, '-'),
-            members: userName,
+            members: members,
         }
         event.preventDefault()
         if (projectTitle) {

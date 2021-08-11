@@ -25,6 +25,7 @@
     "css-loader": "^5.2.6",
     "dotenv": "^9.0.2",
     "file-loader": "^6.2.0",
+    "firebase": "^8.9.1",
     "html-webpack-plugin": "^5.3.1",
     "is-empty": "^1.2.0",
     "jwt-decode": "^3.1.2",
