@@ -21,7 +21,7 @@ p {
     --input-border-radius: 5px;
     --input-border: 1px solid rgba(0, 0, 0, 0.1);
     --nav-size: 60px;
-    --border: 1px solid #474a4d;
+    --border: 1px solid #ccc;
     --border-radius: 8px;
     --speed: 500ms;
     --noti: #fa383e;
@@ -34,6 +34,8 @@ p {
     --h6: 1rem;
     --small: 0.8rem;
     --main-font: 'Roboto Mono', monospace;
+    --inner-padding: 20px;
+    --outter-padding: 30px;
 }
 
 ::selection {

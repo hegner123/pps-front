@@ -53,19 +53,3 @@ function referenceDelete(id) {
         dispatch({ type: formConstants.REFERENCE_DELETE, id: id })
     }
 }
-
-// function deleteProject(project) {
-//     return (dispatch) => {
-//         projectService.deleteProjects(project).then(
-//             (project) => dispatch(success(project)),
-//             (error) => dispatch(failure(error))
-//         )
-//     }
-
-//     function success(create) {
-//         return { type: projectConstants.DELETE_PROJECT_SUCCESS, create }
-//     }
-//     function failure(error) {
-//         return { type: projectConstants.DELETE_PROJECT_FAILURE, error }
-//     }
-// }

@@ -19,12 +19,13 @@ export const Main = styled.main`
         grid-template-areas: 'first second third fourth';
 
         margin-top: auto;
-        margin-bottom: auto;
+        margin-bottom: 50px;
     }
     section.user-info .user-img {
         grid-area: second;
         overflow: hidden;
         border-radius: 50%;
+        height: 100%max-content;
     }
     section.user-info div {
         grid-area: third;
@@ -34,6 +35,7 @@ export const Main = styled.main`
     }
 
     section.account ul {
+        padding-top: var(--inner-padding);
         grid-area: second;
     }
     section.account .friends,

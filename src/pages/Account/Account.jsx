@@ -8,10 +8,10 @@ import {
     useLocation,
     useRouteMatch,
 } from 'react-router-dom'
-import { Friends, Spotify, UserAccount } from '../_components/account'
-import { uploadFile } from '../_services'
+import { Friends, Spotify, UserAccount } from '../../_components/account'
+import { uploadFile } from '../../_services'
 import { Main, AccountMenuItem } from './style'
-import { getFiles } from '../_hooks/getFiles/getFiles'
+import { getFiles } from '../../_hooks/getFiles/getFiles'
 
 const Account = (props) => {
     let { path, url } = useRouteMatch()
@@ -21,9 +21,9 @@ const Account = (props) => {
     const [userImg, setUserImg] = useState('')
 
     async function loadFiles() {
-        const img = await getFiles('mlh-thumb.jpeg')
-        setUserImg(img)
-        console.log(userImg)
+        const img = await getFiles('mlh-thumb.jpeg').then((image) => {
+            setUserImg(image)
+        })
     }
 
     useEffect(() => {
@@ -33,10 +33,11 @@ const Account = (props) => {
     function handleFileChange(e) {
         const fileList = e.target.files[0]
         setUserFile(fileList)
+        upload(userFile)
     }
 
-    function upload() {
-        uploadFile(userFile)
+    function upload(file) {
+        uploadFile(file)
         setUserFile('')
     }
 
@@ -44,32 +45,22 @@ const Account = (props) => {
         <Main>
             <section className="user-info">
                 <div className="user-img">
-                    <img
-                        src={userImg}
-                        alt="user picture"
-                        css={'width:300px;'}
-                    />
+                    {userImg ? (
+                        <img
+                            src={userImg}
+                            alt="user picture"
+                            css={'width:150px;height:150px;'}
+                        />
+                    ) : (
+                        <div css="height:150px;width:150px"></div>
+                    )}
                 </div>
                 <div>
                     <p>Username: {userInfo.userName}</p>
                     <p>
                         Name: {userInfo.firstName} {userInfo.lastName}
                     </p>
-                    <div>
-                        <input
-                            type="file"
-                            name="upload-image"
-                            id="upload-image"
-                            onChange={(e) => handleFileChange(e)}
-                            css={'cursor:pointer;display:block'}
-                        />
-                        <button
-                            onClick={() => upload()}
-                            css={'display:block;cursor:pointer'}
-                        >
-                            Upload
-                        </button>
-                    </div>
+                    <Upload fileChange={(e) => handleFileChange(e)} />
                 </div>
             </section>
             <section className="account">
@@ -120,3 +111,23 @@ function mapState(state) {
 
 const connectedAccount = connect(mapState)(Account)
 export { connectedAccount as Account }
+
+const Upload = (props) => {
+    return (
+        <div css={'padding-top:20px;'}>
+            <label
+                htmlFor="upload-image"
+                css="  border: 1px solid #ccc;display: inline-block;cursor: pointer;"
+            >
+                Upload Profile Pic
+            </label>
+            <input
+                type="file"
+                name="upload-image"
+                id="upload-image"
+                onChange={(e) => props.fileChange(e)}
+                css={'display:none'}
+            />
+        </div>
+    )
+}

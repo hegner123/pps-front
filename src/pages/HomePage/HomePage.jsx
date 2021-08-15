@@ -1,5 +1,5 @@
 import React from "react";
-import Graphic from "../_assets/images/Image1.svg";
+import Graphic from "../../_assets/images/Image1.svg";
 import {
   Header,
   SubTitle,

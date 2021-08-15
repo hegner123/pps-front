@@ -1,56 +1,59 @@
-import React, { useLayoutEffect, useEffect, useState, useMemo } from "react";
-import { connect } from "react-redux";
-import { userActions } from "../../../_actions";
-import { projectActions } from "../../../_actions";
-import { RecentProjects, UserProjects } from "../d_projects/";
+import React, { useLayoutEffect, useEffect, useState, useMemo } from 'react'
+import { connect } from 'react-redux'
+import { userActions } from '../../../_actions'
+import { projectActions } from '../../../_actions'
+import { RecentProjects, UserProjects } from '../d_projects/'
 
 function Dash(props) {
-  const [isWaiting, setWaiting] = useState(true);
-  const [projects, setProjects] = useState([]);
-  const recent = props.authentication.user.recentProjects;
+    const [isWaiting, setWaiting] = useState(true)
+    const [projects, setProjects] = useState([])
+    const recent = props.authentication.user.recentProjects
 
-  function fetchData() {
-    props.getProjects();
-  }
+    function fetchData(id, userName) {
+        props.getProjects(id, userName)
+    }
 
-  function handleStatusChange() {
-    setWaiting(false);
-    setProjects(props.userData.projects);
-  }
+    function handleStatusChange() {
+        setWaiting(false)
+        setProjects(props.userData.projects)
+    }
 
-  useEffect(() => {
-    handleStatusChange();
-  }, [props.userData.projects]);
+    useEffect(() => {
+        handleStatusChange()
+    }, [])
 
-  useEffect(() => {
-    fetchData();
-  }, [recent]);
+    useEffect(() => {
+        fetchData(
+            props.authentication.user.id,
+            props.authentication.user.userName
+        )
+    }, [])
 
-  if (isWaiting) {
-    return (
-      <div>
-        <p css={"color:var(--white);"}>Waiting</p>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <RecentProjects data={recent} />
-        <UserProjects projects={projects} />
-      </div>
-    );
-  }
+    if (isWaiting) {
+        return (
+            <div>
+                <p css={'color:var(--white);'}>Waiting</p>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <RecentProjects data={recent} />
+                <UserProjects projects={projects} />
+            </div>
+        )
+    }
 }
 
 function mapState(state) {
-  const { userData, authentication, recent } = state;
-  return { userData, authentication, recent };
+    const { userData, authentication, recent } = state
+    return { userData, authentication, recent }
 }
 
 const actionCreators = {
-  getProjects: projectActions.getProjects,
-  getUser: userActions.getById,
-};
+    getProjects: projectActions.getProjects,
+    getUser: userActions.getById,
+}
 
-const connectedDash = connect(mapState, actionCreators)(Dash);
-export { connectedDash as Dash };
+const connectedDash = connect(mapState, actionCreators)(Dash)
+export { connectedDash as Dash }
