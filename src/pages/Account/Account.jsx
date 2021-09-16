@@ -43,8 +43,8 @@ const Account = (props) => {
 
     return (
         <Main>
-            <section className="user-info">
-                <div className="user-img">
+            <section>
+                <div>
                     {userImg ? (
                         <img
                             src={userImg}
@@ -63,8 +63,8 @@ const Account = (props) => {
                     <Upload fileChange={(e) => handleFileChange(e)} />
                 </div>
             </section>
-            <section className="account">
-                <ul className="account-menu-items">
+            <section>
+                <ul>
                     <AccountMenuItem
                         active={fullUrl === '/account'}
                         id="account"
@@ -84,33 +84,27 @@ const Account = (props) => {
                         <Link to={`${url}/spotify`}>Spotify</Link>
                     </AccountMenuItem>
                 </ul>
-                <Switch>
-                    <Route exact path={path}>
-                        <UserAccount />
-                    </Route>
-                    <Route exact path={`${path}/friends`}>
-                        <Friends />
-                    </Route>
-                    <Route exact path={`${path}/spotify`}>
-                        <Spotify />
-                    </Route>
-                </Switch>
+                <div>
+                    <Switch>
+                        <Route exact path={path}>
+                            <UserAccount />
+                        </Route>
+                        <Route exact path={`${path}/friends`}>
+                            <Friends />
+                        </Route>
+                        <Route exact path={`${path}/spotify`}>
+                            <Spotify />
+                        </Route>
+                    </Switch>
+                </div>
             </section>
         </Main>
     )
 }
 
-function mapState(state) {
-    const { authentication } = state
-    return { authentication }
-}
-
 // const actionCreators = {
 
 // }
-
-const connectedAccount = connect(mapState)(Account)
-export { connectedAccount as Account }
 
 const Upload = (props) => {
     return (
@@ -131,3 +125,9 @@ const Upload = (props) => {
         </div>
     )
 }
+function mapState(state) {
+    const { authentication } = state
+    return { authentication }
+}
+const connectedAccount = connect(mapState)(Account)
+export { connectedAccount as Account }

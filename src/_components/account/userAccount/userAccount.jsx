@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const UserAccount = (props) => {
     const [isEdit, setEdit] = useState(false)
     const initState = 'Setting'
-    const [valOption1, setOption1] = useState(initState)
+    const [passwordReset, setPasswordReset] = useState('')
     const [valOption2, setOption2] = useState(initState)
     const [valOption3, setOption3] = useState(initState)
     const [valOption4, setOption4] = useState(initState)
@@ -11,7 +11,8 @@ const UserAccount = (props) => {
     const display = (
         <ul>
             <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option1: {valOption1}
+                Reset password:
+                <button onChange={(e) => console.log(e)}>Reset</button>
             </li>
             <li css={'margin-top:10px;margin-bottom:10px;'}>
                 Option2: {valOption2}
@@ -27,11 +28,13 @@ const UserAccount = (props) => {
     const edit = (
         <ul>
             <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option1:{' '}
+                <label for="passwordReset">Reset password:</label>
                 <input
+                    id="passwordReset"
+                    name="passwordReset"
                     type="text"
-                    value={valOption1}
-                    onChange={(e) => setOption1(e.target.value)}
+                    value={passwordReset}
+                    onChange={(e) => setPasswordReset(e.target.value)}
                 />
             </li>
             <li css={'margin-top:10px;margin-bottom:10px;'}>
