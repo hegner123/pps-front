@@ -22,7 +22,7 @@ function RecentProjects(props) {
       <ProjectSection>
         {data &&
           data.map((entry, i) => (
-            <RecentProjectTile id={entry.recentID} key={i} />
+            <RecentProjectTile id={entry.recentID} key={entry.recentID + i} />
           ))}
       </ProjectSection>
     </Section>
