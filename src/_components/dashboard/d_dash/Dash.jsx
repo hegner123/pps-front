@@ -38,7 +38,7 @@ function Dash(props) {
     } else {
         return (
             <div>
-                <RecentProjects />
+                <RecentProjects data={recent} />
                 <UserProjects projects={projects} />
             </div>
         )
