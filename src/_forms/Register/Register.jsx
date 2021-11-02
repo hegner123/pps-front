@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { userActions } from '../../_actions'
@@ -14,132 +14,109 @@ import {
     Input,
 } from './style'
 
-class Register extends React.Component {
-    constructor(props) {
-        super(props)
+const Register = (props) => {
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [userName, setUserName] = useState('')
+    const [hash, setHash] = useState('')
+    const [submitted, setSubmitted] = useState(false)
 
-        this.state = {
-            user: {
-                firstName: '',
-                lastName: '',
-                userName: '',
-                hash: '',
-                recentProjects: [],
-            },
-            submitted: false,
-        }
-
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    handleChange(event) {
-        const { name, value } = event.target
-        const { user } = this.state
-        this.setState({
-            user: {
-                ...user,
-                [name]: value,
-            },
-        })
-    }
-
-    handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault()
-        this.setState({ submitted: true })
-        const { user } = this.state
+        setSubmitted(true)
+        const user = {
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+            hash: hash,
+            recentProjects: [],
+        }
         if (user.firstName && user.lastName && user.userName && user.hash) {
-            this.props.register(user)
+            props.register(user)
         }
     }
 
-    render() {
-        const { registering } = this.props
-        const { user, submitted } = this.state
-        return (
-            <div>
-                <Row>
-                    <Centered>
-                        <FormSection>
-                            <FormTitle>Register</FormTitle>
-                            <form name="form" onSubmit={this.handleSubmit}>
-                                {submitted && !user.firstName && (
-                                    <HelpBlock>
-                                        {' '}
-                                        First Name is required
-                                    </HelpBlock>
-                                )}
-                                <FormGroup>
-                                    <Label htmlFor="firstName">
-                                        First Name
-                                    </Label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="firstName"
-                                        value={user.firstName}
-                                        onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-                                {submitted && !user.lastName && (
-                                    <HelpBlock>
-                                        {' '}
-                                        Last Name is required
-                                    </HelpBlock>
-                                )}
-                                <FormGroup>
-                                    <Label htmlFor="lastName">Last Name</Label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="lastName"
-                                        value={user.lastName}
-                                        onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-                                {submitted && !user.userName && (
-                                    <HelpBlock> Username is required</HelpBlock>
-                                )}
-                                <FormGroup>
-                                    <Label htmlFor="userName">Username</Label>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="userName"
-                                        value={user.userName}
-                                        onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-                                {submitted && !user.hash && (
-                                    <HelpBlock> Password is required</HelpBlock>
-                                )}
-                                <FormGroup>
-                                    <Label htmlFor="hash">Password</Label>
-                                    <Input
-                                        type="password"
-                                        className="form-control"
-                                        name="hash"
-                                        value={user.hash}
-                                        onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <div
-                                        class="g-recaptcha"
-                                        data-sitekey="6LcTDtUbAAAAAESl0q1TsP1LS28g00tIXOiQ7Ktp"
-                                    ></div>
-                                </FormGroup>
+    return (
+        <div>
+            <Row>
+                <Centered>
+                    <FormSection>
+                        <FormTitle>Register</FormTitle>
+                        <form name="form" onSubmit={handleSubmit}>
+                            {submitted && !firstName && (
+                                <HelpBlock> First Name is required</HelpBlock>
+                            )}
+                            <FormGroup>
+                                <Label htmlFor="firstName">First Name</Label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="firstName"
+                                    value={firstName}
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
+                                />
+                            </FormGroup>
+                            {submitted && !lastName && (
+                                <HelpBlock> Last Name is required</HelpBlock>
+                            )}
+                            <FormGroup>
+                                <Label htmlFor="lastName">Last Name</Label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="lastName"
+                                    value={lastName}
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
+                                />
+                            </FormGroup>
+                            {submitted && !userName && (
+                                <HelpBlock> Username is required</HelpBlock>
+                            )}
+                            <FormGroup>
+                                <Label htmlFor="userName">Username</Label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="userName"
+                                    value={userName}
+                                    onChange={(e) =>
+                                        setUserName(e.target.value)
+                                    }
+                                />
+                            </FormGroup>
+                            {submitted && hash && (
+                                <HelpBlock> Password is required</HelpBlock>
+                            )}
+                            <FormGroup>
+                                <Label htmlFor="hash">Password</Label>
+                                <Input
+                                    type="password"
+                                    className="form-control"
+                                    name="hash"
+                                    value={hash}
+                                    onChange={(e) => setHash(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <div
+                                    className="g-recaptcha"
+                                    data-sitekey="6LcTDtUbAAAAAESl0q1TsP1LS28g00tIXOiQ7Ktp"
+                                ></div>
+                            </FormGroup>
 
-                                <FormGroup>
-                                    <Button>Register</Button>
-                                </FormGroup>
-                            </form>
-                        </FormSection>
-                    </Centered>
-                </Row>
-            </div>
-        )
-    }
+                            <FormGroup>
+                                <Button>Register</Button>
+                            </FormGroup>
+                        </form>
+                    </FormSection>
+                </Centered>
+            </Row>
+        </div>
+    )
 }
 
 function mapState(state) {
