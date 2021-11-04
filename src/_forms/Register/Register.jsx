@@ -2,21 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { userActions } from '../../_actions'
-import {
-    Button,
-    Centered,
-    FormSection,
-    FormTitle,
-    FormGroup,
-    HelpBlock,
-    Label,
-    Row,
-    Input,
-} from './style'
 
 const Register = (props) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [userEmail, setUserEmail] = useState('')
     const [userName, setUserName] = useState('')
     const [hash, setHash] = useState('')
     const [submitted, setSubmitted] = useState(false)
@@ -27,28 +17,33 @@ const Register = (props) => {
         const user = {
             firstName: firstName,
             lastName: lastName,
+            email: userEmail,
             userName: userName,
             hash: hash,
             recentProjects: [],
         }
-        if (user.firstName && user.lastName && user.userName && user.hash) {
+        if (
+            user.firstName &&
+            user.lastName &&
+            user.email &&
+            user.userName &&
+            user.hash
+        ) {
             props.register(user)
         }
     }
 
     return (
-        <div>
-            <Row>
-                <Centered>
-                    <FormSection>
-                        <FormTitle>Register</FormTitle>
-                        <form name="form" onSubmit={handleSubmit}>
-                            {submitted && !firstName && (
-                                <HelpBlock> First Name is required</HelpBlock>
-                            )}
-                            <FormGroup>
-                                <Label htmlFor="firstName">First Name</Label>
-                                <Input
+        <div className="form-block">
+            <div className="block">
+                <h2>Register</h2>
+                <form name="form" onSubmit={handleSubmit}>
+                    {submitted && !firstName && <p> First Name is required</p>}
+                    <div>
+                        <div className="field-group">
+                            <div className="input-field">
+                                <label htmlFor="firstName">First Name</label>
+                                <input
                                     type="text"
                                     className="form-control"
                                     name="firstName"
@@ -57,13 +52,13 @@ const Register = (props) => {
                                         setFirstName(e.target.value)
                                     }
                                 />
-                            </FormGroup>
+                            </div>
                             {submitted && !lastName && (
-                                <HelpBlock> Last Name is required</HelpBlock>
+                                <p> Last Name is required</p>
                             )}
-                            <FormGroup>
-                                <Label htmlFor="lastName">Last Name</Label>
-                                <Input
+                            <div className="input-field">
+                                <label htmlFor="lastName">Last Name</label>
+                                <input
                                     type="text"
                                     className="form-control"
                                     name="lastName"
@@ -72,13 +67,30 @@ const Register = (props) => {
                                         setLastName(e.target.value)
                                     }
                                 />
-                            </FormGroup>
-                            {submitted && !userName && (
-                                <HelpBlock> Username is required</HelpBlock>
+                            </div>
+                        </div>
+                        <div className="field-group">
+                            {submitted && !userEmail && (
+                                <p> Email is required</p>
                             )}
-                            <FormGroup>
-                                <Label htmlFor="userName">Username</Label>
-                                <Input
+                            <div className="input-field">
+                                <label htmlFor="userEmail">Email</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="userEmail"
+                                    value={userEmail}
+                                    onChange={(e) =>
+                                        setUserEmail(e.target.value)
+                                    }
+                                />
+                            </div>
+                            {submitted && !userName && (
+                                <p> Username is required</p>
+                            )}
+                            <div className="input-field">
+                                <label htmlFor="userName">Username</label>
+                                <input
                                     type="text"
                                     className="form-control"
                                     name="userName"
@@ -87,34 +99,33 @@ const Register = (props) => {
                                         setUserName(e.target.value)
                                     }
                                 />
-                            </FormGroup>
-                            {submitted && hash && (
-                                <HelpBlock> Password is required</HelpBlock>
-                            )}
-                            <FormGroup>
-                                <Label htmlFor="hash">Password</Label>
-                                <Input
-                                    type="password"
-                                    className="form-control"
-                                    name="hash"
-                                    value={hash}
-                                    onChange={(e) => setHash(e.target.value)}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <div
-                                    className="g-recaptcha"
-                                    data-sitekey="6LcTDtUbAAAAAESl0q1TsP1LS28g00tIXOiQ7Ktp"
-                                ></div>
-                            </FormGroup>
+                            </div>
+                        </div>
 
-                            <FormGroup>
-                                <Button>Register</Button>
-                            </FormGroup>
-                        </form>
-                    </FormSection>
-                </Centered>
-            </Row>
+                        {submitted && !hash && <p> Password is required</p>}
+                        <div className="input-field">
+                            <label htmlFor="hash">Password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                name="hash"
+                                value={hash}
+                                onChange={(e) => setHash(e.target.value)}
+                            />
+                        </div>
+                        <div className="input-field">
+                            <div
+                                className="g-recaptcha"
+                                data-sitekey="6LcTDtUbAAAAAESl0q1TsP1LS28g00tIXOiQ7Ktp"
+                            ></div>
+                        </div>
+
+                        <div>
+                            <button>Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
