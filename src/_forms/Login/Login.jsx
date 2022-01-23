@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { userActions } from "../../_actions";
 import {
@@ -13,44 +14,36 @@ import {
   Input,
   FormRegister,
 } from "./style";
+import { useState } from "react";
+import { useEffect } from "react";
 
-class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    // reset login status
-    this.state = {
-      username: "",
-      password: "",
-      submitted: false,
-    };
+const LoginPage =(props) =>{
+const [username, setUsername] = useState('');
+const [password, setPassword] = useState('');
+const [submitted, setSubmitted] = useState(false);
+const path = useLocation().pathname;
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
+    setSubmitted(true);
     if (username && password) {
-      this.props.login(username, password);
+      props.login(username, password);
     }
   }
-
-  render() {
-    const { loggingIn } = this.props;
-    const { username, password, submitted } = this.state;
+useEffect(() => {
+  if( path === "/login/demo"){
+    props.login('demo','demo#demo')
+  }
+}, [])
+ 
+    const { loggingIn } = props;
     return (
       <Row>
         <Centered>
           <FormSection>
             <FormTitle>Login</FormTitle>
-            <form name="form" onSubmit={this.handleSubmit}>
+            <form name="form" onSubmit={handleSubmit}>
               {submitted && !username && (
                 <HelpBlock>Username is required</HelpBlock>
               )}
@@ -61,7 +54,7 @@ class LoginPage extends React.Component {
                   name="username"
                   autoComplete="username"
                   value={username}
-                  onChange={this.handleChange}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </FormGroup>
               {submitted && !password && (
@@ -74,13 +67,8 @@ class LoginPage extends React.Component {
                   autoComplete="current-password"
                   name="password"
                   value={password}
-                  onChange={this.handleChange}
+                  onChange={(e)=> setPassword(e.target.value)}
                 />
-              </FormGroup>
-              {loggingIn && (
-                <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-              )}
-              <FormGroup>
                 <Button>Login</Button>
               </FormGroup>
             </form>
@@ -89,7 +77,7 @@ class LoginPage extends React.Component {
       </Row>
     );
   }
-}
+
 
 function mapState(state) {
   const { loggingIn } = state.authentication;

@@ -48,7 +48,7 @@ function NewSong(props) {
         event.preventDefault()
         let song = {
             id: currentProject,
-            songTitle: songTitle,
+            songTitle: valSongTitle,
             arrangement: [...props.form.arrangement],
             references: [...references],
             path: `/project/${projectPage}`,

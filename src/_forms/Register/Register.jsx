@@ -114,10 +114,10 @@ const Register = (props) => {
                             />
                         </div>
                         <div className="input-field">
-                            <div
+                            {/* <div
                                 className="g-recaptcha"
                                 data-sitekey="6LcTDtUbAAAAAESl0q1TsP1LS28g00tIXOiQ7Ktp"
-                            ></div>
+                            ></div> */}
                         </div>
 
                         <div>

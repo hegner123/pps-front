@@ -60,24 +60,14 @@ const App = (props) => {
                         component={SingleProject}
                     />
                     <PrivateRoute path="/account" component={Account} />
-                    <PrivateRoute
-                        exact
-                        path="/dashboard"
-                        component={Dashboard}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/new-project"
-                        component={NewProject}
-                    />
-                    <PrivateRoute
-                        path="/project/:id/new-song/"
-                        component={NewSong}
-                    />
+                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                    <PrivateRoute exact path="/new-project" component={NewProject} />
+                    <PrivateRoute path="/project/:id/new-song/" component={NewSong} />
                     <Route exact path="/test" component={Audio} />
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" component={LoginPage} />
+                    <Route  path="/login" component={LoginPage} />
+                    <Route  path="/login/demo" component={LoginPage} />
                 </Switch>
             </Router>
             <AlertBar>

@@ -34,6 +34,9 @@ export function HomePage() {
                 <Action spaced>
                   <ActionItem href="/login">Login</ActionItem>
                 </Action>
+                <Action>
+                  <ActionItem href="/login/demo">Demo</ActionItem>
+                </Action>
               </ActionList>
             </SubTitle>
           </div>

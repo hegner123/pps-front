@@ -6,9 +6,9 @@ import { DashboardPage, ProjectSection, SidebarSection } from "./style";
 export function Dashboard() {
   return (
     <DashboardPage>
-      <SidebarSection>
+      {/* <SidebarSection>
         <Sidebar />
-      </SidebarSection>
+      </SidebarSection> */}
       <ProjectSection>
         <Dash />
       </ProjectSection>
