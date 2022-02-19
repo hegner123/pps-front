@@ -69,7 +69,7 @@ function NewSong(props) {
                             <IconButton
                                 onClick={() => props.referenceDelete(refs.id)}
                             >
-                                <Delete css="height:24px;width:24px;" />
+                                <Delete  />
                             </IconButton>
                         </RefItem>
                     )

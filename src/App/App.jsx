@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Router, Switch, Route } from 'react-router-dom'
 import { alertActions, uiActions } from '../_actions'
 import { connect } from 'react-redux'
-import { history } from '../_helpers'
+import { history, indexDb } from '../_helpers'
 import { PrivateRoute } from '../_components/privateRoute'
 import { Menu } from '../_components/menu'
 import { HomePage } from '../pages/HomePage'
@@ -60,14 +60,25 @@ const App = (props) => {
                         component={SingleProject}
                     />
                     <PrivateRoute path="/account" component={Account} />
-                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                    <PrivateRoute exact path="/new-project" component={NewProject} />
-                    <PrivateRoute path="/project/:id/new-song/" component={NewSong} />
+                    <PrivateRoute
+                        exact
+                        path="/dashboard"
+                        component={Dashboard}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/new-project"
+                        component={NewProject}
+                    />
+                    <PrivateRoute
+                        path="/project/:id/new-song/"
+                        component={NewSong}
+                    />
                     <Route exact path="/test" component={Audio} />
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/register" component={Register} />
-                    <Route  path="/login" component={LoginPage} />
-                    <Route  path="/login/demo" component={LoginPage} />
+                    <Route path="/login" component={LoginPage} />
+                    <Route path="/login/demo" component={LoginPage} />
                 </Switch>
             </Router>
             <AlertBar>

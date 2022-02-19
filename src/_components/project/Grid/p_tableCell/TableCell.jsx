@@ -27,9 +27,6 @@ function TableCell(props) {
     const projectId = useSelector((state) => state.userData.current._id)
     const userInterface = props.userInterface
 
-    function handleDelete(song, id) {
-        props.deleteSong(song, id)
-    }
     let dropdownStatus
 
     if (userInterface.id === songTitle) {
@@ -90,7 +87,8 @@ function TableCell(props) {
                     icon={<Edit css="height:20px;width:20px;" />}
                 >
                     <ConDropdownMenu
-                        deleteSong={() => handleDelete(songId, projectId)}
+                        songId={songId}
+                        projectId={projectId}
                         currentS={songId}
                     ></ConDropdownMenu>
                 </NavItem>
@@ -125,19 +123,23 @@ function DropdownMenu(props) {
     const [menuHeight, setMenuHeight] = useState(null)
     const dropdownRef = useRef(null)
     useOnClickOutside(dropdownRef, () => props.dropdownClose())
-
-    useEffect(() => {
-        setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
-    }, [])
-
+    function handleDelete(song, projectId, userId, userName) {
+        console.log(song)
+        console.log(projectId)
+        props.deleteSong(song, projectId, userId, userName)
+    }
     function calcHeight(el) {
         const height = el.offsetHeight
         setMenuHeight(height)
     }
 
+    useEffect(() => {
+        setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
+    }, [])
+
     function DropdownItem(props) {
         return (
-            <DropdownSong href="#" onClick={() => props.deleteSong()}>
+            <DropdownSong onClick={() => props.deleteSong()}>
                 {props.children}
             </DropdownSong>
         )
@@ -157,7 +159,16 @@ function DropdownMenu(props) {
                 onEnter={calcHeight}
             >
                 <div className="menu">
-                    <DropdownItem deleteSong={() => props.deleteSong()}>
+                    <DropdownItem
+                        deleteSong={() =>
+                            handleDelete(
+                                props.songId,
+                                props.projectId,
+                                props.authentication.user.id,
+                                props.authentication.user.userName
+                            )
+                        }
+                    >
                         Delete Song
                     </DropdownItem>
                 </div>
@@ -167,8 +178,8 @@ function DropdownMenu(props) {
 }
 
 function mapState(state) {
-    const { cellStatus, userInterface } = state
-    return { cellStatus, userInterface }
+    const { cellStatus, authentication, userInterface } = state
+    return { cellStatus, authentication, userInterface }
 }
 
 const actionCreators = {

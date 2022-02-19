@@ -9,25 +9,23 @@ function Dash(props) {
     const [projects, setProjects] = useState([])
     const recent = props.authentication.user.recentProjects
 
-    function fetchData(id, userName) {
-        props.getProjects(id, userName)
-    }
+    // function fetchData(id, userName) {
+    //     props.getProjects(id, userName)
+    // }
+    // useEffect(() => {
+    //     fetchData(
+    //         props.authentication.user.id,
+    //         props.authentication.user.userName
+    //     )
+    // }, [])
+    // function handleStatusChange() {
+    //     setWaiting(false)
+    //     setProjects(props.userData.projects)
+    // }
 
-    function handleStatusChange() {
-        setWaiting(false)
-        setProjects(props.userData.projects)
-    }
-
-    useEffect(() => {
-        handleStatusChange()
-    }, [])
-
-    useEffect(() => {
-        fetchData(
-            props.authentication.user.id,
-            props.authentication.user.userName
-        )
-    }, [])
+    // useEffect(() => {
+    //     handleStatusChange()
+    // }, [])
 
     if (isWaiting) {
         return (

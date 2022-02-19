@@ -56,27 +56,31 @@ async function createSong(newSong) {
         .then(history.push(newSong.path))
 }
 
-async function deleteSong(song, id) {
+async function deleteSong(song, projectId) {
+    const songData = {
+        song: song,
+        projectId: projectId,
+    }
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader(1),
+        body: JSON.stringify(songData),
     }
-    return fetch(
-        `${config.apiUrl}/projects/songs/${song}/${id}`,
-        requestOptions
-    ).then(handleResponse)
+    return fetch(`${config.apiUrl}/projects/songs/`, requestOptions).then(
+        handleResponse
+    )
 }
 
 async function changeCellStatus(project, song, instrument, status, id, user) {
+    const options = { project, song, instrument, status, id }
     const requestOptions = {
         method: 'PUT',
         headers: authHeader(1),
-        body: JSON.stringify({ user: user }),
+        body: JSON.stringify(options),
     }
-    return fetch(
-        `${config.apiUrl}/projects/project/${project}/song/${song}/instrument/${instrument}/status/${status}/id/${id}`,
-        requestOptions
-    ).then(handleResponse)
+    return fetch(`${config.apiUrl}/projects/update`, requestOptions).then(
+        handleResponse
+    )
 }
 
 async function handleResponse(response) {
