@@ -5,7 +5,7 @@ p {
 
 @font-face {
     font-family: Roboto Mono;
-    src: url(../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
+    src: url('../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
 }
 :root {
     --white: #dadce1;

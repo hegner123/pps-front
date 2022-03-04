@@ -119,7 +119,8 @@ function createSong(newSong) {
         projectService.createSong(newSong).then(
             (create) => {
                 dispatch(success(create))
-                getProjects()
+                // dispatch(getProjects())
+                console.log(newSong)
             },
             (error) => dispatch(failure(error))
         )

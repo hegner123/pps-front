@@ -54,8 +54,11 @@ export const Main = styled.main`
     div.section div.form {
         width: 100%;
         display: grid;
-        grid: auto / 1fr 0.5fr 1fr;
+        grid-template-columns: 3fr 1fr 1fr;
         grid-gap: 0 3rem;
+    }
+    .create-song-action {
+        grid-template-columns: 1fr 1fr;
     }
     .section {
         display: block;
@@ -95,10 +98,11 @@ export const Main = styled.main`
 `
 export const Grid = styled.div`
     display: grid;
-    grid: 1fr 1fr/ 1fr;
+    grid-template-columns: 1fr;
+
     grid-gap: 3rem;
     @media (min-width: 768px) {
-        grid: 50vh / repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
     }
 `
 export const ArrangmentSection = styled.div`
@@ -125,8 +129,6 @@ export const Btn = styled(Link)`
         background-color: var(--blue);
     }
 `
-
-
 
 export const RefItem = styled.li`
     display: flex;

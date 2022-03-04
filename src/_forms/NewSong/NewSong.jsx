@@ -193,7 +193,7 @@ function NewSong(props) {
                                 </div>
                             </section>
                         </Grid>
-                        <div>
+                        <div className="create-song-action">
                             <button>Create</button>
                             <Btn to={`/project/${projectPage}`}>Cancel</Btn>
                         </div>

@@ -9,13 +9,19 @@ import { Info } from '../../_components/project/Info'
 
 export function SingleProject(props) {
     const userData = useSelector((state) => state.userData.current)
-    let id = useParams().id
     const [songs, setSongs] = useState(userData)
-    const [userId, setUserId] = useState(id)
 
     if (!songs.songs.length > 0) {
         history.push(`/project/${userData.projectSlug}/new-song/`)
+        return (
+            <>
+                <p>loading</p>
+            </>
+        )
     } else {
+        let id = useParams().id
+
+        const [userId, setUserId] = useState(id)
         return (
             <div css={'width:100%'}>
                 <div
