@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { InfoGrid, TitleGrid, ProjectInfoGrid, Title, Field } from './style'
+import { InfoGrid, Title, Field } from './style'
 import { NewSong } from '../../../_forms/NewSong/NewSong'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { Card, AudioPlayer } from '../../atoms/'
 
 const Info = (props) => {
     const [isEditing, setEditing] = useState(false)
@@ -19,62 +20,56 @@ const Info = (props) => {
         <>
             {!isEditing && (
                 <InfoGrid>
-                    <TitleGrid>
-                        <div>
-                            <Title>
-                                <h2>{song.song_title}</h2>
-                            </Title>
-                        </div>
-                        <div>
-                            <strong css={'color:var(--white)'}>
-                                Members:{' '}
-                            </strong>
-                            {project.members.map((data) => (
-                                <span
-                                    css={'color:var(--white);'}
-                                    key={data.username}
-                                >
+                    <Field>
+                        <h2>{song.song_title}</h2>
+                    </Field>
+                    <Field>
+                        <p className="members">
+                            <strong>MEMBERS: </strong>
+                            {project.members.map((data, i) => (
+                                <span css={'color:var(--white);'} key={i}>
                                     {data.username}
                                 </span>
                             ))}
-                        </div>
-                        <div>
-                            <Field css={'text-align:right;'}>
-                                <button onClick={() => setEditing(!isEditing)}>
-                                    Edit Song
-                                </button>
-                            </Field>
-                        </div>
-                    </TitleGrid>
-                    <ProjectInfoGrid>
-                        <Field>
-                            <strong>BPM: </strong>
-                            {song.song_bpm}
-                        </Field>
-                        <Field>
-                            <strong>KEY: </strong>
-                            {song.song_key}
-                        </Field>
-                        <Field>
+                        </p>
+                    </Field>
+
+                    <Field className="bpm">
+                        <p>
+                            <strong>TEMPO: </strong> {song.song_bpm}bpm
+                        </p>
+                    </Field>
+                    <Field className="key">
+                        <p>
+                            <strong>KEY: </strong> {song.song_key}
+                        </p>
+                    </Field>
+                    <Field className="references">
+                        <p>
                             <strong>REFERENCES: </strong>
-                            {song.song_references.map((ref) => (
-                                <div>
-                                    <span>{ref.name}</span>
-                                    <audio
-                                        src={ref.preview}
-                                        controls
-                                        css={'margin-left:10px;'}
-                                    />
-                                </div>
-                            ))}
-                        </Field>
-                        <Field>Lyrics</Field>
-                        <Field>Notes</Field>
-                        <Field>Reference Preview</Field>
-                    </ProjectInfoGrid>
+                        </p>
+                        {console.log(song)}
+                        {song.song_references.map((ref, i) => (
+                            <Card key={i}>
+                                <AudioPlayer
+                                    music={ref}
+                                    css={'margin-left:10px;'}
+                                />
+                            </Card>
+                        ))}
+                    </Field>
+                    <Field className="lyrics">
+                        <strong>
+                            <p>LYRICS: </p>
+                        </strong>
+                    </Field>
+                    <Field className="notes">
+                        <strong>
+                            <p>NOTES: </p>
+                        </strong>
+                    </Field>
                 </InfoGrid>
             )}
-            {isEditing && <NewSong />}
         </>
     )
 }

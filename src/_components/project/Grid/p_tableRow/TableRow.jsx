@@ -67,12 +67,12 @@ function TableRow(props) {
                 grid={
                     projectSongs.projectArrangement.songArrangement.length + 1
                 }
-                key={projectSongs.title}
+                key={i}
             >
                 <TableCell
                     songTitle={projectSongs.title}
-                    key={i}
-                    id={i}
+                    key={projectSongs.songId}
+                    id={Math.floor(Math.random() * 10000)}
                     songId={projectSongs.songId}
                 />
                 {mapStatus({

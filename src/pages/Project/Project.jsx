@@ -7,7 +7,7 @@ import { history } from '../../_helpers'
 
 import { Info } from '../../_components/project/Info'
 
-export function SingleProject(props) {
+export function SingleProject() {
     const userData = useSelector((state) => state.userData.current)
     const [songs, setSongs] = useState(userData)
 

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const EvenSpace = styled.div`
     display: grid;
@@ -11,7 +11,7 @@ export const Header = styled.h1`
     color: var(--text-color);
     align-items: center;
     font-size: 40px;
-    
+
     font-weight: 300;
 `
 
