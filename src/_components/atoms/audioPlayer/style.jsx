@@ -30,6 +30,15 @@ export const Wrapper = styled.div`
         color: black;
         font-size: 12px;
     }
+    .controls-disabled {
+        display: flex;
+        align-items: center;
+        height: 2rem;
+        > * {
+            color: grey;
+            pointer-events: none;
+        }
+    }
 `
 
 export const Play = styled.div`

@@ -7,7 +7,7 @@ import PreviousButton from './playerAssets/previous.svg'
 import NextButton from './playerAssets/next.svg'
 
 export const AudioPlayer = (props) => {
-    console.log(props)
+    const [audioSrc, setAudioSrc] = useState(props.music)
     const [audioPlayer, setAudioPlayer] = useState('')
     const [duration, setDuration] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -56,49 +56,84 @@ export const AudioPlayer = (props) => {
                 <h3>{props.name}</h3>
                 <h5>Blink-183</h5>
             </div>
-            <div className="controls">
-                <Previous>
-                    <PreviousButton onClick={() => setSongRestart(true)} />
-                </Previous>
-                <div className="play-pause">
-                    {isPlaying ? (
-                        <Pause onClick={() => setIsPlaying(false)}>
-                            <PauseButton />
-                        </Pause>
-                    ) : (
-                        <Play>
-                            <PlayButton
-                                ready={canPlay}
-                                onClick={() => setIsPlaying(true)}
+            {audioSrc ? (
+                <>
+                    <div className="controls">
+                        <Previous>
+                            <PreviousButton
+                                onClick={() => setSongRestart(true)}
                             />
-                        </Play>
-                    )}
-                </div>
-                <div className="player">
-                    <input
-                        type="range"
-                        id="seek-slider"
-                        max={duration ? duration : 100}
-                        value={playhead}
-                        onChange={(e) => setPlayhead(e.target.value)}
-                        onMouseUp={() =>
-                            (audioPlayer.currentTime = (playhead * 1).toFixed())
-                        }
-                    />
-                </div>
-            </div>
-            <div>
-                <div className="time">
-                    {audioPlayer && (
-                        <span className="small-text">
-                            {audioPlayer.currentTime.toFixed()} /{' '}
-                            {duration.toFixed()}
-                        </span>
-                    )}
-                </div>
+                        </Previous>
+                        <div className="play-pause">
+                            {isPlaying ? (
+                                <Pause onClick={() => setIsPlaying(false)}>
+                                    <PauseButton />
+                                </Pause>
+                            ) : (
+                                <Play>
+                                    <PlayButton
+                                        ready={canPlay}
+                                        onClick={() => setIsPlaying(true)}
+                                    />
+                                </Play>
+                            )}
+                        </div>
+                        <div className="player">
+                            <input
+                                type="range"
+                                id="seek-slider"
+                                max={duration ? duration : 100}
+                                value={playhead}
+                                onChange={(e) => setPlayhead(e.target.value)}
+                                onMouseUp={() =>
+                                    (audioPlayer.currentTime = (
+                                        playhead * 1
+                                    ).toFixed())
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="time">
+                            {audioPlayer && (
+                                <span className="small-text">
+                                    {audioPlayer.currentTime.toFixed()} /{' '}
+                                    {duration.toFixed()}
+                                </span>
+                            )}
+                        </div>
 
-                <audio id="audio" src={props.music} type="audio/mp3" />
-            </div>
+                        <audio id="audio" src={props.music} type="audio/mp3" />
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="controls-disabled">
+                        <Previous>
+                            <PreviousButton />
+                        </Previous>
+                        <div className="play-pause">
+                            {isPlaying ? (
+                                <Pause>
+                                    <PauseButton />
+                                </Pause>
+                            ) : (
+                                <Play>
+                                    <PlayButton />
+                                </Play>
+                            )}
+                        </div>
+                        <div className="player">
+                            <input type="range" id="seek-slider" />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="time"></div>
+
+                        <audio id="audio" disabled type="audio/mp3" />
+                    </div>
+                </>
+            )}
         </Wrapper>
     )
 }
