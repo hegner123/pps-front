@@ -7,9 +7,9 @@ export const Wrapper = styled.div`
         height: 100%;
     }
     .controls {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
         align-items: center;
-        height: 2rem;
     }
     .info {
         * {
@@ -17,7 +17,8 @@ export const Wrapper = styled.div`
         }
     }
     .player {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
         align-items: center;
     }
     .play-pause {
@@ -30,23 +31,12 @@ export const Wrapper = styled.div`
         color: black;
         font-size: 12px;
     }
-    .controls-disabled {
-        display: flex;
-        align-items: center;
-        height: 2rem;
-        > * {
-            color: grey;
-            pointer-events: none;
-        }
-    }
 `
 
 export const Play = styled.div`
     max-width: 100px;
-
     transform: scale(0.3);
     cursor: pointer;
-
     &:hover {
         filter: brightness(0.8);
     }
@@ -69,7 +59,6 @@ export const Pause = styled.div`
 
 export const Previous = styled.div`
     transform: scale(0.3);
-
     cursor: pointer;
     &svg:hover {
         filter: brightness(0.8);

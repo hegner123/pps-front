@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
 import { Wrapper, Play, Pause, Previous } from './style.jsx'
-import PlayButton from './playerAssets/play1.svg'
+import { PlayButton } from './playerAssets'
 import PauseButton from './playerAssets/pause.svg'
 import PreviousButton from './playerAssets/previous.svg'
 import NextButton from './playerAssets/next.svg'
@@ -51,13 +50,13 @@ export const AudioPlayer = (props) => {
     }, [isPlaying, canPlay, songRestart])
 
     return (
-        <Wrapper>
-            <div className="info">
-                <h3>{props.name}</h3>
-                <h5>Blink-183</h5>
-            </div>
+        <>
             {audioSrc ? (
-                <>
+                <Wrapper canPlay={true}>
+                    <div className="info">
+                        <h3>{props.name}</h3>
+                        <h5>Blink-183</h5>
+                    </div>
                     <div className="controls">
                         <Previous>
                             <PreviousButton
@@ -105,10 +104,14 @@ export const AudioPlayer = (props) => {
 
                         <audio id="audio" src={props.music} type="audio/mp3" />
                     </div>
-                </>
+                </Wrapper>
             ) : (
-                <>
-                    <div className="controls-disabled">
+                <Wrapper canPlay={false}>
+                    <div className="info">
+                        <h3>{props.name}</h3>
+                        <h5>Blink-183</h5>
+                    </div>
+                    <div className="controls">
                         <Previous>
                             <PreviousButton />
                         </Previous>
@@ -128,12 +131,12 @@ export const AudioPlayer = (props) => {
                         </div>
                     </div>
                     <div>
-                        <div className="time"></div>
+                        <div className="time "></div>
 
                         <audio id="audio" disabled type="audio/mp3" />
                     </div>
-                </>
+                </Wrapper>
             )}
-        </Wrapper>
+        </>
     )
 }
