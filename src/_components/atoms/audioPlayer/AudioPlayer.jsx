@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Wrapper, Play, Pause, Previous } from './style.jsx'
 import { PlayButton } from './playerAssets'
-import PauseButton from './playerAssets/pause.svg'
+import Pausebutton from './playerAssets/'
 import PreviousButton from './playerAssets/previous.svg'
 import NextButton from './playerAssets/next.svg'
 
@@ -16,6 +16,7 @@ export const AudioPlayer = (props) => {
 
     useEffect(() => {
         const player = document.getElementById('audio')
+
         setAudioPlayer(player)
         setDuration(player.duration)
 
@@ -69,11 +70,11 @@ export const AudioPlayer = (props) => {
                                     <PauseButton />
                                 </Pause>
                             ) : (
-                                <Play>
-                                    <PlayButton
-                                        ready={canPlay}
-                                        onClick={() => setIsPlaying(true)}
-                                    />
+                                <Play
+                                    ready={canPlay}
+                                    onClick={() => setIsPlaying(true)}
+                                >
+                                    <PlayButton />
                                 </Play>
                             )}
                         </div>

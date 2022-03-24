@@ -1,2 +1,2 @@
-export * from './play.svg'
 export * from './Playbutton'
+export * from './Pausebutton'

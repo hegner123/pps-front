@@ -85,8 +85,8 @@ async function changeCellStatus(project, song, instrument, status, id, user) {
 
 async function handleResponse(response) {
     return response.text().then((text) => {
-        const userData = text && JSON.parse(text)
+        const responseData = text && JSON.parse(text)
 
-        return userData
+        return responseData
     })
 }

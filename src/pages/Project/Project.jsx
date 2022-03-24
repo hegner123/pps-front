@@ -9,9 +9,13 @@ import { Info } from '../../_components/project/Info'
 
 export function SingleProject() {
     const userData = useSelector((state) => state.userData.current)
-    const [songs, setSongs] = useState(userData)
+    const [songs, setSongs] = useState()
 
-    if (!songs.songs.length > 0) {
+    useEffect(() => {
+        setSongs(userData)
+    }, [userData])
+
+    if (songs && !songs.songs.length > 0) {
         history.push(`/project/${userData.projectSlug}/new-song/`)
         return (
             <>
@@ -28,12 +32,12 @@ export function SingleProject() {
                     css={'display:flex; flex-wrap: wrap; width: 100%;'}
                     className=" grid-area"
                 >
-                    <PDetails data={songs} />
+                    {songs && <PDetails data={songs} />}
                 </div>
+                <div>{songs && <TableArea data={songs} />}</div>
                 <div>
-                    <TableArea data={songs} />
+                    <Info />
                 </div>
-                <Info />
             </div>
         )
     }

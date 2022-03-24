@@ -6,11 +6,12 @@ import { Table, TableHead } from './style'
 import { projectActions } from '../../../../_actions/project.actions'
 
 function TableArea(props) {
-    const [songs, setSongs] = useState(props.data.songs)
-    const [projectId, setProjectId] = useState(props.data._id)
+    const [songs, setSongs] = useState(false)
+    const [projectId, setProjectId] = useState(false)
 
     useEffect(() => {
         setSongs(props.userData.current.songs)
+        setProjectId(props.data._id)
     }, [props.userData.current.songs])
 
     function tableHeaders(songs) {
@@ -27,14 +28,15 @@ function TableArea(props) {
     }
     return (
         <Table>
-            <TableHead>
-                {songs && (
+            {songs && (
+                <TableHead>
                     <TableHeaders data={tableHeaders(songs)} id={'headers'} />
-                )}
-            </TableHead>
+                </TableHead>
+            )}
+
             {songs && (
                 <TableRow
-                    data={songs}
+                    songs={songs}
                     projectId={projectId}
                     headers={tableHeaders(songs)}
                     id={'table-body'}

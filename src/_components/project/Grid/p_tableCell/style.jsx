@@ -95,16 +95,20 @@ export const CellButton = styled.div`
     cursor: pointer;
 `
 
-export const IconButton = styled.a`
+export const IconButton = styled.button`
     --button-size: calc(var(--nav-size) * 0.5);
     width: var(--button-size);
     height: var(--button-size);
-
+    border: none;
+    background: transparent;
     margin: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: filter 300ms;
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 export const NavItems = styled.div`

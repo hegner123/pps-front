@@ -29,7 +29,7 @@ function TableCell(props) {
 
     let dropdownStatus
 
-    if (userInterface.id === songTitle) {
+    if (userInterface.id === songId) {
         dropdownStatus = true
     } else {
         dropdownStatus = false
@@ -77,12 +77,12 @@ function TableCell(props) {
     } else if (props.songTitle) {
         display = (
             <TitleCell>
-                <Celltitle onClick={(e) => props.setSelected(props.id)}>
+                <Celltitle onClick={() => props.setSelected(props.songIndex)}>
                     {songTitle}
                 </Celltitle>
                 <NavItem
                     openState={dropdownStatus}
-                    cellId={songTitle}
+                    cellId={songId}
                     dropdownOpen={(e) => props.dropdownOpen(e)}
                     icon={<Edit css="height:20px;width:20px;" />}
                 >
@@ -107,10 +107,7 @@ function NavItem(props) {
     }
     return (
         <NavItems>
-            <IconButton
-                href="#"
-                onClick={() => props.dropdownOpen(props.cellId)}
-            >
+            <IconButton onClick={() => props.dropdownOpen(props.cellId)}>
                 {props.icon}
             </IconButton>
             {props.openState && props.children}
@@ -121,22 +118,22 @@ function NavItem(props) {
 function DropdownMenu(props) {
     const [activeMenu, setActiveMenu] = useState('main')
     const [menuHeight, setMenuHeight] = useState(null)
+
     const dropdownRef = useRef(null)
+
     useOnClickOutside(dropdownRef, () => props.dropdownClose())
-    function handleDelete(song, projectId, userId, userName) {
-        console.log(song)
-        console.log(projectId)
-        props.deleteSong(song, projectId, userId, userName)
-    }
-    function calcHeight(el) {
-        const height = el.offsetHeight
-        setMenuHeight(height)
-    }
 
     useEffect(() => {
         setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
     }, [])
 
+    function handleDelete(songId, projectId, userId, userName) {
+        props.deleteSong(songId, projectId, userId, userName)
+    }
+    function calcHeight(el) {
+        const height = el.offsetHeight
+        setMenuHeight(height)
+    }
     function DropdownItem(props) {
         return (
             <DropdownSong onClick={() => props.deleteSong()}>
@@ -144,6 +141,7 @@ function DropdownMenu(props) {
             </DropdownSong>
         )
     }
+
     return (
         <div
             className="dropdown-song"

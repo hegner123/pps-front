@@ -8,64 +8,68 @@ import { Card, AudioPlayer } from '../../atoms/'
 
 const Info = (props) => {
     const [isEditing, setEditing] = useState(false)
-    let selected = props.userData.selected
-    let song = props.userData.current.songs[selected]
-    let project = props.userData.current
+    let selected = props.userData.selected ? props.userData.selected : 0
+    let song = props.userData.current
+        ? props.userData.current.songs[selected]
+        : ''
+    let project = props.userData.current ? props.userData.current : ''
 
-    useEffect(() => {
-        console.log(isEditing)
-    }, [isEditing])
+    useEffect(() => {}, [isEditing])
 
     return (
         <>
             {!isEditing && (
                 <InfoGrid>
                     <Field>
-                        <h2>{song.song_title}</h2>
+                        <h2>{song ? song.song_title : ''}</h2>
                     </Field>
                     <Field>
                         <p className="members">
                             <strong>MEMBERS: </strong>
-                            {project.members.map((data, i) => (
-                                <span css={'color:var(--white);'} key={i}>
-                                    {data.username}
-                                </span>
-                            ))}
+                            {project &&
+                                project.members.map((data, i) => (
+                                    <span css={'color:var(--white);'} key={i}>
+                                        {data.username}
+                                    </span>
+                                ))}
                         </p>
                     </Field>
 
                     <Field className="bpm">
                         <p>
-                            <strong>TEMPO: </strong> {song.song_bpm}bpm
+                            <strong>TEMPO: </strong> {song ? song.song_bpm : ''}
+                            bpm
                         </p>
                     </Field>
                     <Field className="key">
                         <p>
-                            <strong>KEY: </strong> {song.song_key}
+                            <strong>KEY: </strong> {song ? song.song_key : ''}
                         </p>
                     </Field>
                     <Field className="references">
                         <p>
                             <strong>REFERENCES: </strong>
                         </p>
-                        {console.log(song)}
-                        {song.song_references.map((ref, i) => (
-                            <Card key={i}>
-                                <AudioPlayer
-                                    music={ref}
-                                    css={'margin-left:10px;'}
-                                />
-                            </Card>
-                        ))}
+
+                        {song
+                            ? song.song_references.map((ref, i) => (
+                                  <Card key={i}>
+                                      <AudioPlayer
+                                          music={song ? ref : ''}
+                                          css={'margin-left:10px;'}
+                                      />
+                                  </Card>
+                              ))
+                            : ''}
                     </Field>
                     <Field className="lyrics">
                         <strong>
-                            <p>LYRICS: </p>
+                            <p>LYRICS: {song ? song.song_lyrics : ''}</p>
                         </strong>
                     </Field>
                     <Field className="notes">
                         <strong>
-                            <p>NOTES: </p>
+                            <p>NOTES: {song ? song.song_notes : ''}</p>
                         </strong>
                     </Field>
                 </InfoGrid>

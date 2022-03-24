@@ -50,5 +50,7 @@ export const Title = styled.div`
 `
 
 export const Field = styled.div`
+    h2 {
+    }
     color: var(--white);
 `

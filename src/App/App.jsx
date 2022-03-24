@@ -15,7 +15,7 @@ import { NewProject } from '../_forms/NewProject'
 import '../_assets/css/normalize.css'
 import '../_assets/css/main.css'
 import '../_assets/css/style.css'
-import { AlertBar, Alert } from './style'
+import { AlertBar, Alert, TopLevel } from './style'
 import { Account } from '../pages/Account'
 import { TestPage } from '../pages/TestPage'
 
@@ -50,7 +50,7 @@ const App = (props) => {
     }
 
     return (
-        <div className="container">
+        <TopLevel className="container">
             <Router history={history}>
                 <Menu logout={() => logout(props)} />
                 <Switch>
@@ -92,7 +92,7 @@ const App = (props) => {
                     </Alert>
                 )}
             </AlertBar>
-        </div>
+        </TopLevel>
     )
 }
 

@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
         align-items: center;
     }
     .play-pause {
+        width: 30px;
     }
     .time {
         width: max-content;
@@ -35,7 +36,7 @@ export const Wrapper = styled.div`
 
 export const Play = styled.div`
     max-width: 100px;
-    transform: scale(0.3);
+
     cursor: pointer;
     &:hover {
         filter: brightness(0.8);

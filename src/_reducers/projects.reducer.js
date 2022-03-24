@@ -11,8 +11,8 @@ const id = first.replace('/new-song/', '')
 // }
 
 const initialState = current
-    ? { projects: 'unset', current: current, selected: 0 }
-    : { projects: 'unset', current: 'unset', selected: 0 }
+    ? { projects: 'unset', current: current, selected: current.selected }
+    : { projects: 'unset', current: 'unset', selected: 'unset' }
 // const initialState = { projects: 'unset', selected: 0 }
 
 export function userData(state = initialState, action) {
@@ -79,7 +79,7 @@ export function userData(state = initialState, action) {
         case projectConstants.DELETE_SONG_SUCCESS:
             return {
                 ...state,
-                songDelete: action.results,
+                songDelete: action.delete,
             }
         case projectConstants.DELETE_SONG_FAILURE:
             return {

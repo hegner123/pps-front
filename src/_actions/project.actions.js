@@ -20,14 +20,16 @@ function getProjects(id, userName) {
     const user = id
     return (dispatch) => {
         dispatch(request())
-        projectService.getProjects(user).then(
+        return projectService.getProjects(user).then(
             (projects) => {
                 console.log(userName)
                 dispatch(alertSuccess(userName.toUpperCase()))
                 dispatch(success(projects))
                 dispatch(userActions.getById(user))
                 localStorage.removeItem('userProjects')
+
                 localStorage.setItem('userProjects', JSON.stringify(projects))
+                return projects
             },
             (error) => dispatch(failure(error.toString()))
         )
@@ -64,7 +66,16 @@ function assignProject(action, project) {
                 userService.addToRecent(currentProject, user)
                 dispatch(assign(currentProject))
                 userService.getById(user)
+                currentProject = { ...currentProject, selected: 0 }
+
                 localStorage.setItem('current', JSON.stringify(currentProject))
+            }
+        case 'refresh':
+            return (dispatch) => {
+                userService.addToRecent(currentProject, user)
+                dispatch(assign(currentProject))
+                userService.getById(user)
+                currentProject = { ...currentProject, selected: 0 }
             }
         case 'clear':
             return (dispatch) => {
@@ -114,10 +125,25 @@ function deleteProject(project) {
     }
 }
 
-function createSong(newSong) {
+function createSong(newSong, user, projectId) {
     return (dispatch) => {
         projectService.createSong(newSong).then(
             (create) => {
+                projectService.getProjects(user).then(
+                    (projects) => {
+                        let currentProject = projects.filter(
+                            (project) => project._id == projectId
+                        )
+                        localStorage.removeItem('current')
+
+                        localStorage.setItem(
+                            'current',
+                            JSON.stringify({ project: currentProject[0] })
+                        )
+                    },
+                    (error) => dispatch(failure(error.toString()))
+                )
+
                 dispatch(success(create))
                 // dispatch(getProjects())
                 console.log(newSong)
@@ -134,19 +160,40 @@ function createSong(newSong) {
     }
 }
 
-function deleteSong(song, projectId, userId, userName) {
-    // console.log(song)
-    // console.log(projectId)
+function deleteSong(song, projectId, user) {
     return (dispatch) => {
-        projectService.deleteSong(song, projectId).then((result) => {
-            dispatch(success(result, userId, userName))
-            dispatch(getProjects(userId, userName))
-        }),
-            (error) => dispatch(failure(error))
+        projectService
+            .deleteSong(song, projectId)
+            .then((result) => {
+                projectService.getProjects(user).then(
+                    (projects) => {
+                        let currentProject = projects.filter(
+                            (project) => project._id == projectId
+                        )
+
+                        localStorage.setItem(
+                            'current',
+                            JSON.stringify(currentProject[0])
+                        )
+                        dispatch(
+                            assignProject(
+                                'refresh',
+                                currentProject[0].projectSlug
+                            )
+                        )
+                    },
+                    (error) => dispatch(failure(error.toString()))
+                )
+                dispatch(success(result, song))
+            })
+            .catch((error) => dispatch(failure(error)))
     }
 
-    function success(result, userId) {
-        return { type: projectConstants.DELETE_SONG_SUCCESS, result }
+    function success(result) {
+        return {
+            type: projectConstants.DELETE_SONG_SUCCESS,
+            result,
+        }
     }
     function failure(error) {
         return { type: projectConstants.DELETE_SONG_FAILURE, error }
@@ -183,7 +230,7 @@ function changeCellStatus(project, song, instrument, status, id) {
 }
 
 function setSelected(selected) {
-    // console.log(selected)
+    console.log(selected)
     return (dispatch) => {
         dispatch(setSelectedSong(selected))
     }

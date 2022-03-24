@@ -54,7 +54,7 @@ function NewSong(props) {
             path: `/project/${projectPage}`,
         }
         if (song.songTitle) {
-            props.createSong(song)
+            props.createSong(song, props.authentication.user._id, projectPage)
         }
     }
 
@@ -69,7 +69,7 @@ function NewSong(props) {
                             <IconButton
                                 onClick={() => props.referenceDelete(refs.id)}
                             >
-                                <Delete  />
+                                <Delete />
                             </IconButton>
                         </RefItem>
                     )
@@ -242,8 +242,13 @@ function NewSong(props) {
 }
 
 function mapState(state) {
-    const { userData, form } = state
-    return { userData, form, project: state.userData.current._id }
+    const { userData, form, authentication } = state
+    return {
+        userData,
+        form,
+        authentication,
+        project: state.userData.current._id,
+    }
 }
 
 const actionCreators = {
