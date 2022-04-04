@@ -2,7 +2,7 @@ import { alertActions } from './alert.actions'
 import { projectConstants } from '../_constants'
 import { projectService } from '../_services/'
 import { userService } from '../_services/user.service'
-import { store } from '../_helpers'
+import { store, history } from '../_helpers'
 import { userActions } from './user.actions'
 
 export const projectActions = {
@@ -26,9 +26,7 @@ function getProjects(id, userName) {
                 dispatch(alertSuccess(userName.toUpperCase()))
                 dispatch(success(projects))
                 dispatch(userActions.getById(user))
-                localStorage.removeItem('userProjects')
 
-                localStorage.setItem('userProjects', JSON.stringify(projects))
                 return projects
             },
             (error) => dispatch(failure(error.toString()))
@@ -125,28 +123,18 @@ function deleteProject(project) {
     }
 }
 
-function createSong(newSong, user, projectId) {
+function createSong(song, projectId) {
+    const state = store.getState()
+    const user = state.authentication.user.id
+    const newSong = { song, user, projectId }
     return (dispatch) => {
         projectService.createSong(newSong).then(
-            (create) => {
-                projectService.getProjects(user).then(
-                    (projects) => {
-                        let currentProject = projects.filter(
-                            (project) => project._id == projectId
-                        )
-                        localStorage.removeItem('current')
-
-                        localStorage.setItem(
-                            'current',
-                            JSON.stringify({ project: currentProject[0] })
-                        )
-                    },
-                    (error) => dispatch(failure(error.toString()))
-                )
-
-                dispatch(success(create))
-                // dispatch(getProjects())
-                console.log(newSong)
+            (createdSong) => {
+                dispatch(success(createdSong))
+                projectService.getProjects(user).then((projects) => {
+                    dispatch(updateTable(projects))
+                    history.push('../')
+                })
             },
             (error) => dispatch(failure(error))
         )
@@ -154,6 +142,9 @@ function createSong(newSong, user, projectId) {
 
     function success(create) {
         return { type: projectConstants.CREATE_SONG_SUCCESS, create }
+    }
+    function updateTable(table) {
+        return { type: projectConstants.UPDATE_TABLE, table }
     }
     function failure(error) {
         return { type: projectConstants.CREATE_SONG_FAILURE, error }

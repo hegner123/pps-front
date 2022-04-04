@@ -91,6 +91,11 @@ export function userData(state = initialState, action) {
                 ...state,
                 selected: action.selection,
             }
+        case projectConstants.UPDATE_TABLE:
+            return {
+                ...state,
+                projects: action.table,
+            }
         default:
             return { ...state }
     }
