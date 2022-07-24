@@ -24,7 +24,7 @@ function TableCell(props) {
     const [cellStatus, setCellStatus] = useState(props.data)
     const [cellId, setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    const projectId = useSelector((state) => state.userData.current._id)
+    const projectId = useSelector((state) => state.project.current._id)
     const userInterface = props.userInterface
 
     let dropdownStatus
@@ -127,9 +127,7 @@ function DropdownMenu(props) {
         setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
     }, [])
 
-    function handleDelete(songId, projectId, userId, userName) {
-        props.deleteSong(songId, projectId, userId, userName)
-    }
+    const handleDelete = props.deleteSong
     function calcHeight(el) {
         const height = el.offsetHeight
         setMenuHeight(height)

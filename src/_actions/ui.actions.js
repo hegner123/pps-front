@@ -16,7 +16,6 @@ function setSettingsClose() {
 }
 
 function dropdownOpen(id) {
-    console.log(id)
     return { type: uiConstants.DROPDOWN_OPEN, id }
 }
 

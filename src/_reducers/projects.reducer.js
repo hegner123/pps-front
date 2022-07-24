@@ -11,11 +11,21 @@ const id = first.replace('/new-song/', '')
 // }
 
 const initialState = current
-    ? { projects: 'unset', current: current, selected: current.selected }
-    : { projects: 'unset', current: 'unset', selected: 'unset' }
+    ? {
+          projects: 'unset',
+          current: current,
+          selected: current.selected,
+          needsUpdate: false,
+      }
+    : {
+          projects: 'unset',
+          current: 'unset',
+          selected: 'unset',
+          needsUpdate: false,
+      }
 // const initialState = { projects: 'unset', selected: 0 }
 
-export function userData(state = initialState, action) {
+export function projectsReducer(state = initialState, action) {
     switch (action.type) {
         case projectConstants.GETALL_SUCCESS:
             return {
@@ -50,6 +60,7 @@ export function userData(state = initialState, action) {
             return {
                 ...state,
                 create: action.create,
+                needsUpdate: true,
             }
         case projectConstants.CREATE_PROJECT_FAILURE:
             return {
@@ -60,6 +71,7 @@ export function userData(state = initialState, action) {
             return {
                 ...state,
                 delete: action.delete,
+                needsUpdate: true,
             }
         case projectConstants.DELETE_PROJECT_FAILURE:
             return {
@@ -70,6 +82,7 @@ export function userData(state = initialState, action) {
             return {
                 ...state,
                 create: action.create,
+                needsUpdate: true,
             }
         case projectConstants.CREATE_SONG_FAILURE:
             return {
@@ -80,6 +93,7 @@ export function userData(state = initialState, action) {
             return {
                 ...state,
                 songDelete: action.delete,
+                needsUpdate: true,
             }
         case projectConstants.DELETE_SONG_FAILURE:
             return {
@@ -95,6 +109,11 @@ export function userData(state = initialState, action) {
             return {
                 ...state,
                 projects: action.table,
+            }
+        case projectConstants.NEEDS_UPDATE:
+            return {
+                ...state,
+                needsUpdate: action.needsUpdate,
             }
         default:
             return { ...state }

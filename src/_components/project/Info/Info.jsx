@@ -8,11 +8,11 @@ import { Card, AudioPlayer } from '../../atoms/'
 
 const Info = (props) => {
     const [isEditing, setEditing] = useState(false)
-    let selected = props.userData.selected ? props.userData.selected : 0
-    let song = props.userData.current
-        ? props.userData.current.songs[selected]
+    let selected = props.project.selected ? props.project.selected : 0
+    let song = props.project.current
+        ? props.project.current.songs[selected]
         : ''
-    let project = props.userData.current ? props.userData.current : ''
+    let project = props.project.current ? props.project.current : ''
 
     useEffect(() => {}, [isEditing])
 
@@ -79,8 +79,8 @@ const Info = (props) => {
 }
 
 function mapState(state) {
-    const { userData } = state
-    return { userData }
+    const { project } = state
+    return { project }
 }
 
 const connectedInfo = connect(mapState)(Info)

@@ -47,7 +47,6 @@ const References = (props) => {
         })
     }
 
-    
     return <RefPreviewList>{referenceArray}</RefPreviewList>
 }
 
@@ -55,7 +54,7 @@ function mapState(state) {
     const { form } = state
     return {
         results: state.referenceData.results,
-        project: state.userData.current._id,
+        project: state.project.current._id,
         form,
     }
 }

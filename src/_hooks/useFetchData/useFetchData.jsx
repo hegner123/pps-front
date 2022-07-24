@@ -28,6 +28,6 @@ export function useFetchData() {
     }, [])
 
     useEffect(() => {
-        setProjects(props.userData.projects)
+        setProjects(props.project.projects)
     }, [isWaiting])
 }

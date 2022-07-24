@@ -10,9 +10,9 @@ function TableArea(props) {
     const [projectId, setProjectId] = useState(false)
 
     useEffect(() => {
-        setSongs(props.userData.current.songs)
+        setSongs(props.project.current.songs)
         setProjectId(props.data._id)
-    }, [props.userData.current.songs])
+    }, [props.project.current.songs])
 
     function tableHeaders(songs) {
         let instruments = []
@@ -47,8 +47,8 @@ function TableArea(props) {
 }
 
 function mapState(state) {
-    const { userData } = state
-    return { userData }
+    const { project } = state
+    return { project }
 }
 
 const actionCreators = {

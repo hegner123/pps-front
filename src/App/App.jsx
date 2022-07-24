@@ -6,7 +6,7 @@ import { history, indexDb } from '../_helpers'
 import { PrivateRoute } from '../_components/privateRoute'
 import { Menu } from '../_components/menu'
 import { HomePage } from '../pages/HomePage'
-import { SingleProject } from '../pages/Project'
+import { Project } from '../pages/Project'
 import { LoginPage } from '../_forms/Login'
 import { Register } from '../_forms/Register'
 import { Dashboard } from '../pages/Dashboard'
@@ -57,7 +57,7 @@ const App = (props) => {
                     <PrivateRoute
                         exact
                         path="/project/:id"
-                        component={SingleProject}
+                        component={Project}
                     />
                     <PrivateRoute path="/account" component={Account} />
                     <PrivateRoute

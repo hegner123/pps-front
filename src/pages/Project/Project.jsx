@@ -1,22 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { pDetails as PDetails } from '../../_components/project/Grid/p_details'
 import { TableArea } from '../../_components/project/Grid/p_table'
-import { useSelector, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { history } from '../../_helpers'
+import { projectActions, userActions } from '../../_actions'
 
 import { Info } from '../../_components/project/Info'
 
-export function SingleProject() {
-    const userData = useSelector((state) => state.userData.current)
+function SingleProject(props) {
+    const [isWaiting, setWaiting] = useState('unloaded')
     const [songs, setSongs] = useState()
+    const location = useParams()
 
     useEffect(() => {
-        setSongs(userData)
-    }, [userData])
+        setWaiting('start load')
+        setSongs('')
+
+        fetchData(
+            props.authentication.user.id,
+            props.authentication.user.userName
+        )
+
+        setWaiting('assign')
+    }, [props.project.needsUpdate])
+
+    useEffect(() => {
+        switch (isWaiting) {
+            case 'assign':
+                assignCurrent(location.id)
+                setWaiting('ready')
+                break
+            case 'ready':
+                setSongs(props.project.current)
+                setWaiting('loaded')
+                break
+            default:
+                break
+        }
+    }, [isWaiting])
+
+    function fetchData(id, userName) {
+        props.getProjects(id, userName)
+    }
+
+    function assignCurrent(id) {
+        props.assignProject(id)
+    }
 
     if (songs && !songs.songs.length > 0) {
-        history.push(`/project/${userData.projectSlug}/new-song/`)
+        history.push(`/project/${project.projectSlug}/new-song/`)
         return (
             <>
                 <p>loading</p>
@@ -25,7 +58,6 @@ export function SingleProject() {
     } else {
         let id = useParams().id
 
-        const [userId, setUserId] = useState(id)
         return (
             <div css={'width:100%'}>
                 <div
@@ -35,13 +67,22 @@ export function SingleProject() {
                     {songs && <PDetails data={songs} />}
                 </div>
                 <div>{songs && <TableArea data={songs} />}</div>
-                <div>
-                    <Info />
-                </div>
+                <div>{/* <Info /> */}</div>
             </div>
         )
     }
 }
 
-const connectedProject = connect()(SingleProject)
+function mapState(state) {
+    const { project, authentication } = state
+    return { project, authentication }
+}
+
+const actionCreators = {
+    getProjects: projectActions.getProjects,
+    getUser: userActions.getById,
+    assignProject: projectActions.assignProject,
+}
+
+const connectedProject = connect(mapState, actionCreators)(SingleProject)
 export { connectedProject as Project }

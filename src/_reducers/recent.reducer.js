@@ -1,19 +1,19 @@
-import { userConstants } from "../_constants";
+import { userConstants } from '../_constants'
 
-const recents = JSON.parse(localStorage.getItem("recent"));
+const recents = JSON.parse(localStorage.getItem('recent'))
 
-const initialState = recents ? { projects: recents } : {};
+const initialState = recents ? { projects: recents } : {}
 
-export function recent(state = initialState, action) {
-  switch (action.type) {
-    case userConstants.GET_SUCCESS:
-      return {
-        projects: recents,
-      };
-    case userConstants.GET_FAILURE:
-      return {};
+export function recentReducer(state = initialState, action) {
+    switch (action.type) {
+        case userConstants.GET_SUCCESS:
+            return {
+                projects: recents,
+            }
+        case userConstants.GET_FAILURE:
+            return {}
 
-    default:
-      return state;
-  }
+        default:
+            return state
+    }
 }

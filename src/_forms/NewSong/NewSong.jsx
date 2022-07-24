@@ -242,12 +242,13 @@ function NewSong(props) {
 }
 
 function mapState(state) {
-    const { userData, form, authentication } = state
+    const { project, form, authentication } = state
     return {
-        userData,
+        project,
         form,
         authentication,
-        project: state.userData.current._id,
+        monitor,
+        project: state.project.current._id,
     }
 }
 

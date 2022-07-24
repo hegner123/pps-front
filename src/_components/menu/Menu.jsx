@@ -27,7 +27,7 @@ import { useOnClickOutside } from '../../_hooks/onClickOutside'
 const Menu = (props) => {
     const loggedIn = props.authentication.loggedIn
     // const current = useSelector((state) =>
-    //     state.userData.current ? state.userData.current._id : ''
+    //     state.project.current ? state.project.current._id : ''
     // )
     const ui = props.userInterface
     let searchBar, settings

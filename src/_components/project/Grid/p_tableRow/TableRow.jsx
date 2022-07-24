@@ -117,8 +117,8 @@ function TableRow(props) {
 }
 
 function mapState(state) {
-    const { userData } = state
-    return { userData }
+    const { project } = state
+    return { project }
 }
 
 const actionCreators = {

@@ -7,7 +7,7 @@ export function pDetails(props) {
     return (
         <ProjectDetails>
             <ProjectTitle>{props.data.projectTitle}</ProjectTitle>
-            <Link to={`${id}/new-song/`}>
+            <Link to={`/project/${id}/new-song/`}>
                 <AddSong>+</AddSong>
             </Link>
         </ProjectDetails>

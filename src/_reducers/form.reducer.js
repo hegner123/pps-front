@@ -52,28 +52,29 @@ export function formReducer(state = initState, action) {
             }
 
         case formConstants.REFERENCE_ADD:
-            if (state.references){
+            if (state.references) {
                 return {
-                ...state,
-                references: [
-                     ...state.references ,
-                    {
-                        reference: action.value,
-                        id: uuidv4(),
-                    },
-                ],
+                    ...state,
+                    references: [
+                        ...state.references,
+                        {
+                            reference: action.value,
+                            id: uuidv4(),
+                        },
+                    ],
+                }
+            } else {
+                return {
+                    ...state,
+                    references: [
+                        {
+                            reference: action.value,
+                            id: uuidv4(),
+                        },
+                    ],
+                }
             }
-            } else{ 
-                return {
-                ...state,
-                references: [
-                    {
-                        reference: action.value,
-                        id: uuidv4(),
-                    },
-                ],
-            }}
-            
+
         case formConstants.REFERENCE_DELETE:
             return {
                 ...state,

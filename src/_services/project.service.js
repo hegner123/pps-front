@@ -16,12 +16,9 @@ async function getProjects(user) {
         method: 'GET',
         headers: authHeader(),
     }
-    return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions)
-        .then(handleResponse)
-        .then((projects) => {
-            localStorage.setItem('userProjects', JSON.stringify(projects))
-            return projects
-        })
+    return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions).then(
+        handleResponse
+    )
 }
 
 async function createProjects(newProject) {
@@ -86,7 +83,6 @@ async function changeCellStatus(project, song, instrument, status, id, user) {
 async function handleResponse(response) {
     return response.text().then((text) => {
         const responseData = text && JSON.parse(text)
-
         return responseData
     })
 }

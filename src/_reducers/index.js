@@ -1,22 +1,24 @@
 import { combineReducers } from 'redux'
-import { authentication } from './authentication.reducer'
-import { registration } from './registration.reducer'
-import { recent } from './recent.reducer'
-import { alert } from './alert.reducer'
-import { userData } from './projects.reducer'
-import { referenceData } from './reference.reducer'
-import { userInterface } from './ui.reducer'
+import { authenticationReducer as authentication } from './authentication.reducer'
+import { registrationReducer as registration } from './registration.reducer'
+import { recentReducer as recent } from './recent.reducer'
+import { alertReducer as alert } from './alert.reducer'
+import { projectsReducer as project } from './projects.reducer'
+import { referenceReducer as reference } from './reference.reducer'
+import { uiReducer as userInterface } from './ui.reducer'
 import { formReducer as form } from './form.reducer'
+import { monitorReducer as monitor } from './monitor.reducer'
 
 const rootReducer = combineReducers({
     authentication,
     registration,
     recent,
-    userInterface,
     alert,
-    userData,
-    referenceData,
+    project,
+    reference,
+    userInterface,
     form,
+    monitor,
 })
 
 export default rootReducer
