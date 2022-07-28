@@ -14,6 +14,7 @@ export const projectActions = {
     deleteSong,
     changeCellStatus,
     setSelected,
+    refreshProject,
     setNeedsUpdate,
 }
 
@@ -51,7 +52,7 @@ function getProjects(id, userName) {
 function assignProject(project) {
     const state = store.getState()
     const user = state.authentication.user.id
-    let currentProject = refreshCurrent(project)
+    let currentProject = refreshProject(project, true)
     return (dispatch) => {
         userService.addToRecent(currentProject, user)
         dispatch(assign(currentProject))
@@ -149,6 +150,7 @@ function deleteSong(song, projectId, user) {
                 .then((projects) => {
                     assignProject('refresh', projectId)
                     dispatch(success(result, song))
+                    dispatch(updateSuccess)
                 })
                 .catch((error) => dispatch(failure(error)))
         })
@@ -158,10 +160,17 @@ function deleteSong(song, projectId, user) {
         return {
             type: projectConstants.DELETE_SONG_SUCCESS,
             result,
+            song,
         }
     }
     function failure(error) {
         return { type: projectConstants.DELETE_SONG_FAILURE, error }
+    }
+    function updateSuccess() {
+        return {
+            type: monitorConstants.DATABASE_UPDATE_SUCCESS,
+            success: 'DELETE_SONG_SUCCESS',
+        }
     }
 }
 
@@ -195,7 +204,6 @@ function changeCellStatus(project, song, instrument, status, id) {
 }
 
 function setSelected(selected) {
-    console.log(selected)
     return (dispatch) => {
         dispatch(setSelectedSong(selected))
     }
@@ -204,7 +212,7 @@ function setSelected(selected) {
     }
 }
 
-function refreshCurrent(project) {
+function refreshProject(project, internal) {
     let currentProject
     const projects = JSON.parse(localStorage.getItem('userProjects'))
     projects
@@ -213,11 +221,17 @@ function refreshCurrent(project) {
                   currentProject = data
               }
           })
-        : console.log('test')
-    return currentProject
+        : console.log('refresh')
+    if (internal) {
+        return currentProject
+    } else {
+        return (dispatch) => {
+            dispatch(refresh)
+        }
+    }
 
-    function refreshFail() {
-        return { type: projectConstants.REFRESH_FAIL }
+    function refresh() {
+        return { type: projectConstants.REFRESH }
     }
 }
 

@@ -24,7 +24,7 @@ function TableCell(props) {
     const [cellStatus, setCellStatus] = useState(props.data)
     const [cellId, setCellId] = useState(props.cellId)
     const [projectSlug, setProjectSlug] = useState(props.projectId)
-    const projectId = useSelector((state) => state.project.current._id)
+    const [projectId, setProjectId] = useState(props.projectId)
     const userInterface = props.userInterface
 
     let dropdownStatus

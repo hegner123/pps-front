@@ -4,6 +4,7 @@ import { ProjectDetails, ProjectTitle, AddSong } from './style'
 
 export function pDetails(props) {
     let id = useParams().id
+
     return (
         <ProjectDetails>
             <ProjectTitle>{props.data.projectTitle}</ProjectTitle>

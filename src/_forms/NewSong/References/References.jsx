@@ -53,8 +53,8 @@ const References = (props) => {
 function mapState(state) {
     const { form } = state
     return {
-        results: state.referenceData.results,
-        project: state.project.current._id,
+        results: state.reference.results,
+
         form,
     }
 }
