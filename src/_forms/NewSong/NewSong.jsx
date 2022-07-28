@@ -48,13 +48,13 @@ function NewSong(props) {
         event.preventDefault()
         let song = {
             id: currentProject,
-            songTitle: songTitle,
+            songTitle: valSongTitle,
             arrangement: [...props.form.arrangement],
             references: [...references],
             path: `/project/${projectPage}`,
         }
         if (song.songTitle) {
-            props.createSong(song)
+            props.createSong(song, props.authentication.user._id, projectPage)
         }
     }
 
@@ -69,7 +69,7 @@ function NewSong(props) {
                             <IconButton
                                 onClick={() => props.referenceDelete(refs.id)}
                             >
-                                <Delete css="height:24px;width:24px;" />
+                                <Delete />
                             </IconButton>
                         </RefItem>
                     )
@@ -193,7 +193,7 @@ function NewSong(props) {
                                 </div>
                             </section>
                         </Grid>
-                        <div>
+                        <div className="create-song-action">
                             <button>Create</button>
                             <Btn to={`/project/${projectPage}`}>Cancel</Btn>
                         </div>
@@ -242,8 +242,14 @@ function NewSong(props) {
 }
 
 function mapState(state) {
-    const { userData, form } = state
-    return { userData, form, project: state.userData.current._id }
+    const { project, form, authentication } = state
+    return {
+        project,
+        form,
+        authentication,
+        monitor,
+        project: state.project.current._id,
+    }
 }
 
 const actionCreators = {

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { userActions } from '../../../_actions'
 import { projectActions } from '../../../_actions'
@@ -12,21 +12,19 @@ function Dash(props) {
     function fetchData(id, userName) {
         props.getProjects(id, userName)
     }
-
-    function handleStatusChange() {
-        setWaiting(false)
-        setProjects(props.userData.projects)
-    }
-
-    useEffect(() => {
-        handleStatusChange()
-    }, [])
-
     useEffect(() => {
         fetchData(
             props.authentication.user.id,
             props.authentication.user.userName
         )
+    }, [props.project.needsUpdate])
+    function handleStatusChange() {
+        setWaiting(false)
+        setProjects(props.project.projects)
+    }
+
+    useEffect(() => {
+        handleStatusChange()
     }, [])
 
     if (isWaiting) {
@@ -46,8 +44,8 @@ function Dash(props) {
 }
 
 function mapState(state) {
-    const { userData, authentication, recent } = state
-    return { userData, authentication, recent }
+    const { project, authentication, recent } = state
+    return { project, authentication, recent }
 }
 
 const actionCreators = {

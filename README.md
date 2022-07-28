@@ -20,6 +20,9 @@ Mix revisions are something every engineer has to deal with, and their is no tec
 
 The potential for **PPS** is huge. Their is currently nocompetitor in the recording project mangement space, and the pro audio market is huge.
 
+## Planning
+Create single constant for updating table. Dispatch this constant when updates are made.
+
 ## Technology
 
 **PPS** uses the following technology:

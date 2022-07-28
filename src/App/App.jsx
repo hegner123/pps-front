@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 import { Router, Switch, Route } from 'react-router-dom'
 import { alertActions, uiActions } from '../_actions'
 import { connect } from 'react-redux'
-import { history } from '../_helpers'
+import { history, indexDb } from '../_helpers'
 import { PrivateRoute } from '../_components/privateRoute'
 import { Menu } from '../_components/menu'
 import { HomePage } from '../pages/HomePage'
-import { Audio } from '../_components/audio/audio'
-import { SingleProject } from '../pages/Project'
+import { Project } from '../pages/Project'
 import { LoginPage } from '../_forms/Login'
 import { Register } from '../_forms/Register'
 import { Dashboard } from '../pages/Dashboard'
@@ -16,8 +15,9 @@ import { NewProject } from '../_forms/NewProject'
 import '../_assets/css/normalize.css'
 import '../_assets/css/main.css'
 import '../_assets/css/style.css'
-import { AlertBar, Alert } from './style'
+import { AlertBar, Alert, TopLevel } from './style'
 import { Account } from '../pages/Account'
+import { TestPage } from '../pages/TestPage'
 
 const App = (props) => {
     const { alert } = props
@@ -50,14 +50,14 @@ const App = (props) => {
     }
 
     return (
-        <div className="container">
+        <TopLevel className="container">
             <Router history={history}>
                 <Menu logout={() => logout(props)} />
                 <Switch>
                     <PrivateRoute
                         exact
                         path="/project/:id"
-                        component={SingleProject}
+                        component={Project}
                     />
                     <PrivateRoute path="/account" component={Account} />
                     <PrivateRoute
@@ -74,10 +74,12 @@ const App = (props) => {
                         path="/project/:id/new-song/"
                         component={NewSong}
                     />
-                    <Route exact path="/test" component={Audio} />
+
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" component={LoginPage} />
+                    <Route path="/login" component={LoginPage} />
+                    <Route path="/login/demo" component={LoginPage} />
+                    <Route path="/test" component={TestPage} />
                 </Switch>
             </Router>
             <AlertBar>
@@ -90,7 +92,7 @@ const App = (props) => {
                     </Alert>
                 )}
             </AlertBar>
-        </div>
+        </TopLevel>
     )
 }
 

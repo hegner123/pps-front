@@ -1,12 +1,19 @@
-p {
-    margin-block-start: 0;
-    margin-block-end: 0;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
 }
 
 @font-face {
     font-family: Roboto Mono;
-    src: url(../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
+    src: url('../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
 }
+
 :root {
     --white: #dadce1;
     --bg: #242526;
@@ -68,6 +75,7 @@ a {
     color: var(--link-color);
     text-decoration: none;
 }
+
 input:focus {
     border: 1px solid rgba(0, 0, 0, 0.6);
 }
@@ -196,11 +204,12 @@ input:focus {
 
 .dropdown-song {
     position: absolute;
-    transform: translateX(60%) translateY(45%);
+    transform: translateX(80%) translateY(76%);
     background-color: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);
     transition: height var(--speed) ease;
+
 }
 
 .menu-item {

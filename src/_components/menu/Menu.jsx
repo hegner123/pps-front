@@ -26,9 +26,9 @@ import { useOnClickOutside } from '../../_hooks/onClickOutside'
 
 const Menu = (props) => {
     const loggedIn = props.authentication.loggedIn
-    const current = useSelector((state) =>
-        state.userData.current ? state.userData.current._id : ''
-    )
+    // const current = useSelector((state) =>
+    //     state.project.current ? state.project.current._id : ''
+    // )
     const ui = props.userInterface
     let searchBar, settings
     if (loggedIn) {
@@ -53,7 +53,7 @@ const Menu = (props) => {
                 <ConDropdownMenu
                     logOut={() => userLogout()}
                     deleteProject={() => handleDelete(current)}
-                    currentP={current.projectTitle}
+                    // currentP={current.projectTitle}
                 ></ConDropdownMenu>
             </NavItem>
         )
