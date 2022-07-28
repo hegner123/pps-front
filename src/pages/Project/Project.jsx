@@ -9,80 +9,37 @@ import { projectActions, userActions } from '../../_actions'
 import { Info } from '../../_components/project/Info'
 
 function SingleProject(props) {
-    const [isWaiting, setWaiting] = useState('unloaded')
-    const [songs, setSongs] = useState()
+    const [hasProject, setProject] = useState()
     const location = useParams()
 
-    useEffect(() => {
-        setWaiting('start load')
-        setSongs('')
-
-        fetchData(
-            props.authentication.user.id,
-            props.authentication.user.userName
-        )
-
-        setWaiting('assign')
-    }, [props.project.needsUpdate])
+    let localStorageData = JSON.parse(
+        localStorage.getItem('userProjects')
+    ).filter((project) => {
+        return project.projectSlug == location.id
+    })
 
     useEffect(() => {
-        switch (isWaiting) {
-            case 'assign':
-                assignCurrent(location.id)
-                setWaiting('ready')
-                break
-            case 'ready':
-                setSongs(props.project.current)
-                setWaiting('loaded')
-                break
-            default:
-                break
-        }
-    }, [isWaiting])
+        setProject(localStorageData)
+    }, [])
 
-    function fetchData(id, userName) {
-        props.getProjects(id, userName)
-    }
-
-    function assignCurrent(id) {
-        props.assignProject(id)
-    }
-
-    if (songs && !songs.songs.length > 0) {
-        history.push(`/project/${project.projectSlug}/new-song/`)
-        return (
-            <>
-                <p>loading</p>
-            </>
-        )
-    } else {
-        let id = useParams().id
-
-        return (
-            <div css={'width:100%'}>
-                <div
-                    css={'display:flex; flex-wrap: wrap; width: 100%;'}
-                    className=" grid-area"
-                >
-                    {songs && <PDetails data={songs} />}
-                </div>
-                <div>{songs && <TableArea data={songs} />}</div>
-                <div>{/* <Info /> */}</div>
+    return (
+        <div css={'width:100%'}>
+            <div
+                css={'display:flex; flex-wrap: wrap; width: 100%;'}
+                className=" grid-area"
+            >
+                {hasProject && <PDetails data={hasProject[0]} />}
             </div>
-        )
-    }
+            <div>{hasProject && <TableArea data={hasProject[0]} />}</div>
+            <div>{/* <Info /> */}</div>
+        </div>
+    )
 }
 
 function mapState(state) {
-    const { project, authentication } = state
-    return { project, authentication }
+    const { authentication, monitor } = state
+    return { authentication, monitor }
 }
 
-const actionCreators = {
-    getProjects: projectActions.getProjects,
-    getUser: userActions.getById,
-    assignProject: projectActions.assignProject,
-}
-
-const connectedProject = connect(mapState, actionCreators)(SingleProject)
+const connectedProject = connect(mapState)(SingleProject)
 export { connectedProject as Project }

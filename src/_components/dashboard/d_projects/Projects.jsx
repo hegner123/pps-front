@@ -40,10 +40,8 @@ function UserProjects(props) {
     }
 
     useEffect(() => {
-        if (props.project.projects !== 'unset') {
-            handleIsReady()
-        }
-    }, [props.project.projects])
+        handleIsReady()
+    }, [])
     return (
         <Section>
             <DashHeader>
@@ -56,7 +54,7 @@ function UserProjects(props) {
             </DashHeader>
             <ProjectSection>
                 {isReady &&
-                    props.project.projects.map((entry, i) => (
+                    props.projects.map((entry, i) => (
                         <DashTile
                             data={entry.projectTitle}
                             slug={entry.projectSlug}
@@ -70,8 +68,8 @@ function UserProjects(props) {
 }
 
 function mapState(state) {
-    const { project, authentication, recent } = state
-    return { project, authentication, recent }
+    const { authentication, recent } = state
+    return { authentication, recent }
 }
 
 const connectedRecentProjects = connect(mapState)(RecentProjects)

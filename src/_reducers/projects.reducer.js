@@ -1,31 +1,12 @@
 import { projectConstants } from '../_constants'
 
-let current = JSON.parse(localStorage.getItem('current'))
-
-const url = window.location.pathname
-const first = url.replace('/project/', '')
-const id = first.replace('/new-song/', '')
-
 // if (url.includes('/project/')) {
 //     current = id
 // }
 
-const initialState = current
-    ? {
-          projects: 'unset',
-          current: current,
-          selected: current.selected,
-          needsUpdate: false,
-      }
-    : {
-          projects: 'unset',
-          current: 'unset',
-          selected: 'unset',
-          needsUpdate: false,
-      }
 // const initialState = { projects: 'unset', selected: 0 }
 
-export function projectsReducer(state = initialState, action) {
+export function projectsReducer(state, action) {
     switch (action.type) {
         case projectConstants.GETALL_SUCCESS:
             return {
@@ -81,6 +62,7 @@ export function projectsReducer(state = initialState, action) {
         case projectConstants.CREATE_SONG_SUCCESS:
             return {
                 ...state,
+
                 create: action.create,
                 needsUpdate: true,
             }
@@ -90,8 +72,15 @@ export function projectsReducer(state = initialState, action) {
                 create: action.error,
             }
         case projectConstants.DELETE_SONG_SUCCESS:
+            console.log(
+                state.current.songs.filter((song) => {
+                    return song._id !== action.song
+                })
+            )
             return {
-                ...state,
+                current: state.current.songs.filter((song) => {
+                    return song._id !== action.song
+                }),
                 songDelete: action.delete,
                 needsUpdate: true,
             }
@@ -99,6 +88,14 @@ export function projectsReducer(state = initialState, action) {
             return {
                 ...state,
                 songDelete: action.error,
+            }
+        case projectConstants.REFRESH:
+            return {
+                ...state,
+                projects: 'unset',
+                current: current,
+                selected: current.selected,
+                needsUpdate: false,
             }
         case projectConstants.SET_SELECTED:
             return {

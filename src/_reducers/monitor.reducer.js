@@ -9,10 +9,18 @@ const initialState = {
 export function monitorReducer(state = initialState, action) {
     switch (action.type) {
         case monitorConstants.DATABASE_UPDATE_SUCCESS:
-            return { ...state, DATABASE_UPDATE_ERROR: action.success }
+            return {
+                ...state,
+                idle: false,
+                DATABASE_UPDATE_SUCCESS: action.success,
+            }
 
         case monitorConstants.DATABASE_UPDATE_ERROR:
-            return { ...state, DATABASE_UPDATE_ERROR: action.error }
+            return {
+                ...state,
+                idle: false,
+                DATABASE_UPDATE_ERROR: action.error,
+            }
 
         default:
             return state

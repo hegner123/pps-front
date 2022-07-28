@@ -1,6 +1,7 @@
-import React, { useState, useReducer, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { projectActions, refActions, formActions } from '../../_actions'
+import { history } from '../../_helpers'
 
 //! development query
 import { query } from './_query'
@@ -28,6 +29,14 @@ function NewSong(props) {
     const [valSongLyrics, setSongLyrics] = useState('')
     const [references, setReferences] = useState([''])
     const [valTemplate, setTemplate] = useState('')
+    const projectPage = useParams().id
+    let localStorageData = JSON.parse(
+        localStorage.getItem('userProjects')
+    ).filter((project) => {
+        return project.projectSlug == useParams().id
+    })
+    const currentProject = localStorageData[0]._id
+
     let refList
     useEffect(() => {
         props.instReset()
@@ -36,13 +45,18 @@ function NewSong(props) {
         }
     }, [valTemplate])
 
+    useEffect(() => {
+        if (props.monitor.DATABASE_UPDATE_SUCCESS === 'CREATE_SONG_SUCCESS') {
+            history.push(`/project/${projectPage}`)
+        }
+
+        return
+    }, [props.monitor])
+
     function handleSpotifySearch(e, ref) {
         e.preventDefault()
         props.getReferences(ref)
     }
-
-    const projectPage = useParams().id
-    const currentProject = props.project
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -51,10 +65,13 @@ function NewSong(props) {
             songTitle: valSongTitle,
             arrangement: [...props.form.arrangement],
             references: [...references],
-            path: `/project/${projectPage}`,
         }
         if (song.songTitle) {
-            props.createSong(song, props.authentication.user._id, projectPage)
+            props.createSong(
+                song,
+                props.authentication.user._id,
+                localStorageData[0]._id
+            )
         }
     }
 
@@ -242,13 +259,11 @@ function NewSong(props) {
 }
 
 function mapState(state) {
-    const { project, form, authentication } = state
+    const { form, authentication, monitor } = state
     return {
-        project,
         form,
         authentication,
         monitor,
-        project: state.project.current._id,
     }
 }
 

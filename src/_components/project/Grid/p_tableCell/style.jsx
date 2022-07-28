@@ -81,7 +81,7 @@ export const TitleCell = styled.td`
     display: flex;
     color: var(--table-text-color);
     padding: 0 15px;
-    font-size: 10px;
+    font-size: 1rem;
     line-height: 1rem;
     border: 1px solid #333;
     border-collapse: collapse;
