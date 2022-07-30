@@ -5,12 +5,15 @@ import { TableArea } from '../../_components/project/Grid/p_table'
 import { connect } from 'react-redux'
 import { history } from '../../_helpers'
 import { projectActions, userActions } from '../../_actions'
+import { projectService } from '../../_services/'
 
 import { Info } from '../../_components/project/Info'
 
 function SingleProject(props) {
     const [hasProject, setProject] = useState()
     const location = useParams()
+
+    let currentStorage = JSON.parse(localStorage.getItem('current'))
 
     let localStorageData = JSON.parse(
         localStorage.getItem('userProjects')
@@ -19,8 +22,14 @@ function SingleProject(props) {
     })
 
     useEffect(() => {
-        setProject(localStorageData)
-    }, [])
+        projectService.getProjects(props.authentication.user._id).then((data) =>
+            setProject(
+                data.filter((project) => {
+                    return project.projectSlug == location.id
+                })
+            )
+        )
+    }, [props.monitor.idle])
 
     return (
         <div css={'width:100%'}>
@@ -41,5 +50,9 @@ function mapState(state) {
     return { authentication, monitor }
 }
 
-const connectedProject = connect(mapState)(SingleProject)
+const actionCreators = {
+    getProjects: projectActions.getProjects,
+}
+
+const connectedProject = connect(mapState, actionCreators)(SingleProject)
 export { connectedProject as Project }

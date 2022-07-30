@@ -24,10 +24,9 @@ function getProjects(id, userName) {
         dispatch(request)
         return projectService.getProjects(user).then(
             (projects) => {
-                dispatch(alertSuccess(userName.toUpperCase()))
-                setUserProjects(projects)
+                dispatch(alertSuccess(userName))
+
                 dispatch(success(projects))
-                dispatch(userActions.getById(user))
 
                 return projects
             },
@@ -58,8 +57,6 @@ function assignProject(project) {
         dispatch(assign(currentProject))
         userService.getById(user)
         currentProject = { ...currentProject, selected: 0 }
-
-        localStorage.setItem('user', JSON.stringify(currentProject))
     }
 
     function assign(project) {
@@ -142,18 +139,19 @@ function createSong(song, projectId) {
     }
 }
 
-function deleteSong(song, projectId, user) {
+function deleteSong(song, projectId) {
+    let currentProject = refreshProject(projectId, true)
     return (dispatch) => {
-        projectService.deleteSong(song, projectId).then((result) => {
-            projectService
-                .getProjects(user)
-                .then((projects) => {
-                    assignProject('refresh', projectId)
-                    dispatch(success(result, song))
-                    dispatch(updateSuccess)
-                })
-                .catch((error) => dispatch(failure(error)))
-        })
+        projectService
+            .deleteSong(song, projectId)
+            .then((result) => {
+                console.log(result)
+                // currentProject = { ...currentProject, selected: 0 }
+
+                // localStorage.setItem('current', JSON.stringify(currentProject))
+                dispatch(updateSuccess())
+            })
+            .catch((error) => dispatch(failure(error)))
     }
 
     function success(result) {
@@ -171,6 +169,9 @@ function deleteSong(song, projectId, user) {
             type: monitorConstants.DATABASE_UPDATE_SUCCESS,
             success: 'DELETE_SONG_SUCCESS',
         }
+    }
+    function alertSuccess(userName) {
+        return alertActions.success(`song was deleted`)
     }
 }
 
@@ -235,17 +236,6 @@ function refreshProject(project, internal) {
     }
 }
 
-function setUserProjects(projects) {
-    localStorage.clear('userProjects')
-    localStorage.setItem('userProjects', JSON.stringify(projects))
-    return (dispatch) => {
-        dispatch(updated)
-    }
-
-    function updated() {
-        return { type: projectConstants.UPDATE_TABLE }
-    }
-}
 function setNeedsUpdate(action) {
     return (dispatch) => {
         dispatch(setUpdated(action))

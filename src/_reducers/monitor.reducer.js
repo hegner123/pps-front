@@ -11,7 +11,7 @@ export function monitorReducer(state = initialState, action) {
         case monitorConstants.DATABASE_UPDATE_SUCCESS:
             return {
                 ...state,
-                idle: false,
+                idle: !state.idle,
                 DATABASE_UPDATE_SUCCESS: action.success,
             }
 
