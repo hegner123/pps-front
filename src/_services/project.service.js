@@ -17,7 +17,12 @@ async function getProjects(user) {
         headers: authHeader(),
     }
     return fetch(`${config.apiUrl}/projects/${user}/`, requestOptions).then(
-        handleResponse
+        (response) =>
+            response.text().then((text) => {
+                // console.log(JSON.parse(text))
+                const responseData = text && JSON.parse(text)
+                return responseData
+            })
     )
 }
 
@@ -48,6 +53,7 @@ async function createSong(newSong) {
         headers: authHeader(1),
         body: JSON.stringify({ newSong }),
     }
+    console.log(requestOptions.body)
     return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
         .then(handleResponse)
         .then(history.push(newSong.path))
@@ -80,8 +86,9 @@ async function changeCellStatus(project, song, instrument, status, id, user) {
     )
 }
 
-async function handleResponse(response) {
+function handleResponse(response) {
     return response.text().then((text) => {
+        console.log(JSON.parse(text))
         const responseData = text && JSON.parse(text)
         return responseData
     })

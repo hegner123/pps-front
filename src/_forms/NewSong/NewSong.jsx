@@ -45,14 +45,6 @@ function NewSong(props) {
         }
     }, [valTemplate])
 
-    useEffect(() => {
-        if (props.monitor.DATABASE_UPDATE_SUCCESS === 'CREATE_SONG_SUCCESS') {
-            history.push(`/project/${projectPage}`)
-        }
-
-        return
-    }, [props.monitor])
-
     function handleSpotifySearch(e, ref) {
         e.preventDefault()
         props.getReferences(ref)
@@ -72,6 +64,7 @@ function NewSong(props) {
                 props.authentication.user._id,
                 localStorageData[0]._id
             )
+            history.push(`/project/${projectPage}`)
         }
     }
 
