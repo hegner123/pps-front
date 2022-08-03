@@ -4,7 +4,7 @@ export const ProjectsTile = styled.div`
     width: 205px;
     height: 48px;
     background: var(--bg-accent);
-    margin: 0 25px;
+
     border-radius: 4px;
     display: flex;
     justify-content: center;

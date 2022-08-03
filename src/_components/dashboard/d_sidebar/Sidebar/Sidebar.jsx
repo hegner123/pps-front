@@ -12,8 +12,8 @@ const Sidebar = (props) => {
         projects.map((project) => {
             let recent = []
 
-            if (project.recent_activity) {
-                project.recent_activity.map((noti) => {
+            if (project.recentActivity) {
+                project.recentActivity.map((noti) => {
                     recent.push(noti)
                 })
             }

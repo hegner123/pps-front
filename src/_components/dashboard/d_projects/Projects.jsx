@@ -33,15 +33,7 @@ function RecentProjects(props) {
 }
 
 function UserProjects(props) {
-    const [isReady, setIsReady] = useState(false)
-
-    function handleIsReady() {
-        setIsReady(true)
-    }
-
-    useEffect(() => {
-        handleIsReady()
-    }, [])
+    console.log(props.isReady)
     return (
         <Section>
             <DashHeader>
@@ -53,13 +45,14 @@ function UserProjects(props) {
                 </Link>
             </DashHeader>
             <ProjectSection>
-                {isReady &&
-                    props.projects.map((entry, i) => (
+                {props.isReady &&
+                    props.hasProjects !== 'unset' &&
+                    props.hasProjects.map((project) => (
                         <DashTile
-                            data={entry.projectTitle}
-                            slug={entry.projectSlug}
-                            id={entry._id}
-                            key={i}
+                            title={project.projectTitle}
+                            slug={project.projectSlug}
+                            id={project._id}
+                            key={project._id}
                         />
                     ))}
             </ProjectSection>

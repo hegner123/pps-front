@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { store } from '../../../../_helpers'
 import { TableCell } from '../p_tableCell'
 import { TableRows } from './style'
-import { projectActions } from '../../../../_actions/project.actions'
+
 import { ArrangementCell, SongRow, SongArrangement } from './constructors'
-import { render } from 'react-dom'
 
 function TableRow(props) {
     const [rows, setRows] = useState([])
@@ -13,6 +11,7 @@ function TableRow(props) {
     useEffect(() => {
         setRows(renderTable(props.headers, props.songs, props.id))
     }, [props])
+
     function renderTable(headers, songs, id) {
         let tableRows = []
         if (id == 'table-body') {
@@ -24,17 +23,17 @@ function TableRow(props) {
                     song.songArrangement.push(cell)
                 }
 
-                currentSong.song_status.forEach((song_status) => {
+                currentSong.songStatus.forEach((songStatus) => {
                     song.songArrangement.forEach((arrangement) => {
-                        if (song_status.instrument === arrangement.instrument) {
-                            arrangement.status = song_status.status
-                            arrangement.cellId = song_status._id
+                        if (songStatus.instrument === arrangement.instrument) {
+                            arrangement.status = songStatus.status
+                            arrangement.cellId = songStatus._id
                         }
                     })
                 })
 
                 let row = new SongRow(
-                    currentSong.song_title,
+                    currentSong.songTitle,
                     song,
                     currentSong._id,
                     currentSong
@@ -75,10 +74,12 @@ function TableRow(props) {
                         }
                         key={projectSongs.songId}
                     >
+                        {console.log('projectSongs', projectSongs)}
                         <TableCell
                             songTitle={projectSongs.title}
                             key={projectSongs.songId}
                             id={Math.floor(Math.random() * 10000)}
+                            songObject={projectSongs.songObject}
                             songId={projectSongs.songId}
                             songIndex={i}
                             projectId={props.projectId}

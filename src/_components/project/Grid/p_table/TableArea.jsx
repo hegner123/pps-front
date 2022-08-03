@@ -19,7 +19,7 @@ function TableArea(props) {
         let instruments = []
 
         headers.forEach((song) => {
-            song.song_arrangements.forEach((instrument) => {
+            song.songArrangements.forEach((instrument) => {
                 if (!instruments.includes(instrument)) {
                     instruments.push(instrument)
                 }

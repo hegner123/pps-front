@@ -30,12 +30,8 @@ function NewSong(props) {
     const [references, setReferences] = useState([''])
     const [valTemplate, setTemplate] = useState('')
     const projectPage = useParams().id
-    let localStorageData = JSON.parse(
-        localStorage.getItem('userProjects')
-    ).filter((project) => {
-        return project.projectSlug == useParams().id
-    })
-    const currentProject = localStorageData[0]._id
+
+    const currentProject = props.data._id
 
     let refList
     useEffect(() => {
@@ -62,7 +58,7 @@ function NewSong(props) {
             props.createSong(
                 song,
                 props.authentication.user._id,
-                localStorageData[0]._id
+                currentProject
             )
             history.push(`/project/${projectPage}`)
         }

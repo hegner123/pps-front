@@ -43,7 +43,7 @@ const Account = (props) => {
 
     return (
         <Main>
-            <section>
+            <section css={'grid-column:4/-4'}>
                 <div>
                     {userImg ? (
                         <img
@@ -52,7 +52,13 @@ const Account = (props) => {
                             css={'width:150px;height:150px;'}
                         />
                     ) : (
-                        <div css="height:150px;width:150px"></div>
+                        <div css="height:150px;width:150px">
+                            <img
+                                src="https://via.placeholder.com/150x150"
+                                alt="placeholder"
+                            />
+                            
+                        </div>
                     )}
                 </div>
                 <div>
@@ -63,7 +69,7 @@ const Account = (props) => {
                     <Upload fileChange={(e) => handleFileChange(e)} />
                 </div>
             </section>
-            <section>
+            <section css={'grid-column:4/-4;'}>
                 <ul>
                     <AccountMenuItem
                         active={fullUrl === '/account'}
@@ -111,7 +117,7 @@ const Upload = (props) => {
         <div css={'padding-top:20px;'}>
             <label
                 htmlFor="upload-image"
-                css="  border: 1px solid #ccc;display: inline-block;cursor: pointer;"
+                css="  border: 1px solid #ccc;display: inline-block;cursor: pointer; max-width:200px;"
             >
                 Upload Profile Pic
             </label>

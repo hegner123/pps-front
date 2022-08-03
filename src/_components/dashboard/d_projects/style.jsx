@@ -3,10 +3,11 @@ export const root = styled.div``
 
 export const DashHeader = styled.div`
     width: 100%;
-    margin: 5px 15px 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    padding: 1rem;
     align-items: center;
-    justify-content: flex-start;
 `
 
 export const DashTitle = styled.h2`
@@ -16,8 +17,10 @@ export const DashTitle = styled.h2`
 
 export const ProjectSection = styled.div`
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    padding: 1rem;
 `
 
 export const AddProject = styled.span`

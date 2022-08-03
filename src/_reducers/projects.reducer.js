@@ -4,9 +4,9 @@ import { projectConstants } from '../_constants'
 //     current = id
 // }
 
-// const initialState = { projects: 'unset', selected: 0 }
+const initialState = { projects: 'unset', selected: 0 }
 
-export function projectsReducer(state, action) {
+export function projectsReducer(state = initialState, action) {
     switch (action.type) {
         case projectConstants.GETALL_SUCCESS:
             return {

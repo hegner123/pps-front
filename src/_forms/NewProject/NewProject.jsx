@@ -39,7 +39,7 @@ function NewProject(props) {
     function handleSubmit(event) {
         const members = {
             id: user._id,
-            username: user.userName,
+            userName: user.userName,
         }
         let project = {
             projectTitle: projectTitle,

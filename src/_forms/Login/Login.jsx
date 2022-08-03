@@ -18,7 +18,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 const LoginPage = (props) => {
-    const [username, setUsername] = useState('')
+    const [userName, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const path = useLocation().pathname
@@ -26,8 +26,8 @@ const LoginPage = (props) => {
     function handleSubmit(e) {
         e.preventDefault()
         setSubmitted(true)
-        if (username && password) {
-            props.login(username, password)
+        if (userName && password) {
+            props.login(userName, password)
         }
     }
     useEffect(() => {
@@ -43,16 +43,16 @@ const LoginPage = (props) => {
                 <FormSection>
                     <FormTitle>Login</FormTitle>
                     <form name="form" onSubmit={handleSubmit}>
-                        {submitted && !username && (
+                        {submitted && !userName && (
                             <HelpBlock>Username is required</HelpBlock>
                         )}
                         <FormGroup>
-                            <Label htmlFor="username">Username</Label>
+                            <Label htmlFor="userName">Username</Label>
                             <Input
                                 type="text"
-                                name="username"
-                                autoComplete="username"
-                                value={username}
+                                name="userName"
+                                autoComplete="userName"
+                                value={userName}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
                         </FormGroup>

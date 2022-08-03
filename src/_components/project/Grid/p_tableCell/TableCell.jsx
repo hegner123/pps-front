@@ -10,7 +10,6 @@ import {
     DropdownSong,
     IconButton,
     NavItems,
-    Celltitle,
 } from './style'
 import Edit from '../../../../_assets/icons/more.svg'
 
@@ -76,10 +75,8 @@ function TableCell(props) {
         }
     } else if (props.songTitle) {
         display = (
-            <TitleCell>
-                <Celltitle onClick={() => props.setSelected(props.songIndex)}>
-                    {songTitle}
-                </Celltitle>
+            <TitleCell onClick={() => props.setSelected(props.songObject)}>
+                <span>{songTitle}</span>
                 <NavItem
                     openState={dropdownStatus}
                     cellId={songId}

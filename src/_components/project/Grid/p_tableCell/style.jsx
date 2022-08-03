@@ -45,7 +45,7 @@ export const NaCell = styled.td`
     align-items: center;
     justify-content: flex-start;
     font-weight: bold;
-
+    background: var(--table-bg);
     padding: 0 15px;
     font-size: 16px;
     cursor: pointer;
@@ -63,7 +63,7 @@ export const TextCell = styled.td`
     align-items: center;
     font-weight: bold;
     color: var(--table-text-color);
-
+    background: var(--table-bg);
     padding: 0 15px;
     font-size: var(--h5);
     line-height: 1rem;
@@ -78,6 +78,7 @@ export const TextCell = styled.td`
 `
 
 export const TitleCell = styled.td`
+    background: var(--table-bg);
     display: flex;
     color: var(--table-text-color);
     padding: 0 15px;
@@ -89,6 +90,10 @@ export const TitleCell = styled.td`
     align-items: center;
     justify-content: space-between;
     font-weight: bold;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(0.5);
+    }
 `
 
 export const CellButton = styled.div`
@@ -131,12 +136,5 @@ export const DropdownSong = styled.a`
     z-index: 10;
     &:hover {
         background-color: var(--bg-accent);
-    }
-`
-
-export const Celltitle = styled.span`
-    cursor: pointer;
-    &:hover {
-        filter: brightness(1.5);
     }
 `

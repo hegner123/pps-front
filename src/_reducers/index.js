@@ -3,7 +3,7 @@ import { authenticationReducer as authentication } from './authentication.reduce
 import { registrationReducer as registration } from './registration.reducer'
 import { recentReducer as recent } from './recent.reducer'
 import { alertReducer as alert } from './alert.reducer'
-// import { projectsReducer as project } from './projects.reducer'
+import { projectsReducer as userProjects } from './projects.reducer'
 import { referenceReducer as reference } from './reference.reducer'
 import { uiReducer as userInterface } from './ui.reducer'
 import { formReducer as form } from './form.reducer'
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     registration,
     recent,
     alert,
-
+    userProjects,
     reference,
     userInterface,
     form,

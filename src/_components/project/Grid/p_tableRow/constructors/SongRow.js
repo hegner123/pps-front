@@ -1,8 +1,8 @@
 export class SongRow {
-    constructor(title, arrangement, id, index) {
+    constructor(title, arrangement, id, songObject) {
         this.songId = id
         this.title = title
         this.projectArrangement = arrangement
-        this.index = index
+        this.songObject = songObject
     }
 }

@@ -2,7 +2,7 @@ import { alertActions } from './alert.actions'
 import { projectConstants, monitorConstants } from '../_constants'
 import { projectService } from '../_services/'
 import { userService } from '../_services/user.service'
-import { store, history } from '../_helpers'
+import { store } from '../_helpers'
 import { userActions } from './user.actions'
 
 export const projectActions = {
@@ -27,8 +27,6 @@ function getProjects(id, userName) {
                 dispatch(alertSuccess(userName))
 
                 dispatch(success(projects))
-
-                return projects
             },
             (error) => dispatch(failure(error.toString()))
         )
@@ -38,32 +36,13 @@ function getProjects(id, userName) {
         return { type: projectConstants.GETALL_REQUEST }
     }
     function success(projects) {
-        return { type: projectConstants.GETALL_SUCCESS, projects }
+        return { type: projectConstants.GETALL_SUCCESS, projects: projects }
     }
     function failure(error) {
         return { type: projectConstants.GETALL_FAILURE, error }
     }
     function alertSuccess(userName) {
         return alertActions.success(`${userName}'s projects loaded!`)
-    }
-}
-
-function assignProject(project) {
-    const state = store.getState()
-    const user = state.authentication.user.id
-    let currentProject = refreshProject(project, true)
-    return (dispatch) => {
-        userService.addToRecent(currentProject, user)
-        dispatch(assign(currentProject))
-        userService.getById(user)
-        currentProject = { ...currentProject, selected: 0 }
-    }
-
-    function assign(project) {
-        return { type: projectConstants.ASSIGN_PROJECT, project }
-    }
-    function clear() {
-        return { type: projectConstants.CLEAR_PROJECT }
     }
 }
 
@@ -119,9 +98,7 @@ function createSong(song, projectId) {
     function success(create) {
         return { type: projectConstants.CREATE_SONG_SUCCESS, create }
     }
-    function updateTable(table) {
-        return { type: projectConstants.UPDATE_TABLE, table }
-    }
+
     function failure(error) {
         return { type: projectConstants.CREATE_SONG_FAILURE, error }
     }
@@ -140,15 +117,11 @@ function createSong(song, projectId) {
 }
 
 function deleteSong(song, projectId) {
-    let currentProject = refreshProject(projectId, true)
     return (dispatch) => {
         projectService
             .deleteSong(song, projectId)
             .then((result) => {
-                console.log(result)
-                // currentProject = { ...currentProject, selected: 0 }
-
-                // localStorage.setItem('current', JSON.stringify(currentProject))
+                dispatch(success(result))
                 dispatch(updateSuccess())
             })
             .catch((error) => dispatch(failure(error)))
@@ -158,7 +131,6 @@ function deleteSong(song, projectId) {
         return {
             type: projectConstants.DELETE_SONG_SUCCESS,
             result,
-            song,
         }
     }
     function failure(error) {
@@ -201,6 +173,25 @@ function changeCellStatus(project, song, instrument, status, id) {
     }
     function failure(error) {
         return { type: projectConstants.STATUS_FAILURE, error }
+    }
+}
+
+function assignProject(project) {
+    const state = store.getState()
+    const user = state.authentication.user.id
+    let currentProject = refreshProject(project, true)
+    return (dispatch) => {
+        userService.addToRecent(currentProject, user)
+        dispatch(assign(currentProject))
+        userService.getById(user)
+        currentProject = { ...currentProject, selected: 0 }
+    }
+
+    function assign(project) {
+        return { type: projectConstants.ASSIGN_PROJECT, project }
+    }
+    function clear() {
+        return { type: projectConstants.CLEAR_PROJECT }
     }
 }
 

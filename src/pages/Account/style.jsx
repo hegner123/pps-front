@@ -5,6 +5,8 @@ export const Main = styled.main`
     margin-top: 2rem;
     color: var(--text-color);
     min-height: 500px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
 `
 
 export const AccountMenuItem = styled.li`

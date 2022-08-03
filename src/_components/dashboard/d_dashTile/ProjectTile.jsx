@@ -6,15 +6,14 @@ import { projectActions } from '../../../_actions'
 
 function DashTile(props) {
     const param = useParams()
-    console.log(['slug', props.slug])
     return (
-        <div css={'margin-bottom:10px;'}>
+        <div>
             <Link
                 to={'/project/' + props.slug}
                 onClick={() => props.assignProject(props.slug)}
             >
                 <ProjectsTile>
-                    <TileHeader>{props.data}</TileHeader>
+                    <TileHeader>{props.title}</TileHeader>
                 </ProjectsTile>
             </Link>
         </div>
@@ -43,7 +42,7 @@ function RecentDashTile(props) {
     }
 
     return (
-        <div css={'margin-bottom:10px;'}>
+        <div>
             {!isWaiting && (
                 <Link
                     to={'/project/' + projects.projectSlug}

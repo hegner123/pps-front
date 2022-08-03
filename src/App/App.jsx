@@ -10,7 +10,7 @@ import { Project } from '../pages/Project'
 import { LoginPage } from '../_forms/Login'
 import { Register } from '../_forms/Register'
 import { Dashboard } from '../pages/Dashboard'
-import { NewSong } from '../_forms/NewSong'
+
 import { NewProject } from '../_forms/NewProject'
 import '../_assets/css/normalize.css'
 import '../_assets/css/main.css'
@@ -54,11 +54,7 @@ const App = (props) => {
             <Router history={history}>
                 <Menu logout={() => logout(props)} />
                 <Switch>
-                    <PrivateRoute
-                        exact
-                        path="/project/:id"
-                        component={Project}
-                    />
+                    <PrivateRoute path="/project/:id" component={Project} />
                     <PrivateRoute path="/account" component={Account} />
                     <PrivateRoute
                         exact
@@ -69,10 +65,6 @@ const App = (props) => {
                         exact
                         path="/new-project"
                         component={NewProject}
-                    />
-                    <PrivateRoute
-                        path="/project/:id/new-song/"
-                        component={NewSong}
                     />
 
                     <Route exact path="/" component={HomePage} />

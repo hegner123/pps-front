@@ -5,11 +5,11 @@ import { projectActions } from '../../../_actions'
 import { RecentProjects, UserProjects } from '../d_projects/'
 
 function Dash(props) {
-    const [projects, setProjects] = useState(false)
+    const [isReady, setIsReady] = useState(false)
 
     function fetchData(id, userName) {
         props.getProjects(id, userName)
-        setProjects(JSON.parse(localStorage.getItem('userProjects')))
+        setIsReady(true)
     }
     useEffect(() => {
         fetchData(
@@ -20,11 +20,14 @@ function Dash(props) {
 
     return (
         <div>
-            {projects && (
+            {isReady && (
                 <>
-                    <RecentProjects />
-                    {console.log(projects)}
-                    <UserProjects projects={projects} />
+                    {/* <RecentProjects /> */}
+
+                    <UserProjects
+                        isReady={isReady}
+                        hasProjects={props.userProjects.projects}
+                    />
                 </>
             )}
         </div>
@@ -32,8 +35,8 @@ function Dash(props) {
 }
 
 function mapState(state) {
-    const { authentication, recent } = state
-    return { authentication, recent }
+    const { authentication, recent, userProjects } = state
+    return { authentication, recent, userProjects }
 }
 
 const actionCreators = {
