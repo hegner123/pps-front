@@ -17,18 +17,8 @@ const Account = (props) => {
     let { path, url } = useRouteMatch()
     const userInfo = props.authentication.user
     const fullUrl = useLocation().pathname
-    const [userFile, setUserFile] = useState('')
-    const [userImg, setUserImg] = useState('')
-
-    async function loadFiles() {
-        const img = await getFiles('mlh-thumb.jpeg').then((image) => {
-            setUserImg(image)
-        })
-    }
-
-    useEffect(() => {
-        loadFiles()
-    }, [])
+    const [userFile, setUserFile] = useState('#000')
+    const [userImg, setUserImg] = useState('#000')
 
     function handleFileChange(e) {
         const fileList = e.target.files[0]
@@ -45,21 +35,12 @@ const Account = (props) => {
         <Main>
             <section css={'grid-column:4/-4'}>
                 <div>
-                    {userImg ? (
+                    <div css="height:150px;width:150px">
                         <img
-                            src={userImg}
-                            alt="user picture"
-                            css={'width:150px;height:150px;'}
+                            src="https://via.placeholder.com/150x150"
+                            alt="placeholder"
                         />
-                    ) : (
-                        <div css="height:150px;width:150px">
-                            <img
-                                src="https://via.placeholder.com/150x150"
-                                alt="placeholder"
-                            />
-                            
-                        </div>
-                    )}
+                    </div>
                 </div>
                 <div>
                     <p>Username: {userInfo.userName}</p>

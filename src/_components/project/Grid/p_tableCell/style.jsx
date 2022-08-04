@@ -9,7 +9,7 @@ export const CompletedCell = styled.td`
     padding: 0 15px;
     font-size: 16px;
     cursor: pointer;
-    background: rgb(0, 255, 0);
+    background: #00ff00;
     transition: filter 30ms;
     border: 1px solid #333;
     border-collapse: collapse;

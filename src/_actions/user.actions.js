@@ -9,6 +9,7 @@ export const userActions = {
     logout,
     register,
     getById,
+    saveSettings,
     delete: _delete,
 }
 
@@ -112,5 +113,30 @@ function _delete(id) {
     }
     function failure(id, error) {
         return { type: userConstants.DELETE_FAILURE, id, error }
+    }
+}
+
+function saveSettings(userId, settings) {
+    return (dispatch) => {
+        dispatch(request({ userId }))
+        userService.saveSettings(userId, settings).then(
+            (result) => {
+                dispatch(success(result))
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+
+    function request(user) {
+        return { type: userConstants.SETTINGS_UPDATE_REQUEST, user }
+    }
+    function success(user) {
+        return { type: userConstants.SETTINGS_UPDATE_SUCCESS, user }
+    }
+    function failure(error) {
+        return { type: userConstants.SETTINGS_UPDATE_FAILURE, error }
     }
 }

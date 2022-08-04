@@ -10,6 +10,7 @@ export const userService = {
     addToRecent,
     getById,
     findUsers,
+    saveSettings,
     delete: _delete,
 }
 
@@ -105,6 +106,19 @@ function addToRecent(project, user) {
     }
     return fetch(
         `${config.apiUrl}/users/addtorecent/${user}`,
+        requestOptions
+    ).then(handleResponse)
+}
+
+function saveSettings(userId, settings) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { ...authHeader(1), 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings),
+    }
+
+    return fetch(
+        `${config.apiUrl}/users/${userId}/settings`,
         requestOptions
     ).then(handleResponse)
 }

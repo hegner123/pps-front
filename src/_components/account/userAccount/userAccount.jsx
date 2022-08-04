@@ -1,76 +1,112 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+
+import { ChromePicker } from 'react-color'
+import { userActions } from '../../../_actions'
 
 const UserAccount = (props) => {
     const [isEdit, setEdit] = useState(false)
     const initState = 'Setting'
     const [passwordReset, setPasswordReset] = useState('')
-    const [valOption2, setOption2] = useState(initState)
-    const [valOption3, setOption3] = useState(initState)
-    const [valOption4, setOption4] = useState(initState)
+    const [hasCompleteColor, setCompleteColor] = useState('')
+    const [hasIncompleteColor, setIncompleteColor] = useState('')
+    const [hasTheme, setTheme] = useState('')
+
+    useEffect(() => {
+        setCompleteColor(props.authentication.user.userSettings.completeColor)
+        setIncompleteColor(
+            props.authentication.user.userSettings.incompleteColor
+        )
+    }, [])
+
+    function submitSettings(userId) {
+        const settings = {
+            completeColor: hasCompleteColor,
+            incompleteColor: hasIncompleteColor,
+            theme: hasTheme,
+        }
+        props.saveSettings(userId, settings)
+    }
 
     const display = (
-        <ul>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Reset password:
-                <button onChange={(e) => console.log(e)}>Reset</button>
-            </li>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option2: {valOption2}
-            </li>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option3: {valOption3}
-            </li>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option4: {valOption4}
-            </li>
-        </ul>
+        <>
+            <ul>
+                <li css={'margin-top:10px;margin-bottom:10px;'}>
+                    Reset password:
+                    <button onChange={(e) => console.log(e)}>Reset</button>
+                </li>
+                <li css={'margin-top:10px;margin-bottom:10px;'}>
+                    Complete Color:{' '}
+                    <span
+                        css={`
+                            background-color: ${hasCompleteColor};
+                            width: 200px;
+                            padding: 1px 100px;
+                        `}
+                    ></span>
+                </li>
+                <li css={'margin-top:10px;margin-bottom:10px;'}>
+                    Incomplete Color:{' '}
+                    <span
+                        css={`
+                            background-color: ${hasIncompleteColor};
+                            width: 200px;
+                            padding: 1px 100px;
+                        `}
+                    ></span>
+                </li>
+            </ul>
+        </>
     )
     const edit = (
-        <ul>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                <label for="passwordReset">Reset password:</label>
-                <input
-                    id="passwordReset"
-                    name="passwordReset"
-                    type="text"
-                    value={passwordReset}
-                    onChange={(e) => setPasswordReset(e.target.value)}
-                />
-            </li>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option2:{' '}
-                <input
-                    type="text"
-                    value={valOption2}
-                    onChange={(e) => setOption2(e.target.value)}
-                />
-            </li>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option3:{' '}
-                <input
-                    type="text"
-                    value={valOption3}
-                    onChange={(e) => setOption3(e.target.value)}
-                />
-            </li>
-            <li css={'margin-top:10px;margin-bottom:10px;'}>
-                Option4:{' '}
-                <input
-                    type="text"
-                    value={valOption4}
-                    onChange={(e) => setOption4(e.target.value)}
-                />
-            </li>
-        </ul>
+        <>
+            <button
+                onClick={() => submitSettings(props.authentication.user._id)}
+            >
+                Save
+            </button>
+            <ul>
+                <li css={'margin-top:10px;margin-bottom:10px;'}>
+                    <label htmlFor="passwordReset">Reset password:</label>
+                    <input
+                        id="passwordReset"
+                        name="passwordReset"
+                        type="text"
+                        value={passwordReset}
+                        onChange={(e) => setPasswordReset(e.target.value)}
+                    />
+                </li>
+                <li css={'margin-top:10px;margin-bottom:10px;'}>
+                    Complete Color:{' '}
+                    <ChromePicker
+                        color={hasCompleteColor}
+                        onChange={(color) => setCompleteColor(color.hex)}
+                    />
+                </li>
+                <li css={'margin-top:10px;margin-bottom:10px;'}>
+                    Incomplete Color:{' '}
+                    <ChromePicker
+                        color={hasIncompleteColor}
+                        onChange={(color) => setIncompleteColor(color.hex)}
+                    />
+                </li>
+            </ul>
+        </>
     )
     return (
         <div className="user-account">
-            <div css={'display:flex'}>
+            <div
+                css={`
+                    display: flex;
+                `}
+            >
                 <h2>Account Options</h2>
                 <button
-                    css={
-                        'height:min-content;align-self:center;margin-left:10px'
-                    }
+                    css={`
+                        height: min-content;
+                        align-self: center;
+                        margin-left: 10px;
+                    `}
                     onClick={() => setEdit(!isEdit)}
                 >
                     Edit
@@ -82,4 +118,14 @@ const UserAccount = (props) => {
     )
 }
 
-export { UserAccount }
+function mapState(state) {
+    const { authentication } = state
+    return { authentication }
+}
+
+const actionCreators = {
+    saveSettings: userActions.saveSettings,
+}
+
+const connectedUserAccount = connect(mapState, actionCreators)(UserAccount)
+export { connectedUserAccount as UserAccount }

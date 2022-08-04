@@ -19,6 +19,11 @@ export function authenticationReducer(state = initialState, action) {
             return {}
         case userConstants.LOGOUT:
             return {}
+        case userConstants.SETTINGS_UPDATE_SUCCESS:
+            return {
+                ...state,
+                user: action.user,
+            }
         default:
             return state
     }
