@@ -53,7 +53,7 @@ async function createSong(newSong) {
         headers: authHeader(1),
         body: JSON.stringify({ newSong }),
     }
-    console.log(requestOptions.body)
+
     return fetch(`${config.apiUrl}/projects/songs/`, requestOptions)
         .then(handleResponse)
         .then(history.push(newSong.path))
@@ -88,7 +88,6 @@ async function changeCellStatus(project, song, instrument, status, id, user) {
 
 function handleResponse(response) {
     return response.text().then((text) => {
-        console.log(JSON.parse(text))
         const responseData = text && JSON.parse(text)
         return responseData
     })

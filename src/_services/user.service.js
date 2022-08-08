@@ -11,6 +11,9 @@ export const userService = {
     getById,
     findUsers,
     saveSettings,
+    sendInvitation,
+    handleInvitation,
+    checkInvites,
     delete: _delete,
 }
 
@@ -104,10 +107,9 @@ function addToRecent(project, user) {
         headers: authHeader(1),
         body: JSON.stringify(project),
     }
-    return fetch(
-        `${config.apiUrl}/users/addtorecent/${user}`,
-        requestOptions
-    ).then(handleResponse)
+    return fetch(`${config.apiUrl}/users/recent/${user}`, requestOptions).then(
+        handleResponse
+    )
 }
 
 function saveSettings(userId, settings) {
@@ -123,6 +125,39 @@ function saveSettings(userId, settings) {
     ).then(handleResponse)
 }
 
+function sendInvitation(userId, invite) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(invite),
+    }
+    return fetch(
+        `${config.apiUrl}/users/invitation.send/${userId}`,
+        requestOptions
+    ).then(handleResponse)
+}
+function handleInvitation(userId, status) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(status),
+    }
+    return fetch(
+        `${config.apiUrl}/users/invitation.handle/${userId}`,
+        requestOptions
+    ).then(handleResponse)
+}
+function checkInvites(userId, projectId) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(projectId),
+    }
+    return fetch(
+        `${config.apiUrl}/users/invitation.check/${userId}`,
+        requestOptions
+    ).then(handleResponse)
+}
 function handleResponse(response) {
     return response.text().then((text) => {
         const data = text && JSON.parse(text)

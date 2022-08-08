@@ -14,8 +14,6 @@ const Info = (props) => {
     const selectedSongIndex = 0
     let hasSelected = props.userProjects.selected
 
-    console.log(hasSong)
-
     useEffect(() => {
         if (props.data) {
             setSong(props.data.songs)

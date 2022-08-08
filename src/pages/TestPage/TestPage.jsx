@@ -10,9 +10,7 @@ export function TestPage(props) {
         })
 
         var channel = pusher.subscribe('my-channel')
-        channel.bind('my-event', function (data) {
-            console.log(JSON.stringify(data))
-        })
+        channel.bind('my-event', function (data) {})
     }, [])
 
     return (

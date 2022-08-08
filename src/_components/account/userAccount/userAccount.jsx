@@ -33,7 +33,7 @@ const UserAccount = (props) => {
             <ul>
                 <li css={'margin-top:10px;margin-bottom:10px;'}>
                     Reset password:
-                    <button onChange={(e) => console.log(e)}>Reset</button>
+                    <button onChange={(e) => ''}>Reset</button>
                 </li>
                 <li css={'margin-top:10px;margin-bottom:10px;'}>
                     Complete Color:{' '}

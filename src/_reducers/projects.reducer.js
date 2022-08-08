@@ -72,11 +72,6 @@ export function projectsReducer(state = initialState, action) {
                 create: action.error,
             }
         case projectConstants.DELETE_SONG_SUCCESS:
-            console.log(
-                state.current.songs.filter((song) => {
-                    return song._id !== action.song
-                })
-            )
             return {
                 current: state.current.songs.filter((song) => {
                     return song._id !== action.song

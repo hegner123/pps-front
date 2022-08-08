@@ -10,6 +10,9 @@ export const userActions = {
     register,
     getById,
     saveSettings,
+    sendInvite,
+    handleInvitation,
+    checkInvites,
     delete: _delete,
 }
 
@@ -138,5 +141,90 @@ function saveSettings(userId, settings) {
     }
     function failure(error) {
         return { type: userConstants.SETTINGS_UPDATE_FAILURE, error }
+    }
+}
+function sendInvite(options) {
+    const invite = {
+        projectSlug: options.projectSlug,
+        projectId: options.projectId,
+
+        hostUser: {
+            userName: options.userName,
+            id: options.id,
+        },
+    }
+    return (dispatch) => {
+        dispatch(request(user))
+        userService.sendInvitation(invite).then(
+            (res) => {
+                dispatch(success(res))
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+    function request() {
+        return { type: userConstants.SEND_INVITE_REQUEST }
+    }
+    function success(user) {
+        return { type: userConstants.SEND_INVITE_SUCCESS, user }
+    }
+    function failure(error) {
+        return { type: userConstants.SEND_INVITE_FAILURE, error }
+    }
+}
+function handleInvitation(status, invitationId) {
+    // expected input
+    // {"status":"accepted", "invitationId": "62ee8cde74917f246608db07"}
+    const action = {
+        status: status,
+        invitationId: invitationId,
+    }
+    return (dispatch) => {
+        dispatch(request(user))
+        userService.handleInvitation(action).then(
+            (res) => {
+                dispatch(success(res))
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+    function request(user) {
+        return { type: userConstants.HANDLE_INVITE_REQUEST, user }
+    }
+    function success(user) {
+        return { type: userConstants.HANDLE_INVITE_SUCCESS, user }
+    }
+    function failure(error) {
+        return { type: userConstants.HANDLE_INVITE_FAILURE, error }
+    }
+}
+function checkInvites(projectId) {
+    // expected input {"projectId":"62ebcd7b16f6b6d946a6a5b8"}
+    return (dispatch) => {
+        dispatch(request(user))
+        userService.checkInvites(projectId).then(
+            (res) => {
+                dispatch(success(res))
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+    function request(user) {
+        return { type: userConstants.CHECK_INVITE_REQUEST, user }
+    }
+    function success(user) {
+        return { type: userConstants.CHECK_INVITE_SUCCESS, user }
+    }
+    function failure(error) {
+        return { type: userConstants.CHECK_INVITE_FAILURE, error }
     }
 }

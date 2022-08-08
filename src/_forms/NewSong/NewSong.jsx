@@ -146,9 +146,7 @@ function NewSong(props) {
                                     <input
                                         type="file"
                                         name="lyris"
-                                        onChange={(e) =>
-                                            console.log(e.target.value)
-                                        }
+                                        onChange={(e) => ''}
                                     />
                                 </div>
                             </section>

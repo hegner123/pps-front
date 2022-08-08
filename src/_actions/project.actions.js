@@ -121,10 +121,12 @@ function deleteSong(song, projectId) {
         projectService
             .deleteSong(song, projectId)
             .then((result) => {
-                dispatch(success(result))
                 dispatch(updateSuccess())
             })
-            .catch((error) => dispatch(failure(error)))
+            .catch((error) => {
+                console.log(error)
+                dispatch(updateSuccess())
+            })
     }
 
     function success(result) {
@@ -213,7 +215,7 @@ function refreshProject(project, internal) {
                   currentProject = data
               }
           })
-        : console.log('refresh')
+        : ''
     if (internal) {
         return currentProject
     } else {

@@ -8,12 +8,14 @@ export const ProjectTitle = styled.h1`
 export const ProjectDetails = styled.div`
     padding: 10px 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr repeat(4, 30px);
+    column-gap: 1rem;
     align-items: center;
 `
 
 export const AddSong = styled.span`
     --button-size: calc(var(--nav-size) * 0.3);
+    position: relative;
     width: var(--button-size);
     height: var(--button-size);
     background-color: var(--bg-accent);
@@ -21,10 +23,7 @@ export const AddSong = styled.span`
     font-size: 20px;
     border-radius: 50%;
     padding: 5px;
-    margin-left: 20px;
-    margin-top: 2px;
-    margin-right: 2px;
-    margin-bottom: 2px;
+
     display: flex;
     align-items: center;
     justify-content: center;

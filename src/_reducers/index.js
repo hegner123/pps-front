@@ -8,16 +8,18 @@ import { referenceReducer as reference } from './reference.reducer'
 import { uiReducer as userInterface } from './ui.reducer'
 import { formReducer as form } from './form.reducer'
 import { monitorReducer as monitor } from './monitor.reducer'
+import { invitationReducer as invitation } from './invitation.reducer'
 
 const rootReducer = combineReducers({
     authentication,
-    registration,
-    recent,
-    alert,
     userProjects,
-    reference,
+    invitation,
+    registration,
     userInterface,
+    reference,
+    recent,
     form,
+    alert,
     monitor,
 })
 

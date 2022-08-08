@@ -32,7 +32,6 @@ function RecentDashTile(props) {
     }, [props.project.projects])
 
     function filterProj() {
-        console.log('filter')
         const res = props.project.projects.filter(filterProjects)
         setProjects(res[0])
         setWaiting(false)

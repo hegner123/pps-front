@@ -16,7 +16,7 @@ import { history } from '../../_helpers'
 import { projectActions, userActions } from '../../_actions'
 import { projectService } from '../../_services/'
 import { NewSong } from '../../_forms/NewSong/NewSong'
-
+import { Invite } from '../../_components/project/Invite'
 import { Info } from '../../_components/project/Info'
 
 function SingleProject(props) {
@@ -31,6 +31,7 @@ function SingleProject(props) {
                 let projects = data.filter((project) => {
                     return project.projectSlug == location.id
                 })
+
                 setProject(projects)
                 props.setSelected(projects[0].songs[0])
             })
@@ -55,6 +56,7 @@ function SingleProject(props) {
                 <Route exact path={`${path}/newsong`}>
                     <div>{hasProject && <NewSong data={hasProject[0]} />}</div>
                 </Route>
+                
             </Switch>
         </div>
     )

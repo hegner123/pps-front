@@ -33,7 +33,6 @@ function RecentProjects(props) {
 }
 
 function UserProjects(props) {
-    console.log(props.isReady)
     return (
         <Section>
             <DashHeader>

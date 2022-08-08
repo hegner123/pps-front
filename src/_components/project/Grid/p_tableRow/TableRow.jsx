@@ -74,7 +74,6 @@ function TableRow(props) {
                         }
                         key={projectSongs.songId}
                     >
-                        {console.log('projectSongs', projectSongs)}
                         <TableCell
                             songTitle={projectSongs.title}
                             key={projectSongs.songId}
