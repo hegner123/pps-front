@@ -24,6 +24,7 @@ export const TopLevel = styled.div`
         width: 100%;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     label {
@@ -46,4 +47,14 @@ export const TopLevel = styled.div`
         grid-template-columns: 1fr 1fr;
         column-gap: 1rem;
     }
+`
+export const InviteModal = styled.div`
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: #00000075;
+    top: 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 `

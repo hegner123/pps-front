@@ -54,8 +54,8 @@ function findUsers(email) {
         method: 'GET',
         headers: authHeader(1),
     }
-
-    return fetch(`${config.apiUrl}/users/search/${id}`, requestOptions).then(
+    console.log(`${config.apiUrl}/users/search/${email}`)
+    return fetch(`${config.apiUrl}/users/search/${email}`, requestOptions).then(
         handleResponse
     )
 }

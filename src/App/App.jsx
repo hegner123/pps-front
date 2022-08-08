@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route, useRouteMatch } from 'react-router-dom'
 import { alertActions, uiActions } from '../_actions'
 import { connect } from 'react-redux'
 import { history, indexDb } from '../_helpers'
@@ -12,10 +12,11 @@ import { Register } from '../_forms/Register'
 import { Dashboard } from '../pages/Dashboard'
 
 import { NewProject } from '../_forms/NewProject'
+import { Invite } from '../_components/forms/Invite'
 import '../_assets/css/normalize.css'
 import '../_assets/css/main.css'
 import '../_assets/css/style.css'
-import { AlertBar, Alert, TopLevel } from './style'
+import { AlertBar, Alert, TopLevel, InviteModal } from './style'
 import { Account } from '../pages/Account'
 import { TestPage } from '../pages/TestPage'
 
@@ -84,18 +85,24 @@ const App = (props) => {
                     </Alert>
                 )}
             </AlertBar>
+            {props.userInterface.inviteOpen && (
+                <InviteModal>
+                    <Invite />
+                </InviteModal>
+            )}
         </TopLevel>
     )
 }
 
 function mapState(state) {
-    const { alert } = state
-    return { alert }
+    const { alert, userInterface } = state
+    return { alert, userInterface }
 }
 
 const actionCreators = {
     clearAlerts: alertActions.clear,
     setSettingsClose: uiActions.setSettingsClose,
+    setInviteClose: uiActions.setInviteClose,
 }
 
 const connectedApp = connect(mapState, actionCreators)(App)

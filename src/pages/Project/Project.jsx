@@ -16,7 +16,7 @@ import { history } from '../../_helpers'
 import { projectActions, userActions } from '../../_actions'
 import { projectService } from '../../_services/'
 import { NewSong } from '../../_forms/NewSong/NewSong'
-import { Invite } from '../../_components/project/Invite'
+import { Invite } from '../../_components/forms/Invite'
 import { Info } from '../../_components/project/Info'
 
 function SingleProject(props) {

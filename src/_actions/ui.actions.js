@@ -5,6 +5,8 @@ export const uiActions = {
     setSettingsClose,
     dropdownOpen,
     dropdownClose,
+    setInviteOpen,
+    setInviteClose,
 }
 
 function setSettingsOpen() {
@@ -21,4 +23,10 @@ function dropdownOpen(id) {
 
 function dropdownClose() {
     return { type: uiConstants.DROPDOWN_CLOSE }
+}
+function setInviteOpen() {
+    return { type: uiConstants.INVITE_OPEN }
+}
+function setInviteClose() {
+    return { type: uiConstants.INVITE_CLOSE }
 }

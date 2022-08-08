@@ -14,6 +14,10 @@ export function uiReducer(
             return { ...state, id: action.id, dropdownOpen: true }
         case uiConstants.DROPDOWN_CLOSE:
             return { ...state, id: '', dropdownOpen: false }
+        case uiConstants.INVITE_OPEN:
+            return { ...state, inviteOpen: true }
+        case uiConstants.INVITE_CLOSE:
+            return { ...state, inviteOpen: false }
         default:
             return state
     }

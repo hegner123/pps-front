@@ -1,19 +1,6 @@
 import styled from 'styled-components'
 
-export const ProjectTitle = styled.h1`
-    font-size: 30px;
-    color: var(--text-color);
-`
-
-export const ProjectDetails = styled.div`
-    padding: 10px 10px;
-    display: grid;
-    grid-template-columns: 1fr repeat(4, 30px);
-    column-gap: 1rem;
-    align-items: center;
-`
-
-export const AddSong = styled.span`
+export const MenuButton = styled.span`
     --button-size: calc(var(--nav-size) * 0.3);
     position: relative;
     width: var(--button-size);

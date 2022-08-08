@@ -9,9 +9,11 @@ import { uiReducer as userInterface } from './ui.reducer'
 import { formReducer as form } from './form.reducer'
 import { monitorReducer as monitor } from './monitor.reducer'
 import { invitationReducer as invitation } from './invitation.reducer'
+import { userReducer as user } from './user.reducer'
 
 const rootReducer = combineReducers({
     authentication,
+    user,
     userProjects,
     invitation,
     registration,

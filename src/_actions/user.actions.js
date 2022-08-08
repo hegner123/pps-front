@@ -9,6 +9,7 @@ export const userActions = {
     logout,
     register,
     getById,
+    findUsers,
     saveSettings,
     sendInvite,
     handleInvitation,
@@ -143,6 +144,31 @@ function saveSettings(userId, settings) {
         return { type: userConstants.SETTINGS_UPDATE_FAILURE, error }
     }
 }
+
+function findUsers(email) {
+    return (dispatch) => {
+        dispatch(request())
+        userService.findUsers(email).then(
+            (users) => {
+                dispatch(success(users))
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+    function request() {
+        return { type: userConstants.FIND_USERS_REQUEST }
+    }
+    function success(users) {
+        return { type: userConstants.FIND_USERS_SUCCESS, users }
+    }
+    function failure(error) {
+        return { type: userConstants.FIND_USERS_FAILURE, error }
+    }
+}
+
 function sendInvite(options) {
     const invite = {
         projectSlug: options.projectSlug,
@@ -204,11 +230,11 @@ function handleInvitation(status, invitationId) {
         return { type: userConstants.HANDLE_INVITE_FAILURE, error }
     }
 }
-function checkInvites(projectId) {
+function checkInvites(userId, projectId) {
     // expected input {"projectId":"62ebcd7b16f6b6d946a6a5b8"}
     return (dispatch) => {
         dispatch(request(user))
-        userService.checkInvites(projectId).then(
+        userService.checkInvites(userId, projectId).then(
             (res) => {
                 dispatch(success(res))
             },

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useParams, useRouteMatch } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { ProjectDetails, ProjectTitle, AddSong } from './style'
 import Groupadd from '../../../../_assets/icons/groupadd.svg'
-import { Invite } from '../../Invite'
+import Add from '../../../../_assets/icons/add.svg'
+import { uiActions } from '../../../../_actions'
 
-export function pDetails(props) {
-    const [showInvite, setShowInvite] = useState(false)
+function pDetails(props) {
     let { path, url } = useRouteMatch()
     let id = useParams().id
 
@@ -13,13 +14,30 @@ export function pDetails(props) {
         <ProjectDetails>
             <ProjectTitle>{props.data.projectTitle}</ProjectTitle>
             <Link to={`${url}/newsong`} css={``}>
-                <AddSong>+</AddSong>
+                <AddSong>
+                    <Add />
+                </AddSong>
             </Link>
 
-            <AddSong onClick={() => setShowInvite(!showInvite)}>
+            <AddSong
+                onClick={() =>
+                    props.setInviteOpen(!props.userInterface.inviteOpen)
+                }
+            >
                 <Groupadd />
-                <Invite visible={showInvite} />
             </AddSong>
         </ProjectDetails>
     )
 }
+
+function mapState(state) {
+    const { userInterface } = state
+    return { userInterface }
+}
+
+const actionCreators = {
+    setInviteOpen: uiActions.setInviteOpen,
+}
+
+const connectedpDetails = connect(mapState, actionCreators)(pDetails)
+export { connectedpDetails as pDetails }
