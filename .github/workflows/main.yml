@@ -33,6 +33,5 @@ jobs:
     
       - name: Deploy to linode
         run:
-          echo "Deploying files to server"
           rsync -avP dist/ root@50.116.26.167:/var/www/proprojectstudio.mhdev.io/
           echo "Deployment complete"
