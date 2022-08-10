@@ -24,6 +24,8 @@ export const Main = styled.div`
 
 export const IconButton = styled.span`
     width: 20px;
+    display: flex;
+    font-size: 1rem;
     background: #f7f7f7;
     border-radius: ${(props) => (props.open ? '0' : '0px 4px 4px 0')};
     border: none;

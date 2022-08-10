@@ -15,7 +15,7 @@ function pDetails(props) {
             <ProjectTitle>{props.data.projectTitle}</ProjectTitle>
             <Link to={`${url}/newsong`} css={``}>
                 <AddSong>
-                    <Add />
+                    <Add fill="#fff" />
                 </AddSong>
             </Link>
 

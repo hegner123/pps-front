@@ -134,6 +134,7 @@ export const RefItem = styled.li`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     color: #000;
     font-size: 14px;
@@ -167,4 +168,19 @@ export const Label = styled.label`
     font-size: var(--small);
     color: var(--dark-text-color);
     padding-top: 10px;
+`
+
+export const ButtonIcon = styled.span`
+    width: 20px;
+    display: flex;
+    font-size: 1rem;
+    background: #f7f7f7;
+    border-radius: ${(props) => (props.open ? '0' : '0px 4px 4px 0')};
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: 300ms;
+    &:hover {
+        filter: brightness(0.5);
+    }
 `

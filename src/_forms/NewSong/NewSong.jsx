@@ -14,11 +14,11 @@ import {
     Btn,
     Grid,
     ArrangmentSection,
-    IconButton,
     RefP,
     RefItem,
     Label,
 } from './style'
+import { IconButton, ButtonIcon } from '../../_atoms'
 import { useParams } from 'react-router'
 
 function NewSong(props) {
@@ -72,11 +72,11 @@ function NewSong(props) {
                     return (
                         <RefItem key={ref.id}>
                             <RefP>{ref.name.substring(0, 21)}</RefP>
-                            <IconButton
+                            <ButtonIcon
                                 onClick={() => props.referenceDelete(refs.id)}
                             >
                                 <Delete />
-                            </IconButton>
+                            </ButtonIcon>
                         </RefItem>
                     )
                 })}
@@ -220,14 +220,14 @@ function NewSong(props) {
                                             setReference(e.target.value)
                                         }
                                     />
-                                    <span
-                                        className="input-group-btn"
+
+                                    <ButtonIcon
                                         onClick={(e) =>
                                             handleSpotifySearch(e, getReference)
                                         }
                                     >
-                                        <Search />
-                                    </span>
+                                        <Search width="100" />
+                                    </ButtonIcon>
                                 </div>
                                 <div>{refList}</div>
                                 <div>{references}</div>

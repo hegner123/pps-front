@@ -10,6 +10,7 @@
     "private": true,
     "scripts": {
         "build": "webpack --mode production",
+        "postbuild": "cp ./public/* ./dist/",
         "start": "webpack serve --open --hot",
         "start:dev": "webpack serve --mode development --open --hot",
         "test": "react-scripts test",

@@ -10,7 +10,6 @@ import DeleteIcon from '../../_assets/icons/delete.svg'
 import Settings from '../../_assets/icons/settings.svg'
 import Account from '../../_assets/icons/account.svg'
 import {
-    IconButton,
     NavItems,
     AdminBar,
     Brand,
@@ -20,6 +19,7 @@ import {
     BrandLink,
     DropdownLink,
 } from './style'
+import { IconButton } from '../../_atoms/'
 import { CSSTransition } from 'react-transition-group'
 import { uiActions } from '../../_actions'
 import { useOnClickOutside } from '../../_hooks/onClickOutside'

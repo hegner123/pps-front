@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
-
+import { useOnClickOutside } from '../../../_hooks/onClickOutside'
 import { uiActions, userActions } from '../../../_actions'
 import { Modal, CloseMenuButton } from './style'
 
@@ -8,6 +8,8 @@ import Close from '../../../_assets/icons/close.svg'
 
 function Invite(props) {
     const [hasEmail, setEmail] = useState('')
+    const ref = useRef(null)
+    useOnClickOutside(ref, () => props.setInviteClose())
 
     function handleSendInvite(e, userName) {
         e.preventDefault()
@@ -42,7 +44,7 @@ function Invite(props) {
                 <Modal>
                     <h3
                         css={`
-                            grid-column: 1/-1;
+                            grid-column: 1/-6;
                         `}
                     >
                         Invite users to <i>project name</i>
@@ -53,7 +55,7 @@ function Invite(props) {
                     <form
                         action=""
                         css={`
-                            grid-column: 1/6;
+                            grid-column: 7/-2;
                         `}
                     >
                         <label htmlFor="email">Email</label>
