@@ -2,26 +2,22 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { connect } from 'react-redux'
 import { useParams, useLocation, Link } from 'react-router-dom'
-import { userActions } from '../../_actions/user.actions'
-import { projectActions } from '../../_actions/project.actions'
-import Home from '../../_assets/icons/home.svg'
-import LogoutIcon from '../../_assets/icons/logout.svg'
-import DeleteIcon from '../../_assets/icons/delete.svg'
-import Settings from '../../_assets/icons/settings.svg'
-import Account from '../../_assets/icons/account.svg'
+import { uiActions, userActions, projectActions } from '../../_actions'
+import { NavItemLink } from './parts/NavItemLink'
+import { NavItem } from './parts/NavItem'
+import { DropdownMenu } from './parts/DropdownMenu'
+import { DropdownItem } from './parts/DropdownItem'
+import { Home, Logout, Delete, Settings, Account } from '../../_assets/icons'
 import {
-    NavItems,
     AdminBar,
     Brand,
     Search,
     AdminControls,
     Input,
     BrandLink,
-    DropdownLink,
 } from './style'
 import { IconButton } from '../../_atoms/'
 import { CSSTransition } from 'react-transition-group'
-import { uiActions } from '../../_actions'
 import { useOnClickOutside } from '../../_hooks/onClickOutside'
 
 const Menu = (props) => {
@@ -84,98 +80,7 @@ const Menu = (props) => {
     )
 }
 
-function NavItemLink(props) {
-    return (
-        <NavItems>
-            <IconButton href={props.link}>{props.children}</IconButton>
-        </NavItems>
-    )
-}
-function NavItem(props) {
-    return (
-        <NavItems>
-            <IconButton href="#" onClick={() => props.navOpen()}>
-                {props.icon}
-            </IconButton>
-            {props.openState && props.children}
-        </NavItems>
-    )
-}
 
-function DropdownMenu(props) {
-    const [activeMenu, setActiveMenu] = useState('main')
-    const [menuHeight, setMenuHeight] = useState(null)
-    const ref = useRef()
-    useOnClickOutside(ref, () => props.setSettingsClose())
-    // State for our modal
-
-    const location = useLocation().pathname
-
-    useEffect(() => {
-        setMenuHeight(ref.current?.firstChild.offsetHeight)
-    }, [])
-
-    function calcHeight(el) {
-        const height = el.offsetHeight
-        setMenuHeight(height)
-    }
-
-    function DropdownItem(props) {
-        return (
-            <DropdownLink
-                href={props.href ? props.href : '#'}
-                className="menu-item"
-                css="color:var(--text-color)"
-                onClick={() => props.action()}
-            >
-                <span>{props.icon}</span>
-                {props.children}
-            </DropdownLink>
-        )
-    }
-
-    return (
-        <div className="dropdown" style={{ height: menuHeight }} ref={ref}>
-            <CSSTransition
-                in={activeMenu === 'main'}
-                unmountOnExit
-                timeout={500}
-                classNames="menu-primary"
-                onEnter={calcHeight}
-            >
-                <div className="menu">
-                    {location.includes('project') && (
-                        <DropdownItem
-                            action={() => props.deleteProject()}
-                            icon={
-                                <DeleteIcon css="fill: var(--text-color);height:20px;width:20px;" />
-                            }
-                        >
-                            Delete Project
-                        </DropdownItem>
-                    )}
-                    <DropdownItem
-                        href="/account"
-                        icon={
-                            <Account css="fill: var(--text-color);height:20px;width:20px;" />
-                        }
-                    >
-                        Account
-                    </DropdownItem>
-
-                    <DropdownItem
-                        action={() => props.logOut()}
-                        icon={
-                            <LogoutIcon css="fill: var(--text-color);height:20px;width:20px;" />
-                        }
-                    >
-                        Log Out
-                    </DropdownItem>
-                </div>
-            </CSSTransition>
-        </div>
-    )
-}
 
 function mapState(state) {
     const { authentication, userInterface } = state

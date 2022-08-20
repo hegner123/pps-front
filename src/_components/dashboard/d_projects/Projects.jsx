@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { DashTile, RecentDashTile } from '../d_dashTile'
-import AddIcon from '../../../_assets/icons/add.svg'
+import { Add } from '../../../_assets/icons'
 import {
     DashHeader,
     DashTitle,
@@ -10,6 +10,7 @@ import {
     AddProject,
     Section,
 } from './style'
+import { uiActions } from '../../../_actions'
 
 function RecentProjects(props) {
     const data = props.data
@@ -37,11 +38,10 @@ function UserProjects(props) {
         <Section>
             <DashHeader>
                 <DashTitle>Projects</DashTitle>
-                <Link to="/new-project">
-                    <AddProject>
-                        <AddIcon css="fill:var(--text-color);" />
-                    </AddProject>
-                </Link>
+
+                <AddProject onClick={() => props.setNewProjectOpen()}>
+                    <Add css="fill:var(--text-color);" />
+                </AddProject>
             </DashHeader>
             <ProjectSection>
                 {props.isReady &&
@@ -60,12 +60,16 @@ function UserProjects(props) {
 }
 
 function mapState(state) {
-    const { authentication, recent } = state
-    return { authentication, recent }
+    const { authentication, recent, userInterface } = state
+    return { authentication, recent, userInterface }
+}
+
+const actionCreators = {
+    setNewProjectOpen: uiActions.setNewProjectOpen,
 }
 
 const connectedRecentProjects = connect(mapState)(RecentProjects)
 export { connectedRecentProjects as RecentProjects }
 
-const connectedUserProjects = connect(mapState)(UserProjects)
+const connectedUserProjects = connect(mapState, actionCreators)(UserProjects)
 export { connectedUserProjects as UserProjects }

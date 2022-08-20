@@ -8,9 +8,22 @@ import {
     useLocation,
     useRouteMatch,
 } from 'react-router-dom'
-import { Friends, Spotify, UserAccount } from '../../_components/account'
+import {
+    Friends,
+    Spotify,
+    UserAccount,
+    Invitations,
+} from '../../_components/account'
 import { uploadFile } from '../../_services'
-import { Main, AccountMenuItem } from './style'
+import {
+    Main,
+    ProfileSection,
+    ProfileImageParent,
+    AccountSection,
+    AccountMenu,
+    AccountMenuItem,
+    ControlPanel,
+} from './style'
 import { getFiles } from '../../_hooks/getFiles/getFiles'
 
 const Account = (props) => {
@@ -19,6 +32,7 @@ const Account = (props) => {
     const fullUrl = useLocation().pathname
     const [userFile, setUserFile] = useState('#000')
     const [userImg, setUserImg] = useState('#000')
+    const [hasSectionTitle, setSectionTitle] = useState('Account')
 
     function handleFileChange(e) {
         const fileList = e.target.files[0]
@@ -31,32 +45,70 @@ const Account = (props) => {
         setUserFile('')
     }
 
+    useEffect(() => {
+        switch (fullUrl) {
+            case '/account':
+                setSectionTitle('Account')
+
+                break
+            case '/account/invitations':
+                setSectionTitle('Invitations')
+
+                break
+            case '/account/friends':
+                setSectionTitle('Friends')
+
+                break
+            case '/account/spotify':
+                setSectionTitle('Spotify')
+
+                break
+
+            default:
+                break
+        }
+    }, [fullUrl])
+
     return (
         <Main>
-            <section css={'grid-column:4/-4'}>
-                <div>
+            <ProfileSection>
+                <ProfileImageParent>
                     <div css="height:150px;width:150px">
                         <img
                             src="https://via.placeholder.com/150x150"
                             alt="placeholder"
                         />
+                        <Upload fileChange={(e) => handleFileChange(e)} />
                     </div>
-                </div>
+                </ProfileImageParent>
                 <div>
                     <p>Username: {userInfo.userName}</p>
                     <p>
                         Name: {userInfo.firstName} {userInfo.lastName}
                     </p>
-                    <Upload fileChange={(e) => handleFileChange(e)} />
                 </div>
-            </section>
-            <section css={'grid-column:4/-4;'}>
-                <ul>
+            </ProfileSection>
+            <AccountSection>
+                <h1
+                    css={`
+                        display: block;
+                        grid-column: 3/-2;
+                    `}
+                >
+                    {hasSectionTitle}
+                </h1>
+                <AccountMenu>
                     <AccountMenuItem
                         active={fullUrl === '/account'}
                         id="account"
                     >
                         <Link to={url}>Account</Link>
+                    </AccountMenuItem>
+                    <AccountMenuItem
+                        active={fullUrl === '/account/invitations'}
+                        id="invitations"
+                    >
+                        <Link to={`${url}/invitations`}>Invitations</Link>
                     </AccountMenuItem>
                     <AccountMenuItem
                         active={fullUrl === '/account/friends'}
@@ -70,11 +122,14 @@ const Account = (props) => {
                     >
                         <Link to={`${url}/spotify`}>Spotify</Link>
                     </AccountMenuItem>
-                </ul>
-                <div>
+                </AccountMenu>
+                <ControlPanel>
                     <Switch>
                         <Route exact path={path}>
                             <UserAccount />
+                        </Route>
+                        <Route exact path={`${path}/invitations`}>
+                            <Invitations />
                         </Route>
                         <Route exact path={`${path}/friends`}>
                             <Friends />
@@ -83,8 +138,8 @@ const Account = (props) => {
                             <Spotify />
                         </Route>
                     </Switch>
-                </div>
-            </section>
+                </ControlPanel>
+            </AccountSection>
         </Main>
     )
 }

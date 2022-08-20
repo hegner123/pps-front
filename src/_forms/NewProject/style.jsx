@@ -60,7 +60,8 @@ export const ActionGroup = styled.div`
     align-items: center;
     margin: 10px 0;
 `
-export const Btn = styled(Link)`
+export const Btn = styled.button`
+    background: transparent;
     padding: 10px;
     text-align: center;
     border: var(--border);

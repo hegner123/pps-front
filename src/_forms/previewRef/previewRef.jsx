@@ -1,8 +1,8 @@
 import React from 'react'
-import { formActions } from '../../../_actions'
+import { formActions } from '../../_actions'
 import { connect } from 'react-redux'
 import { IconButton, Title, Artist } from './style'
-import Add from '../../../_assets/icons/add.svg'
+import { Add } from '../../_assets/icons'
 
 const RefPreview = (props) => {
     const item = props.item

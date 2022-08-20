@@ -15,6 +15,7 @@ h6 {
     --white: #dadce1;
     --bg: #242526;
     --bg-accent: #484a4d;
+    
     --accent: #7a7c7e;
     --table-bg: #ffffff99;
     --dark-text-color: #000;
@@ -74,7 +75,8 @@ a {
     text-decoration: none;
 }
 
-input:focus {
+ input,
+ input:focus {
     border: 1px solid rgba(0, 0, 0, 0.6);
 }
 

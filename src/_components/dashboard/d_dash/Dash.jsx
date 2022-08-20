@@ -16,7 +16,7 @@ function Dash(props) {
             props.authentication.user.id,
             props.authentication.user.userName
         )
-    }, [])
+    }, [props.monitor])
 
     return (
         <div>
@@ -35,8 +35,8 @@ function Dash(props) {
 }
 
 function mapState(state) {
-    const { authentication, recent, userProjects } = state
-    return { authentication, recent, userProjects }
+    const { authentication, recent, userProjects, monitor } = state
+    return { authentication, recent, userProjects, monitor }
 }
 
 const actionCreators = {

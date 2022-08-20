@@ -49,8 +49,14 @@ function getProjects(id, userName) {
 function createProject(newProject) {
     return (dispatch) => {
         projectService.createProjects(newProject).then(
-            (create) => dispatch(success(create)),
-            (error) => dispatch(failure(error))
+            (create) => {
+                dispatch(success(create))
+                dispatch(updateSuccess())
+            },
+            (error) => {
+                dispatch(failure(error))
+                dispatch(updateError(error))
+            }
         )
     }
 
@@ -59,6 +65,18 @@ function createProject(newProject) {
     }
     function failure(error) {
         return { type: projectConstants.CREATE_PROJECT_FAILURE, error }
+    }
+    function updateSuccess() {
+        return {
+            type: monitorConstants.DATABASE_UPDATE_SUCCESS,
+            success: 'CREATE_PROJECT_SUCCESS',
+        }
+    }
+    function updateError() {
+        return {
+            type: monitorConstants.DATABASE_UPDATE_ERROR,
+            error: 'CREATE_PROJECT_ERROR',
+        }
     }
 }
 

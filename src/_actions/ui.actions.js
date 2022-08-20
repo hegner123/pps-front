@@ -7,6 +7,8 @@ export const uiActions = {
     dropdownClose,
     setInviteOpen,
     setInviteClose,
+    setNewProjectOpen,
+    setNewProjectClose,
 }
 
 function setSettingsOpen() {
@@ -29,4 +31,10 @@ function setInviteOpen() {
 }
 function setInviteClose() {
     return { type: uiConstants.INVITE_CLOSE }
+}
+function setNewProjectOpen() {
+    return { type: uiConstants.NEW_PROJECT_OPEN }
+}
+function setNewProjectClose() {
+    return { type: uiConstants.NEW_PROJECT_CLOSE }
 }

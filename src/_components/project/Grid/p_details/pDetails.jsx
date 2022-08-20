@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link, useParams, useRouteMatch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { ProjectDetails, ProjectTitle, AddSong } from './style'
-import Groupadd from '../../../../_assets/icons/groupadd.svg'
-import Add from '../../../../_assets/icons/add.svg'
+import { GroupAdd, Add } from '../../../../_assets/icons/'
+
 import { uiActions } from '../../../../_actions'
 
 function pDetails(props) {
@@ -24,7 +24,7 @@ function pDetails(props) {
                     props.setInviteOpen(!props.userInterface.inviteOpen)
                 }
             >
-                <Groupadd />
+                <GroupAdd />
             </AddSong>
         </ProjectDetails>
     )

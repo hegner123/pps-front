@@ -1,37 +1,56 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
-import { useOnClickOutside } from '../../../_hooks/onClickOutside'
-import { uiActions, userActions } from '../../../_actions'
-import { Modal, CloseMenuButton } from './style'
-
-import Close from '../../../_assets/icons/close.svg'
+import { useOnClickOutside } from '../../_hooks/onClickOutside'
+import { uiActions, userActions } from '../../_actions'
+import {
+    Modal,
+    CloseMenuButton,
+    InviteUserSearch,
+    FormParent,
+    ResultsParent,
+    s,
+} from './style'
+import { SearchResult } from './searchResult'
+import { Close } from '../../_assets/icons'
 
 function Invite(props) {
     const [hasEmail, setEmail] = useState('')
+    const [hasRecipient, setRecipient] = useState('')
     const ref = useRef(null)
+
     useOnClickOutside(ref, () => props.setInviteClose())
 
-    function handleSendInvite(e, userName) {
-        e.preventDefault()
-        console.log(hasEmail)
-
-        const args = {
-            projectSlug: '',
-            projectId: '',
-            userName: userName,
-            id: '',
-        }
-    }
     const handleOnChange = (event) => {
         setEmail(event.target.value)
+    }
+    function handleSendInvite(e, userName) {
+        e.preventDefault()
+
+        const args = {
+            user: hasRecipient,
+            projectSlug: props.userProjects.current.projectSlug,
+            projectId: props.userProjects.current._id,
+            userName: userName,
+            id: props.authentication.user._id,
+        }
+
+        props.sendInvite(args)
+    }
+    const handleOnChangeRecipient = (event) => {
+        {
+            hasRecipient.includes(props.user.findUsers._id)
+                ? setRecipient(
+                      hasRecipient.filter(
+                          (item) => item !== props.user.findUsers._id
+                      )
+                  )
+                : setRecipient([...hasRecipient, props.user.findUsers._id])
+        }
     }
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             if (hasEmail.length > 2) {
-                console.log(
-                    `I can see you're not typing. I can use "${hasEmail}" now!`
-                )
                 props.findUsers(hasEmail)
             }
         }, 1000)
@@ -52,54 +71,48 @@ function Invite(props) {
                     <CloseMenuButton onClick={() => props.setInviteClose()}>
                         <Close />
                     </CloseMenuButton>
-                    <form
-                        action=""
-                        css={`
-                            grid-column: 7/-2;
-                        `}
-                    >
+                    <FormParent action="">
                         <label htmlFor="email">Email</label>
-                        <input
+                        <InviteUserSearch
                             type="email"
                             name="email"
                             id="email"
                             value={hasEmail}
                             onChange={(e) => handleOnChange(e)}
                         />
-                    </form>
-                    <div
-                        css={`
-                            grid-column: 6/-1;
-                        `}
-                    >
+                    </FormParent>
+                    <ResultsParent>
                         {!props.user.isLoading && (
                             <>
                                 {props.user.findUsers.userName ? (
-                                    <div
-                                        css={`
-                                            display: flex;
-                                        `}
-                                    >
-                                        <p>{props.user.findUsers.userName}</p>
-                                        <button
-                                            type="submit"
-                                            onClick={(e) =>
-                                                handleSendInvite(
-                                                    e,
-                                                    props.user.findUsers
-                                                        .userName
-                                                )
-                                            }
-                                        >
-                                            Send Invite
-                                        </button>
-                                    </div>
+                                    <SearchResult
+                                        userName={props.user.findUsers.userName}
+                                        id={props.user.findUsers._id}
+                                        handleOnChangeRecipient={(e) =>
+                                            handleOnChangeRecipient(e)
+                                        }
+                                    />
                                 ) : (
                                     <div>{props.user.findUsers}</div>
                                 )}
                             </>
                         )}
-                    </div>
+                    </ResultsParent>
+                    <button
+                        css={`
+                            grid-column: -3/-1;
+                            grid-row: -2/-1;
+                        `}
+                        type="submit"
+                        onClick={(e) =>
+                            handleSendInvite(
+                                e,
+                                props.authentication.user.userName
+                            )
+                        }
+                    >
+                        Send Invite
+                    </button>
                 </Modal>
             ) : (
                 <></>

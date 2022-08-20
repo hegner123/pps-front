@@ -26,6 +26,10 @@ function TableCell(props) {
     const [projectId, setProjectId] = useState(props.projectId)
     const userInterface = props.userInterface
 
+    const { authentication } = props
+    const { user } = authentication
+    const { userSettings } = user
+
     let dropdownStatus
 
     if (userInterface.id === songId) {
@@ -51,6 +55,7 @@ function TableCell(props) {
                     }}
                     songName={songTitle}
                     instrument={instrument}
+                    userColor={userSettings.completeColor}
                 />
             ))
         } else if (cellStatus == 'Incomplete') {
@@ -68,6 +73,7 @@ function TableCell(props) {
                     }}
                     songName={songTitle}
                     instrument={instrument}
+                    userColor={userSettings.incompleteColor}
                 />
             ))
         } else {

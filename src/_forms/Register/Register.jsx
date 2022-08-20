@@ -6,7 +6,7 @@ import { userActions } from '../../_actions'
 const Register = (props) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [userEmail, setUserEmail] = useState('')
+    const [userEmail, setUserEmail] = useState(props.userEmail ? props.userEmail : '')
     const [userName, setUserName] = useState('')
     const [hash, setHash] = useState('')
     const [submitted, setSubmitted] = useState(false)

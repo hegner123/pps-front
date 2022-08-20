@@ -9,7 +9,7 @@ export const CompletedCell = styled.td`
     padding: 0 15px;
     font-size: 16px;
     cursor: pointer;
-    background: #00ff00;
+    background: ${(props) => props.userColor};
     transition: filter 30ms;
     border: 1px solid #333;
     border-collapse: collapse;
@@ -30,7 +30,7 @@ export const IncompleteCell = styled.td`
     padding: 0 15px;
     font-size: 16px;
     cursor: pointer;
-    background: rgb(255, 0, 0);
+    background: ${(props) => props.userColor};
     transition: filter 30ms;
     border: 1px solid #333;
     border-collapse: collapse;

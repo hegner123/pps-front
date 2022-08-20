@@ -5,6 +5,7 @@ import { authHeader } from '../_helpers'
 export const userService = {
     login,
     logout,
+    resetPassword,
     register,
     update,
     addToRecent,
@@ -14,6 +15,7 @@ export const userService = {
     sendInvitation,
     handleInvitation,
     checkInvites,
+    sendExternalInvitation,
     delete: _delete,
 }
 
@@ -68,6 +70,16 @@ function logout() {
     history.push('/')
 }
 
+function resetPassword(user) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+    }
+    return fetch(`${config.apiUrl}/users/resetPassword`, requestOptions).then(
+        handleResponse
+    )
+}
 function register(user) {
     const requestOptions = {
         method: 'POST',
@@ -133,6 +145,17 @@ function sendInvitation(userId, invite) {
     }
     return fetch(
         `${config.apiUrl}/users/invitation.send/${userId}`,
+        requestOptions
+    ).then(handleResponse)
+}
+function sendExternalInvitation(userEmail, invite) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(invite),
+    }
+    return fetch(
+        `${config.apiUrl}/users/invitation.sendExternal/${userEmail}`,
         requestOptions
     ).then(handleResponse)
 }

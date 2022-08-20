@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { RefPreviewList } from './style'
-import { RefPreview } from '../../../_components/forms/previewRef/previewRef'
+import { RefPreview } from '../../previewRef/previewRef'
 
 const References = (props) => {
     const [getReference, setGetReference] = useState('')

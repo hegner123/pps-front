@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect, store, useSelector } from 'react-redux'
-import { projectActions } from '../../_actions'
+import { projectActions, uiActions } from '../../_actions'
 import {
     ActionGroup,
     Button,
@@ -37,6 +37,7 @@ function NewProject(props) {
     }
 
     function handleSubmit(event) {
+        event.preventDefault()
         const members = {
             id: user._id,
             userName: user.userName,
@@ -46,9 +47,9 @@ function NewProject(props) {
             projectSlug: projectTitle.trim().toLowerCase().replace(/\s/g, '-'),
             members: members,
         }
-        event.preventDefault()
         if (projectTitle) {
             props.createProject(project)
+            props.setNewProjectClose()
         }
     }
 
@@ -86,7 +87,12 @@ function NewProject(props) {
                         </FormGroup>
                         <ActionGroup>
                             <Button>Create</Button>
-                            <Btn to="/dashboard">Cancel</Btn>
+                            <Btn
+                                type="button"
+                                onClick={() => props.setNewProjectClose()}
+                            >
+                                Cancel
+                            </Btn>
                         </ActionGroup>
                     </form>
                 </FormSection>
@@ -102,6 +108,7 @@ function mapState(state) {
 
 const actionCreators = {
     createProject: projectActions.createProject,
+    setNewProjectClose: uiActions.setNewProjectClose,
 }
 
 const connectedNewProject = connect(mapState, actionCreators)(NewProject)

@@ -7,11 +7,12 @@ import { PrivateRoute } from '../_components/privateRoute'
 import { Menu } from '../_components/menu'
 import { HomePage } from '../pages/HomePage'
 import { Project } from '../pages/Project'
+import { resExtInvite } from '../pages/Utility'
 import { LoginPage } from '../_forms/Login'
 import { Register } from '../_forms/Register'
 import { Dashboard } from '../pages/Dashboard'
 import { NewProject } from '../_forms/NewProject'
-import { Invite } from '../_components/forms/Invite'
+import { Invite } from '../_forms/Invite'
 import '../_assets/css/normalize.css'
 import '../_assets/css/main.css'
 import '../_assets/css/style.css'
@@ -66,6 +67,7 @@ const App = (props) => {
                         path="/new-project"
                         component={NewProject}
                     />
+                    <Route path="/ext-invite/:id" component={resExtInvite} />
 
                     <Route exact path="/" component={HomePage} />
                     <Route exact path="/register" component={Register} />

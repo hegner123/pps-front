@@ -18,7 +18,8 @@ export const DashTitle = styled.h2`
 export const ProjectSection = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
     gap: 1rem;
     padding: 1rem;
 `
@@ -43,6 +44,7 @@ export const AddProject = styled.span`
 
     &:hover {
         filter: brightness(1.2);
+        cursor: pointer;
     }
 `
 

@@ -7,11 +7,13 @@ import { history } from '../_helpers'
 export const userActions = {
     login,
     logout,
+    resetPassword,
     register,
     getById,
     findUsers,
     saveSettings,
     sendInvite,
+    sendExternalInvite,
     handleInvitation,
     checkInvites,
     delete: _delete,
@@ -41,6 +43,32 @@ function login(userName, password) {
     }
     function failure(error) {
         return { type: userConstants.LOGIN_FAILURE, error }
+    }
+}
+function resetPassword(userName, password) {
+    return (dispatch) => {
+        dispatch(request({ userName }))
+        userService.resetPassword(userName, password).then(
+            (user) => {
+                dispatch(success(user))
+                // dispatch(projectActions.getProjects())
+                history.push('/login')
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+
+    function request(user) {
+        return { type: userConstants.RESET_PASSWORD_REQUEST, user }
+    }
+    function success(user) {
+        return { type: userConstants.RESET_PASSWORD_SUCCESS, user }
+    }
+    function failure(error) {
+        return { type: userConstants.RESET_PASSWORD_FAILURE, error }
     }
 }
 
@@ -126,6 +154,7 @@ function saveSettings(userId, settings) {
         userService.saveSettings(userId, settings).then(
             (result) => {
                 dispatch(success(result))
+                dispatch(alertSuccess())
             },
             (error) => {
                 dispatch(failure(error.toString()))
@@ -139,6 +168,9 @@ function saveSettings(userId, settings) {
     }
     function success(user) {
         return { type: userConstants.SETTINGS_UPDATE_SUCCESS, user }
+    }
+    function alertSuccess() {
+        return alertActions.success(`Settings Saved`)
     }
     function failure(error) {
         return { type: userConstants.SETTINGS_UPDATE_FAILURE, error }
@@ -180,8 +212,40 @@ function sendInvite(options) {
         },
     }
     return (dispatch) => {
-        dispatch(request(user))
-        userService.sendInvitation(invite).then(
+        dispatch(request(options.user))
+        userService.sendInvitation(options.user, invite).then(
+            (res) => {
+                dispatch(success(res))
+            },
+            (error) => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.toString()))
+            }
+        )
+    }
+    function request() {
+        return { type: userConstants.SEND_INVITE_REQUEST }
+    }
+    function success(user) {
+        return { type: userConstants.SEND_INVITE_SUCCESS, user }
+    }
+    function failure(error) {
+        return { type: userConstants.SEND_INVITE_FAILURE, error }
+    }
+}
+function sendExternalInvite(options) {
+    const invite = {
+        projectSlug: options.projectSlug,
+        projectId: options.projectId,
+
+        hostUser: {
+            userName: options.userName,
+            id: options.id,
+        },
+    }
+    return (dispatch) => {
+        dispatch(request(options.userEmail))
+        userService.sendExternalInvitation(options.userEmail, invite).then(
             (res) => {
                 dispatch(success(res))
             },
